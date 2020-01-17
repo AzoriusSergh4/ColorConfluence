@@ -1,0 +1,5 @@
+languaje: java
+
+script:
+  - cd Backend
+  - mvn clean install
