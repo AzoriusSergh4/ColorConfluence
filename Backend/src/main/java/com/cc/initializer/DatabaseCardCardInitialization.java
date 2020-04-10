@@ -1,6 +1,6 @@
 package com.cc.initializer;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.stereotype.Component;
 
 import io.magicthegathering.javasdk.api.CardAPI;
@@ -29,38 +28,38 @@ public class DatabaseCardCardInitialization {
 	@PostConstruct
 	public void storeCards() {
 		
-		logger.info("RESETEO DE BBDD");
-		cardDao.resetCards();
-		//En caso de meter todas las colecciones
-//		List<MtgSet> sets = SetAPI.getAllSets();
-//		for(MtgSet set : sets) {
-//			logger.info("INSERCIÓN DE " + set.getCode());
-//			storeSet(set.getCode());
-//		}
-		logger.info("INSERCIÓN DE THRONE OF THE ELDRAINE");
-		storeSet("ELD");
-		logger.info("INSERCIÓN DE M20");
-		storeSet("M20");
-		logger.info("INSERCIÓN DE WAR OF THE SPARK");
-		storeSet("WAR");
-		logger.info("INSERCIÓN DE RAVNICA ALLEIGANCE");
-		storeSet("RNA");
-		logger.info("INSERCIÓN DE GUILDS OF RAVNICA");
-		storeSet("GRN");
+//		logger.info("RESETEO DE BBDD");
+//		cardDao.resetCards();
+//		//En caso de meter todas las colecciones
+//	List<MtgSet> sets = SetAPI.getAllSets();
+////		for(MtgSet set : sets) {
+////			logger.info("INSERCIÓN DE " + set.getCode());
+////			storeSet(set.getCode());
+////		}
+//		logger.info("INSERCIÓN DE THRONE OF THE ELDRAINE");
+//		storeSet("ELD");
+//		logger.info("INSERCIÓN DE M20");
+//		storeSet("M20");
+//		logger.info("INSERCIÓN DE WAR OF THE SPARK");
+//		storeSet("WAR");
+//		logger.info("INSERCIÓN DE RAVNICA ALLEIGANCE"); 
+//		storeSet("RNA");
+//		logger.info("INSERCIÓN DE GUILDS OF RAVNICA");
+//		storeSet("GRN");
+//		logger.info("INSERCIÓN DE THEROS BEYOND DEATH");
+//		storeSet("THB");
+		logger.info("INICIALIZACIÓN COMPLETADA CON ÉXITO");
 	}
 	
 	private void storeSet(String set) {
 		
 		try {
 			logger.info("Intento " + intento + " en la llamada a la API (" + set + ")");
-			MtgSet eldraine = SetAPI.getSet(set); 
+			MtgSet currentSet = SetAPI.getSet(set); 
 			logger.info("LLamada realizada con éxito.");
-			logger.info("Insertando batch de " + set +" en BBDD");
-			cardDao.storeCards(eldraine.getCards());
+			logger.info("Insertando cartas de " + set +" en BBDD");
+			cardDao.storeCards(currentSet.getCards());
 			logger.info("Inserción realizada con éxito");
-		}catch(TransientDataAccessResourceException t) {
-			logger.error("Error en la inserción");
-			t.printStackTrace();
 		}catch (HttpRequestFailedException ex) {
 			logger.info("No se ha realizado la llamada");
 			if(intento < 6) {
