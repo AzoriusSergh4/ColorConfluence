@@ -1,4 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;}
+
+.grid-container {
+    margin: 20px;
+}
+
+
+
+/* ColorConfluence Cards */
+.cc-card{
+    position: relative;
+    height: 90%;
+    width: 90%;
+    padding: 0 !important;
+}
+
+.mat-card-header {
+    padding: 16px;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
+}
+
+.mat-card-header-text {
+    margin: auto !important;
+}
+
+.mat-card-title {
+    margin-bottom: 0px !important;
+}
+.cc-card-content {
+    height: 70%;
+    overflow-y: auto;
+    margin-left: 16px;
+    margin-right: 16px;
+
+}

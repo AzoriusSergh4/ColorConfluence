@@ -1,0 +1,34 @@
+.cc-card-left {
+    right: 15px;
+}
+
+.cc-card-right {
+    left:15px;
+
+}
+
+.mat-card-actions {
+    text-align: center;
+    margin: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-button{
+    color: #00838f;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 4px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #00838f;
+  border-radius: 10px;
+}

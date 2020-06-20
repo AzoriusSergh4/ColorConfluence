@@ -1,0 +1,14 @@
+img {
+    max-height:80%;
+}
+
+h1 {
+    margin-left: 10px;
+}
+
+.cc-fill-remaining-space {
+    flex: 1 1 auto;
+}
+.icon {
+    margin-right: 10px;
+}

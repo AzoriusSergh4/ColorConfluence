@@ -1,0 +1,68 @@
+<div class="grid-container">
+    <mat-grid-list cols="2" rowHeight="4:1">
+
+        <!-- Filtro de cartas simple con botón de avanzado -->
+        <mat-grid-tile [colspan] = 2>
+            <mat-form-field appearance="outline">
+                <input matInput type="text" placeholder="Busca tu carta aquí" [formControl]="cardName">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <!-- Cartas más buscadas / Buscada últimamente -->
+        <mat-grid-tile [rowspan] = 2>
+            <mat-card class="cc-card cc-card-left">
+                <mat-card-header class="cc-card-header">
+                    <mat-card-title>
+                        Cartas más buscadas
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="cc-card-content">
+                    <!-- MOCKS TODO Implementar sistema de cartas más buscadas -->
+                    <mat-list>
+                        <mat-list-item *ngFor="let card of cards; last as last" (click)="goToCard()">
+                            <h3 matLine>
+                                <span>{{card.name}}</span>
+                                <span style="float: right;">{{card.colors}}</span>
+                            </h3>
+                            <h3 matLine>{{card.collection}}</h3>
+                            <mat-divider *ngIf="!last"></mat-divider>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary">Cargar más</button>
+                </mat-card-actions>
+                
+            </mat-card>
+        </mat-grid-tile>
+        <!-- Mazos subidos últimamente -->
+        <mat-grid-tile [rowspan] = 2>
+
+            <mat-card class="cc-card cc-card-right">
+                <mat-card-header class="cc-card-header">
+                    <mat-card-title>
+                        Últimos mazos
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="cc-card-content">
+                    <!-- MOCKS TODO Implementar sistema de últimos mazos -->
+                    <mat-list>
+                        <mat-list-item *ngFor="let deck of decks; last as last" (click)="goToDeck()">
+                            <h3 matLine>
+                                <span>{{deck.name}}</span>
+                                <span style="float: right;">{{deck.colors}}</span>
+                            </h3>
+                            <h3 matLine>
+                               <span>{{deck.labels.join(", ")}}</span>
+                            </h3>
+                            <mat-divider *ngIf="!last"></mat-divider>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary">Cargar más</button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
