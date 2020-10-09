@@ -1,23 +1,19 @@
 package com.cc.initializer;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.cc.card.CardRepository;
-import com.cc.card.CardTranslationRepository;
-import com.cc.entity.CardCC;
-import com.cc.entity.CardTranslation;
+import com.cc.web.card.CardRepository;
+import com.cc.web.card.CardTranslationRepository;
+import com.cc.web.entity.CardCC;
+import com.cc.web.entity.CardTranslation;
 
 import io.magicthegathering.javasdk.resource.Card;
 import io.magicthegathering.javasdk.resource.ForeignData;
-import io.magicthegathering.javasdk.resource.Legality;
 
 @Service
 public class CardDAO {

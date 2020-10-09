@@ -28,7 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 const appRoutes = [
   /* {path: '', component: CardSearchComponent} */
   {path: '', component: MainScreenComponent}
-]
+];
 
 
 @NgModule({

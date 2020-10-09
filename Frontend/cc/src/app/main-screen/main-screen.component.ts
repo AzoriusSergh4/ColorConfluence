@@ -33,7 +33,7 @@ export class MainScreenComponent implements OnInit {
     { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
     { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
     { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' }
-  ]
+  ];
 
   decks: Deck[] = [
     { name: 'Rakdos aristocrats', colors: '{B}{R}', labels: ['Aggro', 'Combo', 'Sacrifice']},
@@ -43,7 +43,7 @@ export class MainScreenComponent implements OnInit {
     { name: 'Gruul Midrange', colors: '{R}{G}', labels: ['Aggro', 'Midrange']},
     { name: 'Gruul Midrange', colors: '{R}{G}', labels: ['Aggro', 'Midrange']},
     { name: 'Gruul Midrange', colors: '{R}{G}', labels: ['Aggro', 'Midrange']},
-  ]
+  ];
 
   cardName = new FormControl('');
 
