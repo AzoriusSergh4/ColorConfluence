@@ -1,5 +1,5 @@
 #!/bin/sh
-until nc -z -w50 database 3306
+until nc -z -w50 192.168.1.58 3306
 do
 	echo "Waiting for database..."
 	sleep 5

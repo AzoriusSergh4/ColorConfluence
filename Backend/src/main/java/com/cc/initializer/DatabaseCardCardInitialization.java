@@ -28,26 +28,15 @@ public class DatabaseCardCardInitialization {
 	@PostConstruct
 	public void storeCards() {
 		
-//		logger.info("RESETEO DE BBDD");
-//		cardDao.resetCards();
-//		//En caso de meter todas las colecciones
-//	List<MtgSet> sets = SetAPI.getAllSets();
-////		for(MtgSet set : sets) {
-////			logger.info("INSERCIÓN DE " + set.getCode());
-////			storeSet(set.getCode());
-////		}
-//		logger.info("INSERCIÓN DE THRONE OF THE ELDRAINE");
-//		storeSet("ELD");
-//		logger.info("INSERCIÓN DE M20");
-//		storeSet("M20");
-//		logger.info("INSERCIÓN DE WAR OF THE SPARK");
-//		storeSet("WAR");
-//		logger.info("INSERCIÓN DE RAVNICA ALLEIGANCE"); 
-//		storeSet("RNA");
-//		logger.info("INSERCIÓN DE GUILDS OF RAVNICA");
-//		storeSet("GRN");
-//		logger.info("INSERCIÓN DE THEROS BEYOND DEATH");
-//		storeSet("THB");
+		logger.info("RESETEO DE BBDD");
+		//cardDao.resetCards();
+		//En caso de meter todas las colecciones
+	/*List<MtgSet> sets = SetAPI.getAllSets();
+		for(MtgSet set : sets) {
+			logger.info("INSERCIÓN DE " + set.getCode());
+			storeSet(set.getCode());
+		}*/
+
 		logger.info("INICIALIZACIÓN COMPLETADA CON ÉXITO");
 	}
 	

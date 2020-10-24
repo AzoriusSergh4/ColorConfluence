@@ -1,5 +1,7 @@
 package com.cc.test;
 
+import io.cucumber.java.Before;
+import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -11,8 +13,13 @@ import com.cc.ColorConfluenceApplication;
  * Class to use spring application context while running cucumber
  */
 
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@CucumberContextConfiguration
+@SpringBootTest(classes = ColorConfluenceTestConfig.class)
 @ContextConfiguration(classes = ColorConfluenceApplication.class, loader = SpringBootContextLoader.class)
 public class ColorConfluenceSpringContextConfiguration {
-
+    @Before
+    public void setup_cucumber_spring_context() {
+        // Dummy method so cucumber will recognize this class as glue
+        // and use its context configuration.
+    }
 }
