@@ -16,8 +16,12 @@
 	<description>A web application for Magic The Gathering players</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.11</java.version>
 		<cucumber.version>6.5.0</cucumber.version>
+		<sonar.projectKey>ColorConfluence</sonar.projectKey>
+		<sonar.organization>colorconfluence</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.login>c78b52b70ad0f7cbac0d350b991cbd00f026f850</sonar.login>
 	</properties>
 
 	<dependencies>
