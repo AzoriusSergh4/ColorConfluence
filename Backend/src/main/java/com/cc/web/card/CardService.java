@@ -1,12 +1,10 @@
 package com.cc.web.card;
 
-import java.util.List;
-
-import com.cc.web.entity.CardCC;
+import com.cc.web.entity.CardTranslation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cc.web.entity.CardTranslation;
+import java.util.List;
 
 @Service
 public class CardService {

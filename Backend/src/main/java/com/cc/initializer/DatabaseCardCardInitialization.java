@@ -32,14 +32,14 @@ public class DatabaseCardCardInitialization {
 
 		List<MtgSet> sets = SetAPI.getAllSets();
 		for(MtgSet set : sets) {
-			logger.info("COMPROBACIÓN DE LA COLECCIÓN " + set.getCode() + " EN BBDD");
+			logger.info("COMPROBACIÓN DE LA COLECCIÓN {} EN BBDD", set.getCode());
 			if(!setInfoService.existsByCode(set.getCode())){
-				logger.info("LA COLECCIÓN " + set.getCode() + " NO EXISTE EN BBDD");
-				logger.info("INSERCIÓN DE " + set.getCode());
+				logger.info("LA COLECCIÓN {} NO EXISTE EN BBDD", set.getCode());
+				logger.info("INSERCIÓN DE {}", set.getCode());
 				storeSet(set.getCode());
 				setInfoService.save(new SetInfo(set.getName(), set.getCode()));
 			}else {
-				logger.info("LA COLECCIÓN " + set.getCode() + " YA EXISTE EN BBDD");
+				logger.info("LA COLECCIÓN {} YA EXISTE EN BBDD", set.getCode());
 			}
 		}
 
@@ -49,10 +49,10 @@ public class DatabaseCardCardInitialization {
 	private void storeSet(String set) {
 		
 		try {
-			logger.info("Intento " + intento + " en la llamada a la API (" + set + ")");
+			logger.info("Intento {} en la llamada a la API ({})", intento, set);
 			MtgSet currentSet = SetAPI.getSet(set); 
 			logger.info("LLamada realizada con éxito.");
-			logger.info("Insertando cartas de " + set +" en BBDD");
+			logger.info("Insertando cartas de {} en BBDD", set);
 			cardDao.storeCards(currentSet.getCards());
 			logger.info("Inserción realizada con éxito");
 		}catch (HttpRequestFailedException ex) {
