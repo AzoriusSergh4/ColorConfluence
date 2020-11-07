@@ -1,20 +1,19 @@
 package com.cc.initializer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
+import com.cc.web.entity.SetInfo;
+import com.cc.web.set.SetInfoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.magicthegathering.javasdk.api.CardAPI;
 import io.magicthegathering.javasdk.api.SetAPI;
 import io.magicthegathering.javasdk.exception.HttpRequestFailedException;
-import io.magicthegathering.javasdk.resource.Card;
 import io.magicthegathering.javasdk.resource.MtgSet;
+
+import java.util.List;
 
 @Component
 public class DatabaseCardCardInitialization {
@@ -24,18 +23,25 @@ public class DatabaseCardCardInitialization {
 	
 	@Autowired
 	CardDAO cardDao;
+
+	@Autowired
+	private SetInfoService setInfoService;
 	
 	@PostConstruct
 	public void storeCards() {
-		
-		logger.info("RESETEO DE BBDD");
-		//cardDao.resetCards();
-		//En caso de meter todas las colecciones
-	/*List<MtgSet> sets = SetAPI.getAllSets();
+
+		List<MtgSet> sets = SetAPI.getAllSets();
 		for(MtgSet set : sets) {
-			logger.info("INSERCIÓN DE " + set.getCode());
-			storeSet(set.getCode());
-		}*/
+			logger.info("COMPROBACIÓN DE LA COLECCIÓN " + set.getCode() + " EN BBDD");
+			if(!setInfoService.existsByCode(set.getCode())){
+				logger.info("LA COLECCIÓN " + set.getCode() + " NO EXISTE EN BBDD");
+				logger.info("INSERCIÓN DE " + set.getCode());
+				storeSet(set.getCode());
+				setInfoService.save(new SetInfo(set.getName(), set.getCode()));
+			}else {
+				logger.info("LA COLECCIÓN " + set.getCode() + " YA EXISTE EN BBDD");
+			}
+		}
 
 		logger.info("INICIALIZACIÓN COMPLETADA CON ÉXITO");
 	}

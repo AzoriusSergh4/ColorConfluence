@@ -1,14 +1,17 @@
 package com.cc.web.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "id")
 public class CardTranslation {
 	
 	@Id
@@ -23,24 +26,33 @@ public class CardTranslation {
 	@Size(max=1000)
 	private String lore;
 	
-	private String url;
-	
 	private String lang;
 	
 	@ManyToOne
 	@JoinColumn(name="card_id")
 	private CardCC card;
+
+	@OneToMany(mappedBy = "cardTranslation", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CardSet> cardSet;
 	
 	public CardTranslation() {
 		
 	}
 	
-	public CardTranslation(String name, String description, String lore, String url, String lang) {
+	public CardTranslation(String name, String description, String lore, String lang) {
 		this.name = name;
 		this.description = description;
 		this.lore = lore;
-		this.url = url;
 		this.lang = lang;
+		this.cardSet = new ArrayList<>();
+	}
+	public CardTranslation(String name, String description, String lore, String lang, CardSet set) {
+		this.name = name;
+		this.description = description;
+		this.lore = lore;
+		this.lang = lang;
+		this.cardSet = new ArrayList<>();
+		this.cardSet.add(set);
 	}
 	
 
@@ -76,14 +88,6 @@ public class CardTranslation {
 		this.lore = lore;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
 	public String getLang() {
 		return lang;
 	}
@@ -99,7 +103,13 @@ public class CardTranslation {
 	public void setCard(CardCC card) {
 		this.card = card;
 	}
-	
-	
-	
+
+	public List<CardSet> getCardSet() {
+		return cardSet;
+	}
+
+	public void setCardSet(List<CardSet> splashArt) {
+		this.cardSet = splashArt;
+	}
+
 }

@@ -17,20 +17,20 @@ $cc-accent: mat-palette($mat-light-blue, $default: 800);
 
 //Background and foreground
 $cc-background: (
-  status-bar: map_get($mat-cyan, 300),
-  app-bar:    map_get($mat-cyan, 100),
-  background: map_get($mat-cyan, 50),
+  status-bar: map_get($cc-primary, 300),
+  app-bar:    map_get($cc-primary, 100),
+  background: map_get($cc-primary, 50),
   hover:      rgba(black, 0.04),
   card:       white,
   dialog:     white,
   disabled-button: rgba(black, 0.12),
   raised-button: white,
   focused-button: $dark-focused,
-  selected-button: map_get($mat-cyan, 300),
+  selected-button: map_get($cc-primary, 300),
   selected-disabled-button: map_get($mat-grey, 400),
-  disabled-button-toggle: map_get($mat-cyan, 200),
-  unselected-chip: map_get($mat-cyan, 300),
-  disabled-list-option: map_get($mat-cyan, 200),
+  disabled-button-toggle: map_get($cc-primary, 200),
+  unselected-chip: map_get($cc-primary, 300),
+  disabled-list-option: map_get($cc-primary, 200),
 );
 
 $cc-foreground: (

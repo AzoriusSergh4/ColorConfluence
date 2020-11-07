@@ -4,13 +4,15 @@
         <!-- Filtro de cartas simple con botón de avanzado -->
         <mat-grid-tile [colspan] = 2>
             <mat-form-field appearance="outline">
+              <label>
                 <input matInput type="text" placeholder="Busca tu carta aquí" [formControl]="cardName">
+              </label>
             </mat-form-field>
         </mat-grid-tile>
 
         <!-- Cartas más buscadas / Buscada últimamente -->
         <mat-grid-tile [rowspan] = 2>
-            <mat-card class="cc-card cc-card-left">
+            <mat-card class="cc-card">
                 <mat-card-header class="cc-card-header">
                     <mat-card-title>
                         Cartas más buscadas
@@ -30,15 +32,14 @@
                     </mat-list>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button color="primary">Cargar más</button>
+                  <button mat-raised-button color="primary">Cargar más</button>
                 </mat-card-actions>
-                
             </mat-card>
         </mat-grid-tile>
         <!-- Mazos subidos últimamente -->
         <mat-grid-tile [rowspan] = 2>
 
-            <mat-card class="cc-card cc-card-right">
+            <mat-card class="cc-card">
                 <mat-card-header class="cc-card-header">
                     <mat-card-title>
                         Últimos mazos

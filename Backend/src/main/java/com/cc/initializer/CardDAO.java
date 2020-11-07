@@ -1,7 +1,13 @@
 package com.cc.initializer;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.cc.web.card.CardLegalitiesRepository;
+import com.cc.web.card.CardSetRepository;
+import com.cc.web.entity.CardLegality;
+import com.cc.web.entity.CardSet;
+import io.magicthegathering.javasdk.resource.Legality;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,25 +31,66 @@ public class CardDAO {
 	
 	@Autowired
 	private CardTranslationRepository translationRepository;
+
+	@Autowired
+	private CardSetRepository cardSetRepository;
+
+	@Autowired
+	private CardLegalitiesRepository cardLegalitiesRepository;
 	
     public void storeCards(List<Card> cards) {
     	for (Card card : cards) {
-    		CardCC c = new CardCC(card);
-    		cardRepository.save(c);
-    		ForeignData[] foreignData = card.getForeignNames();
-    		CardTranslation english = new CardTranslation(card.getName(), card.getOriginalText(), card.getFlavor(), card.getImageUrl(), "English");
-    		english.setCard(c);
-    		translationRepository.save(english);
-    		CardTranslation spanish = null;
-    		for(int i = 0; i < foreignData.length; i++) {
-    			if(foreignData[i].getLanguage().equals("Spanish")) {
-    				spanish = new CardTranslation(foreignData[i].getName(), foreignData[i].getText(), foreignData[i].getFlavor(), foreignData[i].getImageUrl(), foreignData[i].getLanguage());
-    				spanish.setCard(c);
-    				translationRepository.save(spanish);
-    			}
-    		}
-    		
-    		
+    		if(!cardRepository.existsByName(card.getName())){
+				CardCC c = new CardCC(card);
+				List<CardLegality> legalities = new ArrayList<>();
+				for (Legality l : card.getLegalities()){
+					CardLegality legality = new CardLegality(l);
+					legality.setCard(c);
+					c.getLegalities().add(legality);
+					legalities.add(legality);
+				}
+				cardRepository.save(c);
+				for(CardLegality legality : legalities){
+					cardLegalitiesRepository.save(legality);
+				}
+				CardSet set = new CardSet(card.getSet(), card.getNumber(), card.getImageUrl());
+				CardTranslation english = new CardTranslation(card.getName(), card.getOriginalText(), card.getFlavor(), "English", set);
+				english.setCard(c);
+				translationRepository.save(english);
+				set.setCardTranslation(english);
+				cardSetRepository.save(set);
+				CardTranslation spanish;
+				ForeignData[] foreignData = card.getForeignNames();
+				for (ForeignData foreignDatum : foreignData) {
+					if (foreignDatum.getLanguage().equals("Spanish")) {
+						set = new CardSet(card.getSet(), card.getNumber(), foreignDatum.getImageUrl());
+						spanish = new CardTranslation(foreignDatum.getName(), foreignDatum.getText(), foreignDatum.getFlavor(), foreignDatum.getLanguage(), set);
+						spanish.setCard(c);
+						translationRepository.save(spanish);
+						set.setCardTranslation(spanish);
+						cardSetRepository.save(set);
+					}
+				}
+			}else{
+    			for(CardTranslation ct : translationRepository.findByCard_Name(card.getName())){
+    				if(ct.getLang().equals("English")){
+						CardSet set = new CardSet(card.getSet(), card.getNumber(), card.getImageUrl());
+						ct.getCardSet().add(set);
+						translationRepository.save(ct);
+						set.setCardTranslation(ct);
+						cardSetRepository.save(set);
+					}
+    				for(ForeignData fd : card.getForeignNames()){
+    					if(fd.getLanguage().equals(ct.getLang())){
+    						CardSet set = new CardSet(card.getSet(), card.getNumber(), fd.getImageUrl());
+    						ct.getCardSet().add(set);
+							translationRepository.save(ct);
+    						set.setCardTranslation(ct);
+    						cardSetRepository.save(set);
+						}
+					}
+				}
+			}
     	}
     	
     }

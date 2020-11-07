@@ -1,17 +1,17 @@
 package com.cc.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.Size;
-
-import io.magicthegathering.javasdk.resource.Legality;
+import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "id")
 public class CardCC {
 
 	@Id
@@ -20,27 +20,23 @@ public class CardCC {
 	
 	private double cmc;
 
-	@Size(max=100)
 	private String manaCost;
 	
 	private String power;
 
 	private String toughness;
 
-	private String cardSet;
-
 	private String cardType;
-
-	private String cardNumber;
-
-	private boolean legal;
 
 	private String rarity;
 	
 	private String name;
 	
-	@OneToMany(mappedBy = "card")
+	@OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CardTranslation> cardTranslation;
+
+	@OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CardLegality> legalities;
 	
 	public CardCC () {
 		
@@ -51,16 +47,11 @@ public class CardCC {
 		this.manaCost = card.getManaCost();
 		this.power = card.getPower();
 		this.toughness = card.getToughness();
-		this.cardSet = card.getSet();
 		this.cardType = card.getType();
-		this.cardNumber = card.getNumber();
-		Legality[] legalities = card.getLegalities();
-		this.legal = false;
-		for(int i = 0; i < legalities.length && !legal; i++) {
-			if(legalities[i].getFormat().equals("Standard") && legalities[i].getLegality().equals("Legal")) {
-				this.legal = true;
-			}
-		}
+
+		this.legalities = new ArrayList<>();
+
+
 		this.rarity = card.getRarity();
 		this.name = card.getName();
 		
@@ -102,36 +93,12 @@ public class CardCC {
 		this.toughness = toughness;
 	}
 
-	public String getCardSet() {
-		return cardSet;
-	}
-
-	public void setCardSet(String cardSet) {
-		this.cardSet = cardSet;
-	}
-
 	public String getCardType() {
 		return cardType;
 	}
 
 	public void setCardType(String cardType) {
 		this.cardType = cardType;
-	}
-
-	public String getCardNumber() {
-		return cardNumber;
-	}
-
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
-	}
-
-	public boolean isLegal() {
-		return legal;
-	}
-
-	public void setLegal(boolean legal) {
-		this.legal = legal;
 	}
 
 	public String getRarity() {
@@ -158,4 +125,11 @@ public class CardCC {
 		this.cardTranslation = cardTranslation;
 	}
 
+	public List<CardLegality> getLegalities() {
+		return legalities;
+	}
+
+	public void setLegalities(List<CardLegality> legalities) {
+		this.legalities = legalities;
+	}
 }
