@@ -1,33 +1,22 @@
-import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CardService} from '../services/card.service';
 
 @Component({
-  selector: 'app-card-search',
+  selector: 'cc-card-search',
   templateUrl: './card-search.component.html',
   styleUrls: ['./card-search.component.css']
 })
 export class CardSearchComponent {
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      }
+  cards: any;
+  name: string;
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
-
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private route: ActivatedRoute, private cardService: CardService) {
+    let name;
+    this.route.queryParams.subscribe(params => {
+      name = params['name'];
+      this.name = name;
+      this.cardService.getCardsByName(name).subscribe(cards => this.cards = cards, error => console.error(error));
+    });
+  }
 }

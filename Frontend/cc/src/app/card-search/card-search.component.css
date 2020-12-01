@@ -1,5 +1,14 @@
-.grid-container {
-  margin: 20px;
+.mtgCard-results {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.mtgCard-result-item{
+  margin: 16px;
+}
+
+.mtgCard-results-text{
+  font-size: large;
 }
 
 .dashboard-card {

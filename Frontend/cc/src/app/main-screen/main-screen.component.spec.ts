@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MainScreenComponent } from './main-screen.component';
+import {MainScreenComponent} from './main-screen.component';
 
 describe('MainScreenComponent', () => {
   let component: MainScreenComponent;

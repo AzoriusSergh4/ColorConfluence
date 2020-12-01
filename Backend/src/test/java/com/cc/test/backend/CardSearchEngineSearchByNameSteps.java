@@ -1,7 +1,7 @@
 package com.cc.test.backend;
 
 import com.cc.web.card.CardService;
-import com.cc.web.entity.CardTranslation;
+import com.cc.web.entity.projection.CardTranslationProjection;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CardSearchEngineSearchByNameSteps {
 
-    List<CardTranslation> cardTranslations = new ArrayList<>();
+    List<CardTranslationProjection> cardTranslations = new ArrayList<>();
     String currentName;
 
     @Autowired
@@ -29,7 +29,7 @@ public class CardSearchEngineSearchByNameSteps {
     @When("I search for a card which has {string} in its name")
     public void iSearchForACardWhichHasStringInItsName(String name) {
         currentName = name;
-        cardTranslations = cardService.getByTranslationName(name);
+        cardTranslations = cardService.getBasicCardsByTranslationName(name);
     }
 
     @Then("There are results")
@@ -39,7 +39,7 @@ public class CardSearchEngineSearchByNameSteps {
 
     @And("All results match the specified criteria")
     public void allResultsMatchTheSpecifiedCriteria() {
-        for(CardTranslation ct : cardTranslations){
+        for(CardTranslationProjection ct : cardTranslations){
             Assert.assertTrue(ct.getName().toLowerCase().contains(currentName.toLowerCase()));
         }
     }

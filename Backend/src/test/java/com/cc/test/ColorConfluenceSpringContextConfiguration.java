@@ -5,6 +5,7 @@ import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.cc.ColorConfluenceApplication;
@@ -14,7 +15,7 @@ import com.cc.ColorConfluenceApplication;
  */
 
 @CucumberContextConfiguration
-@SpringBootTest(classes = ColorConfluenceTestConfig.class)
+@SpringBootTest(classes = {ColorConfluenceTestConfig.class})
 @ContextConfiguration(classes = ColorConfluenceApplication.class, loader = SpringBootContextLoader.class)
 public class ColorConfluenceSpringContextConfiguration {
     @Before

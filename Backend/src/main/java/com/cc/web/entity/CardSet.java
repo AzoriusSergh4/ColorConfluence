@@ -1,14 +1,12 @@
 package com.cc.web.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class CardSet {
 
     @Id
@@ -19,6 +17,7 @@ public class CardSet {
     private String cardSet;
     private String url;
 
+    @JsonIgnore
     @ManyToOne
     private CardTranslation cardTranslation;
 

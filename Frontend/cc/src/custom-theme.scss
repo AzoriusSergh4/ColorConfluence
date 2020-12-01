@@ -3,24 +3,62 @@
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
+@import '~@covalent/core/theming/all-theme';
+
+// (optional) Additional themes
+@import '~@covalent/markdown/markdown-theme';
+@import '~@covalent/highlight/highlight-theme';
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+//Custom accent theme
+$cc-accent: (
+  50: #ffd8b6,
+  100: #ffb39b,
+  200: #ed8e79,
+  300: #c96952,
+  400: #b04c38,
+  500: #952f1d,
+  600: #892519,
+  700: #781711,
+  800: #69000c,
+  900: #580000,
+  A100: #FF9F99,
+  A200: #FF6F66,
+  A400: #FF3F33,
+  A700: #FF271A,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: $black-87-opacity,
+    A700: $black-87-opacity,
+  )
+);
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $cc-primary: mat-palette($mat-cyan,$default: 800);
-$cc-accent: mat-palette($mat-light-blue, $default: 800);
 
 //Background and foreground
 $cc-background: (
   status-bar: map_get($cc-primary, 300),
   app-bar:    map_get($cc-primary, 100),
   background: map_get($cc-primary, 50),
-  hover:      rgba(black, 0.04),
+  hover:      map_get($cc-accent, 900),
   card:       white,
   dialog:     white,
   disabled-button: rgba(black, 0.12),
@@ -70,14 +108,128 @@ $cc-theme: (
 
 
 //Tema personalizado para el encabezado de los cards
-@mixin cc-card-header-theme($theme) {
-  $primary: map-get($theme, primary);
+@mixin cc-card-header-theme() {
   .cc-card-header{
-    background-color: mat-color($primary);
+    background-color: mat-color($cc-primary);
     color: white;
   }
 }
-@include cc-card-header-theme($cc-theme);
+
+@mixin cc-card-full-theme() {
+  .cc-card-full{
+    background-color: mat-color($cc-primary);
+    color: white;
+  }
+}
+
+@mixin cc-main-card-input-theme() {
+
+  .cc-main-card-filter-input {
+    color: white;
+    background-color: mat-color($cc-primary, 900);
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #efefef;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: medium;
+    width: 25%;
+  }
+
+  .cc-main-card-filter-input:focus {
+    border: 2px solid white;
+    border-radius: 4px;
+    outline: none;
+  }
+
+  .cc-main-card-filter-input::placeholder {
+    color: white;
+  }
+}
+
+//Tema personalizado para los input de busqueda de cartas
+@mixin cc-mtg-card-filter-theme() {
+
+  #cc-main-mtg-card-filter {
+    .mat-form-field-wrapper {
+
+     // padding-bottom: 0;
+
+    }
+
+    .mat-form-field{
+
+      .mat-input-element {
+        color: black;
+      }
+
+      .mat-form-field-outline {
+        color: mat-color($cc-primary);
+      }
+
+      .mat-form-field-outline-thick {
+        color: mat-color($cc-accent) !important;
+      }
+
+      .mat-form-field-label {
+        color: mat-color($cc-primary);
+      }
+
+      .mat-form-field-required-marker {
+      }
+    }
+
+    .mat-form-field.mat-focused {
+      .mat-form-field-label {
+        color: #ff884d;
+      }
+
+      .mat-form-field-outline {
+        color: mat-color($cc-accent);
+      }
+
+      .mat-form-field-outline-thick {
+        color: mat-color($cc-accent);
+      }
+
+      .mat-form-field-ripple {
+        background-color: #ff884d;
+      }
+
+      .mat-form-field-required-marker {
+      }
+
+      .mat-input-element {
+        color: black;
+      }
+    }
+
+    .mat-form-field.mat-form-field-invalid {
+      .mat-input-element {
+        color: #ff33cc;
+      }
+
+      .mat-form-field-label {
+        color: #ff33cc;
+
+        .mat-form-field-required-marker {
+          color: #ff33cc;
+        }
+      }
+
+      .mat-form-field-ripple {
+        background-color: #ff33cc;
+      }
+    }
+  }
+}
+
+@include cc-card-header-theme();
+@include cc-card-full-theme();
+@include cc-mtg-card-filter-theme();
+@include cc-main-card-input-theme();
+
 
 //Tipografia
 $cc-typography: mat-typography-config(
@@ -88,4 +240,10 @@ $cc-typography: mat-typography-config(
 @include mat-base-typography($cc-typography);
 @include mat-checkbox-typography($cc-typography);
 @include angular-material-typography($cc-typography);
+
+@include covalent-theme($cc-theme, $cc-typography); // $typography is an **optional** argument for the covalent-theme
+
+// (optional) Additional themes
+@include covalent-markdown-theme($cc-theme);
+@include covalent-highlight-theme();
 

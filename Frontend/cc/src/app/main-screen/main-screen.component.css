@@ -1,15 +1,43 @@
-/*.cc-card-left {
-    right: 15px;
-}
-
-.cc-card-right {
-    left:15px;
-
-}*/
-
 .mat-card-actions {
     text-align: center;
     margin: auto;
+}
+
+.cc-card-filter {
+  height: auto;
+  text-align: center;
+  padding: 16px !important;
+}
+
+a {
+  color: white;
+}
+
+.cc-card-filter-text {
+  font-size: medium;
+}
+
+.cc-link {
+  font-weight: bold;
+}
+
+a:hover {
+  color: #69000c;
+}
+
+.cc-card-filter-content {
+  margin: 16px;
+}
+
+/*
+:host ::ng-deep .cc-card-filter .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+*/
+
+
+.main-grid-element {
+  margin: 10px;
 }
 
 /* width */

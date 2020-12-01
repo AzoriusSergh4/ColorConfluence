@@ -1,4 +1,4 @@
-package com.cc.test.framework;
+package com.cc.test.framework.selenium;
 
 import com.cc.test.TestProperties;
 import io.cucumber.spring.ScenarioScope;
@@ -7,10 +7,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
@@ -23,12 +23,9 @@ public class SeleniumService {
 
     private final TestProperties properties;
 
-    private final ReportManager reportManager;
-
     @Autowired
-    public SeleniumService(TestProperties properties, ReportManager reportManager){
+    public SeleniumService(TestProperties properties){
         this.properties = properties;
-        this.reportManager = reportManager;
     }
 
     public void goToMainPage() {
@@ -44,36 +41,51 @@ public class SeleniumService {
     }
 
 
-    public CcWebElement findWebElementBy(By by){
+    public WebElement findWebElementBy(By by){
         try {
-            return (CcWebElement) wDriver.findElement(by);
+            return (WebElement) wDriver.findElement(by);
         } catch (NoSuchElementException n){
             n.printStackTrace();
             throw n;
         }
     }
 
-    public CcWebElement findWebElementById(String id){
+    public WebElement findWebElementById(String id){
         try {
-            return (CcWebElement) wDriver.findElement(By.id(id));
+            return wDriver.findElement(By.id(id));
         } catch (NoSuchElementException n){
             n.printStackTrace();
             throw n;
         }
     }
 
-    public List<CcWebElement> findWebElementsBy(By by){
+    public List<WebElement> findWebElementsBy(By by){
         try {
-            List<WebElement> elements =  wDriver.findElements(by);
-            List<CcWebElement> ccElements = new ArrayList<>();
-            for(WebElement e : elements){
-                ccElements.add((CcWebElement)e);
+            return wDriver.findElements(by);
+        } catch (NoSuchElementException n){
+            n.printStackTrace();
+            throw n;
+        }
+    }
+
+    public boolean isWebElementBy(By by){
+        return isWebElementBy(by, null);
+    }
+
+    public boolean isWebElementBy(By by, WebElement parent){
+        WebElement element;
+            try {
+                element = (parent == null) ? wDriver.findElement(by) : parent.findElement(by);
+            }catch (NoSuchElementException n){
+                return false;
             }
-            return ccElements;
-        } catch (NoSuchElementException n){
-            n.printStackTrace();
-            throw n;
-        }
+        return element != null;
+    }
+
+    public void typeText(WebElement element, String text){
+        Actions actions = new Actions(wDriver);
+        actions.sendKeys(element, text).perform();
+        actions.sendKeys(element, Keys.ENTER).perform();
     }
 
     public byte[] takeScreenshot(){

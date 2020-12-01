@@ -4,7 +4,8 @@ html, body { height: 100%; }
 body { margin: 0;}
 
 .grid-container {
-    margin: 20px;
+  margin: 5%;
+  height: auto;
 }
 
 
@@ -13,8 +14,8 @@ body { margin: 0;}
 .cc-card{
     float: left;
     position: relative;
-    height: 90%;
-    width: 90%;
+    height: 400px;
+    width: 100%;
     padding: 0 !important;
 }
 

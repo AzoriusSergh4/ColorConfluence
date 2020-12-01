@@ -1,69 +1,79 @@
 <div class="grid-container">
-    <mat-grid-list cols="2" rowHeight="4:1">
 
-        <!-- Filtro de cartas simple con botón de avanzado -->
-        <mat-grid-tile [colspan] = 2>
-            <mat-form-field appearance="outline">
+  <div gdAreas="filter filter | card deck" gdGap="16px 0px" gdColumns="50% 50%"
+  gdAreas.lt-md="filter | card | deck" gdColumns.lt-md="100% 100% 100%">
+    <!-- Filtro de cartas simple con botón de avanzado -->
+    <div gdArea="filter" fxLayoutAlign="center center" class="main-grid-element">
+      <mat-card class="cc-card cc-card-full cc-card-filter">
+        <mat-card-content class="cc-card-content">
+          <div class="cc-card-filter-content">
+            <h1>ColorConfluence: donde las cartas de Magic The Gathering confluyen</h1>
+          </div>
+          <div class="cc-card-filter-content">
               <label>
-                <input matInput type="text" placeholder="Busca tu carta aquí" [formControl]="cardName">
+                <input id="card-search-input" (keyup.enter)="onCardSubmit()" class="cc-main-card-filter-input" type="text" placeholder="Busca tu carta aquí" [formControl]="cardName">
               </label>
-            </mat-form-field>
-        </mat-grid-tile>
+          </div>
+          <div class="cc-card-filter-content cc-card-filter-text">
+            <p>¿Prefieres una búsqueda más personalizada? Usa el <span class="cc-link"><a routerLink="cards">buscador avanzado</a></span></p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
-        <!-- Cartas más buscadas / Buscada últimamente -->
-        <mat-grid-tile [rowspan] = 2>
-            <mat-card class="cc-card">
-                <mat-card-header class="cc-card-header">
-                    <mat-card-title>
-                        Cartas más buscadas
-                    </mat-card-title>
-                </mat-card-header>
-                <mat-card-content class="cc-card-content">
-                    <!-- MOCKS TODO Implementar sistema de cartas más buscadas -->
-                    <mat-list>
-                        <mat-list-item *ngFor="let card of cards; last as last" (click)="goToCard()">
-                            <h3 matLine>
-                                <span>{{card.name}}</span>
-                                <span style="float: right;">{{card.colors}}</span>
-                            </h3>
-                            <h3 matLine>{{card.collection}}</h3>
-                            <mat-divider *ngIf="!last"></mat-divider>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-card-content>
-                <mat-card-actions>
-                  <button mat-raised-button color="primary">Cargar más</button>
-                </mat-card-actions>
-            </mat-card>
-        </mat-grid-tile>
-        <!-- Mazos subidos últimamente -->
-        <mat-grid-tile [rowspan] = 2>
-
-            <mat-card class="cc-card">
-                <mat-card-header class="cc-card-header">
-                    <mat-card-title>
-                        Últimos mazos
-                    </mat-card-title>
-                </mat-card-header>
-                <mat-card-content class="cc-card-content">
-                    <!-- MOCKS TODO Implementar sistema de últimos mazos -->
-                    <mat-list>
-                        <mat-list-item *ngFor="let deck of decks; last as last" (click)="goToDeck()">
-                            <h3 matLine>
-                                <span>{{deck.name}}</span>
-                                <span style="float: right;">{{deck.colors}}</span>
-                            </h3>
-                            <h3 matLine>
-                               <span>{{deck.labels.join(", ")}}</span>
-                            </h3>
-                            <mat-divider *ngIf="!last"></mat-divider>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button mat-raised-button color="primary">Cargar más</button>
-                </mat-card-actions>
-            </mat-card>
-        </mat-grid-tile>
-    </mat-grid-list>
+    <!-- Cartas más buscadas / Buscada últimamente -->
+    <div gdArea="card" class="main-grid-element">
+      <mat-card class="cc-card">
+        <mat-card-header class="cc-card-header">
+          <mat-card-title>
+            Cartas más buscadas
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="cc-card-content">
+          <!-- MOCKS TODO Implementar sistema de cartas más buscadas -->
+          <mat-list>
+            <mat-list-item *ngFor="let card of cards; last as last" (click)="goToCard()">
+              <h3 matLine>
+                <span>{{card.name}}</span>
+                <span style="float: right;">{{card.colors}}</span>
+              </h3>
+              <h3 matLine>{{card.collection}}</h3>
+              <mat-divider *ngIf="!last"></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button [@tdPulse]="pulseStateCards" (click)="pulseStateCards = !pulseStateCards" color="primary">Cargar más</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <!-- Mazos subidos últimamente -->
+    <div gdArea="deck" class="main-grid-element">
+      <mat-card class="cc-card">
+        <mat-card-header class="cc-card-header">
+          <mat-card-title>
+            Últimos mazos
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="cc-card-content">
+          <!-- MOCKS TODO Implementar sistema de últimos mazos -->
+          <mat-list>
+            <mat-list-item *ngFor="let deck of decks; last as last" (click)="goToDeck()">
+              <h3 matLine>
+                <span>{{deck.name}}</span>
+                <span style="float: right;">{{deck.colors}}</span>
+              </h3>
+              <h3 matLine>
+                <span>{{deck.labels.join(", ")}}</span>
+              </h3>
+              <mat-divider *ngIf="!last"></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button [@tdPulse]="pulseStateDeck" (click)="pulseStateDeck = !pulseStateDeck" color="primary">Cargar más</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
 </div>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {tdBounceAnimation, tdPulseAnimation} from '@covalent/core/common';
+import {Router} from '@angular/router';
 
 export interface Card {
   name: string;
@@ -16,23 +18,29 @@ export interface Deck {
 @Component({
   selector: 'cc-main-screen',
   templateUrl: './main-screen.component.html',
-  styleUrls: ['./main-screen.component.css']
+  styleUrls: ['./main-screen.component.css'],
+  animations: [
+    tdBounceAnimation,
+    tdPulseAnimation
+  ]
 })
 export class MainScreenComponent implements OnInit {
+  pulseStateCards = false;
+  pulseStateDeck = false;
 
   cards: Card[] = [
     { name: 'Azorius Guildgate', colors: '', collection: 'Ravnica Alleigance' },
     { name: 'Cauldron Familiar', colors: '{B}', collection: 'Throne of Eldraine' },
-    { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: "Kroxa, Titan of Death's Hunger", colors: '{B}{R}', collection: 'Theros Beyond Death' }
+    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
+    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
+    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
+    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
+    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
+    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
+    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
+    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
+    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
+    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' }
   ];
 
   decks: Deck[] = [
@@ -47,7 +55,13 @@ export class MainScreenComponent implements OnInit {
 
   cardName = new FormControl('');
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  onCardSubmit(): void {
+    if (this.cardName.value !== ''){
+      this.router.navigate(['/cards'], {queryParams: {name: this.cardName.value}});
+    }
+  }
 
   ngOnInit(): void {
   }

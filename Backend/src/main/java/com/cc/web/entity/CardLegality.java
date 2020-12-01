@@ -1,15 +1,13 @@
 package com.cc.web.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.magicthegathering.javasdk.resource.Legality;
 
 import javax.persistence.*;
 
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class CardLegality {
 
 
@@ -20,9 +18,9 @@ public class CardLegality {
     private String format;
     private String legality;
 
+    @JsonIgnore
     @ManyToOne
     private CardCC card;
-
 
     public CardLegality(){}
 
