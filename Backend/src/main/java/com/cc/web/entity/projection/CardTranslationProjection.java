@@ -10,7 +10,13 @@ public interface CardTranslationProjection {
 
     long getId();
 
+    void setId();
+
     String getName();
+
+    void setName();
+
+    void setCard();
 
     @JsonIgnore
     CardCC getCard();

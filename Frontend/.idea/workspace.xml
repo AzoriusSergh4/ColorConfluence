@@ -20,56 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cb2ad74-a7ca-4f8d-91fb-03be8507665f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/WebSecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/projection/CardTranslationProjection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/BasePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/CardSearchPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/HomePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/selenium/Hooks.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/CardSearchNameFrontendSteps.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/resources/features/frontend/SearchCardsFrontend.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/services/card.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/services/card.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/services/common.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/services/common.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/CardSpecifications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/ColorConfluenceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/ColorConfluenceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardTranslationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardTranslationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/CardLegality.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/CardLegality.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/CardSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/CardSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/ColorConfluenceSpringContextConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/ColorConfluenceSpringContextConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/CardSearchEngineSearchByNameSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/CardSearchEngineSearchByNameSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/BackendTestCommons.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/selenium/BackendTestCommons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/CcWebElement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/FrontendTestCommons.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/selenium/FrontendTestCommons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/SeleniumService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/selenium/SeleniumService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/TestCommons.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/selenium/TestCommons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/MainPageInitializationSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/MainPageInitializationSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/projection/CardTranslationProjection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/projection/CardTranslationProjection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/CardSearchEngineSearchByNameSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/CardSearchEngineBackendSteps.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/test/resources/features/backend/SearchCardsBackend.feature" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/resources/features/backend/SearchCardsBackend.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/cc/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/cc/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/app.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/custom-theme.scss" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/custom-theme.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/polyfills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/polyfills.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/test.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +87,10 @@
       <workItem from="1606132137605" duration="1211000" />
       <workItem from="1606733303953" duration="123000" />
       <workItem from="1606733460568" duration="600000" />
-      <workItem from="1606813212950" duration="1147000" />
+      <workItem from="1606813212950" duration="2717000" />
+      <workItem from="1606901622780" duration="1202000" />
+      <workItem from="1607719248272" duration="36000" />
+      <workItem from="1608316532020" duration="691000" />
     </task>
     <servers />
   </component>
@@ -162,9 +126,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1601123658171" />
-    <state x="667" y="119" width="585" height="801" key="find.popup" timestamp="1604830521203">
+    <state x="667" y="119" width="585" height="801" key="find.popup" timestamp="1608316582159">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="667" y="119" width="585" height="801" key="find.popup/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1604830521203" />
+    <state x="667" y="119" width="585" height="801" key="find.popup/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608316582159" />
   </component>
 </project>

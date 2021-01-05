@@ -2,9 +2,11 @@ package com.cc.web.card;
 
 import com.cc.web.entity.projection.CardTranslationProjection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @CrossOrigin("http://localhost:4200")
@@ -16,8 +18,13 @@ public class CardController {
 	private CardService cardService;
 
 	@GetMapping("/find/name")
-	public List<CardTranslationProjection> getCardByName(@RequestParam String name){
+	public Page<CardTranslationProjection> getCardByName(@RequestParam String name){
 		return cardService.getBasicCardsByTranslationName(name);
+	}
+
+	@GetMapping("/find")
+	public Page<CardTranslationProjection> getCardsByCriteria(@RequestParam Map<String,String> criteria){
+		return cardService.getBasicCardsByCriteria(criteria);
 	}
 	
 	
