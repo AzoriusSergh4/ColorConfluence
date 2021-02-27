@@ -15,6 +15,10 @@ public class HomePage extends BasePage{
         seleniumService.typeText(seleniumService.findWebElementById("card-search-input"), name);
     }
 
+    public void goToSearchPage(){
+        seleniumService.findWebElementById("search-cards-link").click();
+    }
+
     public void goToPage(){
         seleniumService.goToMainPage();
     }

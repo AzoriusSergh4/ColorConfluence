@@ -1,23 +1,15 @@
 package com.cc.test.backend;
 
 import com.cc.web.card.CardService;
-import com.cc.web.entity.CardCC;
-import com.cc.web.entity.CardTranslation;
 import com.cc.web.entity.projection.CardTranslationProjection;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.it.Ma;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-
-import javax.persistence.criteria.Join;
 import java.util.*;
 
 public class CardSearchEngineBackendSteps {

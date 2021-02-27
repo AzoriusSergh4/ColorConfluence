@@ -1,10 +1,200 @@
 <div class="grid-container mtgCard-results">
-  <div class="mtgCard-results-text" style="text-align: center">
-    <p>Showing {{cards.length}} results which matches with name <span style="font-weight: bold; font-style: italic">"{{name}}"</span></p>
+  <div class="mtgCard-results-filter">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Advance criteria {{cardFilterForm.status}}
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <form [formGroup]="cardFilterForm" (ngSubmit)="onSubmit()">
+        <div >
+          <div>
+            <mat-form-field class="cc-mat-form-field-full" appearance="outline">
+              <mat-label>Card Name</mat-label>
+              <input matInput formControlName="name">
+              <mat-error *ngIf="cardFilterForm.get('name').hasError('required')">Required</mat-error>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row wrap" fxLayoutGap="10px">
+            <mat-form-field fxFlex="0 1 calc(50%-10px)" class="cc-mat-form-field-half cc-mat-form-field" appearance="outline">
+              <mat-label>Text</mat-label>
+              <input matInput formControlName="text" placeholder="e.g: Vigilance">
+              <mat-hint>The rules text of the card. This allows partial match</mat-hint>
+
+            </mat-form-field>
+            <mat-form-field class="cc-mat-form-field-half cc-mat-form-field" appearance="outline">
+              <mat-label>Lore</mat-label>
+              <input matInput formControlName="lore" placeholder="Flavour text: e.g: Jace">
+              <mat-hint>The lore of the card</mat-hint>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="cc-mat-form-field-full" appearance="outline">
+              <mat-label>Card Types</mat-label>
+              <mat-chip-list #typeList>
+                <mat-chip *ngFor="let type of currentTypes" selectable="false" (removed)="removeType(type)">
+                  {{type}}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+              <input matInput formControlName="type" [matChipInputFor]="typeList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="true"
+                     (matChipInputTokenEnd)="addType($event)"
+                      placeholder="New Type...">
+            </mat-form-field>
+          </div>
+          <mat-divider class="cc-mat-divider"></mat-divider>
+          <div>
+            <h5>Colors</h5>
+            <section fxLayout="row wrap" fxLayoutGap="5px" class="cc-mat-form-field">
+              <mat-checkbox color="primary" value="W" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/white.png" alt="White Color">White</mat-checkbox>
+              <mat-checkbox color="primary" value="U" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/blue.png" alt="Blue Color">Blue</mat-checkbox>
+              <mat-checkbox color="primary" value="B" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/black.jpg" alt="Black Color">Black</mat-checkbox>
+              <mat-checkbox color="primary" value="R" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/red.png" alt="Red Color">Red</mat-checkbox>
+              <mat-checkbox color="primary" value="G" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/green.png" alt="Green Color">Green</mat-checkbox>
+              <mat-checkbox color="primary" value="C" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/colorless.png" alt="Colorless">Colorless</mat-checkbox>
+            </section>
+            <section>
+              <mat-form-field class="cc-mat-form-field-half cc-mat-form-field" appearance="outline">
+                <mat-label>Color criteria</mat-label>
+                <mat-select [(value)]="colorCriteria" (selectionChange)="colorCriteriaChange($event)">
+                  <mat-option>-</mat-option>
+                  <mat-option value="=">Exactly these colors</mat-option>
+                  <mat-option value="<=">Including all these colors</mat-option>
+                  <mat-option value="<">Including at least one of these colors</mat-option>
+                </mat-select>
+                <mat-hint class="cc-error" *ngIf="cardFilterForm.get('colors').invalid">You must check at least one color and a criteria</mat-hint>
+              </mat-form-field>
+            </section>
+          </div>
+          <mat-divider class="cc-mat-divider"></mat-divider>
+          <div fxLayout="row wrap" fxLayoutGap="10px">
+            <div fxFlex="0 1 calc(33.3% - 10px)">
+              <mat-form-field class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+                <mat-label>CMC</mat-label>
+                <mat-select [(value)]="cmcCriteria" id="cmc-select" (selectionChange)="statCriteriaChange($event,'cmc')">
+                  <mat-option>-</mat-option>
+                  <mat-option value="=">Equal to</mat-option>
+                  <mat-option value="!=">Not equal to</mat-option>
+                  <mat-option value=">">Greater than</mat-option>
+                  <mat-option value="<">Lesser than</mat-option>
+                  <mat-option value=">=">Greater than or equal to</mat-option>
+                  <mat-option value="<=">Lesser than or equal to</mat-option>
+                </mat-select>
+                <mat-hint class="cc-error" *ngIf="cardFilterForm.get('cmc').invalid && cmcControl">You must fill this field if CMC value is provided</mat-hint>
+              </mat-form-field>
+              <mat-form-field class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+                <mat-label>CMC value</mat-label>
+               <input [(ngModel)]="cmcControl" [ngModelOptions]="{standalone: true}" type="number" min="0" matInput (input)="statChange($event, 'cmc')">
+                <mat-hint class="cc-error" *ngIf="cardFilterForm.get('cmc').invalid && cmcCriteria">You must fill this field if CMC criteria is provided</mat-hint>
+              </mat-form-field>
+            </div>
+            <div fxFlex="0 1 calc(33.3% - 10px)">
+              <mat-form-field class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+                <mat-label>Power</mat-label>
+                <mat-select [(value)]="powerCriteria" (selectionChange)="statCriteriaChange($event,'power')">
+                  <mat-option>-</mat-option>
+                  <mat-option value="=">Equal to</mat-option>
+                  <mat-option value="!=">Not equal to</mat-option>
+                  <mat-option value=">">Greater than</mat-option>
+                  <mat-option value="<">Lesser than</mat-option>
+                  <mat-option value=">=">Greater than or equal to</mat-option>
+                  <mat-option value="<=">Lesser than or equal to</mat-option>
+                </mat-select>
+                <mat-hint class="cc-error" *ngIf="cardFilterForm.get('power').invalid && powerControl">You must fill this field if power value is provided</mat-hint>
+              </mat-form-field>
+              <mat-form-field class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+                <mat-label>Power value</mat-label>
+                <input [(ngModel)]="powerControl" [ngModelOptions]="{standalone: true}" type="number" min="0" matInput (input)="statChange($event, 'power')">
+                <mat-hint class="cc-error" *ngIf="cardFilterForm.get('power').invalid && powerCriteria">You must fill this field if power criteria is provided</mat-hint>
+              </mat-form-field>
+            </div>
+           <div fxFlex="0 1 calc(33.3% - 10px)">
+              <mat-form-field class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+                <mat-label>Toughness</mat-label>
+                <mat-select [(value)]="toughnessCriteria" (selectionChange)="statCriteriaChange($event,'toughness')">
+                  <mat-option>-</mat-option>
+                  <mat-option value="=">Equal to</mat-option>
+                  <mat-option value="!=">Not equal to</mat-option>
+                  <mat-option value=">">Greater than</mat-option>
+                  <mat-option value="<">Lesser than</mat-option>
+                  <mat-option value=">=">Greater than or equal to</mat-option>
+                  <mat-option value="<=">Lesser than or equal to</mat-option>
+                </mat-select>
+                <mat-hint class="cc-error" *ngIf="cardFilterForm.get('toughness').invalid && toughnessControl">You must fill this field if toughness value is provided</mat-hint>
+              </mat-form-field>
+              <mat-form-field class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+                <mat-label>Toughness value</mat-label>
+                <input [(ngModel)]="toughnessControl" [ngModelOptions]="{standalone: true}" type="number" min="0" matInput (input)="statChange($event, 'toughness')">
+                <mat-hint class="cc-error" *ngIf="cardFilterForm.get('toughness').invalid && toughnessCriteria">You must fill this field if toughness criteria is provided</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <mat-divider class="cc-mat-divider"></mat-divider>
+          <div formGroupName="legality" fxLayout="row wrap" fxLayoutGap="10px">
+            <mat-form-field fxFlex="0 1 calc(50%-10px)" class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+              <mat-label>Legality</mat-label>
+              <mat-select formControlName="legality">
+                <mat-option>-</mat-option>
+                <mat-option value="Legal">Legal</mat-option>
+                <mat-option value="Restricted">Restricted</mat-option>
+                <mat-option value="Banned">Banned</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+              <mat-label>Format</mat-label>
+              <mat-select formControlName="format">
+                <mat-option>-</mat-option>
+                <mat-option *ngFor="let format of formats" value="{{format.name}}">{{format.publicName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-divider class="cc-mat-divider"></mat-divider>
+          <div fxLayout="row wrap" fxLayoutGap="10px">
+            <mat-form-field fxFlex="0 1 calc(33.3% - 10px)" class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+              <mat-label>Set</mat-label>
+              <mat-select formControlName="set">
+                <mat-option>-</mat-option>
+                <mat-option *ngFor="let set of sets" value="{{set.code}}">{{set.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="0 1 calc(33.3% - 10px)" class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+              <mat-label>Lang</mat-label>
+              <mat-select formControlName="lang">
+                <mat-option>-</mat-option>
+                <mat-option value="English">English</mat-option>
+                <mat-option value="Spanish">Spanish</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="0 1 calc(33.3% - 10px)" class="cc-mat-form-field cc-mat-form-field-half" appearance="outline">
+              <mat-label>Rarity</mat-label>
+              <mat-select formControlName="rarity">
+                <mat-option>-</mat-option>
+                <mat-option value="Common">Common</mat-option>
+                <mat-option value="Uncommon">Uncommon</mat-option>
+                <mat-option value="Rare">Rare</mat-option>
+                <mat-option value="Mythic">Mythic</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" type="submit">Search</button>
+        </div>
+        </form>
+      </mat-expansion-panel>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="center">
-    <div *ngFor="let card of cards" class="mtgCard-result-item">
-      <img width="223" height="310" src="{{card.cardSet[0].url}}" alt="MTG image card">
+  <div *ngIf="cards">
+    <div class="mtgCard-results-text" style="text-align: center">
+      <p>Showing {{cards.content.length}} results</p>
+    </div>
+   <div fxLayout="row wrap" fxLayoutAlign="center">
+      <div *ngFor="let card of cards.content" class="mtgCard-result-item">
+        <img width="223" height="310" src="{{card.cardSet[0].url}}" alt="MTG image card">
+      </div>
     </div>
   </div>
 </div>

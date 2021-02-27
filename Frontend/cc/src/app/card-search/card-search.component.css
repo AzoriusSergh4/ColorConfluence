@@ -8,6 +8,7 @@
 }
 
 .mtgCard-results-text{
+  margin-top: 15px;
   font-size: large;
 }
 
@@ -27,4 +28,33 @@
 
 .dashboard-card-content {
   text-align: center;
+}
+
+.cc-mat-form-field{
+  margin-bottom: 10px;
+}
+
+.cc-mat-form-field-full {
+  width: 100%;
+}
+.cc-mat-form-field-half {
+  width: 50%;
+}
+
+.cc-error {
+  color: red;
+}
+
+.cc-color-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: center;
+}
+
+.cc-mat-divider{
+  margin-bottom: 10px;
+}
+
+.cc-mat-tooltip {
+  background-color:black !important;
 }

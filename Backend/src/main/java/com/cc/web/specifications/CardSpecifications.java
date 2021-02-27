@@ -101,22 +101,22 @@ public final class CardSpecifications {
         if(content.startsWith(">=")){
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
-                return builder.greaterThanOrEqualTo(join.get(stat), contains(content.replaceAll(">=", "")));
+                return builder.greaterThanOrEqualTo(join.get(stat), content.replaceAll(">=", ""));
             };
         }else if(content.startsWith("<=")){
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
-                return builder.lessThanOrEqualTo(join.get(stat), contains(content.replaceAll("<=", "")));
+                return builder.lessThanOrEqualTo(join.get(stat), content.replaceAll("<=", ""));
             };
         }else if(content.startsWith(">")){
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
-                return builder.greaterThan(join.get(stat), contains(content.replaceAll(">", "")));
+                return builder.greaterThan(join.get(stat), content.replaceAll(">", ""));
             };
         }else if(content.startsWith("<")){
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
-                return builder.lessThan(join.get(stat), contains(content.replaceAll("<", "")));
+                return builder.lessThan(join.get(stat), content.replaceAll("<", ""));
             };
         }else{
             return (root, query, builder) -> {
@@ -135,16 +135,16 @@ public final class CardSpecifications {
 
     public static Specification<CardTranslation> cardSetContains(String cardSet){
         return (root, query, builder) -> {
-            Join<CardSet, CardTranslation> join = root.join("cardTranslation");
+            Join<CardSet, CardTranslation> join = root.join("cardSet");
             return builder.like(join.get("cardSet"), contains(cardSet));
         };
     }
 
-    public static Specification<CardTranslation> legalityContains(String legality, String format){
+    public static Specification<CardTranslation> legalityContains(String format, String legality){
         return (root, query, builder) -> {
-            Join<CardTranslation, CardCC> join = root.join("cardTranslation");
+            Join<CardTranslation, CardCC> join = root.join("card");
             Join<CardCC, CardLegality> joinL = join.join("legalities");
-            return builder.and(builder.equal(joinL.get("format"),format),builder.equal(joinL.get("legality"), legality));
+            return builder.and(builder.like(joinL.get("format"),contains(format)),builder.like(joinL.get("legality"), contains(legality)));
         };
     }
 

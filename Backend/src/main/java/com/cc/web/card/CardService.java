@@ -35,7 +35,7 @@ public class CardService {
 				.where(criteria.get("name") == null ? null : CardSpecifications.nameContains(criteria.get("name")))
 				.and(criteria.get("text") == null ? null : CardSpecifications.descriptionContains(criteria.get("text")))
 				.and(criteria.get("lore") == null ? null : CardSpecifications.loreContains(criteria.get("lore")))
-				.and(criteria.get("lang") == null ? null : CardSpecifications.langEquals(criteria.get("lang")))
+				.and(criteria.get("lang") == null ? CardSpecifications.langEquals("English") : CardSpecifications.langEquals(criteria.get("lang")))
 				.and(criteria.get("type") == null ? null : CardSpecifications.typeContains(criteria.get("type")))
 				.and(criteria.get("colors") == null ? null : CardSpecifications.colorContains(criteria.get("colors")))
 				.and((criteria.get("manaCost") == null ? null : CardSpecifications.manaCostContains(criteria.get("manaCost"))))

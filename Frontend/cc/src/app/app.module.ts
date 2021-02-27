@@ -22,8 +22,10 @@ import {MatDividerModule} from '@angular/material/divider';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatChipsModule} from '@angular/material/chips';
 
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -35,6 +37,9 @@ import {CovalentMarkdownModule} from '@covalent/markdown';
 import {CovalentDynamicFormsModule} from '@covalent/dynamic-forms';
 import {CovalentBaseEchartsModule} from '@covalent/echarts/base';
 import {CardService} from './services/card.service';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const appRoutes = [
   {path: '', component: MainScreenComponent},
@@ -61,6 +66,8 @@ const appRoutes = [
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
+    MatExpansionModule,
+    MatChipsModule,
     LayoutModule,
     MatDividerModule,
     ScrollingModule,
@@ -73,7 +80,11 @@ const appRoutes = [
     CovalentHighlightModule,
     CovalentMarkdownModule,
     CovalentDynamicFormsModule,
-    CovalentBaseEchartsModule
+    CovalentBaseEchartsModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    FormsModule,
+    MatTooltipModule
   ],
   providers: [CardService],
   bootstrap: [AppComponent]

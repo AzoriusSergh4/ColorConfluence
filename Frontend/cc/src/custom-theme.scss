@@ -58,7 +58,7 @@ $cc-background: (
   status-bar: map_get($cc-primary, 300),
   app-bar:    map_get($cc-primary, 100),
   background: map_get($cc-primary, 50),
-  hover:      map_get($cc-accent, 900),
+  hover:      map_get($cc-primary, 200),
   card:       white,
   dialog:     white,
   disabled-button: rgba(black, 0.12),

@@ -4,6 +4,8 @@ import com.cc.web.entity.SetInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SetInfoService {
 
@@ -16,5 +18,9 @@ public class SetInfoService {
 
     public void save(SetInfo set){
         setInfoRepository.save(set);
+    }
+
+    public List<SetInfo> getAllSets() {
+        return setInfoRepository.findAll();
     }
 }
