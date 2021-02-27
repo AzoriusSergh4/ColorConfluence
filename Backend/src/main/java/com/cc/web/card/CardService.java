@@ -77,4 +77,9 @@ public class CardService {
 		}
 		return cardsFiltered;
 	}
+
+	public CardTranslation getCardById(long id) {
+		Optional<CardTranslation> opt = translationRepository.findById(id);
+		return opt.orElse(null);
+	}
 }

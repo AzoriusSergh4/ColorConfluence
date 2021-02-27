@@ -1,5 +1,6 @@
 package com.cc.web.card;
 
+import com.cc.web.entity.CardTranslation;
 import com.cc.web.entity.projection.CardTranslationProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,11 @@ public class CardController {
 	@GetMapping("/find")
 	public Page<CardTranslationProjection> getCardsByCriteria(@RequestParam Map<String,String> criteria){
 		return cardService.getBasicCardsByCriteria(criteria);
+	}
+
+	@GetMapping("/{id}")
+	public CardTranslation getCardById(@PathVariable long id){
+		return cardService.getCardById(id);
 	}
 	
 	

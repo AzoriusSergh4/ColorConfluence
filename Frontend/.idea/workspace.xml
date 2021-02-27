@@ -20,33 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cb2ad74-a7ca-4f8d-91fb-03be8507665f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/set/SetController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/assets/icons/black.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/assets/icons/blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/assets/icons/colorless.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/assets/icons/green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/assets/icons/red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/assets/icons/white.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/drivers/chromedriver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/drivers/chromedriver.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/set/SetInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/set/SetInfoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/CardSpecifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/CardSpecifications.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/CardSearchEngineBackendSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/CardSearchEngineBackendSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/CardSearchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/CardSearchPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/CardSearchNameFrontendSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/CardSearchFrontendSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/resources/features/frontend/SearchCardsFrontend.feature" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/resources/features/frontend/SearchCardsFrontend.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/services/card.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/card.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/services/common.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/common.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/custom-theme.scss" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/custom-theme.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/cc/tslint.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/GetCardInfoBackendSteps.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/test/resources/features/backend/GetCardInfo.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +119,7 @@
       <workItem from="1613676163568" duration="320000" />
       <workItem from="1613992340546" duration="64000" />
       <workItem from="1614417925241" duration="1278000" />
-      <workItem from="1614435523168" duration="1281000" />
+      <workItem from="1614435523168" duration="1883000" />
     </task>
     <servers />
   </component>
