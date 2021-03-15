@@ -22,6 +22,10 @@ public class CardSearchPage extends BasePage{
         return seleniumService.findWebElementsBy(By.xpath("//div[contains(@class,'mtgCard-result-item')]//img")).size() > 0;
     }
 
+    public void clickFirstCard(){
+        seleniumService.findWebElementBy(By.xpath("//div[contains(@class,'mtgCard-result-item')]")).click();
+    }
+
     public void openAdvanced(){
         seleniumService.findWebElementBy(By.xpath("//mat-expansion-panel-header")).click();
     }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {tdBounceAnimation, tdPulseAnimation} from '@covalent/core/common';
 import {Router} from '@angular/router';
+import {CardService} from '../services/card.service';
 
 export interface Card {
   name: string;
@@ -55,11 +56,17 @@ export class MainScreenComponent implements OnInit {
 
   cardName = new FormControl('');
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cardService: CardService) { }
 
   onCardSubmit(): void {
     if (this.cardName.value !== ''){
-      this.router.navigate(['/cards'], {queryParams: {name: this.cardName.value}});
+      this.cardService.countCardsByName(this.cardName.value).subscribe(cards => {
+        if (cards === 1){
+          this.cardService.getCardsByName(this.cardName.value).subscribe(card => this.router.navigate(['/card/' + card.content[0].id]), error => console.error(error));
+        } else {
+          this.router.navigate(['/cards'], {queryParams: {name: this.cardName.value}});
+        }
+      }, error => console.error(error));
     }
   }
 

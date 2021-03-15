@@ -1,0 +1,33 @@
+.mtgCard-info {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.mtgCard-info-line-break{
+  white-space: pre-line;
+
+}
+
+.mtgCard-info-card-content {
+  height: 100%;
+}
+
+.mtgCard-info-section {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mtgCard-info-set-button {
+  margin-bottom: 10px;
+}
+
+#data-lore {
+  font-style: italic;
+}
+
+.mtgCard-info-text-large {
+  line-height: 1.5;
+}
+.cc-card-info {
+  height: auto;
+}

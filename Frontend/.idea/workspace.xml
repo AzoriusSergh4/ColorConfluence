@@ -20,8 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cb2ad74-a7ca-4f8d-91fb-03be8507665f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/GetCardInfoBackendSteps.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/resources/features/backend/GetCardInfo.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/initializer/CardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/initializer/CardDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardTranslationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardTranslationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/CardSpecifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/CardSpecifications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/services/card.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/card.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +133,19 @@
       <workItem from="1613992340546" duration="64000" />
       <workItem from="1614417925241" duration="1278000" />
       <workItem from="1614435523168" duration="1883000" />
+      <workItem from="1614446760957" duration="33000" />
+      <workItem from="1614680240388" duration="6762000" />
+      <workItem from="1615019484351" duration="5464000" />
+      <workItem from="1615040137828" duration="2027000" />
+      <workItem from="1615278464268" duration="5538000" />
+      <workItem from="1615288057244" duration="809000" />
+      <workItem from="1615308260533" duration="1072000" />
+      <workItem from="1615384972426" duration="21000" />
+      <workItem from="1615385020561" duration="4192000" />
+      <workItem from="1615459821225" duration="684000" />
+      <workItem from="1615460632089" duration="88000" />
+      <workItem from="1615750678025" duration="75000" />
+      <workItem from="1615797000134" duration="2414000" />
     </task>
     <servers />
   </component>
@@ -137,5 +163,16 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/cc/src/app/card-information/card-information.component.ts</url>
+          <line>106</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -61,14 +61,16 @@ public class CardDAO {
 				cardSetRepository.save(set);
 				CardTranslation spanish;
 				ForeignData[] foreignData = card.getForeignNames();
-				for (ForeignData foreignDatum : foreignData) {
-					if (foreignDatum.getLanguage().equals("Spanish")) {
-						set = new CardSet(card.getSet(), card.getNumber(), foreignDatum.getImageUrl());
-						spanish = new CardTranslation(foreignDatum.getName(), foreignDatum.getText(), foreignDatum.getFlavor(), foreignDatum.getLanguage(), set);
-						spanish.setCard(c);
-						translationRepository.save(spanish);
-						set.setCardTranslation(spanish);
-						cardSetRepository.save(set);
+				if(foreignData != null){
+					for (ForeignData foreignDatum : foreignData) {
+						if (foreignDatum.getLanguage().equals("Spanish")) {
+							set = new CardSet(card.getSet(), card.getNumber(), foreignDatum.getImageUrl());
+							spanish = new CardTranslation(foreignDatum.getName(), foreignDatum.getText(), foreignDatum.getFlavor(), foreignDatum.getLanguage(), set);
+							spanish.setCard(c);
+							translationRepository.save(spanish);
+							set.setCardTranslation(spanish);
+							cardSetRepository.save(set);
+						}
 					}
 				}
 			}else{
@@ -80,13 +82,15 @@ public class CardDAO {
 						set.setCardTranslation(ct);
 						cardSetRepository.save(set);
 					}
-    				for(ForeignData fd : card.getForeignNames()){
-    					if(fd.getLanguage().equals(ct.getLang())){
-    						CardSet set = new CardSet(card.getSet(), card.getNumber(), fd.getImageUrl());
-    						ct.getCardSet().add(set);
-							translationRepository.save(ct);
-    						set.setCardTranslation(ct);
-    						cardSetRepository.save(set);
+    				if(card.getForeignNames() != null){
+						for(ForeignData fd : card.getForeignNames()){
+							if(fd.getLanguage().equals(ct.getLang())){
+								CardSet set = new CardSet(card.getSet(), card.getNumber(), fd.getImageUrl());
+								ct.getCardSet().add(set);
+								translationRepository.save(ct);
+								set.setCardTranslation(ct);
+								cardSetRepository.save(set);
+							}
 						}
 					}
 				}

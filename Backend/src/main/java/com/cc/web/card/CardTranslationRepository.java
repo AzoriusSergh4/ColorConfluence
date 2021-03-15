@@ -7,6 +7,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
 import th.co.geniustree.springdata.jpa.repository.JpaSpecificationExecutorWithProjection;
@@ -17,5 +18,4 @@ public interface CardTranslationRepository extends JpaRepository<CardTranslation
 
 	<T> Page<T> findByNameContaining(String name, Class<T> type, Pageable p);
 	List<CardTranslation> findByCard_Name(String name);
-
 }

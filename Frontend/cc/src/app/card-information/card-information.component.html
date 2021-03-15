@@ -1,0 +1,74 @@
+<div class="grid-container mtgCard-info">
+  <div gdAreas="back lang empty | image info info" gdGap="16px 0px" gdColumns="30% 70%"
+       gdAreas.lt-md="back | lang | image | info" gdColumns.lt-md="100% 100% 100% 100%">
+    <div gdArea="back" fxLayoutAlign="flex-start">
+      <button mat-raised-button color="primary" (click)="back()">Back</button>
+    </div>
+    <div gdArea="lang">
+      <div fxLayout="row wrap" fxLayoutGap="5px">
+        <button mat-raised-button color="primary" *ngFor="let lang of languages" (click)="changeLanguage(lang)" [disabled]="lang === selectedLang">{{lang}}</button>
+      </div>
+    </div>
+    <div gdArea="empty"></div>
+    <div gdArea="image">
+      <img width="223" height="310" src="{{selectedSet?.url}}" alt="MTG image card">
+    </div>
+    <div gdArea="info">
+      <mat-card class="cc-card cc-card-info">
+        <mat-card-header class="cc-card-header">
+          <mat-card-title>
+            {{card?.name}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="cc-card-content">
+          <div gdAreas="data collection" gdGap="16px 0px" gdColumns="50% 50%"
+               gdAreas.lt-md="data | collection" gdColumns.lt-md="100%">
+            <div gdArea="data">
+              <div id="data-type" class="mtgCard-info-section">
+                <p>{{card?.card.cardType}}</p>
+              </div>
+              <mat-divider inset></mat-divider>
+              <div id="data-description" class="mtgCard-info-line-break mtgCard-info-section mtgCard-info-text-large">
+                <p>{{card?.description}}</p>
+              </div>
+              <mat-divider inset></mat-divider>
+              <div id="data-lore" class="mtgCard-info-line-break mtgCard-info-section mtgCard-info-text-large">
+                <p>{{card?.lore}}</p>
+              </div>
+              <mat-divider inset *ngIf="card?.lore"></mat-divider>
+              <div id="data-stats" class="mtgCard-info-section" fxLayout="row wrap">
+                <p style="width: 50%" *ngIf="card?.card.cmc">CMC: {{card?.card.cmc}}</p>
+                <p style="width: 50%" *ngIf="card?.card.power">{{card.card.power}}/{{card.card.toughness}}</p>
+              </div>
+            </div>
+            <div gdArea="collection">
+              <div id="collection-rarity" class="mtgCard-info-section">
+                <p>{{card?.card.rarity}}</p>
+              </div>
+              <mat-divider inset></mat-divider>
+              <div id="collection-legality" class="mtgCard-info-section">
+                <div fxLayout="row wrap" fxLayoutGap="5px">
+                  <p style="width: 45%">Standard: {{legalities.standard}}</p>
+                  <p style="width: 45%">Historic: {{legalities.historic}}</p>
+                  <p style="width: 45%">Pioneer: {{legalities.pioneer}}</p>
+                  <p style="width: 45%">Modern: {{legalities.modern}}</p>
+                  <p style="width: 45%">Commander: {{legalities.commander}}</p>
+                  <p style="width: 45%">Vintage: {{legalities.vintage}}</p>
+                  <p style="width: 45%">Legacy: {{legalities.legacy}}</p>
+                  <p style="width: 45%">Duel: {{legalities.duel}}</p>
+                  <p style="width: 45%">Penny: {{legalities.penny}}</p>
+                </div>
+              </div>
+              <mat-divider inset></mat-divider>
+              <div id="collection-sets" class="mtgCard-info-section">
+                <div fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                  <button mat-raised-button class="mtgCard-info-set-button" color="primary" *ngFor="let set of card?.cardSet" [disabled]="set.cardSet === selectedSet.cardSet" (click)="changeSet(set.cardSet)">{{set.cardSet}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

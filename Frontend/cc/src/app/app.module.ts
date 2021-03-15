@@ -40,10 +40,12 @@ import {CardService} from './services/card.service';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { CardInformationComponent } from './card-information/card-information.component';
 
 const appRoutes = [
   {path: '', component: MainScreenComponent},
-  {path: 'cards', component: CardSearchComponent}
+  {path: 'cards', component: CardSearchComponent},
+  {path: 'card/:id', component: CardInformationComponent}
 ];
 
 
@@ -52,7 +54,8 @@ const appRoutes = [
     AppComponent,
     MainMenuComponent,
     MainScreenComponent,
-    CardSearchComponent
+    CardSearchComponent,
+    CardInformationComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

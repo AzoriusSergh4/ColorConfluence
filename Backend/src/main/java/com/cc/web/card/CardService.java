@@ -20,16 +20,26 @@ public class CardService {
 	private CardTranslationRepository translationRepository;
 
 	/**
-	 * Gets the cards filtered by name and remove duplicates
+	 * Gets the cards filtered by name
 	 * @param name Name of the card
-	 * @return the list of amtched cards
+	 * @return the list of matched cards
 	 */
 	public Page<CardTranslationProjection> getBasicCardsByTranslationName(String name) {
 		Specification<CardTranslation> s = Specification
-				.where(name == null ? null : CardSpecifications.nameContains(name));
+				.where(name == null ? null : CardSpecifications.nameContains(name))
+				.and(CardSpecifications.langEquals("English"));
 		return translationRepository.findAll(s, CardTranslationProjection.class, PageRequest.of(0,60));
 	}
 
+	public long countBasicCardsByName(String name) {
+		return  getBasicCardsByTranslationName(name).getTotalElements();
+	}
+
+	/**
+	 * Gets the cards filtered by criteria
+	 * @param criteria crite to filter by
+	 * @return the page of matched cards
+	 */
 	public Page<CardTranslationProjection> getBasicCardsByCriteria(Map<String, String> criteria){
 		Specification<CardTranslation> s = Specification
 				.where(criteria.get("name") == null ? null : CardSpecifications.nameContains(criteria.get("name")))

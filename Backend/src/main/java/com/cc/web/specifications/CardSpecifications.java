@@ -17,8 +17,8 @@ public final class CardSpecifications {
 
     //Translation Specifications
 
-    public static Specification<CardTranslation> nameContains(String expression) {
-        return (root, query, builder) -> builder.like(root.get("name"), contains(expression));
+    public static Specification<CardTranslation> nameContains(String name) {
+        return (root, query, builder) -> builder.like(root.get("name"), contains(name));
     }
 
     public static Specification<CardTranslation> descriptionContains(String description){

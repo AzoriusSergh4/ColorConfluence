@@ -23,6 +23,11 @@ public class CardController {
 		return cardService.getBasicCardsByTranslationName(name);
 	}
 
+	@GetMapping("/count/name")
+	public long countByName(@RequestParam String name) {
+		return cardService.countBasicCardsByName(name);
+	}
+
 	@GetMapping("/find")
 	public Page<CardTranslationProjection> getCardsByCriteria(@RequestParam Map<String,String> criteria){
 		return cardService.getBasicCardsByCriteria(criteria);

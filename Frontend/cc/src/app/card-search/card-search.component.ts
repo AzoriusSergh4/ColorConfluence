@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CardService} from '../services/card.service';
 import {FormGroup, FormControl, FormBuilder, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material/chips';
@@ -18,7 +18,7 @@ interface Format {
 })
 export class CardSearchComponent implements OnInit{
 
-  constructor(private route: ActivatedRoute, private cardService: CardService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private cardService: CardService, private fb: FormBuilder) {
   }
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -82,10 +82,13 @@ export class CardSearchComponent implements OnInit{
       if (name){
         this.cardName = name;
         this.cardFilterForm.setControl('name', new FormControl(name));
-        this.cardService.getCardsByName(name).subscribe(cards => this.cards = cards, error => console.error(error));
+        this.cardService.getCardsByName(name).subscribe(cards => {
+          this.cards = cards;
+        }, error => console.error(error));
       }
     });
     this.cardService.getAllSets().subscribe(sets => this.sets = sets, error => console.error(error));
+
   }
 
   onSubmit() {

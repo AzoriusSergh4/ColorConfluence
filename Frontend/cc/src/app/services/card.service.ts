@@ -3,8 +3,10 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {CommonService} from './common.service';
 
 const CARD_URL = '/api/card';
+const CARD_INFO = CARD_URL + '/';
 const FIND = CARD_URL + '/find';
 const FIND_NAME = CARD_URL + '/find/name';
+const COUNT_NAME = CARD_URL + '/count/name';
 const SET_URL = '/api/set';
 const SET_ALL = SET_URL + '/all';
 
@@ -26,6 +28,14 @@ export class CardService extends CommonService{
   }
 
   /**
+   * Get the number of cards that their names matches with the specified one
+   * @param name the name to filter
+   */
+  countCardsByName(name: string) {
+    return this.apiGetRequest(COUNT_NAME + '?name=' + name);
+  }
+
+  /**
    * Get all existing sets
    */
   getAllSets(){
@@ -38,6 +48,10 @@ export class CardService extends CommonService{
    */
   getCardsByCriteria(criteria: HttpParams){
     return this.apiGetRequestWithCriteria(FIND, criteria);
+  }
+
+  getCardInfo(id: number){
+    return this.apiGetRequest(CARD_INFO + id);
   }
 }
 

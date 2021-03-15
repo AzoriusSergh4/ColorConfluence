@@ -3,7 +3,7 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Advance criteria {{cardFilterForm.status}}
+            Advance criteria
           </mat-panel-title>
           <mat-panel-description>
           </mat-panel-description>
@@ -193,7 +193,7 @@
     </div>
    <div fxLayout="row wrap" fxLayoutAlign="center">
       <div *ngFor="let card of cards.content" class="mtgCard-result-item">
-        <img width="223" height="310" src="{{card.cardSet[0].url}}" alt="MTG image card">
+        <a routerLink="/card/{{card.id}}"><img width="223" height="310" src="{{card.cardSet[0].url}}" alt="{{card.name}} Image card"></a>
       </div>
     </div>
   </div>
