@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-
-const API_URL = 'http://localhost:8080';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,8 @@ export class CommonService {
    * @protected
    */
   protected apiGetRequest(url: string){
-    console.log(API_URL + url);
+
+    console.log(environment.apiUrl + url);
     const options = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -26,7 +26,7 @@ export class CommonService {
         'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
       })
     };
-    return this.http.get<any>(API_URL + url, options)
+    return this.http.get<any>(environment.apiUrl + url, options)
       .pipe(
         map(result => result),
         catchError(err => this.handleError(err))
@@ -40,7 +40,7 @@ export class CommonService {
    * @protected
    */
   protected apiGetRequestWithCriteria(url: string, criteria: HttpParams){
-    console.log(API_URL + url);
+    console.log(environment.apiUrl + url);
     const options = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
@@ -49,7 +49,7 @@ export class CommonService {
       }),
       params: criteria
     };
-    return this.http.get<any>(API_URL + url, options)
+    return this.http.get<any>(environment.apiUrl + url, options)
       .pipe(
         map(result => result),
         catchError(err => this.handleError(err))

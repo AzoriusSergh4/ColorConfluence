@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://azoriussergh4.github.io"})
 @RestController
 @RequestMapping("/api/card")
 public class CardController {
