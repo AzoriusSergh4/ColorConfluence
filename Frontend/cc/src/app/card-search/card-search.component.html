@@ -191,10 +191,17 @@
     <div class="mtgCard-results-text" style="text-align: center">
       <p>Showing {{cards.content.length}} results</p>
     </div>
-   <div fxLayout="row wrap" fxLayoutAlign="center">
+    <div fxLayout="row wrap" fxLayoutAlign="center">
       <div *ngFor="let card of cards.content" class="mtgCard-result-item">
         <a routerLink="/card/{{card.id}}"><img width="223" height="310" src="{{card.cardSet[0].url}}" alt="{{card.name}} Image card"></a>
       </div>
     </div>
+    <div>
+      <mat-paginator color="primary" [length]="cards.totalElements"
+                     [pageSize]="60"
+                     (page)="handlePageEvent($event)">
+      </mat-paginator>
+    </div>
   </div>
+
 </div>

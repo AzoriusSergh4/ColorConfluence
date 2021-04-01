@@ -5,6 +5,7 @@ import {FormGroup, FormControl, FormBuilder, Validators, ValidatorFn, AbstractCo
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {HttpParams} from '@angular/common/http';
+import {PageEvent} from '@angular/material/paginator';
 
 interface Format {
   name: string;
@@ -19,16 +20,19 @@ interface Format {
 export class CardSearchComponent implements OnInit{
 
   constructor(private router: Router, private route: ActivatedRoute, private cardService: CardService, private fb: FormBuilder) {
+    this.pageIndex = 0;
+    this.currentParams = new HttpParams();
   }
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   readonly colorRegex = '(^$|^(?:(<|=|<=))(?:([WURGBC])(?!.*\\2))+$)';
   readonly statRegex = '(^$|^(?:(<|=|<=|>|>=|!=))(?:([0-9])(?!.*\\2))+$)';
 
+  pageIndex: number;
   sets: any;
   cards: any;
-  cardName: string;
   currentTypes: string[] = [];
+  currentParams: HttpParams;
   formats: Format[] = [
     {name: 'standard', publicName: 'Standard'},
     {name: 'duel', publicName: 'Duel'},
@@ -80,7 +84,7 @@ export class CardSearchComponent implements OnInit{
     this.route.queryParams.subscribe(params => {
       name = params.name;
       if (name){
-        this.cardName = name;
+        this.currentParams = this.currentParams.append('name', name);
         this.cardFilterForm.setControl('name', new FormControl(name));
         this.cardService.getCardsByName(name).subscribe(cards => {
           this.cards = cards;
@@ -108,6 +112,8 @@ export class CardSearchComponent implements OnInit{
       if (!this.isFieldEmpty(this.cardFilterForm.get('lang'))) {  params = params.append('lang', this.cardFilterForm.get('lang').value); }
       if (!this.isFieldEmpty(this.cardFilterForm.get('rarity'))) {   params = params.append('rarity', this.cardFilterForm.get('rarity').value); }
       if (!this.isFieldEmpty(this.cardFilterForm.get('legality').get('legality'))) { params = params.append(this.cardFilterForm.get('legality').get('format').value, this.cardFilterForm.get('legality').get('legality').value); }
+      params = params.append('page', '0');
+      this.currentParams = params;
       this.cardService.getCardsByCriteria(params).subscribe(cards => this.cards = cards, error => console.error(error));
     }
   }
@@ -215,5 +221,11 @@ export class CardSearchComponent implements OnInit{
         notAllFilled: true
       } : null ;
     };
+  }
+
+  handlePageEvent(event: PageEvent) {
+    this.currentParams = this.currentParams.set('page', event.pageIndex.toString());
+    console.log(this.currentParams);
+    this.cardService.getCardsByCriteria(this.currentParams).subscribe(cards => this.cards = cards, error => console.error(error));
   }
 }

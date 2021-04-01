@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'cc-main-menu',
@@ -7,13 +8,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  goToMain() {
-
+  goToMain(): void {
+    this.router.navigate(['/']);
   }
 
 }

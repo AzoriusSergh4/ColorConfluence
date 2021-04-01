@@ -64,7 +64,7 @@ public class CardService {
 				.and((criteria.get("pioneer") == null ? null : CardSpecifications.legalityContains("Pioneer", criteria.get("pioneer"))))
 				.and((criteria.get("penny") == null ? null : CardSpecifications.legalityContains("Penny", criteria.get("penny"))));
 
-		return translationRepository.findAll(s,CardTranslationProjection.class, PageRequest.of(0,60));
+		return translationRepository.findAll(s,CardTranslationProjection.class, PageRequest.of(Integer.parseInt(criteria.get("page")),60));
 	}
 
 	private List<CardTranslationProjection> filterCards(Page<CardTranslationProjection> cards){

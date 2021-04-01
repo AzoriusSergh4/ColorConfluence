@@ -41,6 +41,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { CardInformationComponent } from './card-information/card-information.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 const appRoutes = [
   {path: '', component: MainScreenComponent},
@@ -71,6 +72,7 @@ const appRoutes = [
     MatButtonModule,
     MatExpansionModule,
     MatChipsModule,
+    MatPaginatorModule,
     LayoutModule,
     MatDividerModule,
     ScrollingModule,

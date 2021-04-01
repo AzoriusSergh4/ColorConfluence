@@ -24,7 +24,7 @@ export class CardService extends CommonService{
    * @param name the name to filter
    */
   getCardsByName(name: string){
-    return this.apiGetRequest(FIND_NAME + '?name=' + name);
+    return this.apiGetRequest(FIND_NAME + '?name=' + encodeURIComponent(name));
   }
 
   /**
@@ -32,7 +32,7 @@ export class CardService extends CommonService{
    * @param name the name to filter
    */
   countCardsByName(name: string) {
-    return this.apiGetRequest(COUNT_NAME + '?name=' + name);
+    return this.apiGetRequest(COUNT_NAME + '?name=' + encodeURIComponent(name));
   }
 
   /**
@@ -45,6 +45,7 @@ export class CardService extends CommonService{
   /**
    * Get all cards which attributes matches with the given criteria
    * @param criteria the card criteria to filter by
+   * @param page page index
    */
   getCardsByCriteria(criteria: HttpParams){
     return this.apiGetRequestWithCriteria(FIND, criteria);
