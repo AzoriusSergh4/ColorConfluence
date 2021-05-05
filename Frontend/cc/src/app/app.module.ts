@@ -24,6 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -36,17 +37,34 @@ import {CovalentHighlightModule} from '@covalent/highlight';
 import {CovalentMarkdownModule} from '@covalent/markdown';
 import {CovalentDynamicFormsModule} from '@covalent/dynamic-forms';
 import {CovalentBaseEchartsModule} from '@covalent/echarts/base';
+import { CovalentUserProfileModule } from '@covalent/core/user-profile';
 import {CardService} from './services/card.service';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { CardInformationComponent } from './card-information/card-information.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ConfirmAccountComponent } from './confirm-account/confirm-account.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {BasicAuthInterceptor} from './services/auth/auth.interceptor';
+import {LoginService} from './services/login.service';
+import { ProfileComponent } from './profile/profile.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { BaseComponent } from './base/base.component';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component';
+import { RecoverPasswordFormComponent } from './recover-password-form/recover-password-form.component';
 
 const appRoutes = [
   {path: '', component: MainScreenComponent},
   {path: 'cards', component: CardSearchComponent},
-  {path: 'card/:id', component: CardInformationComponent}
+  {path: 'card/:id', component: CardInformationComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'confirm-account', component: ConfirmAccountComponent},
+  {path: 'recover-password', component: RecoverPasswordComponent},
+  {path: 'profile', component: ProfileComponent}
 ];
 
 
@@ -56,7 +74,14 @@ const appRoutes = [
     MainMenuComponent,
     MainScreenComponent,
     CardSearchComponent,
-    CardInformationComponent
+    CardInformationComponent,
+    LoginComponent,
+    RegisterComponent,
+    ConfirmAccountComponent,
+    ProfileComponent,
+    BaseComponent,
+    RecoverPasswordComponent,
+    RecoverPasswordFormComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -89,9 +114,16 @@ const appRoutes = [
     MatCheckboxModule,
     MatSelectModule,
     FormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSlideToggleModule,
+    CovalentUserProfileModule,
+    MatSnackBarModule
   ],
-  providers: [CardService],
+  providers: [
+    CardService,
+    LoginService,
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

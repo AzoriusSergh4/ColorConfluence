@@ -1,0 +1,8 @@
+<div class="grid-container">
+  <div *ngIf="brokenTk">
+    <p>Uops! It seems that your email confirmation went wrong. Please check your email and ensure the link is correct!</p>
+  </div>
+  <div *ngIf="!brokenTk">
+    <p>Congratulations! You have registered to ColorConfluence successfully! Go back to the <span><a routerLink="">Home Page</a></span> and enjoy our page!</p>
+  </div>
+</div>

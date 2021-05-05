@@ -8,8 +8,6 @@ body { margin: 0;}
   height: auto;
 }
 
-
-
 /* ColorConfluence Cards */
 .cc-card{
     float: left;
@@ -39,4 +37,24 @@ body { margin: 0;}
     margin-left: 16px;
     margin-right: 16px;
 
+}
+
+.cc-card-half {
+  width: 50%;
+}
+
+
+/* Forms */
+
+.cc-mat-form-field-full {
+  width: 100%;
+}
+.cc-mat-form-field-half {
+  width: 50%;
+}
+.cc-card-center {
+  text-align: center;
+}
+.cc-error {
+  color: red;
 }

@@ -1,0 +1,20 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="grid-container">
+  <mat-card *ngIf="loginService.isLogged" class="cc-card cc-card-half cc-card-profile">
+    <mat-card-header class="cc-card-header">
+      <mat-card-title>Profile</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="cc-card-content cc-card-center" style="padding-top: 1%">
+      <div>
+        <h3>Username: {{loginService.user.username}}</h3>
+      </div>
+      <div>
+        <h3>Email: {{loginService.user.email}}</h3>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="cc-profile-recover-password-title">
+        <h2>Change password</h2>
+      </div>
+      <cc-recover-password-form (formEvent)="changePassword($event)"></cc-recover-password-form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -13,3 +13,20 @@ h1 {
     margin-right: 10px;
 }
 
+a {
+  color: white;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #69000c;
+}
+
+.login-toolbar {
+  font-size: medium;
+  margin-right: 1%;
+}
+
+.login-toolbar p {
+  margin-bottom: 0 !important;
+}

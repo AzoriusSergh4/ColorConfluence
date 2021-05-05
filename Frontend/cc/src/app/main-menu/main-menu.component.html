@@ -5,12 +5,22 @@
     </div>
     <span class="cc-fill-remaining-space"></span>
 
-    <div class="icon">
-        <a>
-            <i class="material-icons">portrait</i>
-        </a>
-    </div>
-    <div>
-        <a><i class="material-icons">build</i></a>
-    </div>
+   <div *ngIf="!loginService.isLogged" class="login-toolbar">
+     <p><span><a routerLink="login">Log in</a></span> or <span><a routerLink="register">Sign up</a></span></p>
+   </div>
+   <div *ngIf="loginService.isLogged">
+     <td-user-profile name="{{loginService.user.username}}" email="{{loginService.user.email}}">
+       <ng-container td-user-action-list>
+         <button mat-list-item>
+           <span matListAvatar></span>
+           <span matLine (click)="goToProfile()">My Profile</span>
+         </button>
+         <mat-divider></mat-divider>
+         <button mat-list-item>
+           <span matListAvatar></span>
+           <span matLine (click)="logout()">Sign out</span>
+         </button>
+       </ng-container>
+     </td-user-profile>
+   </div>
  </mat-toolbar>

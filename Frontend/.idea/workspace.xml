@@ -20,15 +20,62 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cb2ad74-a7ca-4f8d-91fb-03be8507665f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/mail/ColorConfluenceMailSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/UserAuthenticationProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/ChangePasswordForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/RegisterForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/UserComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/token/ConfirmationToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/token/ConfirmationTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/base/base.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/base/base.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/base/base.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/register/register.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/register/register.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/register/register.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/register/register.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/services/auth/auth.interceptor.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/services/login.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/services/login.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/initializer/CardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/initializer/CardDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/WebSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/cc/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/cc/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/services/card.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/card.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/environments/environment.prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/environments/environment.prod.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/services/common.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/common.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +116,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sergi\OneDrive\Documentos\Github\ColorConfluence\Frontend\cc\src\app\services" />
       <recent name="C:\Users\sergi\OneDrive\Documentos\Github\ColorConfluence\Frontend\cc\src\assets\icons" />
     </key>
   </component>
@@ -145,7 +193,36 @@
       <workItem from="1616946841409" duration="4028000" />
       <workItem from="1617095591860" duration="668000" />
       <workItem from="1617112388068" duration="4627000" />
-      <workItem from="1617285752504" duration="2188000" />
+      <workItem from="1617285752504" duration="2434000" />
+      <workItem from="1617358680687" duration="513000" />
+      <workItem from="1617635367596" duration="406000" />
+      <workItem from="1617716861448" duration="595000" />
+      <workItem from="1617719021192" duration="997000" />
+      <workItem from="1617895947447" duration="959000" />
+      <workItem from="1618043908038" duration="2803000" />
+      <workItem from="1618060235812" duration="2127000" />
+      <workItem from="1618216447223" duration="4885000" />
+      <workItem from="1618386970219" duration="14000" />
+      <workItem from="1618402988926" duration="3105000" />
+      <workItem from="1618472762156" duration="5059000" />
+      <workItem from="1618582816293" duration="730000" />
+      <workItem from="1618675038078" duration="842000" />
+      <workItem from="1618822702867" duration="629000" />
+      <workItem from="1618838568226" duration="1310000" />
+      <workItem from="1618925221248" duration="1080000" />
+      <workItem from="1618928097270" duration="6212000" />
+      <workItem from="1619010442295" duration="1241000" />
+      <workItem from="1619023097612" duration="1503000" />
+      <workItem from="1619276164523" duration="5376000" />
+      <workItem from="1619367895248" duration="675000" />
+      <workItem from="1619423179210" duration="6242000" />
+      <workItem from="1619441863415" duration="2609000" />
+      <workItem from="1619455149264" duration="757000" />
+      <workItem from="1619460759500" duration="1878000" />
+      <workItem from="1619520505539" duration="750000" />
+      <workItem from="1619709390316" duration="711000" />
+      <workItem from="1619879196024" duration="425000" />
+      <workItem from="1620113811329" duration="571000" />
     </task>
     <servers />
   </component>

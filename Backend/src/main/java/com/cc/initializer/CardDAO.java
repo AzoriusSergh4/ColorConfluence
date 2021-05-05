@@ -43,11 +43,13 @@ public class CardDAO {
     		if(!cardRepository.existsByName(card.getName())){
 				CardCC c = new CardCC(card);
 				List<CardLegality> legalities = new ArrayList<>();
-				for (Legality l : card.getLegalities()){
-					CardLegality legality = new CardLegality(l);
-					legality.setCard(c);
-					c.getLegalities().add(legality);
-					legalities.add(legality);
+				if(card.getLegalities() != null) {
+					for (Legality l : card.getLegalities()){
+						CardLegality legality = new CardLegality(l);
+						legality.setCard(c);
+						c.getLegalities().add(legality);
+						legalities.add(legality);
+					}
 				}
 				cardRepository.save(c);
 				for(CardLegality legality : legalities){

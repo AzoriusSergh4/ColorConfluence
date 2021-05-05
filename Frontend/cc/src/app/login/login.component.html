@@ -1,0 +1,51 @@
+<div fxLayout="row" fxLayoutAlign="center center"  class="grid-container grid-container-login">
+  <mat-card *ngIf="!loginService.isLogged" class="cc-card cc-card-half cc-card-login">
+    <mat-card-header class="cc-card-header">
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="cc-card-content cc-card-center cc-card-content-login" style="padding-top: 1%">
+      <div>
+        <mat-hint class="cc-error" *ngIf="this.notFound">Username or password is not correct</mat-hint>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div>
+          <mat-form-field appearance="outline" class="cc-mat-form-field-half">
+            <mat-label>Username or Email</mat-label>
+            <input matInput type="text" formControlName="username" placeholder="Username or email">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline"  class="cc-mat-form-field-half">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+          </mat-form-field>
+        </div>
+        <div style="margin-bottom: 16px">
+            <mat-slide-toggle color="primary" formControlName="permanentSession">Keep Session active</mat-slide-toggle>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" type="submit" class="cc-submit-button">Login</button>
+        </div>
+      </form>
+      <div class="cc-login-forgot-password">
+        <mat-divider></mat-divider>
+        <div class="cc-login-forgot-password-link">
+          <button mat-button color="primary" class="cc-submit-button" (click)="resetHidden = false">Forgot you password?</button>
+        </div>
+        <div class="cc-login-forgot-password" [hidden]="resetHidden">
+          <form [formGroup]="resetForm" (ngSubmit)="resetPassword()">
+            <div>
+              <mat-form-field appearance="outline" class="cc-mat-form-field-half">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email" placeholder="Enter your email">
+              </mat-form-field>
+              <div>
+                <button mat-raised-button color="primary" type="submit" class="cc-submit-button">Send mail</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

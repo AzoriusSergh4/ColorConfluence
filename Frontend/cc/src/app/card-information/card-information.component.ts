@@ -4,7 +4,7 @@ import {CardService} from '../services/card.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-card-information',
+  selector: 'cc-card-information',
   templateUrl: './card-information.component.html',
   styleUrls: ['./card-information.component.css']
 })
