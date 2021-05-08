@@ -20,62 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cb2ad74-a7ca-4f8d-91fb-03be8507665f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/mail/ColorConfluenceMailSender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/UserAuthenticationProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/ChangePasswordForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/RegisterForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/UserComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/token/ConfirmationToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/token/ConfirmationTokenRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/base/base.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/base/base.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/base/base.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/register/register.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/register/register.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/register/register.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/register/register.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/services/auth/auth.interceptor.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/services/login.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/services/login.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/initializer/CardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/initializer/CardDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/FormatRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/Deck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/DeckCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/Format.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/cc/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/cc/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/services/common.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/common.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/services/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/login.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,6 +187,9 @@
       <workItem from="1619709390316" duration="711000" />
       <workItem from="1619879196024" duration="425000" />
       <workItem from="1620113811329" duration="571000" />
+      <workItem from="1620199504067" duration="629000" />
+      <workItem from="1620304097144" duration="462000" />
+      <workItem from="1620381855142" duration="2422000" />
     </task>
     <servers />
   </component>

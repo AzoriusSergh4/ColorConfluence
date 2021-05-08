@@ -124,11 +124,11 @@ export class LoginService extends CommonService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.apiPostRequest(USER_URL + '/confirm-recover-password', body, headers);
+    return this.apiPostRequest(USER_URL + '/confirm-recover-password?tk=' + tk, body, headers);
   }
 
   resetPassword(email: string) {
-    return this.apiGetRequest(USER_URL + '/recover-password');
+    return this.apiGetRequest(USER_URL + '/recover-password?email=' + email);
   }
 
   private setCurrentUser(user: User) {

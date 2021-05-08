@@ -14,7 +14,7 @@
       <div class="cc-profile-recover-password-title">
         <h2>Change password</h2>
       </div>
-      <cc-recover-password-form (formEvent)="changePassword($event)"></cc-recover-password-form>
+      <cc-recover-password-form [oldPassword]="true" (formEvent)="changePassword($event)"></cc-recover-password-form>
     </mat-card-content>
   </mat-card>
 </div>

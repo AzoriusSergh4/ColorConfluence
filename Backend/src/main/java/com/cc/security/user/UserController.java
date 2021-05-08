@@ -152,15 +152,11 @@ public class UserController {
                 headers.add("error-type", "same-password");
                 return new ResponseEntity<>(headers,HttpStatus.BAD_REQUEST);
             }
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            user.setPassword(new BCryptPasswordEncoder().encode(passwordForm.getNewPassword()));
+            userRepository.save(user);
+            confirmationTokenRepository.delete(confirmationToken);
+            return new ResponseEntity<>(HttpStatus.OK);
 
-            if(!encoder.matches(passwordForm.getOldPassword(), user.getPassword())){
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            }else{
-                user.setPassword(passwordForm.getNewPassword());
-                userRepository.save(user);
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

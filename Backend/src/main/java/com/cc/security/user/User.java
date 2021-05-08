@@ -1,5 +1,6 @@
 package com.cc.security.user;
 
+import com.cc.web.entity.Deck;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -27,6 +28,10 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     @JsonIgnore
     private List<String> roles;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Deck> decks;
 
     public User() {}
 
@@ -87,5 +92,13 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<Deck> getDecks() {
+        return decks;
+    }
+
+    public void setDecks(List<Deck> decks) {
+        this.decks = decks;
     }
 }

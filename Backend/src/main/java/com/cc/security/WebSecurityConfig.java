@@ -21,9 +21,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/user/register").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/user/confirm-account").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/confirm-account").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/recover-password").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/recover-password").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/user/confirm-recover-password").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/confirm-recover-account0").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/deck/{id}").permitAll();
 
         http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
 

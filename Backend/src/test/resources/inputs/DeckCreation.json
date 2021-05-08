@@ -1,0 +1,119 @@
+{
+  "name": "UW Spirits",
+  "commanders": [],
+  "main": [
+    {
+      "id": 109824,
+      "quantity": 4
+    },
+    {
+      "id": 97908,
+      "quantity": 4
+    },
+    {
+      "id": 268038,
+      "quantity": 4
+    },
+    {
+      "id": 266123,
+      "quantity": 2
+    },
+    {
+      "id": 109383,
+      "quantity": 4
+    },
+    {
+      "id": 143627,
+      "quantity": 4
+    },
+    {
+      "id": 171475,
+      "quantity": 4
+    },
+    {
+      "id": 166131,
+      "quantity": 4
+    },
+    {
+      "id": 109673,
+      "quantity": 3
+    },
+    {
+      "id": 143832,
+      "quantity": 3
+    },
+    {
+      "id": 92691,
+      "quantity": 4
+    },
+    {
+      "id": 1778,
+      "quantity": 2
+    },
+    {
+      "id": 2683,
+      "quantity": 2
+    },
+    {
+      "id": 42103,
+      "quantity": 1
+    },
+    {
+      "id": 113252,
+      "quantity": 4
+    },
+    {
+      "id": 141163,
+      "quantity": 2
+    },
+    {
+      "id": 162109,
+      "quantity": 2
+    },
+    {
+      "id": 237821,
+      "quantity": 4
+    },
+    {
+      "id": 181292,
+      "quantity": 1
+    },
+    {
+      "id": 91229,
+      "quantity": 2
+    }
+  ],
+  "sideboard": [
+    {
+      "id": 23609,
+      "quantity": 3
+    },
+    {
+      "id": 181186,
+      "quantity": 3
+    },
+    {
+      "id": 19643,
+      "quantity": 1
+    },
+    {
+      "id": 8608,
+      "quantity": 3
+    },
+    {
+      "id": 24109,
+      "quantity": 2
+    },
+    {
+      "id": 227990,
+      "quantity": 3
+    }
+  ],
+  "comments": "Azorius Spirits Deck",
+  "formats": [
+    {
+      "id": 282154,
+      "name": "Modern"
+    }
+  ]
+}

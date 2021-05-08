@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {EventEmitter} from '@angular/core';
 
@@ -11,6 +11,7 @@ export class RecoverPasswordFormComponent implements OnInit {
 
   recoverForm: FormGroup;
   readonly passwordRegex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
+  @Input() oldPassword: boolean;
   @Output() formEvent = new EventEmitter<FormGroup>();
 
   constructor(private fb: FormBuilder) {
