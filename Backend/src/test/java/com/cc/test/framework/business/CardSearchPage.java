@@ -14,7 +14,7 @@ public class CardSearchPage extends BasePage{
     public CardSearchPage() {
     }
 
-    public boolean checkSiteIsLoaded(){
+    public boolean checkPageIsLoaded(){
         return seleniumService.isWebElementBy(By.xpath("//div[@class='grid-container mtgCard-results']"));
     }
 

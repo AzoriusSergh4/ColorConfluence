@@ -1,6 +1,7 @@
 package com.cc.test.framework.business;
 
 import io.cucumber.spring.ScenarioScope;
+import org.openqa.selenium.By;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,6 +10,10 @@ public class HomePage extends BasePage{
 
     public HomePage() {
 
+    }
+
+    public boolean checkPageIsLoaded() {
+        return seleniumService.isWebElementBy(By.xpath("//cc-main-screen//div"));
     }
 
     public void searchCard(String name){

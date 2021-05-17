@@ -1,5 +1,6 @@
 @Backend
 @Deck
+@DeckBackend
 Feature: Backend Scenarios for Decks
 
   Scenario: DeckCreation

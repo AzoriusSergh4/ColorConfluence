@@ -147,9 +147,18 @@ $cc-theme: (
     color: white;
   }
 }
+@mixin cc-mat-tooltip() {
+  .mat-tooltip{
+    background:rgba(97,97,97,.9);
+    font-family:Roboto, "Helvetica Neue", sans-serif;font-size:10px;padding-top:6px;padding-bottom:6px
+  }
+  .mat-tooltip-handset{font-size:14px;padding-top:8px;padding-bottom:8px}
+}
 
 //Tema personalizado para los input de busqueda de cartas
 @mixin cc-mtg-card-filter-theme() {
+
+
 
   #cc-main-mtg-card-filter {
     .mat-form-field-wrapper {
@@ -229,6 +238,7 @@ $cc-theme: (
 @include cc-card-full-theme();
 @include cc-mtg-card-filter-theme();
 @include cc-main-card-input-theme();
+@include cc-mat-tooltip();
 
 
 //Tipografia

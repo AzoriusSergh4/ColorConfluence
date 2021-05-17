@@ -40,7 +40,7 @@ export class CardInformationComponent implements OnInit {
   }
 
   setupCard(): void {
-    for (let tr of this.card.card.cardTranslation){
+    for (const tr of this.card.card.cardTranslation){
       if (tr === this.card.id){
         this.card.card.cardTranslation.splice(this.card.card.cardTranslation.indexOf(tr), 1);
         this.card.card.cardTranslation.push({

@@ -6,6 +6,7 @@ const CARD_URL = '/api/card';
 const CARD_INFO = CARD_URL + '/';
 const FIND = CARD_URL + '/find';
 const FIND_NAME = CARD_URL + '/find/name';
+const FIND_NAME_FULL = CARD_URL + '/find/full/name';
 const COUNT_NAME = CARD_URL + '/count/name';
 const SET_URL = '/api/set';
 const SET_ALL = SET_URL + '/all';
@@ -24,7 +25,17 @@ export class CardService extends CommonService{
    * @param name the name to filter
    */
   getCardsByName(name: string){
-    return this.apiGetRequest(FIND_NAME + '?name=' + encodeURIComponent(name));
+    return this.apiGetRequest(FIND_NAME + '?name=' + encodeURIComponent(name) + '&pageSize=60');
+  }
+
+  /**
+   * Get all cards that their names matches with the specified one
+   * @param name the name to filter
+   * @param page the page
+   * @param pageSize the size of the page
+   */
+  getFullCardsByName(name: string, page: number, pageSize: number){
+    return this.apiGetRequest(FIND_NAME_FULL + '?name=' + encodeURIComponent(name) + '&page=' + page + '&pageSize=' + pageSize);
   }
 
   /**

@@ -8,19 +8,36 @@
    <div *ngIf="!loginService.isLogged" class="login-toolbar">
      <p><span><a routerLink="login">Log in</a></span> or <span><a routerLink="register">Sign up</a></span></p>
    </div>
-   <div *ngIf="loginService.isLogged">
-     <td-user-profile name="{{loginService.user.username}}" email="{{loginService.user.email}}">
-       <ng-container td-user-action-list>
-         <button mat-list-item>
-           <span matListAvatar></span>
-           <span matLine (click)="goToProfile()">My Profile</span>
+   <div *ngIf="loginService.isLogged" style="display: flex">
+     <div>
+       <button id="deckMenu" style="font-size: 18px" mat-flat-button color="primary" [matMenuTriggerFor]="deckMenu" aria-label="Deck Menu button">
+         Decks
+       </button>
+       <mat-menu #deckMenu="matMenu">
+         <button mat-menu-item>
+           <mat-icon>list_alt</mat-icon>
+           <span>My Decks</span>
          </button>
-         <mat-divider></mat-divider>
-         <button mat-list-item>
-           <span matListAvatar></span>
-           <span matLine (click)="logout()">Sign out</span>
+         <button mat-menu-item id="newDeck">
+           <mat-icon>add</mat-icon>
+           <span (click)="goToNewDeck()">New Deck</span>
          </button>
-       </ng-container>
-     </td-user-profile>
+       </mat-menu>
+     </div>
+     <div>
+       <td-user-profile name="{{loginService.user.username}}" email="{{loginService.user.email}}">
+         <ng-container td-user-action-list>
+           <button mat-list-item>
+             <span matListAvatar></span>
+             <span matLine (click)="goToProfile()">My Profile</span>
+           </button>
+           <mat-divider></mat-divider>
+           <button mat-list-item>
+             <span matListAvatar></span>
+             <span matLine (click)="logout()">Sign out</span>
+           </button>
+         </ng-container>
+       </td-user-profile>
+     </div>
    </div>
  </mat-toolbar>

@@ -9,13 +9,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
 import th.co.geniustree.springdata.jpa.repository.JpaSpecificationExecutorWithProjection;
 
 import java.util.List;
 
-public interface CardTranslationRepository extends JpaRepository<CardTranslation, Long>, JpaSpecificationExecutorWithProjection<CardTranslation> {
+public interface CardTranslationRepository extends JpaRepository<CardTranslation, Long>, JpaSpecificationExecutor<CardTranslation>, JpaSpecificationExecutorWithProjection<CardTranslation> {
 
 	<T> Page<T> findByNameContaining(String name, Class<T> type, Pageable p);
 	List<CardTranslation> findByCard_Name(String name);
+
 }

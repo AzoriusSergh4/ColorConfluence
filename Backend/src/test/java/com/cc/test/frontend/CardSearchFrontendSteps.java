@@ -5,8 +5,6 @@ import com.cc.test.framework.business.HomePage;
 import com.cc.test.framework.selenium.FrontendTestCommons;
 import com.cc.test.framework.selenium.Hooks;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.DataTableType;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -40,7 +38,7 @@ public class CardSearchFrontendSteps {
 
     @Then("The results page is loaded")
     public void theResultsPageIsLoaded() {
-        Assert.assertTrue(cardSearchPage.checkSiteIsLoaded());
+        Assert.assertTrue(cardSearchPage.checkPageIsLoaded());
     }
 
     @And("I can see all results in block")
@@ -63,6 +61,6 @@ public class CardSearchFrontendSteps {
 
     @And("The Advance Search Page is loaded")
     public void theAdvanceSearchPageIsLoaded() {
-        Assert.assertTrue(cardSearchPage.checkSiteIsLoaded());
+        Assert.assertTrue(cardSearchPage.checkPageIsLoaded());
     }
 }

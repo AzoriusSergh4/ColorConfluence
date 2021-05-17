@@ -24,15 +24,22 @@ public class CardService {
 	 * @param name Name of the card
 	 * @return the list of matched cards
 	 */
-	public Page<CardTranslationProjection> getBasicCardsByTranslationName(String name) {
+	public Page<CardTranslationProjection> getBasicCardsByTranslationName(String name, int pageSize) {
 		Specification<CardTranslation> s = Specification
 				.where(name == null ? null : CardSpecifications.nameContains(name))
 				.and(CardSpecifications.langEquals("English"));
-		return translationRepository.findAll(s, CardTranslationProjection.class, PageRequest.of(0,60));
+		return translationRepository.findAll(s, CardTranslationProjection.class, PageRequest.of(0,pageSize));
+	}
+
+	public Page<CardTranslation> getCardsByTranslationName(String name, int page, int pageSize) {
+		Specification<CardTranslation> s = Specification
+				.where(name == null ? null : CardSpecifications.nameContains(name))
+				.and(CardSpecifications.langEquals("English"));
+		return translationRepository.findAll(s, PageRequest.of(page,pageSize));
 	}
 
 	public long countBasicCardsByName(String name) {
-		return  getBasicCardsByTranslationName(name).getTotalElements();
+		return  getBasicCardsByTranslationName(name, Integer.MAX_VALUE).getTotalElements();
 	}
 
 	/**

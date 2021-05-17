@@ -7,29 +7,50 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = {"http://localhost:4200", "https://azoriussergh4.github.io"})
 @RestController
 @RequestMapping("/api/deck")
 public class DeckController {
 
-    @Autowired
-    private DeckService deckService;
+
+    private final DeckService deckService;
+
+    private final UserComponent userComponent;
 
     @Autowired
-    private UserComponent userComponent;
+    public DeckController(DeckService deckService, UserComponent userComponent) {
+        this.deckService = deckService;
+        this.userComponent = userComponent;
+    }
 
     @PostMapping("/create")
-    public ResponseEntity<String> register(@RequestBody DeckForm deck) {
+    public ResponseEntity<Long> saveDeck(@RequestBody DeckForm deckForm) {
         try{
-            deckService.saveDeck(userComponent.getLoggedUser(), deck);
+            Deck deck = deckService.saveDeck(userComponent.getLoggedUser(), deckForm);
+            return new ResponseEntity<>(deck.getId(),HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/decks/{id}")
+    public List<Deck> getUserDecks(@PathVariable long id) {
+        return deckService.findUserDecks(id);
     }
 
     @GetMapping("/{id}")
     public Deck getDeckById(@PathVariable long id) {
         return deckService.getDeckById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDeck(@PathVariable long id) {
+        Deck deck = this.deckService.getDeckById(id);
+        if(deck == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if(!deck.getUser().equals(userComponent.getLoggedUser())) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        this.deckService.deleteDeck(deck);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

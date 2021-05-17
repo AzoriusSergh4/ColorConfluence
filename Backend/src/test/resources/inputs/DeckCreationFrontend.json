@@ -1,0 +1,26 @@
+{
+  "name": "UW Spirits",
+  "commanders": [],
+  "main": [
+    {
+      "name": "Spell Queller",
+      "quantity": 4
+    },
+    {
+      "name": "Aether Vial",
+      "quantity": 4
+    },
+    {
+      "name": "Skyclave Apparition",
+      "quantity": 4
+    }
+  ],
+  "sideboard": [
+  ],
+  "comments": "Azorius Spirits Deck",
+  "format":
+  {
+    "id": 282154,
+    "name": "Modern"
+  }
+}

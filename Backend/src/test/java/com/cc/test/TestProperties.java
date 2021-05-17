@@ -12,6 +12,31 @@ public class TestProperties {
     private final Timeout timeout = new Timeout();
     private final Driver driver = new Driver();
     private final Url url = new Url();
+    private final User user = new User();
+
+    //User properties
+    public static class User {
+
+        private String username;
+
+        private String password;
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
 
     //Timeout properties
     public static class Timeout {
@@ -103,6 +128,10 @@ public class TestProperties {
         public void setProd(String prod) {
             this.prod = prod;
         }
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public Timeout getTimeout() {

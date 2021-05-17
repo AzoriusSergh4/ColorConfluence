@@ -6,6 +6,8 @@ import java.util.List;
 
 public class DeckForm {
 
+    private long id;
+
     private String name;
 
     private List<DeckCardForm> commanders;
@@ -16,9 +18,19 @@ public class DeckForm {
 
     private String comments;
 
-    private List<Format> formats;
+    private Format format;
+
+    private boolean draft;
 
     public DeckForm() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -61,12 +73,20 @@ public class DeckForm {
         this.comments = comments;
     }
 
-    public List<Format> getFormats() {
-        return formats;
+    public Format getFormat() {
+        return format;
     }
 
-    public void setFormats(List<Format> formats) {
-        this.formats = formats;
+    public void setFormat(Format format) {
+        this.format = format;
+    }
+
+    public boolean isDraft() {
+        return draft;
+    }
+
+    public void setDraft(boolean draft) {
+        this.draft = draft;
     }
 
     public static class DeckCardForm {

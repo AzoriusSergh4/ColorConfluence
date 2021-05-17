@@ -31,7 +31,7 @@ public class CardSearchEngineBackendSteps {
         cardTranslations = new ArrayList<>();
         currentProperties.add(new HashMap<>());
         currentProperties.get(0).put("name", name);
-        cardTranslations.add(cardService.getBasicCardsByTranslationName(name));
+        cardTranslations.add(cardService.getBasicCardsByTranslationName(name, 60));
     }
 
     @When("I search for cards with specified criteria")

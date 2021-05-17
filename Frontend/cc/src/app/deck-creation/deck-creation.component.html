@@ -1,0 +1,241 @@
+<div class="grid-container grid-deck">
+
+  <div *ngIf="loginService.isLogged" gdAreas="save save | name formats | comments comments | searchBar deckInfo | searchCards deck"
+       gdColumns="49.5% 49.5%"
+       gdGap="1%"
+       gdRows="auto auto auto auto auto">
+    <div gdArea="save" style="width: 100%; text-align: right">
+      <mat-slide-toggle
+        class="cc-align-vertical"
+        style="margin-right: 16px"
+        color="primary"
+        [(ngModel)]="deckForm.draft">
+        Draft deck
+      </mat-slide-toggle>
+      <button id="saveButton" [disabled]="deckForm.name.length < 3 || deck.length === 0" mat-raised-button color="primary"
+              (click)="openSaveDialog()">Save
+      </button>
+    </div>
+    <div gdArea="name">
+      <mat-form-field appearance="fill" class="cc-mat-form-field-full">
+        <mat-label>Deck Name</mat-label>
+        <input id="nameInput" matInput placeholder="Ex: Tron" [(ngModel)]="this.deckForm.name" required>
+        <mat-icon matSuffix matTooltip="The name must have at least 3 characters" matTooltipPosition="above"
+                  aria-hidden="false" aria-label="Example home icon">info
+        </mat-icon>
+      </mat-form-field>
+    </div>
+    <div gdArea="formats">
+      <mat-form-field appearance="fill" class="cc-mat-form-field-full">
+        <mat-label>Formats</mat-label>
+        <mat-select id="formatInput" [(ngModel)]="deckForm.format">
+          <mat-option>-</mat-option>
+          <mat-option *ngFor="let format of formats" [value]="format">{{format.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div gdArea="comments">
+      <mat-form-field appearance="fill" class="cc-mat-form-field-full">
+        <mat-label>Leave a comment (Optional)</mat-label>
+        <textarea id="commentsInput" matInput placeholder="Ex. Strategies, any card alternative, etc"
+                  [(ngModel)]="deckForm.comments"></textarea>
+      </mat-form-field>
+    </div>
+    <div gdArea="searchBar" style="display: flex">
+      <mat-form-field appearance="fill" class="cc-mat-form-field-full" style="padding-right: 16px">
+        <mat-label>Search your cards</mat-label>
+        <input id="searchInput" matInput placeholder="Ex: Path" (input)="autofillCard($event.target.value); pagingBar.navigateToPage(1)">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="cc-deck-quantity cc-align-vertical">
+        <mat-label>Add</mat-label>
+        <input matInput type="number" [(ngModel)]="cardsToAdd" value="{{cardsToAdd}}" max="99" min="1"
+               style="text-align: center">
+      </mat-form-field>
+    </div>
+    <div gdArea="deckInfo" class="cc-align-vertical">
+      <table matSort (matSortChange)="sortData($event)" class="cc-align-horizontal">
+        <tr>
+          <th>Sort by:</th>
+          <th mat-sort-header="name">Name</th>
+          <th mat-sort-header="type">Card Type</th>
+          <th mat-sort-header="manaCost">Mana Cost</th>
+        </tr>
+      </table>
+    </div>
+    <div gdArea="searchCards" class="cc-deck-list-container">
+      <div
+        cdkDropList
+        [cdkDropListData]="cardsFound"
+        id="cardsFoundList"
+        [cdkDropListConnectedTo]="[deckList, 'sideboardList', 'commanderList']"
+        class="deck-card-list"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let card of cardsFound" cdkDrag>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title class="cc-deck-row-line">
+                {{card.name}}
+                <mat-icon matTooltip="Not Legal Card" style="font-size: 18px; margin-left: 5px"
+                          *ngIf="checkLegality(card)" aria-hidden="false" aria-label="Not Legal Card">warning
+                </mat-icon>
+              </mat-panel-title>
+              <mat-panel-description class="cc-deck-row-line">
+                {{card.card.cardType}} — {{card.card.manaCost}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="cc-card-center">
+              <img width="223" height="310" src="{{card.cardSet[0].url}}" alt="{{card.name}} Image card">
+            </div>
+          </mat-expansion-panel>
+          <img *cdkDragPreview width="223" height="310" [src]="card.cardSet[0].url" [alt]="card.name + ' Image card'">
+        </div>
+      </div>
+      <div>
+        <td-paging-bar #pagingBar
+                       [pageLinkCount]="5"
+                       [pageSize]="pageSize"
+                       [total]="totalCardsFound"
+                       (change)="pageChange($event)">
+          {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+        </td-paging-bar>
+      </div>
+    </div>
+    <div gdArea="deck" class="cc-deck-list-container">
+      <div *ngIf="deckForm.format && deckForm.format.name === 'Commander'">
+        <div class="cc-deck-separator" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+          <mat-divider fxFlex="1 0"></mat-divider>
+          <div>Commander:<span style="margin-left: 5px">{{sumCards(commanders)}}</span></div>
+          <mat-divider fxFlex="1 0"></mat-divider>
+        </div>
+        <div
+          cdkDropList
+          id="commanderList"
+          [cdkDropListData]="commanders"
+          [cdkDropListConnectedTo]="[deckList]"
+          class="deck-card-list"
+          (cdkDropListDropped)="drop($event)">
+          <div *ngFor="let card of commanders; index as i" cdkDrag>
+            <div style="display: flex;">
+              <div style="display: flex; vertical-align: center">
+                <button mat-icon-button color="primary" aria-label="Delete card from deck button"
+                        class="cc-align-vertical" (click)="removeCard(commanders, i)">
+                  <mat-icon>clear</mat-icon>
+                </button>
+                <mat-form-field color="primary" class="cc-deck-quantity cc-align-vertical">
+                  <input matInput type="number" [(ngModel)]="card.quantity" value="{{card.quantity}}" maxlength="2"
+                         max="99" min="1" style="text-align: center" (change)="checkQuantity($event)">
+                </mat-form-field>
+              </div>
+              <mat-expansion-panel style="width: 100%">
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="cc-deck-row-line">
+                    {{card.name}}
+                    <mat-icon matTooltip="Not Legal Card" style="font-size: 18px; margin-left: 5px"
+                              *ngIf="checkLegality(card)" aria-hidden="false" aria-label="Not Legal Card">warning
+                    </mat-icon>
+                  </mat-panel-title>
+                  <mat-panel-description class="cc-deck-row-line">
+                    {{card.card.cardType}} — {{card.card.manaCost}}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="cc-card-center">
+                  <img width="223" height="310" src="{{card.cardSet[0].url}}" alt="{{card.name}} Image card">
+                </div>
+              </mat-expansion-panel>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cc-deck-separator" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+        <mat-divider fxFlex="1 0"></mat-divider>
+        <div>Main:<span style="margin-left: 5px">{{sumCards(deck)}}</span></div>
+        <mat-divider fxFlex="1 0"></mat-divider>
+      </div>
+      <div
+        cdkDropList
+        #deckList="cdkDropList"
+        id="deckList"
+        [cdkDropListData]="deck"
+        [cdkDropListConnectedTo]="['sideboardList', 'commanderList']"
+        class="deck-card-list"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let card of deck; index as i" cdkDrag>
+          <div style="display: flex;">
+            <div style="display: flex; vertical-align: center">
+              <button mat-icon-button color="primary" aria-label="Delete card from deck button"
+                      class="cc-align-vertical" (click)="removeCard(deck, i)">
+                <mat-icon>clear</mat-icon>
+              </button>
+              <mat-form-field color="primary" class="cc-deck-quantity cc-align-vertical">
+                <input matInput type="number" [(ngModel)]="card.quantity" value="{{card.quantity}}" maxlength="2"
+                       max="99" min="1" style="text-align: center" (change)="checkQuantity($event)">
+              </mat-form-field>
+            </div>
+            <mat-expansion-panel style="width: 100%">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="cc-deck-row-line">
+                  {{card.name}}
+                  <mat-icon matTooltip="Not Legal Card" style="font-size: 18px; margin-left: 5px"
+                            *ngIf="checkLegality(card)" aria-hidden="false" aria-label="Not Legal Card">warning
+                  </mat-icon>
+                </mat-panel-title>
+                <mat-panel-description class="cc-deck-row-line">
+                  {{card.card.cardType}} — {{card.card.manaCost}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="cc-card-center">
+                <img width="223" height="310" src="{{card.cardSet[0].url}}" alt="{{card.name}} Image card">
+              </div>
+            </mat-expansion-panel>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="deckForm.format?.name !== 'Commander'">
+        <div class="cc-deck-separator" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+          <mat-divider fxFlex="1 0"></mat-divider>
+          <div>Sideboard:<span style="margin-left: 5px">{{sumCards(sideboard)}}</span></div>
+          <mat-divider fxFlex="1 0"></mat-divider>
+        </div>
+        <div
+          cdkDropList
+          id="sideboardList"
+          [cdkDropListData]="sideboard"
+          [cdkDropListConnectedTo]="[deckList]"
+          class="deck-card-list"
+          (cdkDropListDropped)="drop($event)">
+          <div *ngFor="let card of sideboard; index as i" cdkDrag>
+            <div style="display: flex;">
+              <div style="display: flex; vertical-align: center">
+                <button mat-icon-button color="primary" aria-label="Delete card from deck button"
+                        class="cc-align-vertical" (click)="removeCard(sideboard, i)">
+                  <mat-icon>clear</mat-icon>
+                </button>
+                <mat-form-field color="primary" class="cc-deck-quantity cc-align-vertical">
+                  <input matInput type="number" [(ngModel)]="card.quantity" value="{{card.quantity}}" maxlength="2"
+                         max="99" min="1" style="text-align: center" (change)="checkQuantity($event)">
+                </mat-form-field>
+              </div>
+              <mat-expansion-panel style="width: 100%">
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="cc-deck-row-line">
+                    {{card.name}}
+                    <mat-icon matTooltip="Not Legal Card" style="font-size: 18px; margin-left: 5px"
+                              *ngIf="checkLegality(card)" aria-hidden="false" aria-label="Not Legal Card">warning
+                    </mat-icon>
+                  </mat-panel-title>
+                  <mat-panel-description class="cc-deck-row-line">
+                    {{card.card.cardType}} — {{card.card.manaCost}}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="cc-card-center">
+                  <img width="223" height="310" src="{{card.cardSet[0].url}}" alt="{{card.name}} Image card">
+                </div>
+              </mat-expansion-panel>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,8 +19,13 @@ public class CardController {
 	private CardService cardService;
 
 	@GetMapping("/find/name")
-	public Page<CardTranslationProjection> getCardByName(@RequestParam String name){
-		return cardService.getBasicCardsByTranslationName(name);
+	public Page<CardTranslationProjection> getCardByName(@RequestParam String name, int pageSize){
+		return cardService.getBasicCardsByTranslationName(name, pageSize);
+	}
+
+	@GetMapping("/find/full/name")
+	public Page<CardTranslation> getFullCardByName(@RequestParam String name, int page, int pageSize){
+		return cardService.getCardsByTranslationName(name, page, pageSize);
 	}
 
 	@GetMapping("/count/name")

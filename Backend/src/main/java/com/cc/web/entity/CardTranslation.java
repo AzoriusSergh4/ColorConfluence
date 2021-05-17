@@ -33,6 +33,7 @@ public class CardTranslation {
 	private CardCC card;
 
 	@OneToMany(mappedBy = "cardTranslation", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OrderBy("url DESC")
 	private List<CardSet> cardSet;
 	
 	public CardTranslation() {

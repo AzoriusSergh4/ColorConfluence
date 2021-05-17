@@ -14,11 +14,23 @@ import java.util.Optional;
 @Service
 public class DeckService {
 
-    @Autowired
-    private DeckRepository deckRepository;
+    private final DeckRepository deckRepository;
+
+    private final CardRepository cardRepository;
 
     @Autowired
-    private CardRepository cardRepository;
+    public DeckService(DeckRepository deckRepository, CardRepository cardRepository) {
+        this.deckRepository = deckRepository;
+        this.cardRepository = cardRepository;
+    }
+
+    /**
+     * Deletes the deck form the database
+     * @param deck The deck to delete
+     */
+    public void deleteDeck(Deck deck) {
+        this.deckRepository.delete(deck);
+    }
 
 
     /**
@@ -27,7 +39,8 @@ public class DeckService {
      * @return the deck data, or null if it is not found
      */
     public Deck getDeckById(long id) {
-        return deckRepository.findById(id).orElse(null);
+        Optional<Deck> opt = deckRepository.findById(id);
+        return opt.orElse(null);
     }
 
     /**
@@ -39,6 +52,15 @@ public class DeckService {
         return deckRepository.getByName(name).orElse(null);
     }
 
+    /**
+     * Retrieves all decks the given user has
+     * @param userId the user id
+     * @return the lsit of decks
+     */
+    public List<Deck> findUserDecks(long userId) {
+        return deckRepository.findByUser_Id(userId);
+    }
+
 
     /**
      * Stores the deck in the database
@@ -46,12 +68,22 @@ public class DeckService {
      * @param deckForm the form with the deck data
      * @throws IllegalArgumentException if any card id is wrong
      */
-    public void saveDeck(User user, DeckForm deckForm) throws IllegalArgumentException {
-        Deck deck = new Deck();
+    public Deck saveDeck(User user, DeckForm deckForm) throws IllegalArgumentException {
+        Deck deck;
+        if(deckForm.getId() > 0){
+            Optional<Deck> opt =  deckRepository.findById(deckForm.getId());
+            if (opt.isPresent() && opt.get().getUser().equals(user)){
+                deck = opt.get();
+            } else {
+                throw new IllegalArgumentException("Deck with wrong id or wrong user");
+            }
+        }else {
+            deck = new Deck();
+        }
 
         deck.setName(deckForm.getName());
         deck.setComments(deckForm.getComments());
-        deck.setFormats(deckForm.getFormats());
+        deck.setFormat(deckForm.getFormat());
         deck.setColors("");
         deck.setUser(user);
 
@@ -85,7 +117,7 @@ public class DeckService {
             }
         }
 
-        deckRepository.save(deck);
+        return deckRepository.save(deck);
     }
 
     private int getTotalQuantity(List<DeckCard> cards) {
@@ -102,10 +134,8 @@ public class DeckService {
             if(card == null) {
                 throw new IllegalArgumentException("Card with id " + c.getId() + " not found");
             }
-            for(Format f : deck.getFormats()) {
-                if (!checkFormat(card, f.getName())) {
-                    throw new IllegalArgumentException("Deck is not legal for the format " + f.getName() + " because of card '" + card.getName() + "'");
-                }
+            if (deck.getFormat() != null && !checkFormat(card, deck.getFormat().getName())) {
+                throw new IllegalArgumentException("Deck is not legal for the format " + deck.getFormat().getName() + " because of card '" + card.getName() + "'");
             }
             deckCards.add(new DeckCard(card, c.getQuantity()));
             updateColorIdentity(deck,card);

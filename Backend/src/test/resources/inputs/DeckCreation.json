@@ -110,10 +110,9 @@
     }
   ],
   "comments": "Azorius Spirits Deck",
-  "formats": [
+  "format":
     {
       "id": 282154,
       "name": "Modern"
     }
-  ]
 }

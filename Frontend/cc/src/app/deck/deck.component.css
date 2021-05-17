@@ -1,0 +1,35 @@
+.cc-card-deck {
+  height: 100%;
+}
+
+.cc-deck-tab {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+
+tr.cc-deck-table-detail-row {
+  height: 0;
+}
+
+tr.cc-deck-table-element-row:not(.cc-deck-table-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.cc-deck-table-element-row:not(.cc-deck-table-expanded-row):active {
+  background: #efefef;
+}
+
+.cc-deck-table-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+.cc-deck-table-element-detail-description {
+  white-space: pre-line;
+  margin-left: 8px;
+  line-height: 24px;
+}
+
+.cc-deck-table-element-row td {
+  border-bottom-width: 0;
+}

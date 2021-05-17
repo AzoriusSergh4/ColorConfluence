@@ -30,10 +30,9 @@ public class Deck {
 
     private String comments;
 
-    @OneToMany
-    private List<Format> formats;
+    @OneToOne
+    private Format format;
 
-    @JsonIgnore
     @ManyToOne
     private User user;
 
@@ -93,12 +92,12 @@ public class Deck {
         this.comments = comments;
     }
 
-    public List<Format> getFormats() {
-        return formats;
+    public Format getFormat() {
+        return format;
     }
 
-    public void setFormats(List<Format> formats) {
-        this.formats = formats;
+    public void setFormat(Format format) {
+        this.format = format;
     }
 
     public User getUser() {

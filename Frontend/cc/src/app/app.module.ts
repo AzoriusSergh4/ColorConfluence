@@ -24,7 +24,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatChipsModule} from '@angular/material/chips';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -32,6 +38,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {CovalentLayoutModule} from '@covalent/core/layout';
 import {CovalentStepsModule} from '@covalent/core/steps';
+import { CovalentPagingModule } from '@covalent/core/paging';
 /* any other core modules */
 import {CovalentHighlightModule} from '@covalent/highlight';
 import {CovalentMarkdownModule} from '@covalent/markdown';
@@ -55,6 +62,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { BaseComponent } from './base/base.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { RecoverPasswordFormComponent } from './recover-password-form/recover-password-form.component';
+import {DeckCreationComponent, SaveDeckDialog} from './deck-creation/deck-creation.component';
+import { DeckComponent } from './deck/deck.component';
+import {DeckService} from './services/deck.service';
 
 const appRoutes = [
   {path: '', component: MainScreenComponent},
@@ -64,7 +74,9 @@ const appRoutes = [
   {path: 'register', component: RegisterComponent},
   {path: 'confirm-account', component: ConfirmAccountComponent},
   {path: 'recover-password', component: RecoverPasswordComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent},
+  {path: 'create-deck', component: DeckCreationComponent},
+  {path: 'deck/:id', component: DeckComponent}
 ];
 
 
@@ -81,7 +93,10 @@ const appRoutes = [
     ProfileComponent,
     BaseComponent,
     RecoverPasswordComponent,
-    RecoverPasswordFormComponent
+    RecoverPasswordFormComponent,
+    DeckCreationComponent,
+    DeckComponent,
+    SaveDeckDialog
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -117,11 +132,19 @@ const appRoutes = [
     MatTooltipModule,
     MatSlideToggleModule,
     CovalentUserProfileModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DragDropModule,
+    MatSortModule,
+    MatTableModule,
+    MatDialogModule,
+    CovalentPagingModule,
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     CardService,
     LoginService,
+    DeckService,
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

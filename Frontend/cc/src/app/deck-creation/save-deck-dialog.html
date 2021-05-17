@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Save Deck</h2>
+<mat-dialog-content>
+  <div *ngIf="data.error.existError">
+    <p>The deck doesn't meet the following requirements:</p>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngIf="data.error.wrongCopies.length > 0">There are more copies of "<span *ngFor="let card of data.error.wrongCopies">{{card}}, </span>"than accepted ({{data.information.defaultSize}})</mat-list-item>
+      <mat-list-item role="listitem" *ngIf="data.error.wrongSize">The deck does not have enough cards</mat-list-item>
+      <mat-list-item role="listitem" *ngIf="data.error.noCommander">The deck does not have a Commander</mat-list-item>
+    </mat-list>
+    <p>If not fixed, the deck will save in draft mode automatically.</p>
+  </div>
+  <div *ngIf="data.error.illegalCards.length === 0">
+    <p>Are you sure you want to save the deck?</p>
+  </div>
+  <div *ngIf="data.error.illegalCards.length > 0">
+    <p>The deck has cards that are illegal in the format, so it can't be saved. Please remove them to save the deck</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
+  <button id="saveDialog" [disabled]="data.error.illegalCards.length > 0" mat-raised-button color="primary" [mat-dialog-close]="true">Save</button>
+</mat-dialog-actions>
