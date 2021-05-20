@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DeckForm} from '../deck-creation/deck-creation.component';
 
 const FORMAT_URL = '/api/format';
+const DECKS_URL = '/decks';
 const DECK_URL = '/api/deck';
 const CREATE_URL = '/create';
 const ALL_URL = '/all';
@@ -23,6 +24,10 @@ export class DeckService extends CommonService{
    */
   getDeck(id: number) {
     return this.apiGetRequest(DECK_URL + '/' + id);
+  }
+
+  getAllDecks(page: number) {
+    return this.apiGetRequest(DECK_URL + DECKS_URL + '?page=' + page);
   }
 
   /**

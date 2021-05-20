@@ -119,9 +119,9 @@ export class CardInformationComponent implements OnInit {
     this.selectedSet = this.card.cardSet[0];
   }
 
-  changeSet(set: string): void {
+  changeSet(set: string, cNumber: number): void {
     for (const s of this.card.cardSet) {
-      if (set === s.cardSet) {
+      if (set === s.cardSet && cNumber === s.cardNumber) {
         this.selectedSet = s;
         break;
       }

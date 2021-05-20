@@ -62,7 +62,7 @@
               <mat-divider inset></mat-divider>
               <div id="collection-sets" class="mtgCard-info-section">
                 <div fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="flex-start">
-                  <button mat-raised-button class="mtgCard-info-set-button" color="primary" *ngFor="let set of card?.cardSet" [disabled]="set.cardSet === selectedSet.cardSet" (click)="changeSet(set.cardSet)">{{set.cardSet}}</button>
+                  <button mat-raised-button class="mtgCard-info-set-button" color="primary" *ngFor="let set of card?.cardSet" [disabled]="set.cardSet === selectedSet.cardSet && set.cardNumber === selectedSet.cardNumber" (click)="changeSet(set.cardSet, set.cardNumber)">{{set.cardSet}}</button>
                 </div>
               </div>
             </div>

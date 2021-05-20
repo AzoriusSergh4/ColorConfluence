@@ -20,64 +20,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cb2ad74-a7ca-4f8d-91fb-03be8507665f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/format/FormatController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/format/FormatService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/DeckCreationPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/DeckInfoPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/LoginPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/selenium/JSWaiter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/DeckCreationFrontendSteps.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/resources/features/frontend/DeckFrontend.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/resources/inputs/DeckCreationFrontend.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-creation/deck-creation.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-creation/deck-creation.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-creation/deck-creation.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-creation/deck-creation.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-creation/save-deck-dialog.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/deck/deck.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/deck/deck.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/deck/deck.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/deck/deck.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/services/deck.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/app/services/deck.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cc/src/environments/environment.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/drivers/chromedriver.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/drivers/chromedriver.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/projection/DeckProjection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/error/APIError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/error/RestExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/CommonSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/DeckSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/DeckListPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/DeckAnalysisSteps.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardSetRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardSetRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardTranslationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardTranslationRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/FormatRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/format/FormatRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/CardTranslation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/CardTranslation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/TestProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/TestProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/CardSearchEngineBackendSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/CardSearchEngineBackendSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/DeckBackendSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/DeckBackendSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/BasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/CardSearchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/CardSearchPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/selenium/SeleniumService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/selenium/SeleniumService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/CardSearchFrontendSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/CardSearchFrontendSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/resources/features/backend/DeckBackend.feature" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/resources/features/backend/DeckBackend.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/resources/inputs/DeckCreation.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/resources/inputs/DeckCreation.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/CardSpecifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/CardSpecifications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/test/resources/features/frontend/DeckFrontend.feature" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/resources/features/frontend/DeckFrontend.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/cc/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/cc/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/cc/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/base/base.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/base/base.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/deck/deck.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck/deck.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/deck/deck.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck/deck.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/deck/deck.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck/deck.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/services/card.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/card.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/custom-theme.scss" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/custom-theme.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/services/deck.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/deck.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -244,7 +217,11 @@
       <workItem from="1620919165162" duration="7810000" />
       <workItem from="1621088956681" duration="8762000" />
       <workItem from="1621167332495" duration="5683000" />
-      <workItem from="1621252826980" duration="8133000" />
+      <workItem from="1621252826980" duration="10787000" />
+      <workItem from="1621281935226" duration="221000" />
+      <workItem from="1621348308608" duration="15093000" />
+      <workItem from="1621418708580" duration="11896000" />
+      <workItem from="1621521734893" duration="3903000" />
     </task>
     <servers />
   </component>

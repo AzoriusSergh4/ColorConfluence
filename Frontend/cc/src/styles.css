@@ -41,6 +41,11 @@ body { margin: 0;}
   width: 50%;
 }
 
+/* Tabs */
+.cc-tab-icon {
+  margin-right: 8px;
+}
+
 /* Spinners */
 
 .cc-loading {

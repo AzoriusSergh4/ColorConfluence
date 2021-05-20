@@ -22,7 +22,12 @@ a:hover {
   color: #69000c;
 }
 
+.cc-toolbar-buttons {
+  margin-left: 1%;
+}
+
 .login-toolbar {
+  display: flex;
   font-size: medium;
   margin-right: 1%;
 }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public final class CardSpecifications {
+public final class CardSpecifications extends CommonSpecification{
 
     //Translation Specifications
 
@@ -146,18 +146,6 @@ public final class CardSpecifications {
             Join<CardCC, CardLegality> joinL = join.join("legalities");
             return builder.and(builder.like(joinL.get("format"),contains(format)),builder.like(joinL.get("legality"), contains(legality)));
         };
-    }
-
-    private static Predicate[] predicateListToArray(List<Predicate> predicates){
-        Predicate[] result = new Predicate[predicates.size()];
-        for(int i = 0; i< predicates.size(); i++){
-            result[i] = predicates.get(i);
-        }
-        return result;
-    }
-
-    private static String contains(String expression) {
-        return MessageFormat.format("%{0}%", expression);
     }
 
 }

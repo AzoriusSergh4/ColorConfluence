@@ -39,6 +39,11 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {CovalentLayoutModule} from '@covalent/core/layout';
 import {CovalentStepsModule} from '@covalent/core/steps';
 import { CovalentPagingModule } from '@covalent/core/paging';
+import { CovalentBarEchartsModule } from '@covalent/echarts/bar';
+import { CovalentPieEchartsModule } from '@covalent/echarts/pie';
+import { CovalentToolboxEchartsModule } from '@covalent/echarts/toolbox';
+import { CovalentTooltipEchartsModule } from '@covalent/echarts/tooltip';
+import { CovalentDataTableModule } from '@covalent/core/data-table';
 /* any other core modules */
 import {CovalentHighlightModule} from '@covalent/highlight';
 import {CovalentMarkdownModule} from '@covalent/markdown';
@@ -65,6 +70,7 @@ import { RecoverPasswordFormComponent } from './recover-password-form/recover-pa
 import {DeckCreationComponent, SaveDeckDialog} from './deck-creation/deck-creation.component';
 import { DeckComponent } from './deck/deck.component';
 import {DeckService} from './services/deck.service';
+import { DeckListComponent } from './deck-list/deck-list.component';
 
 const appRoutes = [
   {path: '', component: MainScreenComponent},
@@ -76,6 +82,7 @@ const appRoutes = [
   {path: 'recover-password', component: RecoverPasswordComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'create-deck', component: DeckCreationComponent},
+  {path: 'decks', component: DeckListComponent},
   {path: 'deck/:id', component: DeckComponent}
 ];
 
@@ -96,7 +103,8 @@ const appRoutes = [
     RecoverPasswordFormComponent,
     DeckCreationComponent,
     DeckComponent,
-    SaveDeckDialog
+    SaveDeckDialog,
+    DeckListComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -126,6 +134,11 @@ const appRoutes = [
     CovalentMarkdownModule,
     CovalentDynamicFormsModule,
     CovalentBaseEchartsModule,
+    CovalentBarEchartsModule,
+    CovalentPieEchartsModule,
+    CovalentToolboxEchartsModule,
+    CovalentTooltipEchartsModule,
+    CovalentDataTableModule,
     MatCheckboxModule,
     MatSelectModule,
     FormsModule,

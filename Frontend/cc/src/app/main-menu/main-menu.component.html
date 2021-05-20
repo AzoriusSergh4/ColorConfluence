@@ -3,27 +3,38 @@
     <div>
         <h1>COLORCONFLUENCE</h1>
     </div>
+
+   <div class="cc-toolbar-buttons">
+     <button style="font-size: 18px" mat-flat-button color="primary" aria-label="Card Button" (click)="goToCards()">
+       <span>Cards</span>
+     </button>
+     <button id="deckMenu" style="font-size: 18px" mat-flat-button color="primary" [matMenuTriggerFor]="deckMenu" aria-label="Deck Menu button">
+       <span>Decks</span>
+       <mat-icon>expand_more</mat-icon>
+     </button>
+     <mat-menu #deckMenu="matMenu">
+       <button mat-menu-item id="allDecks" (click)="goToDecks()">
+         <mat-icon>list_alt</mat-icon>
+         <span>All Decks</span>
+       </button>
+       <button mat-menu-item *ngIf="loginService.isLogged">
+         <mat-icon>folder_shared</mat-icon>
+         <span>My Decks</span>
+       </button>
+       <button mat-menu-item id="newDeck" *ngIf="loginService.isLogged">
+         <mat-icon>add</mat-icon>
+         <span (click)="goToNewDeck()">New Deck</span>
+       </button>
+     </mat-menu>
+   </div>
     <span class="cc-fill-remaining-space"></span>
 
    <div *ngIf="!loginService.isLogged" class="login-toolbar">
-     <p><span><a routerLink="login">Log in</a></span> or <span><a routerLink="register">Sign up</a></span></p>
+     <div>
+       <p><span><a routerLink="login">Log in</a></span> or <span><a routerLink="register">Sign up</a></span></p>
+     </div>
    </div>
    <div *ngIf="loginService.isLogged" style="display: flex">
-     <div>
-       <button id="deckMenu" style="font-size: 18px" mat-flat-button color="primary" [matMenuTriggerFor]="deckMenu" aria-label="Deck Menu button">
-         Decks
-       </button>
-       <mat-menu #deckMenu="matMenu">
-         <button mat-menu-item>
-           <mat-icon>list_alt</mat-icon>
-           <span>My Decks</span>
-         </button>
-         <button mat-menu-item id="newDeck">
-           <mat-icon>add</mat-icon>
-           <span (click)="goToNewDeck()">New Deck</span>
-         </button>
-       </mat-menu>
-     </div>
      <div>
        <td-user-profile name="{{loginService.user.username}}" email="{{loginService.user.email}}">
          <ng-container td-user-action-list>

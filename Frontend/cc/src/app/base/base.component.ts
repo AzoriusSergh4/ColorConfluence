@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from '../services/login.service';
 import {Router} from '@angular/router';
+import {Deck} from '../deck/deck.component';
+import {DeckService} from '../services/deck.service';
 
 @Component({
   selector: 'app-base',
@@ -9,13 +10,18 @@ import {Router} from '@angular/router';
 })
 export class BaseComponent implements OnInit {
 
-  constructor(protected router: Router) { }
+  constructor(protected router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
   redirectToHome() {
     this.router.navigate(['']);
+  }
+
+  goToDecks(): void {
+    this.router.navigate(['decks']);
   }
 
 }

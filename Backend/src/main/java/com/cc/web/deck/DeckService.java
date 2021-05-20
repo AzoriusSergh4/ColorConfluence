@@ -3,11 +3,18 @@ package com.cc.web.deck;
 import com.cc.security.user.User;
 import com.cc.web.card.CardRepository;
 import com.cc.web.entity.*;
+import com.cc.web.entity.projection.DeckProjection;
+import com.cc.web.specifications.DeckSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -44,12 +51,16 @@ public class DeckService {
     }
 
     /**
-     * Retrieves the deck identified by the name
-     * @param name the id of the deck
-     * @return the deck data, or null if it is not found
+     * Retrieves the decks filtered by the specified criteria
+     * @param criteria the criteria to filter by
+     * @return a page with the decks
      */
-    public Deck getDeckByName(String name) {
-        return deckRepository.getByName(name).orElse(null);
+    public Page<DeckProjection>getBasicDecksByCriteria(Map<String, String> criteria){
+        Specification<Deck> specification = Specification
+                .where(criteria.get("name") == null ? null : DeckSpecification.nameContains(criteria.get("name")))
+                .and(criteria.get("colors") == null ? null : DeckSpecification.colorContains(criteria.get("colors")))
+                .and(criteria.get("format") == null ? null : DeckSpecification.formatEquals(criteria.get("format")));
+        return deckRepository.findAll(specification, DeckProjection.class, PageRequest.of(Integer.parseInt(criteria.get("page")),20, Sort.by(Sort.Direction.DESC, "id")));
     }
 
     /**

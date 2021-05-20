@@ -25,8 +25,12 @@ export class MainMenuComponent extends BaseComponent implements OnInit {
     this.router.navigate(['profile']);
   }
 
+  goToCards(): void {
+    this.router.navigate(['cards']);
+  }
+
   goToNewDeck(): void {
-    this.router.navigate(['/create-deck']);
+    this.router.navigate(['create-deck']);
   }
 
   logout() {

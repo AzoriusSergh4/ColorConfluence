@@ -3,6 +3,7 @@ import {FormControl} from '@angular/forms';
 import {tdBounceAnimation, tdPulseAnimation} from '@covalent/core/common';
 import {Router} from '@angular/router';
 import {CardService} from '../services/card.service';
+import {BaseComponent} from '../base/base.component';
 
 export interface Card {
   name: string;
@@ -25,7 +26,7 @@ export interface Deck {
     tdPulseAnimation
   ]
 })
-export class MainScreenComponent implements OnInit {
+export class MainScreenComponent extends BaseComponent implements OnInit {
   pulseStateCards = false;
   pulseStateDeck = false;
 
@@ -56,7 +57,9 @@ export class MainScreenComponent implements OnInit {
 
   cardName = new FormControl('');
 
-  constructor(private router: Router, private cardService: CardService) { }
+  constructor(protected router: Router, private cardService: CardService) {
+    super(router);
+  }
 
   onCardSubmit(): void {
     if (this.cardName.value !== ''){

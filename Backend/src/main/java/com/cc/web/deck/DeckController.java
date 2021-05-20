@@ -2,12 +2,15 @@ package com.cc.web.deck;
 
 import com.cc.security.user.UserComponent;
 import com.cc.web.entity.Deck;
+import com.cc.web.entity.projection.DeckProjection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = {"http://localhost:4200", "https://azoriussergh4.github.io"})
 @RestController
@@ -33,6 +36,11 @@ public class DeckController {
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/decks")
+    public Page<DeckProjection> getDecks(@RequestParam Map<String,String> criteria) {
+        return deckService.getBasicDecksByCriteria(criteria);
     }
 
     @GetMapping("/decks/{id}")

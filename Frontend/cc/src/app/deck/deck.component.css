@@ -1,5 +1,12 @@
+.grid-container-deck {
+  margin-top: 2%;
+}
 .cc-card-deck {
   height: 100%;
+}
+
+.cc-deck-analytics{
+  height: 500px;
 }
 
 .cc-deck-tab {
