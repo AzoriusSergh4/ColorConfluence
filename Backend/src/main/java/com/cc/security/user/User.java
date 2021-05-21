@@ -40,10 +40,8 @@ public class User {
         this.username = data.getUsername();
         this.password = new BCryptPasswordEncoder().encode(data.getPassword());
         this.enabled = false;
-
-        List<String> roles = new ArrayList<>();
-        roles.add("USER");
-        this.roles = roles;
+        this.roles = new ArrayList<>();
+        this.roles.add("USER");
     }
 
     public String getUsername() {

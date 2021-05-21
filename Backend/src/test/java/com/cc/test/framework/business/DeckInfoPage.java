@@ -17,6 +17,10 @@ public class DeckInfoPage extends BasePage{
         return seleniumService.findWebElementsBy(By.xpath("//mat-tab-body//mat-card//mat-card-content//canvas")).size() == 4;
     }
 
+    public boolean checkProbabilities() {
+        return seleniumService.findWebElementsBy(By.xpath("//mat-card//tbody/tr//td[contains(text(),'%')]")).size() > 0 ;
+    }
+
     public boolean checkPageIsLoaded() {
         return this.seleniumService.isWebElementBy(By.xpath("//cc-deck//mat-card-title[text()=' Main ']/ancestor::mat-card//mat-card-content//table//tbody//tr"));
     }

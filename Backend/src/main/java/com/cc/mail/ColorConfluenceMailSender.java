@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ColorConfluenceMailSender {
 
-    private final String LOCAL = "http://localhost:4200";
-    private final String PROD = "https://colorconfluence.ddns.net";
+    private static final String LOCAL = "http://localhost:4200";
+    private static final String PROD = "https://colorconfluence.ddns.net";
 
     @Autowired
     JavaMailSender mailSender;
@@ -20,7 +20,7 @@ public class ColorConfluenceMailSender {
      * @param token the token to send
      */
     public void sendValidationAccount(String to, String token){
-        SimpleMailMessage message = new SimpleMailMessage();
+        var message = new SimpleMailMessage();
         message.setFrom("colorconfluence@gmail.com");
         message.setTo(to);
         message.setSubject("ColorConfluence Account Verification!");
@@ -29,7 +29,7 @@ public class ColorConfluenceMailSender {
     }
 
     public void sendRecoverPassword(String to, String token) {
-        SimpleMailMessage message = new SimpleMailMessage();
+        var message = new SimpleMailMessage();
         message.setFrom("colorconfluence@gmail.com");
         message.setTo(to);
         message.setSubject("ColorConfluence Recover Password");

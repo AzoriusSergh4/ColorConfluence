@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class DeckAnalysisSteps {
+public class DeckInfoFrontendSteps {
 
     @Autowired
     private FrontendTestCommons testCommons;
@@ -19,21 +19,18 @@ public class DeckAnalysisSteps {
     @Autowired
     private Hooks hooks;
 
-    private final HomePage homePage;
-
     private final DeckListPage deckListPage;
 
     private final DeckInfoPage deckInfoPage;
 
     @Autowired
-    public DeckAnalysisSteps(HomePage homePage, DeckListPage deckListPage, DeckInfoPage deckInfoPage) {
-        this.homePage = homePage;
+    public DeckInfoFrontendSteps(DeckListPage deckListPage, DeckInfoPage deckInfoPage) {
         this.deckListPage = deckListPage;
         this.deckInfoPage = deckInfoPage;
     }
 
-    @And("I go the Deck List Page")
-    public void iGoTheDeckListPage() {
+    @And("I go to the Deck List Page")
+    public void iGoToTheDeckListPage() {
         this.deckListPage.goToDeckListCreation();
     }
 
@@ -48,15 +45,20 @@ public class DeckAnalysisSteps {
         Assert.assertTrue(deckInfoPage.checkPageIsLoaded());
     }
 
-    @When("I get into the analysis tab")
-    public void iGetIntoTheAnalysisTab() {
-        this.deckInfoPage.goToTab("Analytics");
-
-    }
-
     @Then("the analysis tab is loaded and I can see the charts")
     public void theAnalysisTabIsLoadedAndICanSeeTheCharts() {
         Assert.assertTrue(this.deckInfoPage.checkAnalysis());
+        testCommons.takeScreenshot(hooks.scenario);
+    }
+
+    @When("I get into the {string} tab")
+    public void iGetIntoTheTab(String tab) {
+        this.deckInfoPage.goToTab(tab);
+    }
+
+    @Then("the probabilities tab is loaded and I can see the percentages")
+    public void theProbabilitiesTabIsLoadedAndICanSeeThePercentages() {
+        Assert.assertTrue(this.deckInfoPage.checkProbabilities());
         testCommons.takeScreenshot(hooks.scenario);
     }
 }

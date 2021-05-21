@@ -23,6 +23,17 @@ export interface Deck {
   user: User;
 }
 
+export interface Probability {
+  quantity: number;
+  name: string;
+  opening: string;
+  turn1: string;
+  turn2: string;
+  turn3: string;
+  turn4: string;
+  turn5: string;
+}
+
 @Component({
   selector: 'cc-deck',
   templateUrl: './deck.component.html',
@@ -39,7 +50,8 @@ export class DeckComponent implements OnInit {
 
   deck: Deck;
 
-  displayedColumns: string[] = ['quantity', 'name', 'cardType', 'manaCost'];
+  displayedColumnsDeck: string[] = ['quantity', 'name', 'cardType', 'manaCost'];
+  displayedColumnsProb: string[] = ['quantity', 'name', 'opening', 'turn1', 'turn2', 'turn3', 'turn4', 'turn5'];
   mainDatasource = [];
   sideDatasource = [];
   expandedElement: DeckCard | null;
@@ -152,6 +164,7 @@ export class DeckComponent implements OnInit {
       },
     }
   };
+  probabilities: Probability[];
 
   constructor(private activatedRoute: ActivatedRoute, private deckService: DeckService) {
     const id = this.activatedRoute.snapshot.params.id;
@@ -163,6 +176,7 @@ export class DeckComponent implements OnInit {
       this.sideDatasource = this.deck.sideboard;
       this.loadingContent = false;
       this.initializeCharts();
+      this.initializeProbabilities();
     }, error => {
       this.loadingContent = false;
       console.log(error);
@@ -173,10 +187,35 @@ export class DeckComponent implements OnInit {
   }
 
   initializeCharts() {
-    this.initializeCmcDistribution()
+    this.initializeCmcDistribution();
     this.initializeTypeDistribution();
     this.initializeManaDistribution();
     this.initializeManaSourceDistribution();
+  }
+
+  initializeProbabilities() {
+    this.probabilities = [];
+    this.deck.main.forEach(c => {
+      this.probabilities.push({
+        quantity: c.quantity,
+        name: c.card.name,
+        opening: ((1 - this.hypergeometrical(this.sumCards(this.deck.main), c.quantity, 7, 0)) * 100).toFixed(2) + '%',
+        turn1: ((1 - this.hypergeometrical(this.sumCards(this.deck.main), c.quantity, 8, 0)) * 100).toFixed(2) + '%',
+        turn2: ((1 - this.hypergeometrical(this.sumCards(this.deck.main), c.quantity, 9, 0)) * 100).toFixed(2) + '%',
+        turn3: ((1 - this.hypergeometrical(this.sumCards(this.deck.main), c.quantity, 10, 0)) * 100).toFixed(2) + '%',
+        turn4: ((1 - this.hypergeometrical(this.sumCards(this.deck.main), c.quantity, 11, 0)) * 100).toFixed(2) + '%',
+        turn5: ((1 - this.hypergeometrical(this.sumCards(this.deck.main), c.quantity, 12, 0)) * 100).toFixed(2) + '%'
+      });
+    });
+    console.log(this.probabilities);
+  }
+
+  sumCards(list: any[]): number {
+    let total = 0;
+    list.forEach(card => {
+      total += card.quantity;
+    });
+    return total;
   }
 
   initializeCmcDistribution() {

@@ -9,6 +9,10 @@
   padding: 16px !important;
 }
 
+.cc-card-main{
+  height: 400px;
+}
+
 a {
   color: white;
 }

@@ -36,9 +36,7 @@ public class Deck {
     @ManyToOne
     private User user;
 
-    public Deck() {
-
-    }
+    public Deck() {}
 
     public boolean isDraft() {
         return draft;

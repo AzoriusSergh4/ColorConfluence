@@ -45,7 +45,7 @@ public final class CardSpecifications extends CommonSpecification{
         };
     }
     public static Specification<CardTranslation> colorContains(String colorCriteria){
-        String[] defaultColors = {"W", "B", "U" ,"R", "G", "C"};
+        var defaultColors = new String[]{"W", "B", "U", "R", "G", "C"};
         if(colorCriteria.startsWith("=")){
             String color = colorCriteria.replaceAll("=", "");
             return (root, query, builder) -> {
@@ -136,7 +136,7 @@ public final class CardSpecifications extends CommonSpecification{
     public static Specification<CardTranslation> cardSetContains(String cardSet){
         return (root, query, builder) -> {
             Join<CardSet, CardTranslation> join = root.join("cardSet");
-            return builder.like(join.get("cardSet"), contains(cardSet));
+            return builder.like(join.get("set"), contains(cardSet));
         };
     }
 

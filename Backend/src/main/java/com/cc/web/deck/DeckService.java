@@ -115,7 +115,7 @@ public class DeckService {
         if (deck.getColors().equals("")) deck.setColors("C");
 
         //Check if the deck structure is correct or is a draft
-        if(deck.getCommander().size() > 0) {
+        if(!deck.getCommander().isEmpty()) {
             List<DeckCard> cards = new ArrayList<>(deck.getCommander());
             cards.addAll(deck.getMain());
             if (getTotalQuantity(cards) != 100) {
@@ -132,7 +132,7 @@ public class DeckService {
     }
 
     private int getTotalQuantity(List<DeckCard> cards) {
-        int quantity = 0;
+        var quantity = 0;
         for(DeckCard card : cards) {
             quantity += card.getQuantity();
         }
@@ -161,7 +161,7 @@ public class DeckService {
     }
 
     private void updateColorIdentity(Deck deck, CardCC cardCC) {
-        String[] defaultColors = {"W", "B", "U" ,"R", "G"};
+        var defaultColors = new String[]{"W", "B", "U", "R", "G"};
         for(String color : defaultColors) {
             if(cardCC.getManaCost() != null && cardCC.getManaCost().contains(color) && !deck.getColors().contains(color)){
                 deck.setColors(deck.getColors() + color);

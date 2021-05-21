@@ -1,8 +1,6 @@
 package com.cc.web.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
@@ -14,7 +12,7 @@ public class CardSet {
     private long id;
 
     private String cardNumber;
-    private String cardSet;
+    private String set;
     private String url;
 
     @JsonIgnore
@@ -23,18 +21,18 @@ public class CardSet {
 
     public CardSet(){}
 
-    public CardSet(String cardSet, String cardNumber, String url){
-        this.cardSet = cardSet;
+    public CardSet(String set, String cardNumber, String url){
+        this.set = set;
         this.cardNumber = cardNumber;
         this.url = url;
     }
 
-    public String getCardSet() {
-        return cardSet;
+    public String getSet() {
+        return set;
     }
 
-    public void setCardSet(String set) {
-        this.cardSet = set;
+    public void setSet(String set) {
+        this.set = set;
     }
 
     public String getUrl() {

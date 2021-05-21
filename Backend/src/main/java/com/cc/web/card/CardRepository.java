@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CardRepository extends JpaRepository<CardCC,Long>{
 
 	boolean existsByName(String name);
-	CardCC findByName(String Name);
 	CardCC findById(long id);
 }

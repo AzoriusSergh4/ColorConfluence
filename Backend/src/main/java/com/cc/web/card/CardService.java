@@ -74,27 +74,6 @@ public class CardService {
 		return translationRepository.findAll(s,CardTranslationProjection.class, PageRequest.of(Integer.parseInt(criteria.get("page")),60));
 	}
 
-	private List<CardTranslationProjection> filterCards(Page<CardTranslationProjection> cards){
-		Set<CardCC> selected = new HashSet<>();
-		List<CardTranslationProjection> cardsFiltered = new ArrayList<>();
-		//Remove duplicates and select first set with card image
-		for(CardTranslationProjection c : cards) {
-			if(!selected.contains(c.getCard())){
-				selected.add(c.getCard());
-				for(CardSet s : c.getCardSet()){
-					if(s.getUrl() != null){
-						List<CardSet> set = new ArrayList<>();
-						set.add(s);
-						c.setCardSet(set);
-						break;
-					}
-				}
-				cardsFiltered.add(c);
-			}
-		}
-		return cardsFiltered;
-	}
-
 	public CardTranslation getCardById(long id) {
 		Optional<CardTranslation> opt = translationRepository.findById(id);
 		return opt.orElse(null);

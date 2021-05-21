@@ -10,7 +10,6 @@ body { margin: 0;}
 .cc-card{
     float: left;
     position: relative;
-    height: 400px;
     width: 100%;
     padding: 0 !important;
 }
@@ -75,4 +74,5 @@ body { margin: 0;}
   align-content: center;
   justify-content: center;
   display: flex;
+
 }
