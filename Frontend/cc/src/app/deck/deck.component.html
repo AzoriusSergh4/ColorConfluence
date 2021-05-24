@@ -299,7 +299,7 @@
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="cc-tab-icon">style</mat-icon>
-        Opening hand
+        Opening Hand
       </ng-template>
       <div class="cc-deck-tab">
         <div class="cc-card-center">
@@ -317,6 +317,31 @@
         <mat-icon class="cc-tab-icon">file_upload</mat-icon>
         Export
       </ng-template>
+      <div class="cc-deck-tab" fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+        <div fxFlex="0 1 calc(75% - 32px)">
+          <mat-form-field appearance="fill" class="cc-mat-form-field-full">
+            <mat-label>Deck Exported</mat-label>
+            <textarea [rows]="exportListLines" spellcheck="false" matInput style="height: 100%; line-height: 22px" [(ngModel)]="exportList"></textarea>
+          </mat-form-field>
+        </div>
+        <div fxFlex="0 1 calc(25% - 32px)">
+          <div fxLayout="column" fxLayoutGap="32px">
+            <div style="text-align: center">
+              <button mat-raised-button color="primary"
+                      [cdkCopyToClipboard]="exportList">
+                <mat-icon style="font-size: 20px">content_copy</mat-icon>
+                Copy To Clipboard
+              </button>
+            </div>
+            <div style="text-align: center">
+              <button mat-raised-button color="primary" disabled>
+                <mat-icon style="font-size: 20px">picture_as_pdf</mat-icon>
+                Registration PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </div>

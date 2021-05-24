@@ -10,6 +10,9 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+
 public class DeckInfoFrontendSteps {
 
     @Autowired
@@ -66,6 +69,12 @@ public class DeckInfoFrontendSteps {
         Assert.assertTrue(this.deckInfoPage.checkOpeningHand());
         testCommons.takeScreenshot(hooks.scenario);
         Assert.assertTrue(this.deckInfoPage.checkMulligan());
+        testCommons.takeScreenshot(hooks.scenario);
+    }
+
+    @Then("the export tab is loaded and I can see the deck list ready to copy")
+    public void theExportTabIsLoadedAndICanSeeTheDeckListReadyToCopy() throws IOException, UnsupportedFlavorException {
+        Assert.assertTrue(this.deckInfoPage.checkExport());
         testCommons.takeScreenshot(hooks.scenario);
     }
 }

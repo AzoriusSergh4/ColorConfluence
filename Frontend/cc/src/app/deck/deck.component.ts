@@ -169,6 +169,9 @@ export class DeckComponent implements OnInit {
 
   openingHand: any[];
 
+  exportList: string;
+  exportListLines: number;
+
   constructor(private activatedRoute: ActivatedRoute, private deckService: DeckService) {
     const id = this.activatedRoute.snapshot.params.id;
     this.loadingContent = true;
@@ -181,6 +184,7 @@ export class DeckComponent implements OnInit {
       this.initializeCharts();
       this.initializeProbabilities();
       this.mulligan();
+      this.prepareExportList();
     }, error => {
       this.loadingContent = false;
       console.log(error);
@@ -433,6 +437,28 @@ export class DeckComponent implements OnInit {
     return r;
   }
 
+  prepareExportList() {
+    this.exportList = '';
+    if (this.deck.commander.length > 0) {
+      this.fillExportListSection('Commander', this.deck.commander);
+      this.separateSections();
+    }
+    this.fillExportListSection('Deck', this.deck.main);
+    if (this.deck.sideboard.length > 0) {
+      this.separateSections();
+      this.fillExportListSection('Sideboard', this.deck.sideboard);
+    }
+    this.exportListLines = this.exportList.match(/^/gm).length;
+  }
 
+  fillExportListSection(sectionName: string, section: any[]) {
+    this.exportList += sectionName + '\n';
+    section.forEach(c => {
+      this.exportList += c.quantity + ' ' + c.card.name + '\n';
+    });
+  }
 
+  separateSections() {
+    this.exportList += '\n';
+  }
 }
