@@ -237,8 +237,8 @@
         <mat-icon class="cc-tab-icon">calculate_outline</mat-icon>
         Probabilities
       </ng-template>
-      <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" class="cc-deck-tab">
-        <mat-card fxFlex="1 1 auto" class="cc-card mat-elevation-z8" fxLayout="column">
+      <div class="cc-deck-tab">
+        <mat-card class="cc-card mat-elevation-z8" fxLayout="column">
           <mat-card-header class="cc-card-header">
             <mat-card-title>
                 Card Probabilites
@@ -301,6 +301,16 @@
         <mat-icon class="cc-tab-icon">style</mat-icon>
         Opening hand
       </ng-template>
+      <div class="cc-deck-tab">
+        <div class="cc-card-center">
+          <button mat-raised-button color="primary" (click)="mulligan()">Mulligan</button>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" class="cc-deck-tab">
+          <div fxFlex="0 1 calc(14.28% - 32px)" *ngFor="let card of openingHand">
+            <img width="100%" src="{{card.card.cardTranslation[0].cardSet[0].url}}" alt="{{card.card.name}} Image card">
+          </div>
+        </div>
+      </div>
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>

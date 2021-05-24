@@ -1,17 +1,17 @@
 package com.cc.web.card;
 
-import com.cc.web.entity.CardCC;
-import com.cc.web.entity.CardSet;
 import com.cc.web.entity.CardTranslation;
 import com.cc.web.entity.projection.CardTranslationProjection;
 import com.cc.web.specifications.CardSpecifications;
+import com.cc.web.specifications.CommonSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class CardService {
@@ -69,7 +69,8 @@ public class CardService {
 				.and((criteria.get("commander") == null ? null : CardSpecifications.legalityContains("Commander", criteria.get("commander"))))
 				.and((criteria.get("historic") == null ? null : CardSpecifications.legalityContains("Historic", criteria.get("historic"))))
 				.and((criteria.get("pioneer") == null ? null : CardSpecifications.legalityContains("Pioneer", criteria.get("pioneer"))))
-				.and((criteria.get("penny") == null ? null : CardSpecifications.legalityContains("Penny", criteria.get("penny"))));
+				.and((criteria.get("penny") == null ? null : CardSpecifications.legalityContains("Penny", criteria.get("penny"))))
+				.and(CommonSpecification.distinct());
 
 		return translationRepository.findAll(s,CardTranslationProjection.class, PageRequest.of(Integer.parseInt(criteria.get("page")),60));
 	}

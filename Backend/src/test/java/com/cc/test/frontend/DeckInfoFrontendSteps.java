@@ -2,7 +2,6 @@ package com.cc.test.frontend;
 
 import com.cc.test.framework.business.DeckInfoPage;
 import com.cc.test.framework.business.DeckListPage;
-import com.cc.test.framework.business.HomePage;
 import com.cc.test.framework.selenium.FrontendTestCommons;
 import com.cc.test.framework.selenium.Hooks;
 import io.cucumber.java.en.And;
@@ -59,6 +58,14 @@ public class DeckInfoFrontendSteps {
     @Then("the probabilities tab is loaded and I can see the percentages")
     public void theProbabilitiesTabIsLoadedAndICanSeeThePercentages() {
         Assert.assertTrue(this.deckInfoPage.checkProbabilities());
+        testCommons.takeScreenshot(hooks.scenario);
+    }
+
+    @Then("the opening hand tab is loaded and I can see seven cards")
+    public void theOpeningHandTabIsLoadedAndICanSeeSevenCards() {
+        Assert.assertTrue(this.deckInfoPage.checkOpeningHand());
+        testCommons.takeScreenshot(hooks.scenario);
+        Assert.assertTrue(this.deckInfoPage.checkMulligan());
         testCommons.takeScreenshot(hooks.scenario);
     }
 }

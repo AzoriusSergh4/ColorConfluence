@@ -1,6 +1,5 @@
 package com.cc.test.framework.business;
 
-import com.cc.web.deck.DeckForm;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.cucumber.spring.ScenarioScope;

@@ -1,14 +1,11 @@
 package com.cc.test;
 
+import com.cc.ColorConfluenceApplication;
 import io.cucumber.java.Before;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-
-import com.cc.ColorConfluenceApplication;
 
 /**
  * Class to use spring application context while running cucumber

@@ -1,6 +1,5 @@
 package com.cc.security;
 
-import com.cc.security.user.User;
 import com.cc.security.user.UserComponent;
 import com.cc.security.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

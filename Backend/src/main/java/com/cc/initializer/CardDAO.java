@@ -1,25 +1,23 @@
 package com.cc.initializer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.cc.web.card.CardLegalitiesRepository;
+import com.cc.web.card.CardRepository;
 import com.cc.web.card.CardSetRepository;
+import com.cc.web.card.CardTranslationRepository;
+import com.cc.web.entity.CardCC;
 import com.cc.web.entity.CardLegality;
 import com.cc.web.entity.CardSet;
+import com.cc.web.entity.CardTranslation;
+import io.magicthegathering.javasdk.resource.Card;
+import io.magicthegathering.javasdk.resource.ForeignData;
 import io.magicthegathering.javasdk.resource.Legality;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cc.web.card.CardRepository;
-import com.cc.web.card.CardTranslationRepository;
-import com.cc.web.entity.CardCC;
-import com.cc.web.entity.CardTranslation;
-
-import io.magicthegathering.javasdk.resource.Card;
-import io.magicthegathering.javasdk.resource.ForeignData;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CardDAO {

@@ -2,7 +2,10 @@ package com.cc.web.deck;
 
 import com.cc.security.user.User;
 import com.cc.web.card.CardRepository;
-import com.cc.web.entity.*;
+import com.cc.web.entity.CardCC;
+import com.cc.web.entity.CardLegality;
+import com.cc.web.entity.Deck;
+import com.cc.web.entity.DeckCard;
 import com.cc.web.entity.projection.DeckProjection;
 import com.cc.web.specifications.DeckSpecification;
 import org.springframework.beans.factory.annotation.Autowired;

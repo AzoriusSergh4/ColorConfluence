@@ -1,7 +1,6 @@
 package com.cc.web.entity;
 
 import com.cc.security.user.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;

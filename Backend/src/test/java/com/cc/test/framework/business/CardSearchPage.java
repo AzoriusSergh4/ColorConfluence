@@ -1,8 +1,8 @@
 package com.cc.test.framework.business;
+
 import io.cucumber.spring.ScenarioScope;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

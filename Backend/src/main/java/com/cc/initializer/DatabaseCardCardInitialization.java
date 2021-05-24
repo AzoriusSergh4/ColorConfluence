@@ -1,18 +1,16 @@
 package com.cc.initializer;
 
-import javax.annotation.PostConstruct;
-
 import com.cc.web.entity.SetInfo;
 import com.cc.web.set.SetInfoService;
+import io.magicthegathering.javasdk.api.SetAPI;
+import io.magicthegathering.javasdk.exception.HttpRequestFailedException;
+import io.magicthegathering.javasdk.resource.MtgSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.magicthegathering.javasdk.api.SetAPI;
-import io.magicthegathering.javasdk.exception.HttpRequestFailedException;
-import io.magicthegathering.javasdk.resource.MtgSet;
-
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component

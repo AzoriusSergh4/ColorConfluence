@@ -3,8 +3,6 @@ package com.cc.test.frontend;
 import com.cc.test.framework.business.HomePage;
 import com.cc.test.framework.selenium.FrontendTestCommons;
 import com.cc.test.framework.selenium.Hooks;
-import com.cc.test.framework.selenium.TestCommons;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

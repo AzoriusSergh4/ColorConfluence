@@ -4,6 +4,7 @@ import {DeckService} from '../services/deck.service';
 import {Format} from '../deck-creation/deck-creation.component';
 import {User} from '../services/login.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import * as _ from 'lodash';
 
 export interface DeckCard {
   id: number;
@@ -76,7 +77,7 @@ export class DeckComponent implements OnInit {
           type: 'value',
           axisLabel: { inside: false },
           max(value) {
-            return value.max + 5;
+            return Math.ceil(value.max / 10) * 10;
           }
         },
       ],
@@ -128,7 +129,7 @@ export class DeckComponent implements OnInit {
           itemStyle: {
             opacity: 0.95,
           },
-          name: 'Product',
+          name: 'Color',
           radius: [0, '75%'],
           data: [
           ],
@@ -166,6 +167,8 @@ export class DeckComponent implements OnInit {
   };
   probabilities: Probability[];
 
+  openingHand: any[];
+
   constructor(private activatedRoute: ActivatedRoute, private deckService: DeckService) {
     const id = this.activatedRoute.snapshot.params.id;
     this.loadingContent = true;
@@ -177,6 +180,7 @@ export class DeckComponent implements OnInit {
       this.loadingContent = false;
       this.initializeCharts();
       this.initializeProbabilities();
+      this.mulligan();
     }, error => {
       this.loadingContent = false;
       console.log(error);
@@ -184,6 +188,10 @@ export class DeckComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  mulligan() {
+    this.openingHand = _.sampleSize(this.deck.main, 7);
   }
 
   initializeCharts() {
@@ -207,7 +215,6 @@ export class DeckComponent implements OnInit {
         turn5: ((1 - this.hypergeometrical(this.sumCards(this.deck.main), c.quantity, 12, 0)) * 100).toFixed(2) + '%'
       });
     });
-    console.log(this.probabilities);
   }
 
   sumCards(list: any[]): number {
