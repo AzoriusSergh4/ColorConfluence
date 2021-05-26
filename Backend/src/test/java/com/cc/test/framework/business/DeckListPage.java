@@ -25,6 +25,13 @@ public class DeckListPage extends BasePage {
         this.seleniumService.typeText(this.seleniumService.findWebElementById("deckName"), name);
     }
 
+    public void fillColors(String colors) {
+        var color = colors.split("(?!^)");
+        for(String c : color) {
+            this.seleniumService.findWebElementBy(By.xpath("//cc-deck-list//mat-checkbox[@value='" + c + "']")).click();
+        }
+    }
+
     public void searchDecks() {
         this.seleniumService.findWebElementBy(By.xpath("//cc-deck-list//button//span[contains(text(),'Search')]")).click();
         this.seleniumService.waitUpdates();
