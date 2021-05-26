@@ -20,9 +20,10 @@ public class CardLegality {
     @ManyToOne
     private CardCC card;
 
-    public CardLegality(){}
+    public CardLegality() {
+    }
 
-    public CardLegality(Legality l){
+    public CardLegality(Legality l) {
         this.format = l.getFormat();
         this.legality = l.getLegality();
 

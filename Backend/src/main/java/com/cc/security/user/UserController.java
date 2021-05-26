@@ -32,14 +32,15 @@ public class UserController {
 
     /**
      * Creates the user disabled and send a confirmation email to enable it
+     *
      * @param data the user data
      * @return the response of the operation
      */
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterForm data) {
-        var existingUser = userRepository.findByEmailOrUsername(data.getEmail(),data.getUsername());
+        var existingUser = userRepository.findByEmailOrUsername(data.getEmail(), data.getUsername());
 
-        if(existingUser != null){
+        if (existingUser != null) {
             return new ResponseEntity<>("", HttpStatus.CONFLICT);
         } else {
 
@@ -61,6 +62,7 @@ public class UserController {
 
     /**
      * Verifies the token to confirm the account creation
+     *
      * @param tk the token
      * @return the response of the oepration
      */
@@ -75,34 +77,35 @@ public class UserController {
             userRepository.save(user);
             confirmationTokenRepository.delete(confirmationToken);
             return new ResponseEntity<>("", HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
         }
     }
 
     /**
      * Changes the password given a logged user
+     *
      * @param passwordForm the old and new password
      * @return the response of the operation
      */
-    @PostMapping(value="/change-password")
+    @PostMapping(value = "/change-password")
     public ResponseEntity<User> changePassword(@RequestBody ChangePasswordForm passwordForm, HttpSession session) {
-        if(!userComponent.isLoggedUser()){
+        if (!userComponent.isLoggedUser()) {
             session.invalidate();
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }else{
+        } else {
             var encoder = new BCryptPasswordEncoder();
-            if(!encoder.matches(passwordForm.getOldPassword(), userComponent.getLoggedUser().getPassword())){
+            if (!encoder.matches(passwordForm.getOldPassword(), userComponent.getLoggedUser().getPassword())) {
                 session.invalidate();
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            }else if (!this.checkPasswordPattern(passwordForm.getNewPassword())) {
+            } else if (!this.checkPasswordPattern(passwordForm.getNewPassword())) {
                 var headers = new HttpHeaders();
                 headers.add("error-type", "password-pattern");
-                return new ResponseEntity<>(headers,HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             } else if (passwordForm.isSamePssword()) {
                 var headers = new HttpHeaders();
                 headers.add("error-type", "same-password");
-                return new ResponseEntity<>(headers,HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             } else {
                 userComponent.getLoggedUser().setPassword(encoder.encode(passwordForm.getNewPassword()));
                 userRepository.save(userComponent.getLoggedUser());
@@ -114,13 +117,14 @@ public class UserController {
 
     /**
      * Creates a token to validate password recover and sends an email with a link to reset it
+     *
      * @param email the email to sent the links
      * @return the response of the operation
      */
-    @GetMapping( "/recover-password")
-    public ResponseEntity<String> recoverPassword(@RequestParam String email){
+    @GetMapping("/recover-password")
+    public ResponseEntity<String> recoverPassword(@RequestParam String email) {
         var user = userRepository.findByEmail(email);
-        if(user != null) {
+        if (user != null) {
             //Confirmation token creation
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
             confirmationTokenRepository.save(confirmationToken);
@@ -133,11 +137,12 @@ public class UserController {
 
     /**
      * Changes the password based on a token sent before
-     * @param tk the token associated to the user
+     *
+     * @param tk           the token associated to the user
      * @param passwordForm the old and new password
      * @return the response of the operation
      */
-    @PostMapping(value="/confirm-recover-password")
+    @PostMapping(value = "/confirm-recover-password")
     public ResponseEntity<User> confirmRecoverPassword(@RequestParam String tk, @RequestBody ChangePasswordForm passwordForm) {
         var confirmationToken = confirmationTokenRepository.findByToken(tk);
 
@@ -146,18 +151,18 @@ public class UserController {
             if (!this.checkPasswordPattern(passwordForm.getNewPassword())) {
                 var headers = new HttpHeaders();
                 headers.add("error-type", "password-pattern");
-                return new ResponseEntity<>(headers,HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             } else if (passwordForm.isSamePssword()) {
                 var headers = new HttpHeaders();
                 headers.add("error-type", "same-password");
-                return new ResponseEntity<>(headers,HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             }
             user.setPassword(new BCryptPasswordEncoder().encode(passwordForm.getNewPassword()));
             userRepository.save(user);
             confirmationTokenRepository.delete(confirmationToken);
             return new ResponseEntity<>(HttpStatus.OK);
 
-        }else{
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -165,39 +170,42 @@ public class UserController {
 
     /**
      * The login method
+     *
      * @return the user or an error response
      */
     @GetMapping("/login")
-    public ResponseEntity<User>login(){
-        if(!userComponent.isLoggedUser()){
+    public ResponseEntity<User> login() {
+        if (!userComponent.isLoggedUser()) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }else{
-            var loggedUser= userComponent.getLoggedUser();
-            return new ResponseEntity<>(loggedUser,HttpStatus.OK);
+        } else {
+            var loggedUser = userComponent.getLoggedUser();
+            return new ResponseEntity<>(loggedUser, HttpStatus.OK);
         }
     }
 
     /**
      * The logout method
+     *
      * @param session the current session
      * @return true if the logout was successfully, an error response in other case
      */
     @GetMapping(value = "/logout")
-    public ResponseEntity<Boolean>logout(HttpSession session){
-        if(!userComponent.isLoggedUser()){
+    public ResponseEntity<Boolean> logout(HttpSession session) {
+        if (!userComponent.isLoggedUser()) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }else{
+        } else {
             session.invalidate();
-            return new ResponseEntity<>(true,HttpStatus.OK);
+            return new ResponseEntity<>(true, HttpStatus.OK);
         }
     }
 
     /**
      * Checks if the password matches the password criteria
+     *
      * @param password the password to check
      * @return true if the passsword matches, false in other case
      */
-    private boolean checkPasswordPattern(String password){
+    private boolean checkPasswordPattern(String password) {
         var pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         return Pattern.matches(pattern, password);
     }

@@ -10,8 +10,8 @@ import th.co.geniustree.springdata.jpa.repository.support.JpaSpecificationExecut
 @EnableJpaRepositories(repositoryBaseClass = JpaSpecificationExecutorWithProjectionImpl.class)
 public class ColorConfluenceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ColorConfluenceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ColorConfluenceApplication.class, args);
+    }
 
 }

@@ -8,7 +8,7 @@ import th.co.geniustree.springdata.jpa.repository.JpaSpecificationExecutorWithPr
 import java.util.List;
 import java.util.Optional;
 
-public interface DeckRepository extends JpaRepository<Deck, Long>, JpaSpecificationExecutor<Deck> , JpaSpecificationExecutorWithProjection<Deck> {
+public interface DeckRepository extends JpaRepository<Deck, Long>, JpaSpecificationExecutor<Deck>, JpaSpecificationExecutorWithProjection<Deck> {
 
     Optional<Deck> getByName(String name);
 

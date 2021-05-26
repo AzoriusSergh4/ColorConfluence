@@ -55,7 +55,7 @@ public class CardSearchFrontendSteps {
     @And("I enter all the information")
     public void iEnterAllTheInformation(DataTable criteria) {
         cardSearchPage.openAdvanced();
-        List<Map<String,String>> list = criteria.asMaps(String.class, String.class);
+        List<Map<String, String>> list = criteria.asMaps(String.class, String.class);
         cardSearchPage.putData(list.get(0));
     }
 

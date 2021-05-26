@@ -18,7 +18,7 @@ public class SetController {
     private SetInfoService setInfoService;
 
     @GetMapping("/all")
-    public List<SetInfo> getAllSets(){
+    public List<SetInfo> getAllSets() {
         return setInfoService.getAllSets();
     }
 }

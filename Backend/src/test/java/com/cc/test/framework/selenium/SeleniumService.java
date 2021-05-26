@@ -27,77 +27,77 @@ public class SeleniumService {
     private JSWaiter waiter;
 
     @Autowired
-    public SeleniumService(TestProperties properties){
+    public SeleniumService(TestProperties properties) {
         this.properties = properties;
         waiter = new JSWaiter();
 
     }
 
     public void goToMainPage() {
-        if(properties.isDebug()){
+        if (properties.isDebug()) {
             wDriver.get(properties.getUrl().getDev());
-        }else{
+        } else {
             wDriver.get(properties.getUrl().getProd());
         }
     }
 
-    public String getPageTitle(){
+    public String getPageTitle() {
         return wDriver.getTitle();
     }
 
 
-    public WebElement findWebElementBy(By by){
+    public WebElement findWebElementBy(By by) {
         try {
             return (WebElement) wDriver.findElement(by);
-        } catch (NoSuchElementException n){
+        } catch (NoSuchElementException n) {
             n.printStackTrace();
             throw n;
         }
     }
 
-    public WebElement findWebElementById(String id){
+    public WebElement findWebElementById(String id) {
         try {
             return wDriver.findElement(By.id(id));
-        } catch (NoSuchElementException n){
+        } catch (NoSuchElementException n) {
             n.printStackTrace();
             throw n;
         }
     }
 
-    public List<WebElement> findWebElementsBy(By by){
+    public List<WebElement> findWebElementsBy(By by) {
         try {
             return wDriver.findElements(by);
-        } catch (NoSuchElementException n){
+        } catch (NoSuchElementException n) {
             n.printStackTrace();
             throw n;
         }
     }
 
-    public boolean isWebElementBy(By by){
+    public boolean isWebElementBy(By by) {
         return isWebElementBy(by, null);
     }
 
-    public boolean isWebElementBy(By by, WebElement parent){
+    public boolean isWebElementBy(By by, WebElement parent) {
         WebElement element;
-            try {
-                element = (parent == null) ? wDriver.findElement(by) : parent.findElement(by);
-            }catch (NoSuchElementException n){
-                return false;
-            }
+        try {
+            element = (parent == null) ? wDriver.findElement(by) : parent.findElement(by);
+        } catch (NoSuchElementException n) {
+            return false;
+        }
         return element != null;
     }
 
-    public void clearText(WebElement element){
+    public void clearText(WebElement element) {
         element.clear();
     }
 
-    public void typeText(WebElement element, String text){
+    public void typeText(WebElement element, String text) {
         Actions actions = new Actions(wDriver);
         actions.sendKeys(element, text).perform();
         actions.sendKeys(element, Keys.ENTER).perform();
     }
 
-    public void selectOption(WebElement select, String option){
+    public void selectOption(WebElement select, String option) {
         select.click();
         wDriver.findElement(By.xpath("//span[text()='" + option + "']/parent::mat-option")).click();
     }
@@ -121,21 +121,21 @@ public class SeleniumService {
                 .release().build().perform();
     }
 
-    public byte[] takeScreenshot(){
+    public byte[] takeScreenshot() {
         TakesScreenshot ts = (TakesScreenshot) wDriver;
         return ts.getScreenshotAs(OutputType.BYTES);
     }
 
-    public void goTo(String url){
+    public void goTo(String url) {
         wDriver.get(url);
     }
 
 
     public void startDriver() {
-        if(properties.getDriver().getName().equals("chrome")){
+        if (properties.getDriver().getName().equals("chrome")) {
             System.setProperty(properties.getDriver().getChromeDriverName(), properties.getDriver().getChromePath());
             wDriver = new ChromeDriver();
-        }else{
+        } else {
             FirefoxOptions firefoxOptions = new FirefoxOptions().setProfile(new FirefoxProfile());
             wDriver = new FirefoxDriver(firefoxOptions);
         }

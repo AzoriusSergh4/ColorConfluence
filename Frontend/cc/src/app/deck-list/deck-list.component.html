@@ -1,41 +1,76 @@
 <div class="grid-container">
+  <div>
+    <h1>Deck List</h1>
+  </div>
   <div class="cc-mat-form-field-full">
-    <table mat-table [dataSource]="decks" class="cc-mat-form-field-full mat-elevation-z8" >
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-
-      <!-- Colors Column -->
-      <ng-container matColumnDef="colors">
-        <th mat-header-cell *matHeaderCellDef> Colors </th>
-        <td mat-cell *matCellDef="let element"> {{element.colors}} </td>
-      </ng-container>
-
-      <!-- Format Column -->
-      <ng-container matColumnDef="format">
-        <th mat-header-cell *matHeaderCellDef> Format </th>
-        <td mat-cell *matCellDef="let element"> {{element.format?.name}} </td>
-      </ng-container>
-
-      <!-- User Column -->
-      <ng-container matColumnDef="user">
-        <th mat-header-cell *matHeaderCellDef> User </th>
-        <td mat-cell *matCellDef="let element"> {{element.user.username}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/deck/' + row.id]"></tr>
-    </table>
+    <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" >
+      <div fxFlex="0 1 calc(33% - 32px)">
+        <mat-form-field appearance="fill" class="cc-mat-form-field-full">
+          <mat-label>Deck Name</mat-label>
+          <input id="deckName" matInput [(ngModel)]="deckName" placeholder="Ex: Mill">
+        </mat-form-field>
+      </div>
+      <div fxFlex="0 1 calc(33% - 32px)">
+        <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between center" style="height: 100%">
+          <mat-checkbox [(ngModel)]="colors[0].checked"  class="cc-deck-list-checkbox" color="primary" value="W" ><img class="cc-color-icon" src="assets/icons/white.png" alt="White"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[1].checked" class="cc-deck-list-checkbox" color="primary" value="U" ><img class="cc-color-icon" src="assets/icons/blue.png" alt="Blue"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[2].checked" class="cc-deck-list-checkbox" color="primary" value="B" ><img class="cc-color-icon" src="assets/icons/black.jpg" alt="Black"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[3].checked" class="cc-deck-list-checkbox" color="primary" value="R" ><img class="cc-color-icon" src="assets/icons/red.png" alt="Red"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[4].checked" class="cc-deck-list-checkbox" color="primary" value="G" ><img class="cc-color-icon" src="assets/icons/green.png" alt="Green"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[5].checked" class="cc-deck-list-checkbox" color="primary" value="C" ><img class="cc-color-icon" src="assets/icons/colorless.png" alt="Colorless"></mat-checkbox>
+        </div>
+      </div>
+      <div fxFlex="0 1 calc(33% - 32px)">
+        <mat-form-field appearance="fill" class="cc-mat-form-field-full">
+          <mat-label>Format</mat-label>
+          <mat-select [(ngModel)]="format">
+            <mat-option [value]="">-</mat-option>
+            <mat-option *ngFor="let format of formats" [value]="format.name">{{format.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="cc-mat-form-field-full" style="margin-bottom: 16px; text-align: right">
+      <button mat-raised-button color="primary" (click)="pagingBar.navigateToPage(1)">Search</button>
+    </div>
     <div>
-      <td-paging-bar #pagingBar
-                     [pageLinkCount]="5"
-                     [pageSize]="pageSize"
-                     [total]="totalCardsFound"
-                     (change)="pageChange($event)">
-        {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
-      </td-paging-bar>
+      <table mat-table [dataSource]="decks" class="cc-mat-form-field-full mat-elevation-z8" >
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Colors Column -->
+        <ng-container matColumnDef="colors">
+          <th mat-header-cell *matHeaderCellDef> Colors </th>
+          <td mat-cell *matCellDef="let element"> {{element.colors}} </td>
+        </ng-container>
+
+        <!-- Format Column -->
+        <ng-container matColumnDef="format">
+          <th mat-header-cell *matHeaderCellDef> Format </th>
+          <td mat-cell *matCellDef="let element"> {{element.format?.name}} </td>
+        </ng-container>
+
+        <!-- User Column -->
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef> User </th>
+          <td mat-cell *matCellDef="let element"> {{element.user.username}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/deck/' + row.id]" class="cc-table-row-link"></tr>
+      </table>
+      <div>
+        <td-paging-bar #pagingBar
+                       [pageLinkCount]="5"
+                       [pageSize]="pageSize"
+                       [total]="totalCardsFound"
+                       (change)="pageChange($event)">
+          {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+        </td-paging-bar>
+      </div>
     </div>
   </div>
 </div>

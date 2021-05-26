@@ -16,15 +16,16 @@ public class ColorConfluenceMailSender {
 
     /**
      * Sends an email with a link to confirm the account creation
-     * @param to the destination account
+     *
+     * @param to    the destination account
      * @param token the token to send
      */
-    public void sendValidationAccount(String to, String token){
+    public void sendValidationAccount(String to, String token) {
         var message = new SimpleMailMessage();
         message.setFrom("colorconfluence@gmail.com");
         message.setTo(to);
         message.setSubject("ColorConfluence Account Verification!");
-        message.setText("You almost finished! To confirm your account, please click the link below: \n" + LOCAL +  "/confirm-account?tk=" + token);
+        message.setText("You almost finished! To confirm your account, please click the link below: \n" + LOCAL + "/confirm-account?tk=" + token);
         mailSender.send(message);
     }
 

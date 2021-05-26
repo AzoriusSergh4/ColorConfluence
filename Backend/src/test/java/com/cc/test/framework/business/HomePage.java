@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ScenarioScope
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
 
     public HomePage() {
 
@@ -16,15 +16,15 @@ public class HomePage extends BasePage{
         return seleniumService.isWebElementBy(By.xpath("//cc-main-screen//div"));
     }
 
-    public void searchCard(String name){
+    public void searchCard(String name) {
         seleniumService.typeText(seleniumService.findWebElementById("card-search-input"), name);
     }
 
-    public void goToSearchPage(){
+    public void goToSearchPage() {
         seleniumService.findWebElementById("search-cards-link").click();
     }
 
-    public void goToPage(){
+    public void goToPage() {
         seleniumService.goToMainPage();
     }
 }

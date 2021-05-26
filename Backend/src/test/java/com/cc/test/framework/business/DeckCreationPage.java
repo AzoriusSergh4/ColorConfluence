@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ScenarioScope
-public class DeckCreationPage extends BasePage{
+public class DeckCreationPage extends BasePage {
 
     public void goToDeckCreation() {
         this.seleniumService.findWebElementById("deckMenu").click();
@@ -22,13 +22,14 @@ public class DeckCreationPage extends BasePage{
 
     public void fillDeckInfo(JsonObject deckForm) {
         this.seleniumService.typeText(this.seleniumService.findWebElementById("nameInput"), deckForm.get("name").getAsString());
-        if(deckForm.get("format").getAsJsonObject() != null) this.seleniumService.selectOption(this.seleniumService.findWebElementById("formatInput"), deckForm.get("format").getAsJsonObject().get("name").getAsString());
+        if (deckForm.get("format").getAsJsonObject() != null)
+            this.seleniumService.selectOption(this.seleniumService.findWebElementById("formatInput"), deckForm.get("format").getAsJsonObject().get("name").getAsString());
         this.seleniumService.typeText(this.seleniumService.findWebElementById("commentsInput"), deckForm.get("comments").getAsString());
 
         //Drag and drop cards
         WebElement searchBar = this.seleniumService.findWebElementById("searchInput");
         WebElement quantity = this.seleniumService.findWebElementBy(By.xpath("//div[@gdarea='searchBar']//input[@type='number']"));
-        for(JsonElement c : deckForm.get("main").getAsJsonArray()){
+        for (JsonElement c : deckForm.get("main").getAsJsonArray()) {
             JsonObject card = c.getAsJsonObject();
             this.seleniumService.clearText(quantity);
             this.seleniumService.typeText(quantity, card.get("quantity").getAsString());
@@ -39,7 +40,7 @@ public class DeckCreationPage extends BasePage{
                     this.seleniumService.findWebElementBy(By.xpath("//mat-panel-title[contains(text(),'" + card.get("name").getAsString() + "')]/ancestor::div[@cdkdrag]")),
                     this.seleniumService.findWebElementById("deckList"));
         }
-        for(JsonElement c : deckForm.get("sideboard").getAsJsonArray()){
+        for (JsonElement c : deckForm.get("sideboard").getAsJsonArray()) {
             JsonObject card = c.getAsJsonObject();
             this.seleniumService.clearText(quantity);
             this.seleniumService.typeText(quantity, card.get("quantity").getAsString());

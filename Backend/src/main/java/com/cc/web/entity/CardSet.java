@@ -19,9 +19,10 @@ public class CardSet {
     @ManyToOne
     private CardTranslation cardTranslation;
 
-    public CardSet(){}
+    public CardSet() {
+    }
 
-    public CardSet(String set, String cardNumber, String url){
+    public CardSet(String set, String cardNumber, String url) {
         this.set = set;
         this.cardNumber = cardNumber;
         this.url = url;

@@ -39,11 +39,11 @@ Feature: Deck Frontend Feature
     When I get into the "Opening Hand" tab
     Then the opening hand tab is loaded and I can see seven cards
 
-    @DeckExport
-    Scenario: Deck Export
-      Given I get into the Main Page
-      And I go to the Deck List Page
-      And I go into a deck
-      And The deck page is rendered
-      When I get into the "Export" tab
-      Then the export tab is loaded and I can see the deck list ready to copy
+  @DeckExport
+  Scenario: Deck Export
+    Given I get into the Main Page
+    And I go to the Deck List Page
+    And I go into a deck
+    And The deck page is rendered
+    When I get into the "Export" tab
+    Then the export tab is loaded and I can see the deck list ready to copy

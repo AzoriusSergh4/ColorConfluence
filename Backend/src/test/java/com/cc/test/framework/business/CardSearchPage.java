@@ -9,28 +9,28 @@ import java.util.Map;
 
 @Service
 @ScenarioScope
-public class CardSearchPage extends BasePage{
+public class CardSearchPage extends BasePage {
 
     public CardSearchPage() {
     }
 
-    public boolean checkPageIsLoaded(){
+    public boolean checkPageIsLoaded() {
         return seleniumService.isWebElementBy(By.xpath("//div[@class='grid-container mtgCard-results']"));
     }
 
-    public boolean checkCardsAreLoaded(){
+    public boolean checkCardsAreLoaded() {
         return seleniumService.findWebElementsBy(By.xpath("//div[contains(@class,'mtgCard-result-item')]//img")).size() > 0;
     }
 
-    public void clickFirstCard(){
+    public void clickFirstCard() {
         seleniumService.findWebElementBy(By.xpath("//div[contains(@class,'mtgCard-result-item')]")).click();
     }
 
-    public void openAdvanced(){
+    public void openAdvanced() {
         seleniumService.findWebElementBy(By.xpath("//mat-expansion-panel-header")).click();
     }
 
-    public void putData(Map<String, String> data){
+    public void putData(Map<String, String> data) {
         seleniumService.typeText(seleniumService.findWebElementBy(By.xpath("//input[@formcontrolname='name']")), data.get("name"));
         seleniumService.typeText(seleniumService.findWebElementBy(By.xpath("//input[@formcontrolname='text']")), data.get("text"));
         seleniumService.typeText(seleniumService.findWebElementBy(By.xpath("//input[@formcontrolname='type']")), data.get("type"));
@@ -45,7 +45,7 @@ public class CardSearchPage extends BasePage{
         seleniumService.findWebElementBy(By.xpath("//button[@type='submit']")).click();
     }
 
-    private void selectColor(String value, String criteria){
+    private void selectColor(String value, String criteria) {
         seleniumService.findWebElementBy(By.xpath("//input[@type='checkbox' and @value='" + value + "']/parent::div")).click();
         seleniumService.findWebElementBy(By.xpath(this.getMatSelectXPath("Color criteria"))).click();
         seleniumService.findWebElementBy(By.xpath("//mat-option[@value='" + criteria + "']")).click();

@@ -30,22 +30,22 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
         var user = userRepository.findByEmailOrUsername(authentication.getName(), authentication.getName());
 
-        if (user == null){
+        if (user == null) {
             throw new BadCredentialsException("User not found");
         }
 
-        if(!user.isEnabled()) {
+        if (!user.isEnabled()) {
             throw new BadCredentialsException("User is not enabled yet");
         }
 
         String password = (String) authentication.getCredentials();
-        if(!new BCryptPasswordEncoder().matches(password, user.getPassword())) {
+        if (!new BCryptPasswordEncoder().matches(password, user.getPassword())) {
             throw new BadCredentialsException("Wrong password");
         }
 
         userComponent.setLoggedUser(user);
         List<GrantedAuthority> roles = new ArrayList<>();
-        for (String role : user.getRoles()){
+        for (String role : user.getRoles()) {
             roles.add(new SimpleGrantedAuthority(role));
         }
 

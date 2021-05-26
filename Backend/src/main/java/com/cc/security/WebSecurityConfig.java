@@ -18,22 +18,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/card/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/set/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/user/register").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/user/confirm-account").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/confirm-account").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/recover-password").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/user/confirm-recover-password").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/confirm-recover-account").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/deck/decks").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/deck/{id}").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/deck/decks/{id}").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/format/all").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/user/register").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/user/confirm-account").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/user/confirm-account").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/user/recover-password").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/user/confirm-recover-password").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/user/confirm-recover-account").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/deck/decks").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/deck/{id}").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/deck/decks/{id}").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/format/all").permitAll();
 
         http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
 
         http.csrf().disable();
 
-        http.logout().logoutSuccessHandler((rq, rs, a) -> {});
+        http.logout().logoutSuccessHandler((rq, rs, a) -> {
+        });
     }
 
     @Override

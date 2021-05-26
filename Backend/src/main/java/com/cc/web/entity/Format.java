@@ -14,7 +14,8 @@ public class Format {
 
     private String name;
 
-    public Format() {}
+    public Format() {
+    }
 
     public long getId() {
         return id;

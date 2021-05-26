@@ -11,7 +11,7 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class CardSpecifications extends CommonSpecification{
+public final class CardSpecifications extends CommonSpecification {
 
     //Translation Specifications
 
@@ -19,37 +19,38 @@ public final class CardSpecifications extends CommonSpecification{
         return (root, query, builder) -> builder.like(root.get("name"), contains(name));
     }
 
-    public static Specification<CardTranslation> descriptionContains(String description){
+    public static Specification<CardTranslation> descriptionContains(String description) {
         return (root, query, builder) -> builder.like(root.get("description"), contains(description));
     }
 
-    public static Specification<CardTranslation> langEquals(String lang){
+    public static Specification<CardTranslation> langEquals(String lang) {
         return (root, query, builder) -> builder.equal(root.get("lang"), lang);
     }
 
-    public static Specification<CardTranslation> loreContains(String lore){
+    public static Specification<CardTranslation> loreContains(String lore) {
         return (root, query, builder) -> builder.like(root.get("lore"), contains(lore));
     }
 
-    public static Specification<CardTranslation> typeContains(String type){
+    public static Specification<CardTranslation> typeContains(String type) {
         String[] types = (type.contains(",")) ? type.split(",") : new String[]{type};
         return (root, query, builder) -> {
             Join<CardTranslation, CardCC> join = root.join("card");
             List<Predicate> predicates = new ArrayList<>();
-            for(String s : types){
+            for (String s : types) {
                 predicates.add(builder.like(join.get("cardType"), contains(s)));
             }
             return builder.and(predicateListToArray(predicates));
         };
     }
-    public static Specification<CardTranslation> colorContains(String colorCriteria){
+
+    public static Specification<CardTranslation> colorContains(String colorCriteria) {
         var defaultColors = new String[]{"W", "B", "U", "R", "G", "C"};
-        if(colorCriteria.startsWith("=")){
+        if (colorCriteria.startsWith("=")) {
             String color = colorCriteria.replaceAll("=", "");
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 List<Predicate> predicates = new ArrayList<>();
-                for(String c : defaultColors) {
+                for (String c : defaultColors) {
                     if (color.contains(c)) {
                         predicates.add(builder.like(join.get("manaCost"), contains(c)));
                     } else {
@@ -58,65 +59,65 @@ public final class CardSpecifications extends CommonSpecification{
                 }
                 return builder.and(predicateListToArray(predicates));
             };
-        }else if(colorCriteria.startsWith("<=")){
+        } else if (colorCriteria.startsWith("<=")) {
             String color = colorCriteria.replaceAll("<=", "");
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 List<Predicate> predicates = new ArrayList<>();
-                for(String c : defaultColors) {
+                for (String c : defaultColors) {
                     if (color.contains(c)) {
                         predicates.add(builder.like(join.get("manaCost"), contains(c)));
                     }
                 }
                 return builder.and(predicateListToArray(predicates));
             };
-        }else if (colorCriteria.startsWith("<")){
+        } else if (colorCriteria.startsWith("<")) {
             String color = colorCriteria.replaceAll("<", "");
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 List<Predicate> predicates = new ArrayList<>();
-                for(String c : defaultColors) {
+                for (String c : defaultColors) {
                     if (color.contains(c)) {
                         predicates.add(builder.like(join.get("manaCost"), contains(c)));
                     }
                 }
                 return builder.or(predicateListToArray(predicates));
             };
-        }else{
+        } else {
             return null;
         }
     }
 
-    public static Specification<CardTranslation> manaCostContains(String manaCost){
+    public static Specification<CardTranslation> manaCostContains(String manaCost) {
         return (root, query, builder) -> {
             Join<CardTranslation, CardCC> join = root.join("card");
             return builder.like(join.get("manaCost"), contains(manaCost));
         };
     }
 
-    public static Specification<CardTranslation> statComparatorContains(String content, String stat){
+    public static Specification<CardTranslation> statComparatorContains(String content, String stat) {
 
-        if(content.startsWith(">=")){
+        if (content.startsWith(">=")) {
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 return builder.greaterThanOrEqualTo(join.get(stat), content.replaceAll(">=", ""));
             };
-        }else if(content.startsWith("<=")){
+        } else if (content.startsWith("<=")) {
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 return builder.lessThanOrEqualTo(join.get(stat), content.replaceAll("<=", ""));
             };
-        }else if(content.startsWith(">")){
+        } else if (content.startsWith(">")) {
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 return builder.greaterThan(join.get(stat), content.replaceAll(">", ""));
             };
-        }else if(content.startsWith("<")){
+        } else if (content.startsWith("<")) {
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 return builder.lessThan(join.get(stat), content.replaceAll("<", ""));
             };
-        }else{
+        } else {
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 return builder.equal(join.get(stat), content.replaceAll("=", ""));
@@ -124,25 +125,25 @@ public final class CardSpecifications extends CommonSpecification{
         }
     }
 
-    public static Specification<CardTranslation> rarityContains(String rarity){
+    public static Specification<CardTranslation> rarityContains(String rarity) {
         return (root, query, builder) -> {
             Join<CardTranslation, CardCC> join = root.join("card");
             return builder.like(join.get("rarity"), contains(rarity));
         };
     }
 
-    public static Specification<CardTranslation> cardSetContains(String cardSet){
+    public static Specification<CardTranslation> cardSetContains(String cardSet) {
         return (root, query, builder) -> {
             Join<CardSet, CardTranslation> join = root.join("cardSet");
             return builder.like(join.get("set"), contains(cardSet));
         };
     }
 
-    public static Specification<CardTranslation> legalityContains(String format, String legality){
+    public static Specification<CardTranslation> legalityContains(String format, String legality) {
         return (root, query, builder) -> {
             Join<CardTranslation, CardCC> join = root.join("card");
             Join<CardCC, CardLegality> joinL = join.join("legalities");
-            return builder.and(builder.like(joinL.get("format"),contains(format)),builder.like(joinL.get("legality"), contains(legality)));
+            return builder.and(builder.like(joinL.get("format"), contains(format)), builder.like(joinL.get("legality"), contains(legality)));
         };
     }
 

@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface CardTranslationRepository extends JpaRepository<CardTranslation, Long>, JpaSpecificationExecutor<CardTranslation>, JpaSpecificationExecutorWithProjection<CardTranslation> {
 
-	List<CardTranslation> findByCard_Name(String name);
+    List<CardTranslation> findByCard_Name(String name);
 
 }

@@ -73,21 +73,6 @@ import {DeckService} from './services/deck.service';
 import { DeckListComponent } from './deck-list/deck-list.component';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 
-const appRoutes = [
-  {path: '', component: MainScreenComponent},
-  {path: 'cards', component: CardSearchComponent},
-  {path: 'card/:id', component: CardInformationComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'confirm-account', component: ConfirmAccountComponent},
-  {path: 'recover-password', component: RecoverPasswordComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'create-deck', component: DeckCreationComponent},
-  {path: 'decks', component: DeckListComponent},
-  {path: 'deck/:id', component: DeckComponent}
-];
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,7 +93,6 @@ const appRoutes = [
     DeckListComponent
   ],
     imports: [
-        RouterModule.forRoot(appRoutes),
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,

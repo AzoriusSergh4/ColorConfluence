@@ -13,34 +13,34 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/card")
 public class CardController {
-	
-	@Autowired
-	private CardService cardService;
 
-	@GetMapping("/find/name")
-	public Page<CardTranslationProjection> getCardByName(@RequestParam String name, int pageSize){
-		return cardService.getBasicCardsByTranslationName(name, pageSize);
-	}
+    @Autowired
+    private CardService cardService;
 
-	@GetMapping("/find/full/name")
-	public Page<CardTranslation> getFullCardByName(@RequestParam String name, int page, int pageSize){
-		return cardService.getCardsByTranslationName(name, page, pageSize);
-	}
+    @GetMapping("/find/name")
+    public Page<CardTranslationProjection> getCardByName(@RequestParam String name, int pageSize) {
+        return cardService.getBasicCardsByTranslationName(name, pageSize);
+    }
 
-	@GetMapping("/count/name")
-	public long countByName(@RequestParam String name) {
-		return cardService.countBasicCardsByName(name);
-	}
+    @GetMapping("/find/full/name")
+    public Page<CardTranslation> getFullCardByName(@RequestParam String name, int page, int pageSize) {
+        return cardService.getCardsByTranslationName(name, page, pageSize);
+    }
 
-	@GetMapping("/find")
-	public Page<CardTranslationProjection> getCardsByCriteria(@RequestParam Map<String,String> criteria){
-		return cardService.getBasicCardsByCriteria(criteria);
-	}
+    @GetMapping("/count/name")
+    public long countByName(@RequestParam String name) {
+        return cardService.countBasicCardsByName(name);
+    }
 
-	@GetMapping("/{id}")
-	public CardTranslation getCardById(@PathVariable long id){
-		return cardService.getCardById(id);
-	}
-	
-	
+    @GetMapping("/find")
+    public Page<CardTranslationProjection> getCardsByCriteria(@RequestParam Map<String, String> criteria) {
+        return cardService.getBasicCardsByCriteria(criteria);
+    }
+
+    @GetMapping("/{id}")
+    public CardTranslation getCardById(@PathVariable long id) {
+        return cardService.getCardById(id);
+    }
+
+
 }

@@ -10,8 +10,8 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan("com.cc")
 public class ApplicationContext {
-	@Bean
+    @Bean
     JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);        
+        return new JdbcTemplate(dataSource);
     }
 }

@@ -1,0 +1,14 @@
+.cc-table-row-link:hover {
+  background-color: rgba(0, 0, 0, .05);
+  cursor: pointer;
+}
+
+.cc-color-icon {
+  width: 32px;
+  height: 32px;
+  margin: 5px;
+}
+
+.cc-deck-list-checkbox{
+  padding-bottom: 16px;
+}

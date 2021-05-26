@@ -14,7 +14,7 @@ public abstract class BasePage {
     @Autowired
     FrontendTestCommons testCommons;
 
-    public BasePage(){
+    public BasePage() {
     }
 
     public String getPageTitle() {

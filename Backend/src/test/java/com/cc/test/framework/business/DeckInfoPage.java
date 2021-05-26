@@ -9,11 +9,12 @@ import java.util.ArrayList;
 
 @Service
 @ScenarioScope
-public class DeckInfoPage extends BasePage{
+public class DeckInfoPage extends BasePage {
 
 
     /**
      * Clicks on the given tab
+     *
      * @param tab the name of the tab
      */
     public void goToTab(String tab) {
@@ -22,6 +23,7 @@ public class DeckInfoPage extends BasePage{
 
     /**
      * Check Analysis tab is correct
+     *
      * @return true if the graphs are loaded, false in other case
      */
     public boolean checkAnalysis() {
@@ -30,14 +32,16 @@ public class DeckInfoPage extends BasePage{
 
     /**
      * Check if the Probabilities tab is correct
+     *
      * @return true if data and probabilities are loaded, false in other case
      */
     public boolean checkProbabilities() {
-        return seleniumService.findWebElementsBy(By.xpath("//mat-card//tbody/tr//td[contains(text(),'%')]")).size() > 0 ;
+        return seleniumService.findWebElementsBy(By.xpath("//mat-card//tbody/tr//td[contains(text(),'%')]")).size() > 0;
     }
 
     /**
      * Check if the Deck Info Page is loaded
+     *
      * @return true if the page is loaded, false in other case
      */
     public boolean checkPageIsLoaded() {
@@ -46,6 +50,7 @@ public class DeckInfoPage extends BasePage{
 
     /**
      * Check if the Opening Hand tab is correct
+     *
      * @return true if there are 7 cards displayed, false in other case
      */
     public boolean checkOpeningHand() {
@@ -55,19 +60,20 @@ public class DeckInfoPage extends BasePage{
 
     /**
      * Check if the mulligan is correct
+     *
      * @return true if the cards are different, false in other case
      */
     public boolean checkMulligan() {
         var urls = new ArrayList<String>();
         var cards = this.seleniumService.findWebElementsBy(By.xpath("//mat-tab-group//mat-tab-body//img"));
-        for(WebElement e : cards) {
+        for (WebElement e : cards) {
             urls.add(e.getAttribute("src"));
         }
         this.seleniumService.findWebElementBy(By.xpath("//mat-tab-group//mat-tab-body//button//span[text()='Mulligan']")).click();
         this.seleniumService.waitUpdates();
         var urls2 = new ArrayList<String>();
         cards = this.seleniumService.findWebElementsBy(By.xpath("//mat-tab-group//mat-tab-body//img"));
-        for(WebElement e : cards) {
+        for (WebElement e : cards) {
             urls2.add(e.getAttribute("src"));
         }
         return !urls.equals(urls2);
@@ -75,9 +81,10 @@ public class DeckInfoPage extends BasePage{
 
     /**
      * Check if the Export tab is correct
+     *
      * @return true if the list is displayed, false in other case
      */
-    public boolean checkExport()  {
+    public boolean checkExport() {
         return !this.seleniumService.findWebElementBy(By.xpath("//mat-tab-group//mat-tab-body//textarea")).getAttribute("value").equals("");
     }
 }

@@ -10,107 +10,108 @@ import java.util.List;
 
 @Entity
 @JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "id")
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class CardTranslation {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	private String name;
-	
-	@Size(max=1000)
-	private String description;
-	
-	@Size(max=1000)
-	private String lore;
-	
-	private String lang;
-	
-	@ManyToOne
-	@JoinColumn(name="card_id")
-	private CardCC card;
 
-	@OneToMany(mappedBy = "cardTranslation", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	@OrderBy("url DESC")
-	private List<CardSet> cardSet;
-	
-	public CardTranslation() {
-		
-	}
-	
-	public CardTranslation(String name, String description, String lore, String lang) {
-		this.name = name;
-		this.description = description;
-		this.lore = lore;
-		this.lang = lang;
-		this.cardSet = new ArrayList<>();
-	}
-	public CardTranslation(String name, String description, String lore, String lang, CardSet set) {
-		this.name = name;
-		this.description = description;
-		this.lore = lore;
-		this.lang = lang;
-		this.cardSet = new ArrayList<>();
-		this.cardSet.add(set);
-	}
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-	public long getId() {
-		return id;
-	}
+    private String name;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    @Size(max = 1000)
+    private String description;
 
-	public String getName() {
-		return name;
-	}
+    @Size(max = 1000)
+    private String lore;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private String lang;
 
-	public String getDescription() {
-		return description;
-	}
+    @ManyToOne
+    @JoinColumn(name = "card_id")
+    private CardCC card;
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    @OneToMany(mappedBy = "cardTranslation", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("url DESC")
+    private List<CardSet> cardSet;
 
-	public String getLore() {
-		return lore;
-	}
+    public CardTranslation() {
 
-	public void setLore(String lore) {
-		this.lore = lore;
-	}
+    }
 
-	public String getLang() {
-		return lang;
-	}
+    public CardTranslation(String name, String description, String lore, String lang) {
+        this.name = name;
+        this.description = description;
+        this.lore = lore;
+        this.lang = lang;
+        this.cardSet = new ArrayList<>();
+    }
 
-	public void setLang(String lang) {
-		this.lang = lang;
-	}
+    public CardTranslation(String name, String description, String lore, String lang, CardSet set) {
+        this.name = name;
+        this.description = description;
+        this.lore = lore;
+        this.lang = lang;
+        this.cardSet = new ArrayList<>();
+        this.cardSet.add(set);
+    }
 
-	public CardCC getCard() {
-		return card;
-	}
 
-	public void setCard(CardCC card) {
-		this.card = card;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public List<CardSet> getCardSet() {
-		return cardSet;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setCardSet(List<CardSet> splashArt) {
-		this.cardSet = splashArt;
-	}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLore() {
+        return lore;
+    }
+
+    public void setLore(String lore) {
+        this.lore = lore;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
+    public CardCC getCard() {
+        return card;
+    }
+
+    public void setCard(CardCC card) {
+        this.card = card;
+    }
+
+    public List<CardSet> getCardSet() {
+        return cardSet;
+    }
+
+    public void setCardSet(List<CardSet> splashArt) {
+        this.cardSet = splashArt;
+    }
 
 }

@@ -13,7 +13,7 @@ public class JSWaiter {
     private static JavascriptExecutor jsExec;
 
     //Get the driver
-    public static void setDriver (WebDriver driver) {
+    public static void setDriver(WebDriver driver) {
         jsWaitDriver = driver;
         jsWait = new WebDriverWait(jsWaitDriver, 10);
         jsExec = (JavascriptExecutor) jsWaitDriver;
@@ -147,6 +147,7 @@ public class JSWaiter {
 
     /**
      * Waits for the elements animation to be completed
+     *
      * @param css
      */
     public void waitForAnimationToComplete(String css) {

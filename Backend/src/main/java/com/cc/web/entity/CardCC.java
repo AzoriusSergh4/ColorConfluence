@@ -9,126 +9,126 @@ import java.util.List;
 
 @Entity
 @JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "id")
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class CardCC {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	private double cmc;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-	private String manaCost;
-	
-	private String power;
+    private double cmc;
 
-	private String toughness;
+    private String manaCost;
 
-	private String cardType;
+    private String power;
 
-	private String rarity;
-	
-	private String name;
-	
-	@OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CardTranslation> cardTranslation;
+    private String toughness;
 
-	@OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CardLegality> legalities;
-	
-	public CardCC () {
-		
-	}
-	
-	public CardCC (io.magicthegathering.javasdk.resource.Card card) {
-		this.cmc = card.getCmc();
-		this.manaCost = card.getManaCost();
-		this.power = card.getPower();
-		this.toughness = card.getToughness();
-		this.cardType = card.getType();
+    private String cardType;
 
-		this.legalities = new ArrayList<>();
+    private String rarity;
+
+    private String name;
+
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CardTranslation> cardTranslation;
+
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CardLegality> legalities;
+
+    public CardCC() {
+
+    }
+
+    public CardCC(io.magicthegathering.javasdk.resource.Card card) {
+        this.cmc = card.getCmc();
+        this.manaCost = card.getManaCost();
+        this.power = card.getPower();
+        this.toughness = card.getToughness();
+        this.cardType = card.getType();
+
+        this.legalities = new ArrayList<>();
 
 
-		this.rarity = card.getRarity();
-		this.name = card.getName();
-		
-	}
+        this.rarity = card.getRarity();
+        this.name = card.getName();
 
-	public long getId() {
-		return id;
-	}
+    }
 
-	public double getCmc() {
-		return cmc;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setCmc(double cmc) {
-		this.cmc = cmc;
-	}
+    public double getCmc() {
+        return cmc;
+    }
 
-	public String getManaCost() {
-		return manaCost;
-	}
+    public void setCmc(double cmc) {
+        this.cmc = cmc;
+    }
 
-	public void setManaCost(String manaCost) {
-		this.manaCost = manaCost;
-	}
+    public String getManaCost() {
+        return manaCost;
+    }
 
-	public String getPower() {
-		return power;
-	}
+    public void setManaCost(String manaCost) {
+        this.manaCost = manaCost;
+    }
 
-	public void setPower(String power) {
-		this.power = power;
-	}
+    public String getPower() {
+        return power;
+    }
 
-	public String getToughness() {
-		return toughness;
-	}
+    public void setPower(String power) {
+        this.power = power;
+    }
 
-	public void setToughness(String toughness) {
-		this.toughness = toughness;
-	}
+    public String getToughness() {
+        return toughness;
+    }
 
-	public String getCardType() {
-		return cardType;
-	}
+    public void setToughness(String toughness) {
+        this.toughness = toughness;
+    }
 
-	public void setCardType(String cardType) {
-		this.cardType = cardType;
-	}
+    public String getCardType() {
+        return cardType;
+    }
 
-	public String getRarity() {
-		return rarity;
-	}
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
 
-	public void setRarity(String rarity) {
-		this.rarity = rarity;
-	}
+    public String getRarity() {
+        return rarity;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setRarity(String rarity) {
+        this.rarity = rarity;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public List<CardTranslation> getCardTranslation() {
-		return cardTranslation;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setCardTranslation(List<CardTranslation> cardTranslation) {
-		this.cardTranslation = cardTranslation;
-	}
+    public List<CardTranslation> getCardTranslation() {
+        return cardTranslation;
+    }
 
-	public List<CardLegality> getLegalities() {
-		return legalities;
-	}
+    public void setCardTranslation(List<CardTranslation> cardTranslation) {
+        this.cardTranslation = cardTranslation;
+    }
 
-	public void setLegalities(List<CardLegality> legalities) {
-		this.legalities = legalities;
-	}
+    public List<CardLegality> getLegalities() {
+        return legalities;
+    }
+
+    public void setLegalities(List<CardLegality> legalities) {
+        this.legalities = legalities;
+    }
 }

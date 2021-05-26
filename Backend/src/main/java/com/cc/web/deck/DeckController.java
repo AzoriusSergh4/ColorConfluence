@@ -30,16 +30,16 @@ public class DeckController {
 
     @PostMapping("/create")
     public ResponseEntity<Long> saveDeck(@RequestBody DeckForm deckForm) {
-        try{
+        try {
             var deck = deckService.saveDeck(userComponent.getLoggedUser(), deckForm);
-            return new ResponseEntity<>(deck.getId(),HttpStatus.CREATED);
+            return new ResponseEntity<>(deck.getId(), HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/decks")
-    public Page<DeckProjection> getDecks(@RequestParam Map<String,String> criteria) {
+    public Page<DeckProjection> getDecks(@RequestParam Map<String, String> criteria) {
         return deckService.getBasicDecksByCriteria(criteria);
     }
 
@@ -56,8 +56,8 @@ public class DeckController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteDeck(@PathVariable long id) {
         var deck = this.deckService.getDeckById(id);
-        if(deck == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        if(!deck.getUser().equals(userComponent.getLoggedUser())) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        if (deck == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (!deck.getUser().equals(userComponent.getLoggedUser())) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         this.deckService.deleteDeck(deck);
         return new ResponseEntity<>(HttpStatus.OK);
     }

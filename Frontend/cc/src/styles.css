@@ -53,6 +53,11 @@ body { margin: 0;}
   justify-content: center;
 }
 
+.cc-color-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: center;
+}
 
 /* Forms */
 

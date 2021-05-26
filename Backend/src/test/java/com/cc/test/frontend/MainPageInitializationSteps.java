@@ -9,7 +9,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class MainPageInitializationSteps{
+public class MainPageInitializationSteps {
 
     @Autowired
     private FrontendTestCommons testCommons;
@@ -20,7 +20,7 @@ public class MainPageInitializationSteps{
     @Autowired
     private Hooks hooks;
 
-    public MainPageInitializationSteps(){
+    public MainPageInitializationSteps() {
         this.homePage = new HomePage();
     }
 

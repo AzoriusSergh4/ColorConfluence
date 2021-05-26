@@ -15,9 +15,9 @@ public class FrontendTestCommons extends TestCommons {
     @Autowired
     private SeleniumService seleniumService;
 
-    public void takeScreenshot(Scenario scenario){
+    public void takeScreenshot(Scenario scenario) {
         String screenshotName = seleniumService.getPageTitle() + "_" + new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss").format(new Date());
-        scenario.attach(seleniumService.takeScreenshot(),"image/png",screenshotName);
+        scenario.attach(seleniumService.takeScreenshot(), "image/png", screenshotName);
     }
 
 }

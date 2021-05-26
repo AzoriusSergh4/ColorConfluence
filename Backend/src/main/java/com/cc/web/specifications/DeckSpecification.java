@@ -9,7 +9,7 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class DeckSpecification extends CommonSpecification{
+public final class DeckSpecification extends CommonSpecification {
 
     public static Specification<Deck> nameContains(String name) {
         return (root, query, builder) -> builder.like(root.get("name"), contains(name));

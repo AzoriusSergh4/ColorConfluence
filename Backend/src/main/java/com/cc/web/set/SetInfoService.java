@@ -12,11 +12,11 @@ public class SetInfoService {
     @Autowired
     private SetInfoRepository setInfoRepository;
 
-    public boolean existsByCode(String code){
+    public boolean existsByCode(String code) {
         return setInfoRepository.existsByCode(code);
     }
 
-    public void save(SetInfo set){
+    public void save(SetInfo set) {
         setInfoRepository.save(set);
     }
 

@@ -33,9 +33,10 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Deck> decks;
 
-    public User() {}
+    public User() {
+    }
 
-    public User(RegisterForm data){
+    public User(RegisterForm data) {
         this.email = data.getEmail();
         this.username = data.getUsername();
         this.password = new BCryptPasswordEncoder().encode(data.getPassword());

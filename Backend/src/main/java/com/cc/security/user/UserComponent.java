@@ -15,7 +15,7 @@ public class UserComponent {
         return user;
     }
 
-    public void setLoggedUser(User user){
+    public void setLoggedUser(User user) {
         this.user = user;
     }
 

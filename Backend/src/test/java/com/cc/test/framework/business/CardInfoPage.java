@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @ScenarioScope
-public class CardInfoPage extends BasePage{
+public class CardInfoPage extends BasePage {
 
     public CardInfoPage() {
 
@@ -21,24 +21,24 @@ public class CardInfoPage extends BasePage{
 
     public boolean checkLanguages() {
         List<WebElement> languages = seleniumService.findWebElementsBy(By.xpath("//div[@gdarea='lang']//button"));
-        if(languages.get(0).isEnabled()) return false;
-        for(int i = 1; i < languages.size(); i++){
-            if(!languages.get(i).isEnabled()) return false;
+        if (languages.get(0).isEnabled()) return false;
+        for (int i = 1; i < languages.size(); i++) {
+            if (!languages.get(i).isEnabled()) return false;
         }
         return true;
     }
 
     public boolean checkInfo() {
-        if(seleniumService.findWebElementById("data-type").getText().equals("")) return false;
-        if(seleniumService.findWebElementById("collection-rarity").getText().equals("")) return false;
+        if (seleniumService.findWebElementById("data-type").getText().equals("")) return false;
+        if (seleniumService.findWebElementById("collection-rarity").getText().equals("")) return false;
         return !seleniumService.findWebElementById("collection-legality").getText().equals("");
     }
 
     public boolean checkSets() {
         List<WebElement> sets = seleniumService.findWebElementsBy(By.xpath("//div[@id='collection-sets']//button"));
-        if(sets.get(0).isEnabled()) return false;
-        for(int i = 1; i < sets.size(); i++){
-            if(!sets.get(i).isEnabled()) return false;
+        if (sets.get(0).isEnabled()) return false;
+        for (int i = 1; i < sets.size(); i++) {
+            if (!sets.get(i).isEnabled()) return false;
         }
         return true;
     }

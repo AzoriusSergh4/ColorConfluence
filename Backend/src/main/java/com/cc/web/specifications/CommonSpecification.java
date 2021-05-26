@@ -8,7 +8,8 @@ import java.util.List;
 
 public class CommonSpecification {
 
-    protected CommonSpecification(){}
+    protected CommonSpecification() {
+    }
 
     public static <T> Specification<T> distinct() {
         return (root, query, cb) -> {
@@ -21,9 +22,9 @@ public class CommonSpecification {
         return MessageFormat.format("%{0}%", expression);
     }
 
-    protected static Predicate[] predicateListToArray(List<Predicate> predicates){
+    protected static Predicate[] predicateListToArray(List<Predicate> predicates) {
         var result = new Predicate[predicates.size()];
-        for(var i = 0; i< predicates.size(); i++){
+        for (var i = 0; i < predicates.size(); i++) {
             result[i] = predicates.get(i);
         }
         return result;

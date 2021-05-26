@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {CommonService} from './common.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {DeckForm} from '../deck-creation/deck-creation.component';
 
 const FORMAT_URL = '/api/format';
@@ -26,8 +26,20 @@ export class DeckService extends CommonService{
     return this.apiGetRequest(DECK_URL + '/' + id);
   }
 
+  /**
+   * Get all pages based on the page
+   * @param page the page index
+   */
   getAllDecks(page: number) {
     return this.apiGetRequest(DECK_URL + DECKS_URL + '?page=' + page);
+  }
+
+  /**
+   * Get a page of decks with the specified criteria
+   * @param criteria the criteria to filter
+   */
+  getAllDecksWithCriteria(criteria: HttpParams) {
+    return this.apiGetRequestWithCriteria(DECK_URL + DECKS_URL, criteria);
   }
 
   /**

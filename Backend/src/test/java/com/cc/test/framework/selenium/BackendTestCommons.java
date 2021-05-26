@@ -9,7 +9,7 @@ import io.cucumber.spring.ScenarioScope;
 public class BackendTestCommons extends TestCommons {
 
     @Before(value = "@Backend")
-    public void beforeScenario(Scenario scenario){
+    public void beforeScenario(Scenario scenario) {
 
     }
 

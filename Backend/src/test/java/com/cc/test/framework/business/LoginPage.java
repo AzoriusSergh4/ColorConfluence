@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ScenarioScope
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
-    public boolean checkPageIsLoaded(){
+    public boolean checkPageIsLoaded() {
         return seleniumService.isWebElementBy(By.xpath("//div[@class='grid-container grid-container-login']"));
     }
 
