@@ -32,6 +32,10 @@ public class DeckListPage extends BasePage {
         }
     }
 
+    public void fillFormat(String format) {
+        this.seleniumService.selectOption(this.seleniumService.findWebElementBy(By.xpath("//cc-deck-list//mat-select")),format);
+    }
+
     public void searchDecks() {
         this.seleniumService.findWebElementBy(By.xpath("//cc-deck-list//button//span[contains(text(),'Search')]")).click();
         this.seleniumService.waitUpdates();

@@ -47,4 +47,15 @@ public class DeckListFrontendSteps {
             Assert.assertTrue(this.deckListPage.checkColumn("Colors", c));
         }
     }
+
+    @When("I search decks by format {string}")
+    public void iSearchDecksByFormat(String format) {
+        this.deckListPage.fillFormat(format);
+        this.deckListPage.searchDecks();
+    }
+
+    @Then("All decks displayed are for the format {string}")
+    public void allDecksDisplayedAreForTheFormat(String format) {
+        this.deckListPage.checkColumn("Format", format);
+    }
 }
