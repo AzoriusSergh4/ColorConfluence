@@ -13,6 +13,8 @@ import java.util.List;
 
 public final class CardSpecifications extends CommonSpecification {
 
+    private static final String MANA_COST = "manaCost";
+
     //Translation Specifications
 
     public static Specification<CardTranslation> nameContains(String name) {
@@ -46,39 +48,39 @@ public final class CardSpecifications extends CommonSpecification {
     public static Specification<CardTranslation> colorContains(String colorCriteria) {
         var defaultColors = new String[]{"W", "B", "U", "R", "G", "C"};
         if (colorCriteria.startsWith("=")) {
-            String color = colorCriteria.replaceAll("=", "");
+            String color = colorCriteria.replace("=", "");
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 List<Predicate> predicates = new ArrayList<>();
                 for (String c : defaultColors) {
                     if (color.contains(c)) {
-                        predicates.add(builder.like(join.get("manaCost"), contains(c)));
+                        predicates.add(builder.like(join.get(MANA_COST), contains(c)));
                     } else {
-                        predicates.add(builder.notLike(join.get("manaCost"), contains(c)));
+                        predicates.add(builder.notLike(join.get(MANA_COST), contains(c)));
                     }
                 }
                 return builder.and(predicateListToArray(predicates));
             };
         } else if (colorCriteria.startsWith("<=")) {
-            String color = colorCriteria.replaceAll("<=", "");
+            String color = colorCriteria.replace("<=", "");
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 List<Predicate> predicates = new ArrayList<>();
                 for (String c : defaultColors) {
                     if (color.contains(c)) {
-                        predicates.add(builder.like(join.get("manaCost"), contains(c)));
+                        predicates.add(builder.like(join.get(MANA_COST), contains(c)));
                     }
                 }
                 return builder.and(predicateListToArray(predicates));
             };
         } else if (colorCriteria.startsWith("<")) {
-            String color = colorCriteria.replaceAll("<", "");
+            String color = colorCriteria.replace("<", "");
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
                 List<Predicate> predicates = new ArrayList<>();
                 for (String c : defaultColors) {
                     if (color.contains(c)) {
-                        predicates.add(builder.like(join.get("manaCost"), contains(c)));
+                        predicates.add(builder.like(join.get(MANA_COST), contains(c)));
                     }
                 }
                 return builder.or(predicateListToArray(predicates));
@@ -91,7 +93,7 @@ public final class CardSpecifications extends CommonSpecification {
     public static Specification<CardTranslation> manaCostContains(String manaCost) {
         return (root, query, builder) -> {
             Join<CardTranslation, CardCC> join = root.join("card");
-            return builder.like(join.get("manaCost"), contains(manaCost));
+            return builder.like(join.get(MANA_COST), contains(manaCost));
         };
     }
 
@@ -100,27 +102,27 @@ public final class CardSpecifications extends CommonSpecification {
         if (content.startsWith(">=")) {
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
-                return builder.greaterThanOrEqualTo(join.get(stat), content.replaceAll(">=", ""));
+                return builder.greaterThanOrEqualTo(join.get(stat), content.replace(">=", ""));
             };
         } else if (content.startsWith("<=")) {
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
-                return builder.lessThanOrEqualTo(join.get(stat), content.replaceAll("<=", ""));
+                return builder.lessThanOrEqualTo(join.get(stat), content.replace("<=", ""));
             };
         } else if (content.startsWith(">")) {
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
-                return builder.greaterThan(join.get(stat), content.replaceAll(">", ""));
+                return builder.greaterThan(join.get(stat), content.replace(">", ""));
             };
         } else if (content.startsWith("<")) {
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
-                return builder.lessThan(join.get(stat), content.replaceAll("<", ""));
+                return builder.lessThan(join.get(stat), content.replace("<", ""));
             };
         } else {
             return (root, query, builder) -> {
                 Join<CardTranslation, CardCC> join = root.join("card");
-                return builder.equal(join.get(stat), content.replaceAll("=", ""));
+                return builder.equal(join.get(stat), content.replace("=", ""));
             };
         }
     }

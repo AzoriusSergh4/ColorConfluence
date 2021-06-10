@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Deck} from '../deck/deck.component';
-import {DeckService} from '../services/deck.service';
 
 @Component({
   selector: 'app-base',
@@ -22,6 +20,10 @@ export class BaseComponent implements OnInit {
 
   goToDecks(): void {
     this.router.navigate(['decks']);
+  }
+
+  goToMyDecks(): void {
+    this.router.navigate(['user-decks']);
   }
 
 }

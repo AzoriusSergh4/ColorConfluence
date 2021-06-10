@@ -6,6 +6,10 @@ body { margin: 0;}
   height: auto;
 }
 
+a:hover {
+  color: #69000c;
+}
+
 /* ColorConfluence Cards */
 .cc-card{
     float: left;

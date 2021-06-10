@@ -17,13 +17,13 @@
          <mat-icon>list_alt</mat-icon>
          <span>All Decks</span>
        </button>
-       <button mat-menu-item *ngIf="loginService.isLogged">
+       <button mat-menu-item *ngIf="loginService.isLogged" (click)="goToMyDecks()">
          <mat-icon>folder_shared</mat-icon>
          <span>My Decks</span>
        </button>
-       <button mat-menu-item id="newDeck" *ngIf="loginService.isLogged">
+       <button mat-menu-item id="newDeck" *ngIf="loginService.isLogged" (click)="goToNewDeck()">
          <mat-icon>add</mat-icon>
-         <span (click)="goToNewDeck()">New Deck</span>
+         <span >New Deck</span>
        </button>
      </mat-menu>
    </div>
@@ -38,14 +38,14 @@
      <div>
        <td-user-profile name="{{loginService.user.username}}" email="{{loginService.user.email}}">
          <ng-container td-user-action-list>
-           <button mat-list-item>
+           <button mat-list-item (click)="goToProfile()">
              <span matListAvatar></span>
-             <span matLine (click)="goToProfile()">My Profile</span>
+             <span matLine>My Profile</span>
            </button>
            <mat-divider></mat-divider>
-           <button mat-list-item>
+           <button mat-list-item (click)="logout()">
              <span matListAvatar></span>
-             <span matLine (click)="logout()">Sign out</span>
+             <span matLine>Sign out</span>
            </button>
          </ng-container>
        </td-user-profile>

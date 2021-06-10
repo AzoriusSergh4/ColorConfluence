@@ -22,7 +22,7 @@ public abstract class BasePage {
     }
 
     public void clickOnLogin() {
-        seleniumService.findWebElementBy(By.xpath("//div[@class='login-toolbar']//a[@routerlink='login']")).click();
+        seleniumService.findWebElementBy(By.xpath("//div[contains(@class,'login-toolbar')]//a[@routerlink='login']")).click();
     }
 
     public abstract boolean checkPageIsLoaded();

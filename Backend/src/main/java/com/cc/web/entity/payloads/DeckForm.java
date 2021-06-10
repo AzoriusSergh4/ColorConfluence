@@ -1,4 +1,4 @@
-package com.cc.web.deck;
+package com.cc.web.entity.payloads;
 
 import com.cc.web.entity.Format;
 
@@ -22,6 +22,9 @@ public class DeckForm {
 
     private boolean draft;
 
+    private long folderId;
+
+    //constructor
     public DeckForm() {
     }
 
@@ -87,6 +90,14 @@ public class DeckForm {
 
     public void setDraft(boolean draft) {
         this.draft = draft;
+    }
+
+    public long getFolderId() {
+        return folderId;
+    }
+
+    public void setFolderId(long folderId) {
+        this.folderId = folderId;
     }
 
     public static class DeckCardForm {

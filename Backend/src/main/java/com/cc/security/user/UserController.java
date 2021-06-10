@@ -30,6 +30,8 @@ public class UserController {
     @Autowired
     private UserComponent userComponent;
 
+    private final String ERROR_TYPE = "error-type";
+
     /**
      * Creates the user disabled and send a confirmation email to enable it
      *
@@ -100,11 +102,11 @@ public class UserController {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             } else if (!this.checkPasswordPattern(passwordForm.getNewPassword())) {
                 var headers = new HttpHeaders();
-                headers.add("error-type", "password-pattern");
+                headers.add(ERROR_TYPE, "password-pattern");
                 return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             } else if (passwordForm.isSamePssword()) {
                 var headers = new HttpHeaders();
-                headers.add("error-type", "same-password");
+                headers.add(ERROR_TYPE, "same-password");
                 return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             } else {
                 userComponent.getLoggedUser().setPassword(encoder.encode(passwordForm.getNewPassword()));
@@ -126,7 +128,7 @@ public class UserController {
         var user = userRepository.findByEmail(email);
         if (user != null) {
             //Confirmation token creation
-            ConfirmationToken confirmationToken = new ConfirmationToken(user);
+            var confirmationToken = new ConfirmationToken(user);
             confirmationTokenRepository.save(confirmationToken);
             //Email send
             mailSender.sendRecoverPassword(user.getEmail(), confirmationToken.getToken());
@@ -150,11 +152,11 @@ public class UserController {
             var user = userRepository.findByEmail(confirmationToken.getUser().getEmail());
             if (!this.checkPasswordPattern(passwordForm.getNewPassword())) {
                 var headers = new HttpHeaders();
-                headers.add("error-type", "password-pattern");
+                headers.add(ERROR_TYPE, "password-pattern");
                 return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             } else if (passwordForm.isSamePssword()) {
                 var headers = new HttpHeaders();
-                headers.add("error-type", "same-password");
+                headers.add(ERROR_TYPE, "same-password");
                 return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             }
             user.setPassword(new BCryptPasswordEncoder().encode(passwordForm.getNewPassword()));

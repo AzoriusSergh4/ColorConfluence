@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DeckService} from '../services/deck.service';
 import {Deck} from '../deck/deck.component';
 import {Format} from '../deck-creation/deck-creation.component';

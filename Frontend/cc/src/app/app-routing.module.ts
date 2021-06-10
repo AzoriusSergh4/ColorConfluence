@@ -11,6 +11,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {DeckCreationComponent} from './deck-creation/deck-creation.component';
 import {DeckListComponent} from './deck-list/deck-list.component';
 import {DeckComponent} from './deck/deck.component';
+import {DeckUserComponent} from './deck-user/deck-user.component';
 
 
 const routes: Routes = [
@@ -22,9 +23,10 @@ const routes: Routes = [
   {path: 'confirm-account', component: ConfirmAccountComponent},
   {path: 'recover-password', component: RecoverPasswordComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'create-deck', component: DeckCreationComponent},
+  {path: 'deck-editor', component: DeckCreationComponent},
   {path: 'decks', component: DeckListComponent},
-  {path: 'deck/:id', component: DeckComponent}
+  {path: 'deck/:id', component: DeckComponent},
+  {path: 'user-decks', component: DeckUserComponent}
 ];
 
 @NgModule({

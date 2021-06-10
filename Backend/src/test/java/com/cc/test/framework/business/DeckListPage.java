@@ -27,13 +27,13 @@ public class DeckListPage extends BasePage {
 
     public void fillColors(String colors) {
         var color = colors.split("(?!^)");
-        for(String c : color) {
+        for (String c : color) {
             this.seleniumService.findWebElementBy(By.xpath("//cc-deck-list//mat-checkbox[@value='" + c + "']")).click();
         }
     }
 
     public void fillFormat(String format) {
-        this.seleniumService.selectOption(this.seleniumService.findWebElementBy(By.xpath("//cc-deck-list//mat-select")),format);
+        this.seleniumService.selectOption(this.seleniumService.findWebElementBy(By.xpath("//cc-deck-list//mat-select")), format);
     }
 
     public void searchDecks() {

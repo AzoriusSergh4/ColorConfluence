@@ -5,7 +5,7 @@ import {DeckService} from '../services/deck.service';
 import {Sort} from '@angular/material/sort';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {BaseComponent} from '../base/base.component';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {IPageChangeEvent} from '@covalent/core/paging';
 import {LoginService} from '../services/login.service';
@@ -13,6 +13,7 @@ import {LoginService} from '../services/login.service';
 export interface DeckCardForm {
   id: number;
   quantity: number;
+  card?: any;
 }
 
 export interface Format {
@@ -21,6 +22,7 @@ export interface Format {
 }
 
 export interface DeckForm {
+  id?: number;
   name: string;
   comments: string;
   draft: boolean;
@@ -28,6 +30,7 @@ export interface DeckForm {
   commanders: DeckCardForm[];
   main: DeckCardForm[];
   sideboard: DeckCardForm[];
+  folderId: number;
 }
 
 @Component({
@@ -54,11 +57,18 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
   deck: any[];
   sideboard: any[];
 
-  constructor(protected router: Router, private cardService: CardService, private deckService: DeckService, public dialog: MatDialog, private snackBar: MatSnackBar, public loginService: LoginService) {
+  constructor(protected router: Router, private route: ActivatedRoute, private cardService: CardService, private deckService: DeckService, public dialog: MatDialog, private snackBar: MatSnackBar, public loginService: LoginService) {
     super(router);
     if (!loginService.isLogged) {
       this.redirectToHome();
     }
+    this.deckService.getAllFormats().subscribe(formats => {
+      this.formats = formats;
+      console.log(formats);
+    }, error => {
+      console.log(error);
+      this.formats = [];
+    });
     this.deckForm = {
       name: '',
       comments: '',
@@ -66,22 +76,61 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
       draft: false,
       main: [],
       commanders: [],
-      sideboard: []
+      sideboard: [],
+      folderId: 0
     };
+    this.route.queryParams.subscribe(params => {
+      if (params.id) {
+        this.deckService.getDeck(+params.id).subscribe(response => {
+          if (response.user.id === loginService.user.id) {
+            this.deckForm.id = response.id;
+            this.deckForm.name = response.name;
+            this.deckForm.comments = response.comments;
+            this.deckForm.draft = response.draft;
+            this.deckForm.format = response.format;
+            this.deckForm.main = response.main;
+            this.deckForm.commanders = response.commander;
+            this.deckForm.sideboard = response.sideboard;
+            console.log(this.deckForm);
+            this.deckForm.main.forEach(c => {
+              const card = c.card.cardTranslation[0];
+              card.quantity = c.quantity;
+              card.card = c.card;
+              this.deck.push(card);
+            });
+            this.deckForm.commanders.forEach(c => {
+              const card = c.card.cardTranslation[0];
+              card.quantity = c.quantity;
+              card.card = c.card;
+              this.commanders.push(card);
+            });
+            this.deckForm.sideboard.forEach(c => {
+              const card = c.card.cardTranslation[0];
+              card.quantity = c.quantity;
+              card.card = c.card;
+              this.sideboard.push(card);
+            });
+          } else {
+            this.redirectToHome();
+          }
+        });
+      }else if (params.folderId) {
+        this.deckForm.folderId = +params.folderId;
+        console.log(this.deckForm);
+      }
+    });
     this.cardsFound = [];
     this.commanders = [];
     this.deck = [];
     this.sideboard = [];
     this.cardsToAdd = 4;
-    this.deckService.getAllFormats().subscribe(formats => {
-      this.formats = formats;
-    }, error => {
-      console.log(error);
-      this.formats = [];
-    });
   }
 
   ngOnInit(): void {
+  }
+
+  compareFormats(f1: Format, f2: Format) {
+    return f1 && f2 && f1.id === f2.id;
   }
 
   checkDeck(): any {
@@ -160,7 +209,6 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
 
   openSaveDialog() {
     const info = this.checkDeck();
-    console.log(info);
     const dialogRef = this.dialog.open(SaveDeckDialog, {
       width: '50%',
       data: info
@@ -179,11 +227,11 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
   saveDeck() {
     console.log(this.deckForm);
     this.deckService.saveDeck(this.deckForm).subscribe(id => {
-      this.snackBar.open('The deck has been saved successfully', 'OK');
+      this.snackBar.open('The deck has been saved successfully', 'OK', {duration: 3000});
       this.router.navigate(['/deck/' + id]);
     }, error => {
       console.log(error);
-      this.snackBar.open('There has been an error saving the deck. Please try again later', 'OK');
+      this.snackBar.open('There has been an error saving the deck. Please try again later', 'OK', {duration: 3000});
     });
   }
 
@@ -204,6 +252,7 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
         event.container.data[i].quantity += this.cardsToAdd;
       }
     }
+    console.log(event.container);
     this.sortData(this.currentSort);
   }
 

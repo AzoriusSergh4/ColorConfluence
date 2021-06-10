@@ -39,6 +39,8 @@ public class DeckInfoFrontendSteps {
     @And("I go into a deck")
     public void iGoIntoADeck() {
         Assert.assertTrue(deckListPage.checkPageIsLoaded());
+        this.deckListPage.fillName("elfos");
+        this.deckListPage.searchDecks();
         this.deckListPage.goToFirstDeck();
     }
 

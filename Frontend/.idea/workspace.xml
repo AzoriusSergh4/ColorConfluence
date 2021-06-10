@@ -20,23 +20,85 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cb2ad74-a7ca-4f8d-91fb-03be8507665f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/DeckListFrontendSteps.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backend/src/test/resources/features/frontend/DeckListFrontend.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/DeckListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/DeckListPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckFolderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/DeckFolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/payloads/FolderForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/projection/DeckFolderProjection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-user/deck-user.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-user/deck-user.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-user/deck-user.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-user/deck-user.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-user/delete-entity-dialog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck-user/new-entity-dialog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc/src/app/deck/delete-deck-dialog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/initializer/CardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/initializer/CardDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/security/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/card/CardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/payloads/DeckForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/deck/DeckService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/entity/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/error/RestExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/error/RestExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/CardSpecifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/com/cc/web/specifications/CardSpecifications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/DeckBackendSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/backend/DeckBackendSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/BasePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/DeckInfoPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/framework/business/DeckInfoPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/DeckInfoFrontendSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/java/com/cc/test/frontend/DeckInfoFrontendSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/test/resources/features/frontend/GetCardInfoFrontend.feature" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/test/resources/features/frontend/GetCardInfoFrontend.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/base/base.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/base/base.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/base/base.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/base/base.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-information/card-information.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/card-search/card-search.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/confirm-account/confirm-account.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/deck-creation/deck-creation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck-creation/deck-creation.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/deck-creation/deck-creation.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck-creation/deck-creation.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/deck-creation/deck-creation.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck-creation/deck-creation.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck-list/deck-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/deck/deck.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck/deck.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/deck/deck.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck/deck.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/deck/deck.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/deck/deck.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/login/login.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-menu/main-menu.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/main-screen/main-screen.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/profile/profile.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/profile/profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/recover-password-form/recover-password-form.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/recover-password/recover-password.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/register/register.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/register/register.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/register/register.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/services/auth/auth.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/auth/auth.interceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/services/common.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/common.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/services/deck.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/deck.service.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/app/services/deck.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/deck.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/services/login.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/login.service.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cc/src/app/services/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/app/services/login.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cc/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/cc/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -57,6 +119,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="ToolWindowDuplicates.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -206,7 +269,22 @@
       <workItem from="1621864655197" duration="7227000" />
       <workItem from="1621951448002" duration="109000" />
       <workItem from="1622037432985" duration="127000" />
-      <workItem from="1622037649497" duration="4826000" />
+      <workItem from="1622037649497" duration="5422000" />
+      <workItem from="1622122423176" duration="7291000" />
+      <workItem from="1622134465957" duration="637000" />
+      <workItem from="1622210538919" duration="781000" />
+      <workItem from="1622212693153" duration="5285000" />
+      <workItem from="1622274890320" duration="986000" />
+      <workItem from="1622468364898" duration="1189000" />
+      <workItem from="1622554686739" duration="4114000" />
+      <workItem from="1622642880296" duration="10588000" />
+      <workItem from="1622728930097" duration="1644000" />
+      <workItem from="1622730979904" duration="1333000" />
+      <workItem from="1622987863359" duration="4189000" />
+      <workItem from="1623164738965" duration="1555000" />
+      <workItem from="1623230328131" duration="13045000" />
+      <workItem from="1623312867435" duration="1133000" />
+      <workItem from="1623322773045" duration="7214000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,6 @@
 package com.cc.security.user;
 
-import com.cc.web.entity.Deck;
+import com.cc.web.entity.DeckFolder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
 public class User {
 
     @Id
@@ -30,8 +29,8 @@ public class User {
     private List<String> roles;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Deck> decks;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<DeckFolder> folder;
 
     public User() {
     }
@@ -43,6 +42,13 @@ public class User {
         this.enabled = false;
         this.roles = new ArrayList<>();
         this.roles.add("USER");
+        var folder = new DeckFolder();
+        folder.setName(this.username + "'s Decks");
+        folder.setUser(this);
+        folder.setRoot(true);
+        this.folder = new ArrayList<>();
+        this.folder.add(folder);
+
     }
 
     public String getUsername() {
@@ -93,11 +99,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public List<Deck> getDecks() {
-        return decks;
+    public List<DeckFolder> getFolder() {
+        return folder;
     }
 
-    public void setDecks(List<Deck> decks) {
-        this.decks = decks;
+    public void setFolder(List<DeckFolder> folder) {
+        this.folder = folder;
     }
 }

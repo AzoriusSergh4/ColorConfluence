@@ -43,7 +43,7 @@ public class DeckListFrontendSteps {
     @Then("All decks displayed are of the combination of colors {string}")
     public void allDecksDisplayedAreOfTheCombinationOfColors(String colors) {
         var color = colors.split("(?!^)");
-        for(String c : color) {
+        for (String c : color) {
             Assert.assertTrue(this.deckListPage.checkColumn("Colors", c));
         }
     }

@@ -39,11 +39,11 @@ public class CardDAO {
     public void storeCards(List<Card> cards) {
         for (Card card : cards) {
             if (!cardRepository.existsByName(card.getName())) {
-                CardCC c = new CardCC(card);
+                var c = new CardCC(card);
                 List<CardLegality> legalities = new ArrayList<>();
                 if (card.getLegalities() != null) {
                     for (Legality l : card.getLegalities()) {
-                        CardLegality legality = new CardLegality(l);
+                        var legality = new CardLegality(l);
                         legality.setCard(c);
                         c.getLegalities().add(legality);
                         legalities.add(legality);
@@ -53,14 +53,14 @@ public class CardDAO {
                 for (CardLegality legality : legalities) {
                     cardLegalitiesRepository.save(legality);
                 }
-                CardSet set = new CardSet(card.getSet(), card.getNumber(), card.getImageUrl());
-                CardTranslation english = new CardTranslation(card.getName(), card.getOriginalText(), card.getFlavor(), "English", set);
+                var set = new CardSet(card.getSet(), card.getNumber(), card.getImageUrl());
+                var english = new CardTranslation(card.getName(), card.getOriginalText(), card.getFlavor(), "English", set);
                 english.setCard(c);
                 translationRepository.save(english);
                 set.setCardTranslation(english);
                 cardSetRepository.save(set);
                 CardTranslation spanish;
-                ForeignData[] foreignData = card.getForeignNames();
+                var foreignData = card.getForeignNames();
                 if (foreignData != null) {
                     for (ForeignData foreignDatum : foreignData) {
                         if (foreignDatum.getLanguage().equals("Spanish")) {
@@ -76,7 +76,7 @@ public class CardDAO {
             } else {
                 for (CardTranslation ct : translationRepository.findByCard_Name(card.getName())) {
                     if (ct.getLang().equals("English")) {
-                        CardSet set = new CardSet(card.getSet(), card.getNumber(), card.getImageUrl());
+                        var set = new CardSet(card.getSet(), card.getNumber(), card.getImageUrl());
                         ct.getCardSet().add(set);
                         translationRepository.save(ct);
                         set.setCardTranslation(ct);
@@ -85,7 +85,7 @@ public class CardDAO {
                     if (card.getForeignNames() != null) {
                         for (ForeignData fd : card.getForeignNames()) {
                             if (fd.getLanguage().equals(ct.getLang())) {
-                                CardSet set = new CardSet(card.getSet(), card.getNumber(), fd.getImageUrl());
+                                var set = new CardSet(card.getSet(), card.getNumber(), fd.getImageUrl());
                                 ct.getCardSet().add(set);
                                 translationRepository.save(ct);
                                 set.setCardTranslation(ct);

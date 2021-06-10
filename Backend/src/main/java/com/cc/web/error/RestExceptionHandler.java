@@ -14,7 +14,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NumberFormatException.class)
     protected ResponseEntity<Object> numberFormatExceptionHandler(NumberFormatException ex) {
-        String error = "Page must be set";
+        var error = "Page must be set";
         return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, error, ex));
     }
 

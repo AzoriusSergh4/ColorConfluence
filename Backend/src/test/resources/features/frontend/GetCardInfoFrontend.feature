@@ -10,7 +10,7 @@ Feature: Get card Information
     And I can see all the information from the card
 
   @GetCardInfoMultipleResults
-  Scenario:
+  Scenario: GetCardInfoMultipleResults
     Given I get into the Main Page
     When I search for a card with name "Ephara"
     And The results page is loaded

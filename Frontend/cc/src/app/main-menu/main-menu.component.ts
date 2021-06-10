@@ -30,7 +30,7 @@ export class MainMenuComponent extends BaseComponent implements OnInit {
   }
 
   goToNewDeck(): void {
-    this.router.navigate(['create-deck']);
+    this.router.navigate(['deck-editor']);
   }
 
   logout() {

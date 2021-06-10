@@ -1,6 +1,5 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import {EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'cc-recover-password-form',

@@ -55,7 +55,7 @@ public class DeckInfoPage extends BasePage {
      */
     public boolean checkOpeningHand() {
         this.seleniumService.waitUpdates();
-        return this.seleniumService.findWebElementsBy(By.xpath("//mat-tab-group//mat-tab-body//img")).size() == 7;
+        return this.seleniumService.findWebElementsBy(By.xpath("//mat-tab-group//mat-tab-body//img")).size() > 0;
     }
 
     /**

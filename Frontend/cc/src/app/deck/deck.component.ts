@@ -1,10 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, Inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DeckService} from '../services/deck.service';
 import {Format} from '../deck-creation/deck-creation.component';
-import {User} from '../services/login.service';
+import {LoginService, User} from '../services/login.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import * as _ from 'lodash';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {DeleteEntityDialog} from '../deck-user/deck-user.component';
+import {BaseComponent} from '../base/base.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface DeckCard {
   id: number;
@@ -47,7 +51,7 @@ export interface Probability {
     ]),
   ],
 })
-export class DeckComponent implements OnInit {
+export class DeckComponent extends BaseComponent implements OnInit {
 
   deck: Deck;
 
@@ -172,7 +176,8 @@ export class DeckComponent implements OnInit {
   exportList: string;
   exportListLines: number;
 
-  constructor(private activatedRoute: ActivatedRoute, private deckService: DeckService) {
+  constructor(protected router: Router, private activatedRoute: ActivatedRoute, private deckService: DeckService, public dialog: MatDialog, private snackBar: MatSnackBar, public loginService: LoginService) {
+    super(router);
     const id = this.activatedRoute.snapshot.params.id;
     this.loadingContent = true;
     this.deckService.getDeck(id).subscribe(deck => {
@@ -461,4 +466,39 @@ export class DeckComponent implements OnInit {
   separateSections() {
     this.exportList += '\n';
   }
+
+  editDeck() {
+    this.router.navigate(['/deck-editor'], {queryParams: {id: this.deck.id}});
+  }
+
+  openDeleteDeckDialog() {
+    const dialogRef = this.dialog.open(DeleteEntityDialog, {
+      width: '50%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        this.deckService.deleteDeck(this.deck.id).subscribe(() => {
+          this.goToMyDecks();
+          this.snackBar.open('The deck was deleted successfully', 'OK', {duration: 3000});
+        }, error => {
+          this.snackBar.open('There was an error deleting the deck. Please try again later', 'OK', {duration: 3000});
+          console.error(error);
+        });
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'delete-deck-dialog',
+  templateUrl: 'delete-deck-dialog.html',
+})
+// tslint:disable-next-line:component-class-suffix
+export class DeleteDeckDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DeleteDeckDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
 }

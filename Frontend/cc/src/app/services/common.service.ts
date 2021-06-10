@@ -81,6 +81,69 @@ export class CommonService {
     }
   }
 
+  protected apiPutRequest(url: string, body?: string, headers?: HttpHeaders) {
+    console.log(environment.apiUrl + url);
+    const options = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'PUT',
+        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
+      }),
+      body: undefined
+    };
+    if (headers) {
+      headers.keys().forEach(key => {
+        options.headers = options.headers.append(key, headers.get(key));
+      });
+    }
+    if (body){
+      return this.http.put<any>(environment.apiUrl + url, body, options)
+        .pipe(
+          map(result => result),
+          catchError(err => this.handleError(err))
+        );
+    } else {
+      return this.http.put<any>(environment.apiUrl + url, options)
+        .pipe(
+          map(result => result),
+          catchError(err => this.handleError(err))
+        );
+    }
+  }
+
+  /**
+   * Common method to perform the POST request
+   * @param url the relative url of the request
+   * @param body optional body
+   * @param headers optional headers to add
+   * @protected
+   */
+  protected apiDeleteRequest(url: string, body?: string, headers?: HttpHeaders){
+
+    console.log(environment.apiUrl + url);
+    const options = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'DELETE',
+        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
+      }),
+      body: undefined
+    };
+    if (headers) {
+      headers.keys().forEach(key => {
+        options.headers = options.headers.append(key, headers.get(key));
+      });
+    }
+    if (body){
+      options.body = body;
+    }
+    return this.http.delete<any>(environment.apiUrl + url, options)
+      .pipe(
+        map(result => result),
+        catchError(err => this.handleError(err))
+      );
+  }
+
   /**
    * Common method to perform the GET request
    * @param url the relative url of the request

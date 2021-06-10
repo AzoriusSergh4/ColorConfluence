@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {CCError, CommonService} from './common.service';
+import {CommonService} from './common.service';
 import {catchError, map} from 'rxjs/operators';
 
 const USER_URL = '/user';
@@ -72,6 +72,8 @@ export class LoginService extends CommonService {
     this.apiGetRequest(USER_URL + '/logout').subscribe(response => {
       this.removeCurrentUser();
       return response;
+    }, error => {
+      console.error(error);
     });
   }
 

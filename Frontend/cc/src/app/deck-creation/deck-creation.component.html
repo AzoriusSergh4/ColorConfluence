@@ -28,7 +28,7 @@
     <div gdArea="formats">
       <mat-form-field appearance="fill" class="cc-mat-form-field-full">
         <mat-label>Formats</mat-label>
-        <mat-select id="formatInput" [(ngModel)]="deckForm.format">
+        <mat-select id="formatInput" [(ngModel)]="deckForm.format" [compareWith]="compareFormats">
           <mat-option>-</mat-option>
           <mat-option *ngFor="let format of formats" [value]="format">{{format.name}}</mat-option>
         </mat-select>

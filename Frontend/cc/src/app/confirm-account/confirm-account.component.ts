@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginService} from '../services/login.service';
+
 @Component({
   selector: 'cc-confirm-account',
   templateUrl: './confirm-account.component.html',

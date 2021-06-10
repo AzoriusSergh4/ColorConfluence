@@ -2,10 +2,10 @@ package com.cc.web.deck;
 
 import com.cc.security.user.User;
 import com.cc.web.card.CardRepository;
-import com.cc.web.entity.CardCC;
-import com.cc.web.entity.CardLegality;
-import com.cc.web.entity.Deck;
-import com.cc.web.entity.DeckCard;
+import com.cc.web.entity.*;
+import com.cc.web.entity.payloads.DeckForm;
+import com.cc.web.entity.payloads.FolderForm;
+import com.cc.web.entity.projection.DeckFolderProjection;
 import com.cc.web.entity.projection.DeckProjection;
 import com.cc.web.specifications.DeckSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,13 @@ public class DeckService {
 
     private final CardRepository cardRepository;
 
+    private final DeckFolderRepository deckFolderRepository;
+
     @Autowired
-    public DeckService(DeckRepository deckRepository, CardRepository cardRepository) {
+    public DeckService(DeckRepository deckRepository, CardRepository cardRepository, DeckFolderRepository deckFolderRepository) {
         this.deckRepository = deckRepository;
         this.cardRepository = cardRepository;
+        this.deckFolderRepository = deckFolderRepository;
     }
 
     /**
@@ -75,10 +78,68 @@ public class DeckService {
      * @param userId the user id
      * @return the lsit of decks
      */
-    public List<Deck> findUserDecks(long userId) {
-        return deckRepository.findByUser_Id(userId);
+    public DeckFolderProjection findUserDecks(long userId) {
+        Optional<DeckFolderProjection> opt = deckFolderRepository.findByRootIsTrueAndUser_Id(userId);
+        return opt.orElse(null);
     }
 
+    /**
+     * Retrieve the folder identified by the given id
+     *
+     * @param folderId the id of the folder
+     * @return the folder
+     */
+    public DeckFolder getFolder(long folderId) {
+        Optional<DeckFolder> opt = deckFolderRepository.findById(folderId);
+        return opt.orElse(null);
+    }
+
+    /**
+     * Stores the new folder
+     *
+     * @param form   the info of the folder
+     * @param parent the parent folder
+     * @return the parent folder with the updated data
+     */
+    public DeckFolder saveFolder(FolderForm form, DeckFolder parent) {
+        var folder = new DeckFolder();
+        folder.setUser(parent.getUser());
+        folder.setName(form.getName());
+        folder.setRoot(false);
+        folder.setParent(parent);
+        return deckFolderRepository.save(folder);
+    }
+
+    /**
+     * Deletes the given folder
+     *
+     * @param folder the folder to delete
+     */
+    public void deleteFolder(DeckFolder folder) {
+        this.deckFolderRepository.delete(folder);
+    }
+
+    /**
+     * Moves a folder from a folder to another
+     *
+     * @param folder the folder to move
+     * @param to     the destination folder
+     */
+    public void moveFolder(DeckFolder folder, DeckFolder to) {
+        folder.setParent(to);
+        this.deckFolderRepository.save(folder);
+    }
+
+    /**
+     * Moves a deck from a folder to another
+     *
+     * @param deck the deck to move
+     * @param to   the destination folder
+     */
+    public void moveDeck(Deck deck, DeckFolder to) {
+        deck.setFolder(to);
+        this.deckRepository.save(deck);
+    }
 
     /**
      * Stores the deck in the database
@@ -89,9 +150,10 @@ public class DeckService {
      */
     public Deck saveDeck(User user, DeckForm deckForm) throws IllegalArgumentException {
         Deck deck;
+        //Check if new or existing deck
         if (deckForm.getId() > 0) {
             Optional<Deck> opt = deckRepository.findById(deckForm.getId());
-            if (opt.isPresent() && opt.get().getUser().equals(user)) {
+            if (opt.isPresent() && opt.get().getUser().getEmail().equals(user.getEmail())) {
                 deck = opt.get();
             } else {
                 throw new IllegalArgumentException("Deck with wrong id or wrong user");
@@ -100,11 +162,23 @@ public class DeckService {
             deck = new Deck();
         }
 
+        //Basic data
         deck.setName(deckForm.getName());
         deck.setComments(deckForm.getComments());
         deck.setFormat(deckForm.getFormat());
         deck.setColors("");
         deck.setUser(user);
+
+        //Set Folder
+        if (deck.getFolder() == null) {
+            if (deckForm.getFolderId() > 0) {
+                deck.setFolder(deckFolderRepository.findById(deckForm.getFolderId()).get());
+            } else {
+                var root = deckFolderRepository.getByRootIsTrueAndUser_Id(user.getId());
+                deck.setFolder(root);
+            }
+        }
+
 
         //card additions
         List<DeckCard> commanders = new ArrayList<>();

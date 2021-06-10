@@ -2,9 +2,9 @@ package com.cc.test.backend;
 
 import com.cc.security.user.User;
 import com.cc.security.user.UserRepository;
-import com.cc.web.deck.DeckForm;
 import com.cc.web.deck.DeckService;
 import com.cc.web.entity.Deck;
+import com.cc.web.entity.payloads.DeckForm;
 import com.google.gson.Gson;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;

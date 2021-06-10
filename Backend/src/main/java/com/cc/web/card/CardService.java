@@ -16,6 +16,8 @@ import java.util.Optional;
 @Service
 public class CardService {
 
+    private final String LANG_ENGLISH = "English";
+
     @Autowired
     private CardTranslationRepository translationRepository;
 
@@ -28,14 +30,14 @@ public class CardService {
     public Page<CardTranslationProjection> getBasicCardsByTranslationName(String name, int pageSize) {
         Specification<CardTranslation> s = Specification
                 .where(name == null ? null : CardSpecifications.nameContains(name))
-                .and(CardSpecifications.langEquals("English"));
+                .and(CardSpecifications.langEquals(LANG_ENGLISH));
         return translationRepository.findAll(s, CardTranslationProjection.class, PageRequest.of(0, pageSize));
     }
 
     public Page<CardTranslation> getCardsByTranslationName(String name, int page, int pageSize) {
         Specification<CardTranslation> s = Specification
                 .where(name == null ? null : CardSpecifications.nameContains(name))
-                .and(CardSpecifications.langEquals("English"));
+                .and(CardSpecifications.langEquals(LANG_ENGLISH));
         return translationRepository.findAll(s, PageRequest.of(page, pageSize));
     }
 
@@ -54,7 +56,7 @@ public class CardService {
                 .where(criteria.get("name") == null ? null : CardSpecifications.nameContains(criteria.get("name")))
                 .and(criteria.get("text") == null ? null : CardSpecifications.descriptionContains(criteria.get("text")))
                 .and(criteria.get("lore") == null ? null : CardSpecifications.loreContains(criteria.get("lore")))
-                .and(criteria.get("lang") == null ? CardSpecifications.langEquals("English") : CardSpecifications.langEquals(criteria.get("lang")))
+                .and(criteria.get("lang") == null ? CardSpecifications.langEquals(LANG_ENGLISH) : CardSpecifications.langEquals(criteria.get("lang")))
                 .and(criteria.get("type") == null ? null : CardSpecifications.typeContains(criteria.get("type")))
                 .and(criteria.get("colors") == null ? null : CardSpecifications.colorContains(criteria.get("colors")))
                 .and((criteria.get("manaCost") == null ? null : CardSpecifications.manaCostContains(criteria.get("manaCost"))))

@@ -1,8 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {RouterModule} from '@angular/router';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MainMenuComponent} from './main-menu/main-menu.component';
@@ -31,6 +29,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTreeModule} from '@angular/material/tree';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -38,40 +37,41 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {CovalentLayoutModule} from '@covalent/core/layout';
 import {CovalentStepsModule} from '@covalent/core/steps';
-import { CovalentPagingModule } from '@covalent/core/paging';
-import { CovalentBarEchartsModule } from '@covalent/echarts/bar';
-import { CovalentPieEchartsModule } from '@covalent/echarts/pie';
-import { CovalentToolboxEchartsModule } from '@covalent/echarts/toolbox';
-import { CovalentTooltipEchartsModule } from '@covalent/echarts/tooltip';
-import { CovalentDataTableModule } from '@covalent/core/data-table';
+import {CovalentPagingModule} from '@covalent/core/paging';
+import {CovalentBarEchartsModule} from '@covalent/echarts/bar';
+import {CovalentPieEchartsModule} from '@covalent/echarts/pie';
+import {CovalentToolboxEchartsModule} from '@covalent/echarts/toolbox';
+import {CovalentTooltipEchartsModule} from '@covalent/echarts/tooltip';
+import {CovalentDataTableModule} from '@covalent/core/data-table';
 /* any other core modules */
 import {CovalentHighlightModule} from '@covalent/highlight';
 import {CovalentMarkdownModule} from '@covalent/markdown';
 import {CovalentDynamicFormsModule} from '@covalent/dynamic-forms';
 import {CovalentBaseEchartsModule} from '@covalent/echarts/base';
-import { CovalentUserProfileModule } from '@covalent/core/user-profile';
+import {CovalentUserProfileModule} from '@covalent/core/user-profile';
 import {CardService} from './services/card.service';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { CardInformationComponent } from './card-information/card-information.component';
+import {CardInformationComponent} from './card-information/card-information.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ConfirmAccountComponent } from './confirm-account/confirm-account.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
+import {ConfirmAccountComponent} from './confirm-account/confirm-account.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BasicAuthInterceptor} from './services/auth/auth.interceptor';
 import {LoginService} from './services/login.service';
-import { ProfileComponent } from './profile/profile.component';
+import {ProfileComponent} from './profile/profile.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { BaseComponent } from './base/base.component';
-import { RecoverPasswordComponent } from './recover-password/recover-password.component';
-import { RecoverPasswordFormComponent } from './recover-password-form/recover-password-form.component';
+import {BaseComponent} from './base/base.component';
+import {RecoverPasswordComponent} from './recover-password/recover-password.component';
+import {RecoverPasswordFormComponent} from './recover-password-form/recover-password-form.component';
 import {DeckCreationComponent, SaveDeckDialog} from './deck-creation/deck-creation.component';
-import { DeckComponent } from './deck/deck.component';
+import {DeckComponent, DeleteDeckDialog} from './deck/deck.component';
 import {DeckService} from './services/deck.service';
-import { DeckListComponent } from './deck-list/deck-list.component';
+import {DeckListComponent} from './deck-list/deck-list.component';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import {DeckUserComponent, DeleteEntityDialog, NewEntityDialog} from './deck-user/deck-user.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +90,11 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     DeckCreationComponent,
     DeckComponent,
     SaveDeckDialog,
-    DeckListComponent
+    NewEntityDialog,
+    DeleteEntityDialog,
+    DeleteDeckDialog,
+    DeckListComponent,
+    DeckUserComponent
   ],
     imports: [
         BrowserModule,
@@ -138,7 +142,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
         CovalentPagingModule,
         MatTabsModule,
         MatProgressSpinnerModule,
-        ClipboardModule
+        ClipboardModule,
+        MatTreeModule
     ],
   providers: [
     CardService,

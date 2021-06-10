@@ -2,7 +2,17 @@
   <div>
     <h1>{{deck?.name}}<span *ngIf="deck?.format"> - {{deck.format.name}}</span></h1>
   </div>
-  <mat-tab-group mat-align-tabs="center" dynamicHeight >
+  <div fxLayout="row wrap" fxLayoutGap="16px">
+    <button mat-raised-button color="primary" *ngIf="loginService.isLogged && loginService.user.id === deck?.user.id" (click)="editDeck()">
+      <mat-icon color="white" style="margin-right: 8px">edit</mat-icon>
+      <span>Edit Deck</span>
+    </button>
+    <button mat-raised-button color="primary" *ngIf="loginService.isLogged && loginService.user.id === deck?.user.id" (click)="openDeleteDeckDialog()">
+      <mat-icon color="white">delete</mat-icon>
+      <span>Delete Deck</span>
+    </button>
+  </div>
+  <mat-tab-group mat-align-tabs="center" dynamicHeight>
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="cc-tab-icon">format_list_bulleted</mat-icon>
@@ -107,7 +117,7 @@
                   <div class="cc-deck-table-element-detail"
                        [@detailExpand]="deckCard == expandedElement ? 'expanded' : 'collapsed'">
                     <div>
-                      <img width="223" height="310" src="{{deckCard.card.cardTranslation[0].cardSet[0].url}}"
+                      <img width="223" height="310" src="{{deckCard.card.cardTranslation[0]?.cardSet[0]?.url}}"
                            alt="{{deckCard.card.name}} Image card">
                     </div>
                     <div class="cc-deck-table-element-detail-description">

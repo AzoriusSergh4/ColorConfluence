@@ -1,6 +1,7 @@
 package com.cc.web.entity;
 
 import com.cc.security.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -31,6 +32,10 @@ public class Deck {
 
     @OneToOne
     private Format format;
+
+    @JsonIgnore
+    @ManyToOne
+    private DeckFolder folder;
 
     @ManyToOne
     private User user;
@@ -112,5 +117,13 @@ public class Deck {
 
     public void setColors(String colors) {
         this.colors = colors;
+    }
+
+    public DeckFolder getFolder() {
+        return folder;
+    }
+
+    public void setFolder(DeckFolder folder) {
+        this.folder = folder;
     }
 }
