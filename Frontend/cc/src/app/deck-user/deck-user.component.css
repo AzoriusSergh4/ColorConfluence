@@ -9,6 +9,17 @@
   list-style-type: none;
 }
 
+.cc-cost-segment {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cc-user-decks-mat-icon {
+  margin-right: 2px;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
 /*
  * This padding sets alignment of the nested nodes.
  */

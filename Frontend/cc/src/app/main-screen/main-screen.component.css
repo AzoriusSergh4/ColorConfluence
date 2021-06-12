@@ -60,3 +60,7 @@ a {
   background: #00838f;
   border-radius: 10px;
 }
+
+mat-list-item:hover {
+  background-color: #f0f0f0;
+}

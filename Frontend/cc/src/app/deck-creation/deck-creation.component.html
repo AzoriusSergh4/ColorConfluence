@@ -81,7 +81,7 @@
                 </mat-icon>
               </mat-panel-title>
               <mat-panel-description class="cc-deck-row-line">
-                {{card.card.cardType}} — {{card.card.manaCost}}
+                <span class="cc-cost-segment">{{card.card.cardType}}</span> <span *ngIf="card.card.manaCost" class="cc-cost-segment">— <mat-icon class="cc-deck-creation-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="cc-card-center">
@@ -181,7 +181,7 @@
                   </mat-icon>
                 </mat-panel-title>
                 <mat-panel-description class="cc-deck-row-line">
-                  {{card.card.cardType}} — {{card.card.manaCost}}
+                  <span class="cc-cost-segment">{{card.card.cardType}}</span> <span *ngIf="card.card.manaCost" class="cc-cost-segment">— <mat-icon class="cc-deck-creation-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="cc-card-center">
@@ -225,7 +225,7 @@
                     </mat-icon>
                   </mat-panel-title>
                   <mat-panel-description class="cc-deck-row-line">
-                    {{card.card.cardType}} — {{card.card.manaCost}}
+                    <span class="cc-cost-segment">{{card.card.cardType}}</span> <span *ngIf="card.card.manaCost" class="cc-cost-segment">— <mat-icon class="cc-deck-creation-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
                   </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="cc-card-center">

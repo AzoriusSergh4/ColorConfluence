@@ -10,6 +10,11 @@ a:hover {
   color: #69000c;
 }
 
+.cc-cost-segment {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 /* ColorConfluence Cards */
 .cc-card{
     float: left;

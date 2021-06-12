@@ -9,6 +9,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {DeleteEntityDialog} from '../deck-user/deck-user.component';
 import {BaseComponent} from '../base/base.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {UtilsService} from '../services/utils.service';
 
 export interface DeckCard {
   id: number;
@@ -176,7 +177,7 @@ export class DeckComponent extends BaseComponent implements OnInit {
   exportList: string;
   exportListLines: number;
 
-  constructor(protected router: Router, private activatedRoute: ActivatedRoute, private deckService: DeckService, public dialog: MatDialog, private snackBar: MatSnackBar, public loginService: LoginService) {
+  constructor(protected router: Router, private activatedRoute: ActivatedRoute, private deckService: DeckService, public dialog: MatDialog, private snackBar: MatSnackBar, public loginService: LoginService, public utilsService: UtilsService) {
     super(router);
     const id = this.activatedRoute.snapshot.params.id;
     this.loadingContent = true;

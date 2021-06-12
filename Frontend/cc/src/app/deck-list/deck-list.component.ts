@@ -3,6 +3,7 @@ import {DeckService} from '../services/deck.service';
 import {Deck} from '../deck/deck.component';
 import {Format} from '../deck-creation/deck-creation.component';
 import {HttpParams} from '@angular/common/http';
+import {UtilsService} from '../services/utils.service';
 
 export interface ColorCheckBox {
   color: string;
@@ -35,7 +36,7 @@ export class DeckListComponent implements OnInit {
   pageSize = 10;
   totalCardsFound: number;
 
-  constructor(private deckService: DeckService) {
+  constructor(private deckService: DeckService, public utilsService: UtilsService) {
     this.currentParams = new HttpParams();
     this.currentParams = this.currentParams.append('page', '0');
     this.deckService.getAllDecksWithCriteria(this.currentParams).subscribe(response => {

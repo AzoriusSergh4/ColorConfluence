@@ -7,21 +7,21 @@
       <mat-card class="cc-card cc-card-full cc-card-filter">
         <mat-card-content class="cc-card-content">
           <div class="cc-card-filter-content">
-            <h1>ColorConfluence: donde las cartas de Magic The Gathering confluyen</h1>
+            <h1>ColorConfluence: Where all cards converge</h1>
           </div>
           <div class="cc-card-filter-content">
               <label>
-                <input id="card-search-input" (keyup.enter)="onCardSubmit()" class="cc-main-card-filter-input" type="text" placeholder="Busca tu carta aquí" [formControl]="cardName">
+                <input id="card-search-input" (keyup.enter)="onCardSubmit()" class="cc-main-card-filter-input" type="text" placeholder="Search your card here" [formControl]="cardName">
               </label>
           </div>
           <div class="cc-card-filter-content cc-card-filter-text">
-            <p>¿Prefieres una búsqueda más personalizada? Usa el <span class="cc-link"><a id="search-cards-link" routerLink="cards">buscador avanzado</a></span></p>
+            <p>Do you prefer a more personalized search? Use the <span class="cc-link"><a id="search-cards-link" routerLink="cards">advanced search engine</a></span></p>
           </div>
         </mat-card-content>
       </mat-card>
     </div>
 
-    <!-- Cartas más buscadas / Buscada últimamente -->
+    <!-- Most popular cards -->
     <div gdArea="card" class="main-grid-element">
       <mat-card class="cc-card cc-card-main">
         <mat-card-header class="cc-card-header">
@@ -32,7 +32,7 @@
         <mat-card-content class="cc-card-content">
           <!-- MOCKS TODO Implementar sistema de cartas más buscadas -->
           <mat-list>
-            <mat-list-item *ngFor="let card of cards; last as last" (click)="goToCard()">
+            <mat-list-item *ngFor="let card of cards; last as last" (click)="goToCard()" style="cursor: pointer">
               <h3 matLine>
                 <span>{{card.name}}</span>
                 <span style="float: right;">{{card.colors}}</span>
@@ -47,7 +47,7 @@
         </mat-card-actions>
       </mat-card>
     </div>
-    <!-- Mazos subidos últimamente -->
+    <!-- Last Decks -->
     <div gdArea="deck" class="main-grid-element">
       <mat-card class="cc-card cc-card-main">
         <mat-card-header class="cc-card-header">
@@ -56,15 +56,14 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="cc-card-content">
-          <!-- MOCKS TODO Implementar sistema de últimos mazos -->
           <mat-list>
-            <mat-list-item *ngFor="let deck of decks; last as last" (click)="goToDeck()">
+            <mat-list-item *ngFor="let deck of decks; last as last" [routerLink]="['/deck/' + deck.id]" style="cursor: pointer">
               <h3 matLine>
-                <span>{{deck.name}}</span>
-                <span style="float: right;">{{deck.colors}}</span>
+                <span>{{deck.name}} <span *ngIf="deck.format">— {{deck.format.name}}</span></span>
+                <span style="float: right;" *ngFor="let color of utilsService.getManaSymbols(deck.colors)"><mat-icon style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
               </h3>
               <h3 matLine>
-                <span>{{deck.labels.join(", ")}}</span>
+                <span style="font-style: italic">by {{deck.user.username}}</span>
               </h3>
               <mat-divider *ngIf="!last"></mat-divider>
             </mat-list-item>

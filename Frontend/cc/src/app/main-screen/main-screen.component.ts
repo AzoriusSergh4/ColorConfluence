@@ -4,17 +4,14 @@ import {tdBounceAnimation, tdPulseAnimation} from '@covalent/core/common';
 import {Router} from '@angular/router';
 import {CardService} from '../services/card.service';
 import {BaseComponent} from '../base/base.component';
+import {DeckService} from '../services/deck.service';
+import {Deck} from '../deck/deck.component';
+import {UtilsService} from '../services/utils.service';
 
 export interface Card {
   name: string;
   colors: string;
   collection: string;
-}
-
-export interface Deck {
-  name: string;
-  colors: string;
-  labels: string[];
 }
 
 @Component({
@@ -45,20 +42,16 @@ export class MainScreenComponent extends BaseComponent implements OnInit {
     { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' }
   ];
 
-  decks: Deck[] = [
-    { name: 'Rakdos aristocrats', colors: '{B}{R}', labels: ['Aggro', 'Combo', 'Sacrifice']},
-    { name: 'Azorius Control', colors: '{W}{U}', labels: ['Control']},
-    { name: 'Izzet Drakes', colors: '{U}{R}', labels: ['Midrange', 'Tribal']},
-    { name: 'Gruul Midrange', colors: '{R}{G}', labels: ['Aggro', 'Midrange']},
-    { name: 'Gruul Midrange', colors: '{R}{G}', labels: ['Aggro', 'Midrange']},
-    { name: 'Gruul Midrange', colors: '{R}{G}', labels: ['Aggro', 'Midrange']},
-    { name: 'Gruul Midrange', colors: '{R}{G}', labels: ['Aggro', 'Midrange']},
-  ];
+  decks: Deck[];
 
   cardName = new FormControl('');
 
-  constructor(protected router: Router, private cardService: CardService) {
+  constructor(protected router: Router, private cardService: CardService, private deckService: DeckService, public utilsService: UtilsService) {
     super(router);
+    this.deckService.getAllDecks(0).subscribe(response => {
+      this.decks = response.content;
+      console.log(this.decks);
+    });
   }
 
   onCardSubmit(): void {
@@ -80,7 +73,7 @@ export class MainScreenComponent extends BaseComponent implements OnInit {
 
   }
 // TODO implementar redirección al mazo
-  goToDeck(): void {
-
+  goToDeck(id: number): void {
+    this.router.navigate([''])
   }
 }

@@ -21,6 +21,7 @@ tr.cc-deck-table-detail-row {
 
 tr.cc-deck-table-element-row:not(.cc-deck-table-expanded-row):hover {
   background: whitesmoke;
+  cursor: pointer;
 }
 
 tr.cc-deck-table-element-row:not(.cc-deck-table-expanded-row):active {
@@ -31,6 +32,7 @@ tr.cc-deck-table-element-row:not(.cc-deck-table-expanded-row):active {
   overflow: hidden;
   display: flex;
 }
+
 .cc-deck-table-element-detail-description {
   white-space: pre-line;
   margin-left: 8px;

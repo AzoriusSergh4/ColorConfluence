@@ -246,7 +246,7 @@ public class DeckService {
         var defaultColors = new String[]{"W", "B", "U", "R", "G"};
         for (String color : defaultColors) {
             if (cardCC.getManaCost() != null && cardCC.getManaCost().contains(color) && !deck.getColors().contains(color)) {
-                deck.setColors(deck.getColors() + color);
+                deck.setColors(deck.getColors() + "{" + color + "}");
             }
         }
     }

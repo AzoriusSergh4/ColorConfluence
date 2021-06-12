@@ -1,6 +1,6 @@
  <mat-toolbar color="primary">
     <img src="assets/cc-logo.png" alt="ColorConfluence logo" (click)="goToMain()">
-    <div>
+    <div fxHide.lt-md>
         <h1>COLORCONFLUENCE</h1>
     </div>
 
@@ -23,7 +23,7 @@
        </button>
        <button mat-menu-item id="newDeck" *ngIf="loginService.isLogged" (click)="goToNewDeck()">
          <mat-icon>add</mat-icon>
-         <span >New Deck</span>
+         <span>New Deck</span>
        </button>
      </mat-menu>
    </div>

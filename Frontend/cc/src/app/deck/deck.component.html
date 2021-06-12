@@ -49,7 +49,7 @@
               <!-- Mana Cost Column -->
               <ng-container matColumnDef="manaCost">
                 <th mat-header-cell *matHeaderCellDef> Mana Cost</th>
-                <td mat-cell *matCellDef="let deckCard"> {{deckCard.card.manaCost}} </td>
+                <td mat-cell *matCellDef="let deckCard"> <mat-icon *ngFor="let color of utilsService.getManaSymbols(deckCard.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon> </td>
               </ng-container>
 
               <ng-container matColumnDef="expandedDetail">
@@ -109,7 +109,7 @@
               <!-- Mana Cost Column -->
               <ng-container matColumnDef="manaCost">
                 <th mat-header-cell *matHeaderCellDef> Mana Cost</th>
-                <td mat-cell *matCellDef="let deckCard"> {{deckCard.card.manaCost}} </td>
+                <td mat-cell *matCellDef="let deckCard"> <mat-icon *ngFor="let color of utilsService.getManaSymbols(deckCard.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon> </td>
               </ng-container>
 
               <ng-container matColumnDef="expandedDetail">

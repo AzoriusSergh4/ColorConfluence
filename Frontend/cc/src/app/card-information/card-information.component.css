@@ -12,6 +12,16 @@
   height: 100%;
 }
 
+.cc-cost-segment {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cc-card-info-mat-icon {
+  width: 20px;
+  height: 20px;
+}
+
 .mtgCard-info-section {
   margin-top: 10px;
   margin-bottom: 10px;

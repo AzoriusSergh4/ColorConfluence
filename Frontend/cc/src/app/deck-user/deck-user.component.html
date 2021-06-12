@@ -11,7 +11,7 @@
         <!-- There is inline padding applied to this node using styles.
           This padding value depends on the mat-icon-button width. -->
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodeToggle cdkDrag [cdkDragData]="node">
-          <a [routerLink]="['/deck/' + node.id]" class="cc-deck-link">{{node.name}}<span style="margin-left: 5px" *ngIf="node.colors">— {{node.colors}}</span></a>
+          <a [routerLink]="['/deck/' + node.id]" class="cc-deck-link"><span class="cc-cost-segment"> {{node.name}}</span><span style="margin-left: 5px" *ngIf="node.colors" class="cc-cost-segment">— <mat-icon class="cc-user-decks-mat-icon" *ngFor="let color of utilsService.getManaSymbols(node.colors)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span></a>
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon color="primary">more_vert</mat-icon>
           </button>

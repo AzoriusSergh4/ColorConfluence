@@ -4,6 +4,12 @@
   margin-left: 4%;
 }
 
+.cc-deck-creation-mat-icon {
+  vertical-align: middle;
+  width: 18px;
+  height: 18px;
+}
+
 .cc-deck-list-container {
   display: inline-block;
   vertical-align: center;

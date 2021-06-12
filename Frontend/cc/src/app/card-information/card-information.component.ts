@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CardService} from '../services/card.service';
 import {Location} from '@angular/common';
+import {UtilsService} from '../services/utils.service';
 
 @Component({
   selector: 'cc-card-information',
@@ -27,9 +28,9 @@ export class CardInformationComponent implements OnInit {
     duel: 'Not Legal',
   };
 
-  constructor(private activatedRoute: ActivatedRoute, private cardService: CardService, private location: Location) {
+  constructor(private activatedRoute: ActivatedRoute, private cardService: CardService, private location: Location, public utilsService: UtilsService) {
     const id = this.activatedRoute.snapshot.params.id;
-    this.cardService.getCardInfo(id).subscribe(card => {this.card = card; this.setupCard(); this.initializeLanguages(); this.initializeLegalities(); }, error => console.error(error));
+    this.cardService.getCardInfo(id).subscribe(card => {this.card = card; this.setupCard(); this.initializeLanguages(); this.initializeLegalities(); console.log(this.card);}, error => console.error(error));
   }
 
   ngOnInit(): void {

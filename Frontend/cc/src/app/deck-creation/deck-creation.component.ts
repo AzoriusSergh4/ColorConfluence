@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {IPageChangeEvent} from '@covalent/core/paging';
 import {LoginService} from '../services/login.service';
+import {UtilsService} from '../services/utils.service';
 
 export interface DeckCardForm {
   id: number;
@@ -57,7 +58,7 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
   deck: any[];
   sideboard: any[];
 
-  constructor(protected router: Router, private route: ActivatedRoute, private cardService: CardService, private deckService: DeckService, public dialog: MatDialog, private snackBar: MatSnackBar, public loginService: LoginService) {
+  constructor(protected router: Router, private route: ActivatedRoute, private cardService: CardService, private deckService: DeckService, public dialog: MatDialog, private snackBar: MatSnackBar, public loginService: LoginService, public utilsService: UtilsService) {
     super(router);
     if (!loginService.isLogged) {
       this.redirectToHome();
@@ -326,7 +327,7 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
         switch (sort.active) {
           case 'name': return compare(a.card.name, b.card.name, isAsc);
           case 'type': return compare(a.card.cardType, b.card.cardType, isAsc);
-          case 'manaCost': return compare(a.card.manaCost, b.card.manaCost, isAsc);
+          case 'manaCost': return compare(a.card.cmc, b.card.cmc, isAsc);
           default: return 0;
         }
       });

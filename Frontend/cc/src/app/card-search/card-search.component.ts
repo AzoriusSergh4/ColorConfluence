@@ -6,6 +6,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {HttpParams} from '@angular/common/http';
 import {PageEvent} from '@angular/material/paginator';
+import {UtilsService} from '../services/utils.service';
 
 interface Format {
   name: string;
@@ -19,7 +20,7 @@ interface Format {
 })
 export class CardSearchComponent implements OnInit{
 
-  constructor(private router: Router, private route: ActivatedRoute, private cardService: CardService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private cardService: CardService, private fb: FormBuilder, public utilsService: UtilsService) {
     this.pageIndex = 0;
     this.currentParams = new HttpParams();
   }

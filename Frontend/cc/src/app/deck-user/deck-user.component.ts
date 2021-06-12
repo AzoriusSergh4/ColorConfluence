@@ -10,6 +10,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {UtilsService} from '../services/utils.service';
 
 export interface Folder {
   id: number;
@@ -47,7 +48,7 @@ interface FlatNode {
 })
 export class DeckUserComponent extends BaseComponent implements OnInit {
 
-  constructor(protected router: Router, public loginService: LoginService, public dialog: MatDialog, private snackBar: MatSnackBar, private deckService: DeckService) {
+  constructor(protected router: Router, public loginService: LoginService, public dialog: MatDialog, private snackBar: MatSnackBar, private deckService: DeckService, public utilsService: UtilsService) {
     super(router);
     if (!loginService.isLogged) {
       this.redirectToHome();

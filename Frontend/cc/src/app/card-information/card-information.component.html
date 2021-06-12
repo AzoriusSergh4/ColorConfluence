@@ -17,7 +17,7 @@
       <mat-card class="cc-card cc-card-info">
         <mat-card-header class="cc-card-header">
           <mat-card-title>
-            {{card?.name}}
+            <span class="cc-cost-segment">{{card?.name}}</span><span class="cc-cost-segment" style="margin-left: 8px"><mat-icon class="cc-card-info-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card?.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="cc-card-content">
@@ -40,6 +40,7 @@
                 <p style="width: 50%" *ngIf="card?.card.cmc">CMC: {{card?.card.cmc}}</p>
                 <p style="width: 50%" *ngIf="card?.card.power">{{card.card.power}}/{{card.card.toughness}}</p>
               </div>
+              <mat-divider inset fxShow.lt-md></mat-divider>
             </div>
             <div gdArea="collection">
               <div id="collection-rarity" class="mtgCard-info-section">
@@ -62,7 +63,7 @@
               <mat-divider inset></mat-divider>
               <div id="collection-sets" class="mtgCard-info-section">
                 <div fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="flex-start">
-                  <button mat-raised-button class="mtgCard-info-set-button" color="primary" *ngFor="let set of card?.cardSet" [disabled]="set.cardSet === selectedSet.cardSet && set.cardNumber === selectedSet.cardNumber" (click)="changeSet(set.cardSet, set.cardNumber)">{{set.cardSet}}</button>
+                  <button mat-raised-button class="mtgCard-info-set-button" color="primary" *ngFor="let set of card?.cardSet" [disabled]="set.cardSet === selectedSet.cardSet && set.cardNumber === selectedSet.cardNumber" (click)="changeSet(set.cardSet, set.cardNumber)">{{set.set}}</button>
                 </div>
               </div>
             </div>

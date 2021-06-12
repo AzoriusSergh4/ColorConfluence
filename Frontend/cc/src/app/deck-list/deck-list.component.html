@@ -12,12 +12,12 @@
       </div>
       <div fxFlex="0 1 calc(33% - 32px)">
         <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between center" style="height: 100%">
-          <mat-checkbox [(ngModel)]="colors[0].checked"  class="cc-deck-list-checkbox" color="primary" value="W" ><img class="cc-color-icon" src="assets/icons/white.png" alt="White"></mat-checkbox>
-          <mat-checkbox [(ngModel)]="colors[1].checked" class="cc-deck-list-checkbox" color="primary" value="U" ><img class="cc-color-icon" src="assets/icons/blue.png" alt="Blue"></mat-checkbox>
-          <mat-checkbox [(ngModel)]="colors[2].checked" class="cc-deck-list-checkbox" color="primary" value="B" ><img class="cc-color-icon" src="assets/icons/black.jpg" alt="Black"></mat-checkbox>
-          <mat-checkbox [(ngModel)]="colors[3].checked" class="cc-deck-list-checkbox" color="primary" value="R" ><img class="cc-color-icon" src="assets/icons/red.png" alt="Red"></mat-checkbox>
-          <mat-checkbox [(ngModel)]="colors[4].checked" class="cc-deck-list-checkbox" color="primary" value="G" ><img class="cc-color-icon" src="assets/icons/green.png" alt="Green"></mat-checkbox>
-          <mat-checkbox [(ngModel)]="colors[5].checked" class="cc-deck-list-checkbox" color="primary" value="C" ><img class="cc-color-icon" src="assets/icons/colorless.png" alt="Colorless"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[0].checked"  class="cc-deck-list-checkbox" color="primary" value="W" ><mat-icon svgIcon="{W}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="White Mana icon"></mat-icon></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[1].checked" class="cc-deck-list-checkbox" color="primary" value="U" ><mat-icon svgIcon="{U}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="Blue Mana icon"></mat-icon></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[2].checked" class="cc-deck-list-checkbox" color="primary" value="B" ><mat-icon svgIcon="{B}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="Black Mana icon"></mat-icon></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[3].checked" class="cc-deck-list-checkbox" color="primary" value="R" ><mat-icon svgIcon="{R}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="Red Mana icon"></mat-icon></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[4].checked" class="cc-deck-list-checkbox" color="primary" value="G" ><mat-icon svgIcon="{G}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="Green Mana icon"></mat-icon></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[5].checked" class="cc-deck-list-checkbox" color="primary" value="C" ><mat-icon svgIcon="{C}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="Colorless Mana icon"></mat-icon></mat-checkbox>
         </div>
       </div>
       <div fxFlex="0 1 calc(33% - 32px)">
@@ -44,7 +44,7 @@
         <!-- Colors Column -->
         <ng-container matColumnDef="colors">
           <th mat-header-cell *matHeaderCellDef> Colors </th>
-          <td mat-cell *matCellDef="let element"> {{element.colors}} </td>
+          <td mat-cell *matCellDef="let element"> <mat-icon *ngFor="let color of utilsService.getManaSymbols(element.colors)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></td>
         </ng-container>
 
         <!-- Format Column -->

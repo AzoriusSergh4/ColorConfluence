@@ -1,6 +1,6 @@
 <div class="grid-container mtgCard-results">
   <div class="mtgCard-results-filter">
-      <mat-expansion-panel>
+      <mat-expansion-panel #matExpansionPanel>
         <mat-expansion-panel-header>
           <mat-panel-title>
             Advance criteria
@@ -49,13 +49,13 @@
           <mat-divider class="cc-mat-divider"></mat-divider>
           <div>
             <h5>Colors</h5>
-            <section fxLayout="row wrap" fxLayoutGap="5px" class="cc-mat-form-field">
-              <mat-checkbox color="primary" value="W" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/white.png" alt="White Color">White</mat-checkbox>
-              <mat-checkbox color="primary" value="U" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/blue.png" alt="Blue Color">Blue</mat-checkbox>
-              <mat-checkbox color="primary" value="B" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/black.jpg" alt="Black Color">Black</mat-checkbox>
-              <mat-checkbox color="primary" value="R" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/red.png" alt="Red Color">Red</mat-checkbox>
-              <mat-checkbox color="primary" value="G" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/green.png" alt="Green Color">Green</mat-checkbox>
-              <mat-checkbox color="primary" value="C" (change)="colorChange($event)"><img class="cc-color-icon" src="assets/icons/colorless.png" alt="Colorless">Colorless</mat-checkbox>
+            <section fxLayout="row wrap" fxLayoutGap="16px" class="cc-mat-form-field">
+              <mat-checkbox color="primary" value="W" (change)="colorChange($event)"><mat-icon svgIcon="{W}" class="cc-card-mat-icon" aria-hidden="false" aria-label="White Mana icon"></mat-icon>White</mat-checkbox>
+              <mat-checkbox color="primary" value="U" (change)="colorChange($event)"><mat-icon svgIcon="{U}" class="cc-card-mat-icon" aria-hidden="false" aria-label="Blue Mana icon"></mat-icon>Blue</mat-checkbox>
+              <mat-checkbox color="primary" value="B" (change)="colorChange($event)"><mat-icon svgIcon="{B}" class="cc-card-mat-icon" aria-hidden="false" aria-label="Black Mana icon"></mat-icon>Black</mat-checkbox>
+              <mat-checkbox color="primary" value="R" (change)="colorChange($event)"><mat-icon svgIcon="{R}" class="cc-card-mat-icon" aria-hidden="false" aria-label="Red Mana icon"></mat-icon>Red</mat-checkbox>
+              <mat-checkbox color="primary" value="G" (change)="colorChange($event)"><mat-icon svgIcon="{G}" class="cc-card-mat-icon" aria-hidden="false" aria-label="Green Mana icon"></mat-icon>Green</mat-checkbox>
+              <mat-checkbox color="primary" value="C" (change)="colorChange($event)"><mat-icon svgIcon="{C}" class="cc-card-mat-icon" aria-hidden="false" aria-label="Colorless Mana icon"></mat-icon>Colorless</mat-checkbox>
             </section>
             <section>
               <mat-form-field class="cc-mat-form-field-half cc-mat-form-field" appearance="outline">
@@ -182,7 +182,7 @@
           </div>
         </div>
         <div>
-          <button mat-raised-button color="primary" type="submit">Search</button>
+          <button mat-raised-button color="primary" type="submit" (click)="matExpansionPanel.close()">Search</button>
         </div>
         </form>
       </mat-expansion-panel>
