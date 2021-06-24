@@ -1,13 +1,17 @@
 <h2 mat-dialog-title>New Folder</h2>
 <mat-dialog-content>
-<div>
-  <mat-form-field appearance="outline" color="primary" class="cc-mat-form-field-full">
-    <mat-label>Folder Name</mat-label>
-    <input #name matInput [(ngModel)]="folderName" placeholder="ex: Folder One">
-  </mat-form-field>
-</div>
+  <div>
+    <mat-form-field appearance="outline" color="primary" class="cc-mat-form-field-full">
+      <mat-label>Folder Name</mat-label>
+      <label>
+        <input #name matInput [(ngModel)]="folderName" placeholder="ex: Folder One">
+      </label>
+    </mat-form-field>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
-  <button [disabled]="name.value.length === 0" id="saveDialog" mat-raised-button color="primary" [mat-dialog-close]="true" (click)="closeDialog()">Save</button>
+  <button [disabled]="name.value.length === 0" id="saveDialog" mat-raised-button color="primary"
+          [mat-dialog-close]="true" (click)="closeDialog()">Save
+  </button>
 </mat-dialog-actions>

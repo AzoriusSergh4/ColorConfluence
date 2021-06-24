@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {LoginService} from '../services/login.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'cc-register',
@@ -31,21 +32,21 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  public SamePasswordValidator(): ValidatorFn{
-    return (control: FormControl): {[key: string]: boolean} => {
+  public SamePasswordValidator(): ValidatorFn {
+    return (control: FormControl): { [key: string]: boolean } => {
       const notSame = control.get('password') !== control.get('passwordConfirm');
       return notSame ? {
         notSame: true
-      } : null ;
+      } : null;
     };
   }
 
   register() {
-    if (this.signUpForm.valid){
-      this.loginService.register(this.signUpForm.get('username').value, this.signUpForm.get('email').value, this.signUpForm.get('password').value).subscribe(response =>
+    if (this.signUpForm.valid) {
+      this.loginService.register(this.signUpForm.get('username').value, this.signUpForm.get('email').value, this.signUpForm.get('password').value).subscribe(() =>
         this.emailSent = true, error => {
         console.log(error);
-        if (error.err.status === 409){
+        if (error.err.status === 409) {
           this.conflict = true;
         }
       });

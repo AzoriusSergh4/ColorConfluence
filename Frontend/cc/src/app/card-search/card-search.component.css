@@ -3,11 +3,11 @@
   margin-right: 5%;
 }
 
-.mtgCard-result-item{
+.mtgCard-result-item {
   margin: 16px;
 }
 
-.mtgCard-results-text{
+.mtgCard-results-text {
   margin-top: 15px;
   font-size: large;
 }
@@ -30,7 +30,7 @@
   text-align: center;
 }
 
-.cc-mat-form-field{
+.cc-mat-form-field {
   margin-bottom: 10px;
 }
 
@@ -42,10 +42,10 @@
   padding-bottom: 4px;
 }
 
-.cc-mat-divider{
+.cc-mat-divider {
   margin-bottom: 10px;
 }
 
 .cc-mat-tooltip {
-  background-color:black !important;
+  background-color: black !important;
 }

@@ -1,5 +1,6 @@
 package com.cc.web.card;
 
+import com.cc.web.entity.CardPopularity;
 import com.cc.web.entity.CardTranslation;
 import com.cc.web.entity.projection.CardTranslationProjection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,8 @@ public class CardController {
         return cardService.getCardById(id);
     }
 
-
+    @GetMapping("/popularity")
+    public Page<CardPopularity> getCardPopularities(@RequestParam int page){
+        return cardService.getCardPopularities(page);
+    }
 }

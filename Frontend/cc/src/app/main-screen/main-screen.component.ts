@@ -8,12 +8,6 @@ import {DeckService} from '../services/deck.service';
 import {Deck} from '../deck/deck.component';
 import {UtilsService} from '../services/utils.service';
 
-export interface Card {
-  name: string;
-  colors: string;
-  collection: string;
-}
-
 @Component({
   selector: 'cc-main-screen',
   templateUrl: './main-screen.component.html',
@@ -27,20 +21,10 @@ export class MainScreenComponent extends BaseComponent implements OnInit {
   pulseStateCards = false;
   pulseStateDeck = false;
 
-  cards: Card[] = [
-    { name: 'Azorius Guildgate', colors: '', collection: 'Ravnica Alleigance' },
-    { name: 'Cauldron Familiar', colors: '{B}', collection: 'Throne of Eldraine' },
-    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' },
-    { name: 'Kroxa, Titan of Death\'s Hunger', colors: '{B}{R}', collection: 'Theros Beyond Death' }
-  ];
+  loadingCards: boolean;
+  loadingDecks: boolean;
+
+  cards: any[];
 
   decks: Deck[];
 
@@ -48,16 +32,28 @@ export class MainScreenComponent extends BaseComponent implements OnInit {
 
   constructor(protected router: Router, private cardService: CardService, private deckService: DeckService, public utilsService: UtilsService) {
     super(router);
+    this.loadingCards = true;
+    this.loadingDecks = true;
     this.deckService.getAllDecks(0).subscribe(response => {
       this.decks = response.content;
-      console.log(this.decks);
+      this.loadingDecks = false;
+    }, error => {
+      console.error(error);
+      this.loadingDecks = false;
+    });
+    this.cardService.getCardPopularity(0).subscribe(response => {
+      this.cards = response.content;
+      this.loadingCards = false;
+    }, error => {
+      console.log(error);
+      this.loadingCards = false;
     });
   }
 
   onCardSubmit(): void {
-    if (this.cardName.value !== ''){
+    if (this.cardName.value !== '') {
       this.cardService.countCardsByName(this.cardName.value).subscribe(cards => {
-        if (cards === 1){
+        if (cards === 1) {
           this.cardService.getCardsByName(this.cardName.value).subscribe(card => this.router.navigate(['/card/' + card.content[0].id]), error => console.error(error));
         } else {
           this.router.navigate(['/cards'], {queryParams: {name: this.cardName.value}});
@@ -69,11 +65,4 @@ export class MainScreenComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goToCard(): void {
-
-  }
-// TODO implementar redirección al mazo
-  goToDeck(id: number): void {
-    this.router.navigate([''])
-  }
 }

@@ -33,7 +33,7 @@ public class DeckInfoFrontendSteps {
 
     @And("I go to the Deck List Page")
     public void iGoToTheDeckListPage() {
-        this.deckListPage.goToDeckListCreation();
+        this.deckListPage.goToDeckList();
     }
 
     @And("I go into a deck")

@@ -1,6 +1,8 @@
 <div class="grid-container grid-deck">
 
-  <div *ngIf="loginService.isLogged" gdAreas="save save | name formats | comments comments | searchBar deckInfo | searchCards deck"
+  <div *ngIf="loginService.isLogged"
+       gdAreas="save save | name formats | comments comments | searchBar deckInfo | searchCards deck"
+       gdAreas.lt-md="save save | name name | formats formats | comments comments | searchBar searchBar | searchCards searchCards | deckInfo deckInfo | deck deck"
        gdColumns="49.5% 49.5%"
        gdGap="1%"
        gdRows="auto auto auto auto auto">
@@ -12,17 +14,16 @@
         [(ngModel)]="deckForm.draft">
         Draft deck
       </mat-slide-toggle>
-      <button id="saveButton" [disabled]="deckForm.name.length < 3 || deck.length === 0" mat-raised-button color="primary"
+      <button id="saveButton" [disabled]="deckForm.name.length < 3 || deck.length === 0" mat-raised-button
+              color="primary"
               (click)="openSaveDialog()">Save
       </button>
     </div>
     <div gdArea="name">
       <mat-form-field appearance="fill" class="cc-mat-form-field-full">
         <mat-label>Deck Name</mat-label>
-        <input id="nameInput" matInput placeholder="Ex: Tron" [(ngModel)]="this.deckForm.name" required>
-        <mat-icon matSuffix matTooltip="The name must have at least 3 characters" matTooltipPosition="above"
-                  aria-hidden="false" aria-label="Help Icon">info
-        </mat-icon>
+        <label for="nameInput"></label><input id="nameInput" matInput placeholder="Ex: Tron" [(ngModel)]="this.deckForm.name" required>
+        <mat-icon matSuffix matTooltip="The name must have at least 3 characters" matTooltipPosition="above">info</mat-icon>
       </mat-form-field>
     </div>
     <div gdArea="formats">
@@ -37,20 +38,23 @@
     <div gdArea="comments">
       <mat-form-field appearance="fill" class="cc-mat-form-field-full">
         <mat-label>Leave a comment (Optional)</mat-label>
-        <textarea id="commentsInput" matInput placeholder="Ex. Strategies, any card alternative, etc"
-                  [(ngModel)]="deckForm.comments"></textarea>
+        <label for="commentsInput"></label><textarea id="commentsInput" matInput placeholder="Ex. Strategies, any card alternative, etc"
+                                                     [(ngModel)]="deckForm.comments"></textarea>
       </mat-form-field>
     </div>
     <div gdArea="searchBar" style="display: flex">
       <mat-form-field appearance="fill" class="cc-mat-form-field-full" style="padding-right: 16px">
         <mat-label>Search your cards</mat-label>
-        <input id="searchInput" matInput placeholder="Ex: Path" (input)="autofillCard($event.target.value); pagingBar.navigateToPage(1)">
+        <label for="searchInput"></label><input id="searchInput" matInput placeholder="Ex: Path"
+                                                (input)="autofillCard($event.target.value); pagingBar.navigateToPage(1)">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
       <mat-form-field appearance="fill" class="cc-deck-quantity cc-align-vertical">
         <mat-label>Add</mat-label>
-        <input matInput type="number" [(ngModel)]="cardsToAdd" value="{{cardsToAdd}}" max="99" min="1"
-               style="text-align: center">
+        <label>
+          <input matInput type="number" [(ngModel)]="cardsToAdd" value="{{cardsToAdd}}" max="99" min="1"
+                 style="text-align: center">
+        </label>
       </mat-form-field>
     </div>
     <div gdArea="deckInfo" class="cc-align-vertical">
@@ -77,11 +81,16 @@
               <mat-panel-title class="cc-deck-row-line">
                 {{card.name}}
                 <mat-icon matTooltip="Not Legal Card" style="font-size: 18px; margin-left: 5px"
-                          *ngIf="checkLegality(card)" aria-hidden="false" aria-label="Not Legal Card">warning
+                          *ngIf="checkLegality(card)">warning
                 </mat-icon>
+                <span class="cdk-visually-hidden">Not Legal Card</span>
               </mat-panel-title>
               <mat-panel-description class="cc-deck-row-line">
-                <span class="cc-cost-segment">{{card.card.cardType}}</span> <span *ngIf="card.card.manaCost" class="cc-cost-segment">— <mat-icon class="cc-deck-creation-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
+                <span fxHide.lt-md class="cc-cost-segment">{{card.card.cardType}}</span>
+                <span *ngIf="card.card.manaCost" class="cc-cost-segment" style="margin-left: 0.5em;">
+                  <mat-icon
+                class="cc-deck-creation-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card.card.manaCost)"
+                style="vertical-align: middle" svgIcon="{{color}}"></mat-icon></span>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="cc-card-center">
@@ -122,9 +131,11 @@
                         class="cc-align-vertical" (click)="removeCard(commanders, i)">
                   <mat-icon>clear</mat-icon>
                 </button>
-                <mat-form-field color="primary" class="cc-deck-quantity cc-align-vertical">
-                  <input matInput type="number" [(ngModel)]="card.quantity" value="{{card.quantity}}" maxlength="2"
-                         max="99" min="1" style="text-align: center" (change)="checkQuantity($event)">
+                <mat-form-field color="primary" class="cc-deck-quantity cc-align-vertical" ngStyle.lt-sm="width:40px;">
+                  <label>
+                    <input matInput type="number" [(ngModel)]="card.quantity" value="{{card.quantity}}" maxlength="2"
+                           max="99" min="1" style="text-align: center" (change)="checkQuantity($event)">
+                  </label>
                 </mat-form-field>
               </div>
               <mat-expansion-panel style="width: 100%">
@@ -132,11 +143,17 @@
                   <mat-panel-title class="cc-deck-row-line">
                     {{card.name}}
                     <mat-icon matTooltip="Not Legal Card" style="font-size: 18px; margin-left: 5px"
-                              *ngIf="checkLegality(card)" aria-hidden="false" aria-label="Not Legal Card">warning
+                              *ngIf="checkLegality(card)">warning
                     </mat-icon>
+                    <span class="cdk-visually-hidden">Not Legal Card</span>
                   </mat-panel-title>
                   <mat-panel-description class="cc-deck-row-line">
-                    {{card.card.cardType}} — {{card.card.manaCost}}
+                    <span fxHide.lt-md class="cc-cost-segment">{{card.card.cardType}}</span>
+                    <span *ngIf="card.card.manaCost" class="cc-cost-segment" style="margin-left: 0.5em;">
+                      <span fxHide.lt-md>— </span>
+                  <mat-icon
+                    class="cc-deck-creation-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card.card.manaCost)"
+                    style="vertical-align: middle" svgIcon="{{color}}"></mat-icon></span>
                   </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="cc-card-center">
@@ -167,9 +184,11 @@
                       class="cc-align-vertical" (click)="removeCard(deck, i)">
                 <mat-icon>clear</mat-icon>
               </button>
-              <mat-form-field color="primary" class="cc-deck-quantity cc-align-vertical">
-                <input matInput type="number" [(ngModel)]="card.quantity" value="{{card.quantity}}" maxlength="2"
-                       max="99" min="1" style="text-align: center" (change)="checkQuantity($event)">
+              <mat-form-field color="primary" class="cc-deck-quantity cc-align-vertical" ngStyle.lt-sm="width:40px;">
+                <label>
+                  <input matInput type="number" [(ngModel)]="card.quantity" value="{{card.quantity}}" maxlength="2"
+                         max="99" min="1" style="text-align: center" (change)="checkQuantity($event)">
+                </label>
               </mat-form-field>
             </div>
             <mat-expansion-panel style="width: 100%">
@@ -177,11 +196,16 @@
                 <mat-panel-title class="cc-deck-row-line">
                   {{card.name}}
                   <mat-icon matTooltip="Not Legal Card" style="font-size: 18px; margin-left: 5px"
-                            *ngIf="checkLegality(card)" aria-hidden="false" aria-label="Not Legal Card">warning
+                            *ngIf="checkLegality(card)">warning
                   </mat-icon>
+                  <span class="cdk-visually-hidden">Not Legal Card</span>
                 </mat-panel-title>
                 <mat-panel-description class="cc-deck-row-line">
-                  <span class="cc-cost-segment">{{card.card.cardType}}</span> <span *ngIf="card.card.manaCost" class="cc-cost-segment">— <mat-icon class="cc-deck-creation-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
+                  <span fxHide.lt-md class="cc-cost-segment">{{card.card.cardType}}</span> <span *ngIf="card.card.manaCost"
+                                                                                                 class="cc-cost-segment"><span fxHide.lt-md>— </span><mat-icon
+                  class="cc-deck-creation-mat-icon"
+                  *ngFor="let color of utilsService.getManaSymbols(card.card.manaCost)" style="vertical-align: middle"
+                  svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="cc-card-center">
@@ -211,9 +235,11 @@
                         class="cc-align-vertical" (click)="removeCard(sideboard, i)">
                   <mat-icon>clear</mat-icon>
                 </button>
-                <mat-form-field color="primary" class="cc-deck-quantity cc-align-vertical">
-                  <input matInput type="number" [(ngModel)]="card.quantity" value="{{card.quantity}}" maxlength="2"
-                         max="99" min="1" style="text-align: center" (change)="checkQuantity($event)">
+                <mat-form-field color="primary" class="cc-deck-quantity cc-align-vertical" ngStyle.lt-sm="width:40px;">
+                  <label>
+                    <input matInput type="number" [(ngModel)]="card.quantity" value="{{card.quantity}}" maxlength="2"
+                           max="99" min="1" style="text-align: center" (change)="checkQuantity($event)">
+                  </label>
                 </mat-form-field>
               </div>
               <mat-expansion-panel style="width: 100%">
@@ -221,11 +247,16 @@
                   <mat-panel-title class="cc-deck-row-line">
                     {{card.name}}
                     <mat-icon matTooltip="Not Legal Card" style="font-size: 18px; margin-left: 5px"
-                              *ngIf="checkLegality(card)" aria-hidden="false" aria-label="Not Legal Card">warning
+                              *ngIf="checkLegality(card)">warning
                     </mat-icon>
+                    <span class="cdk-visually-hidden">Not Legal Card</span>
                   </mat-panel-title>
                   <mat-panel-description class="cc-deck-row-line">
-                    <span class="cc-cost-segment">{{card.card.cardType}}</span> <span *ngIf="card.card.manaCost" class="cc-cost-segment">— <mat-icon class="cc-deck-creation-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
+                    <span fxHide.lt-md class="cc-cost-segment">{{card.card.cardType}}</span> <span *ngIf="card.card.manaCost"
+                                                                                      class="cc-cost-segment"><span fxHide.lt-md>— </span><mat-icon
+                    class="cc-deck-creation-mat-icon"
+                    *ngFor="let color of utilsService.getManaSymbols(card.card.manaCost)" style="vertical-align: middle"
+                    svgIcon="{{color}}"></mat-icon></span>
                   </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="cc-card-center">

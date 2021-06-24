@@ -1,54 +1,70 @@
- <mat-toolbar color="primary">
-    <img src="assets/cc-logo.png" alt="ColorConfluence logo" (click)="goToMain()">
+<mat-toolbar color="primary">
+  <img style="max-height: 100%" src="assets/cc-logo.PNG" alt="ColorConfluence logo" (click)="goToMain()">
+  <div fxHide.lt-md>
+    <span style="font-size: 1em">COLORCONFLUENCE</span>
+  </div>
+
+  <div class="cc-toolbar-buttons">
+    <button style="font-size: 18px" mat-flat-button color="primary" aria-label="Cards" (click)="goToCards()">
+      <span>Cards</span>
+    </button>
+    <button id="deckMenu" style="font-size: 18px" mat-flat-button color="primary" [matMenuTriggerFor]="deckMenu"
+            aria-label="Decks">
+      <span>Decks</span>
+      <mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #deckMenu="matMenu">
+      <button mat-menu-item id="allDecks" (click)="goToDecks()">
+        <mat-icon>list_alt</mat-icon>
+        <span>All Decks</span>
+      </button>
+      <button mat-menu-item *ngIf="loginService.isLogged" (click)="goToMyDecks()">
+        <mat-icon>folder_shared</mat-icon>
+        <span>My Decks</span>
+      </button>
+      <button mat-menu-item id="newDeck" *ngIf="loginService.isLogged" (click)="goToNewDeck()">
+        <mat-icon>add</mat-icon>
+        <span>New Deck</span>
+      </button>
+    </mat-menu>
+  </div>
+  <span class="cc-fill-remaining-space"></span>
+
+  <div *ngIf="!loginService.isLogged" class="login-toolbar">
     <div fxHide.lt-md>
-        <h1>COLORCONFLUENCE</h1>
+      <p><span><a routerLink="login">Log in</a></span> or <span><a routerLink="register">Sign up</a></span></p>
     </div>
-
-   <div class="cc-toolbar-buttons">
-     <button style="font-size: 18px" mat-flat-button color="primary" aria-label="Card Button" (click)="goToCards()">
-       <span>Cards</span>
-     </button>
-     <button id="deckMenu" style="font-size: 18px" mat-flat-button color="primary" [matMenuTriggerFor]="deckMenu" aria-label="Deck Menu button">
-       <span>Decks</span>
-       <mat-icon>expand_more</mat-icon>
-     </button>
-     <mat-menu #deckMenu="matMenu">
-       <button mat-menu-item id="allDecks" (click)="goToDecks()">
-         <mat-icon>list_alt</mat-icon>
-         <span>All Decks</span>
-       </button>
-       <button mat-menu-item *ngIf="loginService.isLogged" (click)="goToMyDecks()">
-         <mat-icon>folder_shared</mat-icon>
-         <span>My Decks</span>
-       </button>
-       <button mat-menu-item id="newDeck" *ngIf="loginService.isLogged" (click)="goToNewDeck()">
-         <mat-icon>add</mat-icon>
-         <span>New Deck</span>
-       </button>
-     </mat-menu>
-   </div>
-    <span class="cc-fill-remaining-space"></span>
-
-   <div *ngIf="!loginService.isLogged" class="login-toolbar">
-     <div>
-       <p><span><a routerLink="login">Log in</a></span> or <span><a routerLink="register">Sign up</a></span></p>
-     </div>
-   </div>
-   <div *ngIf="loginService.isLogged" style="display: flex">
-     <div>
-       <td-user-profile name="{{loginService.user.username}}" email="{{loginService.user.email}}">
-         <ng-container td-user-action-list>
-           <button mat-list-item (click)="goToProfile()">
-             <span matListAvatar></span>
-             <span matLine>My Profile</span>
-           </button>
-           <mat-divider></mat-divider>
-           <button mat-list-item (click)="logout()">
-             <span matListAvatar></span>
-             <span matLine>Sign out</span>
-           </button>
-         </ng-container>
-       </td-user-profile>
-     </div>
-   </div>
- </mat-toolbar>
+    <div fxHide fxShow.lt-md>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="login">
+          <mat-icon color="primary">login</mat-icon>
+          <span>Log in</span>
+        </button>
+        <button mat-menu-item routerLink="register">
+          <mat-icon color="primary">person_add</mat-icon>
+          <span>Sign up</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div *ngIf="loginService.isLogged" style="display: flex">
+    <div>
+      <td-user-profile name="{{loginService.user.username}}" email="{{loginService.user.email}}">
+        <ng-container td-user-action-list>
+          <button mat-list-item (click)="goToProfile()">
+            <span matListAvatar></span>
+            <span matLine>My Profile</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-list-item (click)="logout()">
+            <span matListAvatar></span>
+            <span matLine>Sign out</span>
+          </button>
+        </ng-container>
+      </td-user-profile>
+    </div>
+  </div>
+</mat-toolbar>

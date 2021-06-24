@@ -1,13 +1,15 @@
 <div class="grid-container grid-container-deck">
-  <div>
-    <h1>{{deck?.name}}<span *ngIf="deck?.format"> - {{deck.format.name}}</span></h1>
+  <div ngStyle.lt-md="text-align: center">
+    <h1 ngStyle.lt-md="font-size:1.5em">{{deck?.name}}<span *ngIf="deck?.format"> - {{deck.format.name}}</span></h1>
   </div>
-  <div fxLayout="row wrap" fxLayoutGap="16px">
-    <button mat-raised-button color="primary" *ngIf="loginService.isLogged && loginService.user.id === deck?.user.id" (click)="editDeck()">
+  <div fxLayout="row wrap" fxLayoutAlign.lt-md="center" fxLayoutGap="16px" style="margin-bottom: 16px">
+    <button mat-raised-button color="primary" *ngIf="loginService.isLogged && loginService.user.id === deck?.user.id"
+            (click)="editDeck()">
       <mat-icon color="white" style="margin-right: 8px">edit</mat-icon>
       <span>Edit Deck</span>
     </button>
-    <button mat-raised-button color="primary" *ngIf="loginService.isLogged && loginService.user.id === deck?.user.id" (click)="openDeleteDeckDialog()">
+    <button mat-raised-button color="primary" *ngIf="loginService.isLogged && loginService.user.id === deck?.user.id"
+            (click)="openDeleteDeckDialog()">
       <mat-icon color="white">delete</mat-icon>
       <span>Delete Deck</span>
     </button>
@@ -18,7 +20,8 @@
         <mat-icon class="cc-tab-icon">format_list_bulleted</mat-icon>
         Deck List
       </ng-template>
-      <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" class="cc-deck-tab">
+      <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="32px" fxLayoutAlign="flex-start"
+           class="cc-deck-tab">
         <mat-card fxFlex="0 1 calc(50% - 32px)" class="cc-card cc-card-deck mat-elevation-z8">
           <mat-card-header class="cc-card-header">
             <mat-card-title>
@@ -49,14 +52,18 @@
               <!-- Mana Cost Column -->
               <ng-container matColumnDef="manaCost">
                 <th mat-header-cell *matHeaderCellDef> Mana Cost</th>
-                <td mat-cell *matCellDef="let deckCard"> <mat-icon *ngFor="let color of utilsService.getManaSymbols(deckCard.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon> </td>
+                <td mat-cell *matCellDef="let deckCard">
+                  <mat-icon *ngFor="let color of utilsService.getManaSymbols(deckCard.card.manaCost)"
+                            style="vertical-align: middle"
+                            ngStyle.lt-md="vertical-align: middle; width:18px; height:18px" svgIcon="{{color}}"></mat-icon>
+                </td>
               </ng-container>
 
               <ng-container matColumnDef="expandedDetail">
                 <td mat-cell *matCellDef="let deckCard" [attr.colspan]="displayedColumnsDeck.length">
-                  <div class="cc-deck-table-element-detail"
+                  <div class="cc-deck-table-element-detail" style="display: flex;" ngStyle.lt-md="display:block"
                        [@detailExpand]="deckCard == expandedElement ? 'expanded' : 'collapsed'">
-                    <div>
+                    <div ngStyle.lt-md="text-align:center">
                       <img width="223" height="310" src="{{deckCard.card.cardTranslation[0].cardSet[0].url}}"
                            alt="{{deckCard.card.name}} Image card">
                     </div>
@@ -80,7 +87,8 @@
             </div>
           </mat-card-content>
         </mat-card>
-        <mat-card fxFlex="0 1 calc(50% - 32px)" class="cc-card cc-card-deck mat-elevation-z8">
+        <mat-card fxFlex="0 1 calc(50% - 32px)" class="cc-card cc-card-deck mat-elevation-z8"
+                  *ngIf="deck?.commander.length === 0">
           <mat-card-header class="cc-card-header">
             <mat-card-title>
               Sideboard
@@ -109,14 +117,18 @@
               <!-- Mana Cost Column -->
               <ng-container matColumnDef="manaCost">
                 <th mat-header-cell *matHeaderCellDef> Mana Cost</th>
-                <td mat-cell *matCellDef="let deckCard"> <mat-icon *ngFor="let color of utilsService.getManaSymbols(deckCard.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon> </td>
+                <td mat-cell *matCellDef="let deckCard">
+                  <mat-icon *ngFor="let color of utilsService.getManaSymbols(deckCard.card.manaCost)"
+                            style="vertical-align: middle" svgIcon="{{color}}"></mat-icon>
+                </td>
               </ng-container>
 
               <ng-container matColumnDef="expandedDetail">
                 <td mat-cell *matCellDef="let deckCard" [attr.colspan]="displayedColumnsDeck.length">
                   <div class="cc-deck-table-element-detail"
-                       [@detailExpand]="deckCard == expandedElement ? 'expanded' : 'collapsed'">
-                    <div>
+                       [@detailExpand]="deckCard == expandedElement ? 'expanded' : 'collapsed'" style="display: flex;"
+                       ngStyle.lt-md="display:block">
+                    <div ngStyle.lt-md="text-align:center">
                       <img width="223" height="310" src="{{deckCard.card.cardTranslation[0]?.cardSet[0]?.url}}"
                            alt="{{deckCard.card.name}} Image card">
                     </div>
@@ -142,13 +154,15 @@
         </mat-card>
       </div>
     </mat-tab>
+    <!--  Analytics  -->
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="cc-tab-icon">insights</mat-icon>
         Analytics
       </ng-template>
-      <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" class="cc-deck-tab">
-        <mat-card fxFlex="0 1 calc(25% - 32px)" class="cc-card cc-card-deck mat-elevation-z8">
+      <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="32px" fxLayoutAlign="flex-start"
+           class="cc-deck-tab">
+        <mat-card fxFlex="0 1 calc(25% - 32px)" fxFlex.lt-md="0 1 1" class="cc-card cc-card-deck mat-elevation-z8">
           <mat-card-header class="cc-card-header">
             <mat-card-title>
               CMC Distribution
@@ -171,14 +185,14 @@
             </td-chart>
           </mat-card-content>
         </mat-card>
-        <mat-card fxFlex="0 1 calc(25% - 32px)" class="cc-card cc-card-deck mat-elevation-z8">
+        <mat-card fxFlex="0 1 calc(25% - 32px)" fxFlex.lt-md="0 1 1" class="cc-card cc-card-deck mat-elevation-z8">
           <mat-card-header class="cc-card-header">
             <mat-card-title>
               Type Distribution
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <td-chart [style.height.px]="350" [config]="config.typeD" >
+            <td-chart [style.height.px]="350" [config]="config.typeD">
               <td-chart-tooltip [trigger]="'item'">
                 <ng-template let-params tdTooltipFormatter>
                   <ng-container *ngIf="params">
@@ -194,7 +208,7 @@
             </td-chart>
           </mat-card-content>
         </mat-card>
-        <mat-card fxFlex="0 1 calc(25% - 32px)" class="cc-card cc-card-deck mat-elevation-z8">
+        <mat-card fxFlex="0 1 calc(25% - 32px)" fxFlex.lt-md="0 1 1" class="cc-card cc-card-deck mat-elevation-z8">
           <mat-card-header class="cc-card-header">
             <mat-card-title>
               Mana distribution
@@ -217,7 +231,7 @@
             </td-chart>
           </mat-card-content>
         </mat-card>
-        <mat-card fxFlex="0 1 calc(25% - 32px)" class="cc-card cc-card-deck mat-elevation-z8">
+        <mat-card fxFlex="0 1 calc(25% - 32px)" fxFlex.lt-md="0 1 1" class="cc-card cc-card-deck mat-elevation-z8">
           <mat-card-header class="cc-card-header">
             <mat-card-title>
               Mana source distribution
@@ -236,12 +250,14 @@
                   </ng-container>
                 </ng-template>
               </td-chart-tooltip>
-              <td-chart-series td-pie [data]="config.manaSourceD.series[0].data" [radius]="[0, '75%']"></td-chart-series>
+              <td-chart-series td-pie [data]="config.manaSourceD.series[0].data"
+                               [radius]="[0, '75%']"></td-chart-series>
             </td-chart>
           </mat-card-content>
         </mat-card>
       </div>
     </mat-tab>
+    <!-- Probabilities -->
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="cc-tab-icon">calculate_outline</mat-icon>
@@ -251,51 +267,53 @@
         <mat-card class="cc-card mat-elevation-z8" fxLayout="column">
           <mat-card-header class="cc-card-header">
             <mat-card-title>
-                Card Probabilites
-              <mat-icon style="font-size: 20px" matTooltip="Shows the probability to have at least 1 copy of the card by each case" matTooltipPosition="above"
-                        aria-hidden="false" aria-label="Example home icon">info
+              Card Probabilites
+              <mat-icon style="font-size: 20px"
+                        matTooltip="Shows the probability to have at least 1 copy of the card by each case"
+                        matTooltipPosition="above">info
               </mat-icon>
             </mat-card-title>
           </mat-card-header>
-          <mat-card-content style="max-height: 100%; overflow: auto" >
-            <table mat-table [dataSource]="probabilities" class="cc-mat-form-field-full">
+          <mat-card-content style="max-height: 100%; overflow: auto">
+            <table mat-table [dataSource]="probabilities" class="cc-mat-form-field-full"
+                   ngStyle.lt-md="font-size: 12px">
               <!-- Quantity Column -->
               <ng-container matColumnDef="quantity">
-                <th mat-header-cell *matHeaderCellDef> Qty </th>
+                <th mat-header-cell *matHeaderCellDef> Qty</th>
                 <td mat-cell *matCellDef="let prob"> {{prob.quantity}} </td>
               </ng-container>
 
               <!-- Name Column -->
               <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <th mat-header-cell *matHeaderCellDef> Name</th>
                 <td mat-cell *matCellDef="let prob"> {{prob.name}} </td>
               </ng-container>
 
               <!-- Opening Hand Column -->
               <ng-container matColumnDef="opening">
-                <th mat-header-cell *matHeaderCellDef> Opening Hand </th>
+                <th mat-header-cell *matHeaderCellDef> Opening Hand</th>
                 <td mat-cell *matCellDef="let prob"> {{prob.opening}} </td>
               </ng-container>
 
               <!-- Turn Columns -->
               <ng-container matColumnDef="turn1">
-                <th mat-header-cell *matHeaderCellDef> 1st Draw </th>
+                <th mat-header-cell *matHeaderCellDef> 1st Draw</th>
                 <td mat-cell *matCellDef="let prob"> {{prob.turn1}} </td>
               </ng-container>
               <ng-container matColumnDef="turn2">
-                <th mat-header-cell *matHeaderCellDef> 2nd Draw </th>
+                <th mat-header-cell *matHeaderCellDef> 2nd Draw</th>
                 <td mat-cell *matCellDef="let prob"> {{prob.turn2}} </td>
               </ng-container>
               <ng-container matColumnDef="turn3">
-                <th mat-header-cell *matHeaderCellDef> 3rd Draw </th>
+                <th mat-header-cell *matHeaderCellDef> 3rd Draw</th>
                 <td mat-cell *matCellDef="let prob"> {{prob.turn3}} </td>
               </ng-container>
               <ng-container matColumnDef="turn4">
-                <th mat-header-cell *matHeaderCellDef> 4th Draw </th>
+                <th mat-header-cell *matHeaderCellDef> 4th Draw</th>
                 <td mat-cell *matCellDef="let prob"> {{prob.turn4}} </td>
               </ng-container>
               <ng-container matColumnDef="turn5">
-                <th mat-header-cell *matHeaderCellDef> 5th Draw </th>
+                <th mat-header-cell *matHeaderCellDef> 5th Draw</th>
                 <td mat-cell *matCellDef="let prob"> {{prob.turn5}} </td>
               </ng-container>
 
@@ -306,6 +324,7 @@
         </mat-card>
       </div>
     </mat-tab>
+    <!--  Mulligans  -->
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="cc-tab-icon">style</mat-icon>
@@ -315,26 +334,32 @@
         <div class="cc-card-center">
           <button mat-raised-button color="primary" (click)="mulligan()">Mulligan</button>
         </div>
-        <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" class="cc-deck-tab">
-          <div fxFlex="0 1 calc(14.28% - 32px)" *ngFor="let card of openingHand">
+        <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="center" class="cc-deck-tab">
+          <div fxFlex="0 1 calc(14.28% - 32px)" fxFlex.lt-md="0 1 calc(33% -32px)" *ngFor="let card of openingHand"
+               style="">
             <img width="100%" src="{{card.card.cardTranslation[0].cardSet[0].url}}" alt="{{card.card.name}} Image card">
           </div>
         </div>
       </div>
     </mat-tab>
+    <!--  Export  -->
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="cc-tab-icon">file_upload</mat-icon>
         Export
       </ng-template>
-      <div class="cc-deck-tab" fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
-        <div fxFlex="0 1 calc(75% - 32px)">
+      <div class="cc-deck-tab" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="32px"
+           fxLayoutAlign="flex-start">
+        <div fxFlex="0 1 calc(75% - 32px)" fxFlex.lt-md="0 1 1">
           <mat-form-field appearance="fill" class="cc-mat-form-field-full">
             <mat-label>Deck Exported</mat-label>
-            <textarea [rows]="exportListLines" spellcheck="false" matInput style="height: 100%; line-height: 22px" [(ngModel)]="exportList"></textarea>
+            <label>
+<textarea [rows]="exportListLines" spellcheck="false" matInput style="height: 100%; line-height: 22px"
+          [(ngModel)]="exportList"></textarea>
+            </label>
           </mat-form-field>
         </div>
-        <div fxFlex="0 1 calc(25% - 32px)">
+        <div fxFlex="0 1 calc(25% - 32px)" fxFlex.lt-md="0 1 1">
           <div fxLayout="column" fxLayoutGap="32px">
             <div style="text-align: center">
               <button mat-raised-button color="primary"

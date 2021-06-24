@@ -8,6 +8,8 @@ import java.util.List;
 
 public class CommonSpecification {
 
+    protected static final String[] defaultColors = {"W", "B", "U", "R", "G", "C"};
+
     protected CommonSpecification() {
     }
 

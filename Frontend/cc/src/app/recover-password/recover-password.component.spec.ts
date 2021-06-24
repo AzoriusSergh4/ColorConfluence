@@ -8,9 +8,9 @@ describe('RecoverPasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecoverPasswordComponent ]
+      declarations: [RecoverPasswordComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

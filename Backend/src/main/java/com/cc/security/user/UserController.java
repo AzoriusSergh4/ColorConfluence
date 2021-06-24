@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private UserComponent userComponent;
 
-    private final String ERROR_TYPE = "error-type";
+    private final static String errorType = "error-type";
 
     /**
      * Creates the user disabled and send a confirmation email to enable it
@@ -102,11 +102,11 @@ public class UserController {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             } else if (!this.checkPasswordPattern(passwordForm.getNewPassword())) {
                 var headers = new HttpHeaders();
-                headers.add(ERROR_TYPE, "password-pattern");
+                headers.add(errorType, "password-pattern");
                 return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             } else if (passwordForm.isSamePssword()) {
                 var headers = new HttpHeaders();
-                headers.add(ERROR_TYPE, "same-password");
+                headers.add(errorType, "same-password");
                 return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             } else {
                 userComponent.getLoggedUser().setPassword(encoder.encode(passwordForm.getNewPassword()));
@@ -152,11 +152,11 @@ public class UserController {
             var user = userRepository.findByEmail(confirmationToken.getUser().getEmail());
             if (!this.checkPasswordPattern(passwordForm.getNewPassword())) {
                 var headers = new HttpHeaders();
-                headers.add(ERROR_TYPE, "password-pattern");
+                headers.add(errorType, "password-pattern");
                 return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             } else if (passwordForm.isSamePssword()) {
                 var headers = new HttpHeaders();
-                headers.add(ERROR_TYPE, "same-password");
+                headers.add(errorType, "same-password");
                 return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
             }
             user.setPassword(new BCryptPasswordEncoder().encode(passwordForm.getNewPassword()));

@@ -5,7 +5,6 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Valid
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {HttpParams} from '@angular/common/http';
-import {PageEvent} from '@angular/material/paginator';
 import {UtilsService} from '../services/utils.service';
 
 interface Format {
@@ -18,10 +17,9 @@ interface Format {
   templateUrl: './card-search.component.html',
   styleUrls: ['./card-search.component.css']
 })
-export class CardSearchComponent implements OnInit{
+export class CardSearchComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private cardService: CardService, private fb: FormBuilder, public utilsService: UtilsService) {
-    this.pageIndex = 0;
     this.currentParams = new HttpParams();
   }
 
@@ -29,7 +27,7 @@ export class CardSearchComponent implements OnInit{
   readonly colorRegex = '(^$|^(?:(<|=|<=))(?:([WURGBC])(?!.*\\2))+$)';
   readonly statRegex = '(^$|^(?:(<|=|<=|>|>=|!=))(?:([0-9])(?!.*\\2))+$)';
 
-  pageIndex: number;
+  totalCardsFound: number;
   sets: any;
   cards: any;
   currentTypes: string[] = [];
@@ -62,29 +60,29 @@ export class CardSearchComponent implements OnInit{
 
   ngOnInit() {
     this.cardFilterForm = this.fb.group({
-    name: [''],
-    text: [''],
-    lore: [''],
-    type: [[]],
-    colors: ['', Validators.pattern(this.colorRegex)],
-    manaCost: [''],
-    cmc: ['', Validators.pattern(this.statRegex)],
-    power: ['', Validators.pattern(this.statRegex)],
-    toughness: ['', Validators.pattern(this.statRegex)],
-    legality: this.fb.group({
-      format: [''],
-      legality: ['']
-    }),
-    set: [''],
-    lang: [''],
-    rarity: ['']
-  });
+      name: [''],
+      text: [''],
+      lore: [''],
+      type: [[]],
+      colors: ['', Validators.pattern(this.colorRegex)],
+      manaCost: [''],
+      cmc: ['', Validators.pattern(this.statRegex)],
+      power: ['', Validators.pattern(this.statRegex)],
+      toughness: ['', Validators.pattern(this.statRegex)],
+      legality: this.fb.group({
+        format: [''],
+        legality: ['']
+      }),
+      set: [''],
+      lang: [''],
+      rarity: ['']
+    });
 
     this.cardFilterForm.get('legality').setValidators(this.LegalityValidator());
     let name;
     this.route.queryParams.subscribe(params => {
       name = params.name;
-      if (name){
+      if (name) {
         this.currentParams = this.currentParams.append('name', name);
         this.cardFilterForm.setControl('name', new FormControl(name));
         this.cardService.getCardsByName(name).subscribe(cards => {
@@ -98,24 +96,53 @@ export class CardSearchComponent implements OnInit{
 
   onSubmit() {
     console.log(this.cardFilterForm.valid);
-    if (this.cardFilterForm.valid){
+    if (this.cardFilterForm.valid) {
       let params = new HttpParams();
-      if (!this.isFieldEmpty(this.cardFilterForm.get('name'))) { params = params.append('name', this.cardFilterForm.get('name').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('text'))) { params = params.append('text', this.cardFilterForm.get('text').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('lore'))) { params = params.append('lore', this.cardFilterForm.get('lore').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('type'))) { params = params.append('type', this.cardFilterForm.get('type').value.toString()); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('colors'))) {  params = params.append('colors', this.cardFilterForm.get('colors').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('manaCost'))) {  params = params.append('manaCost', this.cardFilterForm.get('manaCost').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('cmc'))) {  params = params.append('cmc', this.cardFilterForm.get('cmc').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('power'))) {   params = params.append('power', this.cardFilterForm.get('power').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('toughness'))) {   params = params.append('toughness', this.cardFilterForm.get('toughness').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('set'))) {  params = params.append('set', this.cardFilterForm.get('set').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('lang'))) {  params = params.append('lang', this.cardFilterForm.get('lang').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('rarity'))) {   params = params.append('rarity', this.cardFilterForm.get('rarity').value); }
-      if (!this.isFieldEmpty(this.cardFilterForm.get('legality').get('legality'))) { params = params.append(this.cardFilterForm.get('legality').get('format').value, this.cardFilterForm.get('legality').get('legality').value); }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('name'))) {
+        params = params.append('name', this.cardFilterForm.get('name').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('text'))) {
+        params = params.append('text', this.cardFilterForm.get('text').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('lore'))) {
+        params = params.append('lore', this.cardFilterForm.get('lore').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('type'))) {
+        params = params.append('type', this.cardFilterForm.get('type').value.toString());
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('colors'))) {
+        params = params.append('colors', this.cardFilterForm.get('colors').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('manaCost'))) {
+        params = params.append('manaCost', this.cardFilterForm.get('manaCost').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('cmc'))) {
+        params = params.append('cmc', this.cardFilterForm.get('cmc').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('power'))) {
+        params = params.append('power', this.cardFilterForm.get('power').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('toughness'))) {
+        params = params.append('toughness', this.cardFilterForm.get('toughness').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('set'))) {
+        params = params.append('set', this.cardFilterForm.get('set').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('lang'))) {
+        params = params.append('lang', this.cardFilterForm.get('lang').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('rarity'))) {
+        params = params.append('rarity', this.cardFilterForm.get('rarity').value);
+      }
+      if (!this.isFieldEmpty(this.cardFilterForm.get('legality').get('legality'))) {
+        params = params.append(this.cardFilterForm.get('legality').get('format').value, this.cardFilterForm.get('legality').get('legality').value);
+      }
       params = params.append('page', '0');
       this.currentParams = params;
-      this.cardService.getCardsByCriteria(params).subscribe(cards => this.cards = cards, error => console.error(error));
+      this.cardService.getCardsByCriteria(params).subscribe(cards => {
+        this.cards = cards;
+        this.totalCardsFound = cards.totalElements;
+      }, error => console.error(error));
     }
   }
 
@@ -142,8 +169,8 @@ export class CardSearchComponent implements OnInit{
     }
   }
 
-  colorChange(event){
-    if (event.checked){
+  colorChange(event) {
+    if (event.checked) {
       this.colorsControl += event.source.value;
     } else {
       this.colorsControl = this.colorsControl.replace(event.source.value, '');
@@ -151,20 +178,20 @@ export class CardSearchComponent implements OnInit{
     this.checkColorsValidation();
   }
 
-  colorCriteriaChange(event){
-    if (event.value === undefined){
+  colorCriteriaChange(event) {
+    if (event.value === undefined) {
       this.colorCriteria = '';
     }
     this.checkColorsValidation();
   }
 
-  checkColorsValidation(){
+  checkColorsValidation() {
     this.cardFilterForm.setControl('colors', new FormControl(this.colorCriteria + this.colorsControl, Validators.pattern(this.colorRegex)));
   }
 
-  statCriteriaChange(event, stat){
-    if (event.value === undefined){
-      switch (stat){
+  statCriteriaChange(event, stat) {
+    if (event.value === undefined) {
+      switch (stat) {
         case 'cmc':
           this.cmcCriteria = '';
           break;
@@ -179,9 +206,9 @@ export class CardSearchComponent implements OnInit{
     this.checkStatValidation(stat);
   }
 
-  statChange(event, stat){
-    if (event.data === null){
-      switch (stat){
+  statChange(event, stat) {
+    if (event.data === null) {
+      switch (stat) {
         case 'cmc':
           this.cmcControl = '';
           break;
@@ -210,23 +237,24 @@ export class CardSearchComponent implements OnInit{
     }
   }
 
-  isFieldEmpty(field: AbstractControl){
+  isFieldEmpty(field: AbstractControl) {
     return field.value === null || field.value === undefined || field.value === '' || field.value.length === 0;
   }
 
-  public LegalityValidator(): ValidatorFn{
+  public LegalityValidator(): ValidatorFn {
 
-    return (group: FormGroup): {[key: string]: boolean} => {
+    return (group: FormGroup): { [key: string]: boolean } => {
       const invalid = (group.controls.legality.value === undefined || group.controls.legality.value === '') ? (group.controls.format.value !== undefined && group.controls.format.value !== '') : (group.controls.format.value === undefined || group.controls.format.value === '');
       return invalid ? {
         notAllFilled: true
-      } : null ;
+      } : null;
     };
   }
 
-  handlePageEvent(event: PageEvent) {
-    this.currentParams = this.currentParams.set('page', event.pageIndex.toString());
-    console.log(this.currentParams);
-    this.cardService.getCardsByCriteria(this.currentParams).subscribe(cards => this.cards = cards, error => console.error(error));
+  handlePageEvent(event: any) {
+    this.currentParams = this.currentParams.set('page', (event.page - 1).toString());
+    this.cardService.getCardsByCriteria(this.currentParams).subscribe(cards => {
+      this.cards = cards;
+    }, error => console.error(error));
   }
 }

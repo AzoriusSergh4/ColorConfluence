@@ -11,32 +11,39 @@
         <div>
           <mat-form-field appearance="outline" class="cc-mat-form-field-half">
             <mat-label>Email</mat-label>
-            <input matInput type="email" formControlName="email" placeholder="username@email.com">
+            <label>
+              <input matInput type="email" formControlName="email" placeholder="username@email.com">
+            </label>
           </mat-form-field>
         </div>
         <div>
-          <mat-form-field appearance="outline"  class="cc-mat-form-field-half">
+          <mat-form-field appearance="outline" class="cc-mat-form-field-half">
             <mat-label>Username</mat-label>
-            <input matInput formControlName="username">
+            <label>
+              <input matInput formControlName="username">
+            </label>
           </mat-form-field>
         </div>
         <div>
-          <mat-form-field appearance="outline"  class="cc-mat-form-field-half">
+          <mat-form-field appearance="outline" class="cc-mat-form-field-half">
             <mat-label>Password</mat-label>
-            <input matInput type="password" formControlName="password">
-           <!-- <span matSuffix>
-              <mat-icon
-                matTooltip="Must have at least 6 characters, one uppercase letter, one lowercase letter, one number and one special character (@$!%*?&)"
-                matTooltipPosition="after"
-              aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-            </span>-->
+            <label>
+              <input matInput type="password" formControlName="password">
+            </label>
+            <span matSuffix>
+               <mat-icon
+                 matTooltip="Must have at least 6 characters, one uppercase letter, one lowercase letter, one number and one special character (@$!%*?&)"
+                 matTooltipPosition="after"
+                 color="primary">info</mat-icon>
+             </span>
           </mat-form-field>
-
         </div>
         <div>
-          <mat-form-field appearance="outline"  class="cc-mat-form-field-half">
+          <mat-form-field appearance="outline" class="cc-mat-form-field-half">
             <mat-label>Confirm Password</mat-label>
-            <input matInput type="password" formControlName="passwordConfirm">
+            <label>
+              <input matInput type="password" formControlName="passwordConfirm">
+            </label>
           </mat-form-field>
         </div>
         <div>
@@ -51,7 +58,8 @@
     </mat-card-header>
     <mat-card-content class="cc-card-content cc-card-center" style="padding-top: 1%">
       <div>
-        <p>A verification email has been sent to the given account. Please check it and follow the instructions to finish the registration</p>
+        <p>A verification email has been sent to the given account. Please check it and follow the instructions to
+          finish the registration</p>
       </div>
     </mat-card-content>
   </mat-card>

@@ -6,18 +6,21 @@
     </div>
     <div gdArea="lang">
       <div fxLayout="row wrap" fxLayoutGap="5px">
-        <button mat-raised-button color="primary" *ngFor="let lang of languages" (click)="changeLanguage(lang)" [disabled]="lang === selectedLang">{{lang}}</button>
+        <button mat-raised-button color="primary" *ngFor="let lang of languages" (click)="changeLanguage(lang)"
+                [disabled]="lang === selectedLang">{{lang}}</button>
       </div>
     </div>
     <div gdArea="empty"></div>
-    <div gdArea="image">
+    <div gdArea="image" ngStyle.lt-md="text-align: center">
       <img width="223" height="310" src="{{selectedSet?.url}}" alt="MTG image card">
     </div>
     <div gdArea="info">
       <mat-card class="cc-card cc-card-info">
         <mat-card-header class="cc-card-header">
           <mat-card-title>
-            <span class="cc-cost-segment">{{card?.name}}</span><span class="cc-cost-segment" style="margin-left: 8px"><mat-icon class="cc-card-info-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card?.card.manaCost)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
+            <span class="cc-cost-segment">{{card?.name}}</span><span class="cc-cost-segment" style="margin-left: 8px"><mat-icon
+            class="cc-card-info-mat-icon" *ngFor="let color of utilsService.getManaSymbols(card?.card.manaCost)"
+            style="vertical-align: middle" svgIcon="{{color}}"></mat-icon></span>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="cc-card-content">
@@ -29,18 +32,18 @@
               </div>
               <mat-divider inset></mat-divider>
               <div id="data-description" class="mtgCard-info-line-break mtgCard-info-section mtgCard-info-text-large">
-                <p>{{card?.description}}</p>
+                <p *ngIf="card?.description">{{card.description}}</p>
               </div>
-              <mat-divider inset></mat-divider>
+              <mat-divider inset *ngIf="card?.description"></mat-divider>
               <div id="data-lore" class="mtgCard-info-line-break mtgCard-info-section mtgCard-info-text-large">
-                <p>{{card?.lore}}</p>
+                <p *ngIf="card?.lore">{{card.lore}}</p>
               </div>
               <mat-divider inset *ngIf="card?.lore"></mat-divider>
               <div id="data-stats" class="mtgCard-info-section" fxLayout="row wrap">
                 <p style="width: 50%" *ngIf="card?.card.cmc">CMC: {{card?.card.cmc}}</p>
                 <p style="width: 50%" *ngIf="card?.card.power">{{card.card.power}}/{{card.card.toughness}}</p>
               </div>
-              <mat-divider inset fxShow.lt-md></mat-divider>
+              <mat-divider inset fxShow.lt-md *ngIf="card?.power || card?.toughness"></mat-divider>
             </div>
             <div gdArea="collection">
               <div id="collection-rarity" class="mtgCard-info-section">
@@ -63,7 +66,10 @@
               <mat-divider inset></mat-divider>
               <div id="collection-sets" class="mtgCard-info-section">
                 <div fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="flex-start">
-                  <button mat-raised-button class="mtgCard-info-set-button" color="primary" *ngFor="let set of card?.cardSet" [disabled]="set.cardSet === selectedSet.cardSet && set.cardNumber === selectedSet.cardNumber" (click)="changeSet(set.cardSet, set.cardNumber)">{{set.set}}</button>
+                  <button mat-raised-button class="mtgCard-info-set-button" color="primary"
+                          *ngFor="let set of card?.cardSet"
+                          [disabled]="set.cardSet === selectedSet.cardSet && set.cardNumber === selectedSet.cardNumber"
+                          (click)="changeSet(set.cardSet, set.cardNumber)">{{set.set}}</button>
                 </div>
               </div>
             </div>

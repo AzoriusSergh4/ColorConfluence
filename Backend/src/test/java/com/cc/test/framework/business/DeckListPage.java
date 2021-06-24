@@ -8,11 +8,6 @@ import org.springframework.stereotype.Service;
 @ScenarioScope
 public class DeckListPage extends BasePage {
 
-    public void goToDeckListCreation() {
-        this.seleniumService.findWebElementById("deckMenu").click();
-        this.seleniumService.findWebElementById("allDecks").click();
-    }
-
     public void goToFirstDeck() {
         this.seleniumService.findWebElementBy(By.xpath("//table//tbody//tr")).click();
     }

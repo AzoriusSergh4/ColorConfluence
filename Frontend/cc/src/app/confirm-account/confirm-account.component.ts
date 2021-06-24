@@ -15,10 +15,12 @@ export class ConfirmAccountComponent implements OnInit {
     let tk;
     this.route.queryParams.subscribe(params => {
       tk = params.tk;
-      if (tk){
-        this.loginService.confirmAccount(tk).subscribe(response => this.brokenTk = false, error => {console.log(error); this.brokenTk = true; });
-      }
-      else{
+      if (tk) {
+        this.loginService.confirmAccount(tk).subscribe(response => this.brokenTk = false, error => {
+          console.log(error);
+          this.brokenTk = true;
+        });
+      } else {
         this.brokenTk = true;
       }
     });

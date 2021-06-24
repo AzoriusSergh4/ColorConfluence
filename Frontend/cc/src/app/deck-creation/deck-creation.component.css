@@ -4,6 +4,7 @@
   margin-left: 4%;
 }
 
+
 .cc-deck-creation-mat-icon {
   vertical-align: middle;
   width: 18px;
@@ -14,13 +15,16 @@
   display: inline-block;
   vertical-align: center;
 }
+
 .cc-deck-row-line {
   line-height: 18px;
 }
+
 .cc-align-vertical {
   margin-bottom: auto;
   margin-top: auto
 }
+
 .cc-align-horizontal {
   margin-left: auto;
   margin-right: auto;
@@ -43,20 +47,6 @@ mat-expansion-panel-header {
   border-radius: 4px;
   overflow: hidden;
   display: block;
-}
-
-.example-box {
-  padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  cursor: move;
-  background: white;
-  font-size: 14px;
 }
 
 .cdk-drag-preview {

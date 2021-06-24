@@ -1,11 +1,12 @@
 .grid-container-deck {
   margin-top: 2%;
 }
+
 .cc-card-deck {
   height: 100%;
 }
 
-.cc-deck-analytics{
+.cc-deck-analytics {
   height: 500px;
 }
 
@@ -30,7 +31,7 @@ tr.cc-deck-table-element-row:not(.cc-deck-table-expanded-row):active {
 
 .cc-deck-table-element-detail {
   overflow: hidden;
-  display: flex;
+
 }
 
 .cc-deck-table-element-detail-description {

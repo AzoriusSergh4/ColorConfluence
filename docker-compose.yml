@@ -8,20 +8,3 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://192.168.1.58/colorconfluence?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: sergio
       SPRING_DATASOURCE_PASSWORD: ColorConfluence4$$
-  zalenium:
-    image: "dosel/zalenium"
-    container_name: zalenium
-    hostname: zalenium
-    tty: true
-    volumes:
-      - /tmp/videos:/home/seluser/videos
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
-    ports:
-      - 4444:4444
-    privileged: true
-    command: >
-      start --desiredContainers 2
-            --maxDockerSeleniumContainers 8
-            --screenWidth 800 --screenHeight 600
-            --timeZone "Europe/Madrid"

@@ -22,6 +22,10 @@ export class BaseComponent implements OnInit {
     this.router.navigate(['decks']);
   }
 
+  goToCards(): void {
+    this.router.navigate(['cards']);
+  }
+
   goToMyDecks(): void {
     this.router.navigate(['user-decks']);
   }

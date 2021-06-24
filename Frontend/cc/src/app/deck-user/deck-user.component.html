@@ -6,19 +6,24 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="cc-tree" cdkDropList (cdkDropListDropped)="drop($event)">
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="cc-tree" cdkDropList
+                (cdkDropListDropped)="drop($event)">
         <!-- This is the tree node template for leaf nodes -->
         <!-- There is inline padding applied to this node using styles.
           This padding value depends on the mat-icon-button width. -->
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodeToggle cdkDrag [cdkDragData]="node">
-          <a [routerLink]="['/deck/' + node.id]" class="cc-deck-link"><span class="cc-cost-segment"> {{node.name}}</span><span style="margin-left: 5px" *ngIf="node.colors" class="cc-cost-segment">— <mat-icon class="cc-user-decks-mat-icon" *ngFor="let color of utilsService.getManaSymbols(node.colors)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span></a>
-          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <a [routerLink]="['/deck/' + node.id]" class="cc-deck-link"><span
+            class="cc-cost-segment"> {{node.name}}</span><span style="margin-left: 5px" *ngIf="node.colors"
+                                                               class="cc-cost-segment">— <mat-icon
+            class="cc-user-decks-mat-icon" *ngFor="let color of utilsService.getManaSymbols(node.colors)"
+            style="vertical-align: middle" svgIcon="{{color}}"></mat-icon></span></a>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="More icon">
             <mat-icon color="primary">more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="editDeck(node.id)">
               <mat-icon color="primary">edit</mat-icon>
-              <span >Edit Deck</span>
+              <span>Edit Deck</span>
             </button>
             <button mat-menu-item (click)="openDeleteDeckDialog(node.id)">
               <mat-icon color="primary">delete</mat-icon>
@@ -36,7 +41,7 @@
                 {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
               </mat-icon>
             </button>
-            <mat-icon color="primary" aria-hidden="false" aria-label="Folder icon"
+            <mat-icon color="primary"
                       style="margin-right: 8px">{{treeControl.isExpanded(node) ? 'folder_open' : 'folder'}}</mat-icon>
             {{node.name}}
             <button mat-icon-button [matMenuTriggerFor]="folderMenu" aria-label="Menu Add Icon">
@@ -51,9 +56,10 @@
                 <mat-icon color="primary">note_add</mat-icon>
                 <span>New Deck</span>
               </button>
-              <button mat-menu-item aria-label="Delete Icon" [disabled]="node.level !== 1" (click)="openDeleteFolderDialog(node)">
-                <mat-icon *ngIf="node.level === 1" color="primary">delete</mat-icon>
-                <mat-icon *ngIf="node.level !== 1">delete</mat-icon>
+              <button mat-menu-item aria-label="Delete Icon" [disabled]="node.level === 0 "
+                      (click)="openDeleteFolderDialog(node)">
+                <mat-icon *ngIf="node.level !== 0" color="primary">delete</mat-icon>
+                <mat-icon *ngIf="node.level === 0">delete</mat-icon>
                 <span>Delete Folder</span>
               </button>
             </mat-menu>

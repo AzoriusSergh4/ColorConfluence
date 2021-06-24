@@ -115,7 +115,7 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
             this.redirectToHome();
           }
         });
-      }else if (params.folderId) {
+      } else if (params.folderId) {
         this.deckForm.folderId = +params.folderId;
         console.log(this.deckForm);
       }
@@ -185,16 +185,16 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
 
     if (this.deckForm.format && this.deckForm.format.name === 'Commander') {
       info.defaultSize = 1;
-      if (this.commanders.length === 0){
+      if (this.commanders.length === 0) {
         errors.noCommander = true;
       }
-      if (this.sumCards(this.commanders) + this.sumCards(this.deck) !== 100){
+      if (this.sumCards(this.commanders) + this.sumCards(this.deck) !== 100) {
         errors.wrongSize = true;
       }
       checkCards(this.commanders, this.deckForm.commanders, info.defaultSize);
     } else {
       info.defaultSize = 4;
-      if (this.sumCards(this.deck) < 60 || this.sumCards(this.sideboard) > 15){
+      if (this.sumCards(this.deck) < 60 || this.sumCards(this.sideboard) > 15) {
         errors.wrongSize = true;
       }
       checkCards(this.sideboard, this.deckForm.sideboard, info.defaultSize);
@@ -211,12 +211,12 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
   openSaveDialog() {
     const info = this.checkDeck();
     const dialogRef = this.dialog.open(SaveDeckDialog, {
-      width: '50%',
+      width: '75%',
       data: info
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result){
+      if (result) {
         if (info.error.existError) {
           this.deckForm.draft = true;
         }
@@ -242,8 +242,8 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       const i = event.container.data.indexOf(event.previousContainer.data[event.previousIndex]);
-      if (i === -1){
-        if (event.previousContainer.id === 'cardsFoundList'){
+      if (i === -1) {
+        if (event.previousContainer.id === 'cardsFoundList') {
           copyArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
         } else {
           transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
@@ -317,7 +317,7 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
     this.commanders = sortList(sort, this.commanders);
     this.sideboard = sortList(sort, this.sideboard);
 
-    function sortList(sortEvent: Sort, list: any[]): any[]{
+    function sortList(sortEvent: Sort, list: any[]): any[] {
       if (sort === undefined || !sort.active || sort.direction === '') {
         return list;
       }
@@ -325,15 +325,20 @@ export class DeckCreationComponent extends BaseComponent implements OnInit {
       list = data.sort((a, b) => {
         const isAsc = sort.direction === 'asc';
         switch (sort.active) {
-          case 'name': return compare(a.card.name, b.card.name, isAsc);
-          case 'type': return compare(a.card.cardType, b.card.cardType, isAsc);
-          case 'manaCost': return compare(a.card.cmc, b.card.cmc, isAsc);
-          default: return 0;
+          case 'name':
+            return compare(a.card.name, b.card.name, isAsc);
+          case 'type':
+            return compare(a.card.cardType, b.card.cardType, isAsc);
+          case 'manaCost':
+            return compare(a.card.cmc, b.card.cmc, isAsc);
+          default:
+            return 0;
         }
       });
 
       return list;
     }
+
     function compare(a: number | string, b: number | string, isAsc: boolean) {
       return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
     }
@@ -349,6 +354,7 @@ export class SaveDeckDialog {
 
   constructor(
     public dialogRef: MatDialogRef<SaveDeckDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
 }

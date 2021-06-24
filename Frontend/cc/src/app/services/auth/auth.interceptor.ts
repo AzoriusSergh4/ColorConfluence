@@ -6,7 +6,8 @@ import {LoginService} from '../login.service';
 @Injectable()
 export class BasicAuthInterceptor implements HttpInterceptor {
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 

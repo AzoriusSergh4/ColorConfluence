@@ -1,5 +1,7 @@
 package com.cc.web.card;
 
+import com.cc.web.entity.CardCC;
+import com.cc.web.entity.CardPopularity;
 import com.cc.web.entity.CardTranslation;
 import com.cc.web.entity.projection.CardTranslationProjection;
 import com.cc.web.specifications.CardSpecifications;
@@ -7,6 +9,7 @@ import com.cc.web.specifications.CommonSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +21,18 @@ public class CardService {
 
     private final String LANG_ENGLISH = "English";
 
+    private final CardTranslationRepository translationRepository;
+
+    private final CardRepository cardRepository;
+
+    private final CardPopularityRepository cardPopularityRepository;
+
     @Autowired
-    private CardTranslationRepository translationRepository;
+    public CardService(CardTranslationRepository translationRepository, CardRepository cardRepository, CardPopularityRepository cardPopularityRepository) {
+        this.translationRepository = translationRepository;
+        this.cardRepository = cardRepository;
+        this.cardPopularityRepository = cardPopularityRepository;
+    }
 
     /**
      * Gets the cards filtered by name
@@ -34,6 +47,13 @@ public class CardService {
         return translationRepository.findAll(s, CardTranslationProjection.class, PageRequest.of(0, pageSize));
     }
 
+    /**
+     *
+     * @param name Gets the full cards filtered by name
+     * @param page the page
+     * @param pageSize the page size
+     * @return
+     */
     public Page<CardTranslation> getCardsByTranslationName(String name, int page, int pageSize) {
         Specification<CardTranslation> s = Specification
                 .where(name == null ? null : CardSpecifications.nameContains(name))
@@ -41,6 +61,11 @@ public class CardService {
         return translationRepository.findAll(s, PageRequest.of(page, pageSize));
     }
 
+    /**
+     * Count the cards hat matches the given name
+     * @param name the name of the card
+     * @return the number of cards that match
+     */
     public long countBasicCardsByName(String name) {
         return getBasicCardsByTranslationName(name, Integer.MAX_VALUE).getTotalElements();
     }
@@ -76,11 +101,43 @@ public class CardService {
                 .and((criteria.get("penny") == null ? null : CardSpecifications.legalityContains("Penny", criteria.get("penny"))))
                 .and(CommonSpecification.distinct());
 
-        return translationRepository.findAll(s, CardTranslationProjection.class, PageRequest.of(Integer.parseInt(criteria.get("page")), 60));
+        return translationRepository.findAll(s, CardTranslationProjection.class, PageRequest.of(Integer.parseInt(criteria.get("page")), 60, Sort.by(Sort.Direction.ASC, "name")));
     }
 
+    /**
+     * Return teh card translation identified by its id
+     * @param id the id of the card
+     * @return the card, or null
+     */
     public CardTranslation getCardById(long id) {
         Optional<CardTranslation> opt = translationRepository.findById(id);
+        if(opt.isPresent()){
+            var pop = cardPopularityRepository.findByCard(opt.get().getCard());
+            if (pop == null) {
+                pop = new CardPopularity(opt.get().getCard());
+            } else {
+                pop.setVisited(pop.getVisited() + 1);
+            }
+            cardPopularityRepository.save(pop);
+        }
         return opt.orElse(null);
+    }
+
+    /**
+     * Return teh card identified by its id
+     * @param id the id of the card
+     * @return the card, or null
+     */
+    public CardCC getCardCCById(long id) {
+        return cardRepository.findById(id);
+    }
+
+    /**
+     * Get card popularities
+     * @param page the page
+     * @return a page with popularities
+     */
+    public Page<CardPopularity> getCardPopularities(int page) {
+        return cardPopularityRepository.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "visited")));
     }
 }

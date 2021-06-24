@@ -64,7 +64,7 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
   );
   // expansion model tracks expansion state
   expansionModel = new SelectionModel<number>(true);
-  private transformer = (node: Folder|TreeDeck , level: number) => {
+  private transformer = (node: Folder | TreeDeck, level: number) => {
     return {
       expandable: node.folder,
       name: node.name,
@@ -75,11 +75,12 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
   }
 
   treeFlattener = new MatTreeFlattener(
-    this.transformer, node => node.level, node => node.expandable, node => {let line: (Folder|TreeDeck)[];
-                                                                            line = [];
-                                                                            node.decks.forEach(d => line.push(d));
-                                                                            node.folders.forEach(f => line.push(f));
-                                                                            return line;
+    this.transformer, node => node.level, node => node.expandable, node => {
+      let line: (Folder | TreeDeck)[];
+      line = [];
+      node.decks.forEach(d => line.push(d));
+      node.folders.forEach(f => line.push(f));
+      return line;
     });
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
@@ -99,7 +100,7 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
       this.dataSource.data = this.folder;
       this.loadingContent = false;
       this.treeControl.expand(this.treeControl.dataNodes[0]);
-      const expandedNodes =  this.expansionModel.selected;
+      const expandedNodes = this.expansionModel.selected;
       expandedNodes.forEach(id => {
         const node = this.treeControl.dataNodes.find((n) => n.id === id);
         this.treeControl.expand(node);
@@ -109,6 +110,7 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
       expandedNodes.forEach(id => {
         this.expansionModel.select(id);
       });
+      console.log(this.dataSource);
     }, error => {
       this.loadingContent = false;
       console.log(error);
@@ -118,11 +120,11 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
   initializeFolder(folder: Folder) {
     folder.folder = true;
     folder.root = false;
-    folder.decks.forEach( d => {
+    folder.decks.forEach(d => {
       d.decks = [];
       d.folders = [];
     });
-    folder.folders.forEach( f => {
+    folder.folders.forEach(f => {
       this.initializeFolder(f);
     });
   }
@@ -136,7 +138,7 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
   openNewFolderDialog(folder: Folder) {
     console.log(folder);
     const dialogRef = this.dialog.open(NewEntityDialog, {
-      width: '50%',
+      width: '75%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -152,11 +154,11 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
 
   openDeleteFolderDialog(folder: Folder) {
     const dialogRef = this.dialog.open(DeleteEntityDialog, {
-      width: '50%',
+      width: '75%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result){
+      if (result) {
         this.deckService.deleteFolder(folder.id).subscribe(() => {
           this.loadTree();
         }, error => {
@@ -176,7 +178,7 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result){
+      if (result) {
         this.deckService.deleteDeck(node).subscribe(() => {
           this.loadTree();
           this.snackBar.open('The deck was deleted successfully', 'OK', {duration: 3000});
@@ -191,16 +193,17 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
   /**
    * This constructs an array of nodes that matches the DOM
    */
-  visibleNodes(): (Folder|TreeDeck)[] {
+  visibleNodes(): (Folder | TreeDeck)[] {
     const nodes = [];
 
-    function addExpandedChildren(node: Folder|TreeDeck, expanded: number[]) {
+    function addExpandedChildren(node: Folder | TreeDeck, expanded: number[]) {
       nodes.push(node);
       if (expanded.includes(node.id)) {
         node.decks.map((child) => addExpandedChildren(child, expanded));
         node.folders.map((child) => addExpandedChildren(child, expanded));
       }
     }
+
     this.dataSource.data.forEach((node) => {
       addExpandedChildren(node, this.expansionModel.selected);
     });
@@ -213,18 +216,26 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
    */
   drop(event: CdkDragDrop<string[]>) {
     // ignore drops outside of the tree, from or to the root folder, and same positions
-    if (!event.isPointerOverContainer || event.previousIndex === 0 || event.currentIndex === 0 || event.previousIndex === event.currentIndex) { return; }
+    if (!event.isPointerOverContainer || event.previousIndex === 0 || event.currentIndex === 0 || event.previousIndex === event.currentIndex) {
+      return;
+    }
     const visibleNodes = this.visibleNodes();
     console.log(visibleNodes);
     // ignore drops from ancestor to child
-    if (this.isAncestor(visibleNodes[event.previousIndex], visibleNodes[event.currentIndex])) { return; }
+    if (this.isAncestor(visibleNodes[event.previousIndex], visibleNodes[event.currentIndex])) {
+      return;
+    }
     // ignore drops to same folder
-    if (visibleNodes[event.currentIndex].folder && visibleNodes[event.currentIndex] === findParent(visibleNodes[event.previousIndex].id, this.folder[0])) { return; }
-    if (!visibleNodes[event.currentIndex].folder && findParent(visibleNodes[event.currentIndex].id, this.folder[0]) === findParent(visibleNodes[event.previousIndex].id, this.folder[0])) { return; }
+    if (visibleNodes[event.currentIndex].folder && visibleNodes[event.currentIndex] === findParent(visibleNodes[event.previousIndex].id, this.folder[0])) {
+      return;
+    }
+    if (!visibleNodes[event.currentIndex].folder && findParent(visibleNodes[event.currentIndex].id, this.folder[0]) === findParent(visibleNodes[event.previousIndex].id, this.folder[0])) {
+      return;
+    }
     console.log(visibleNodes[event.previousIndex]);
     visibleNodes[event.currentIndex].folder ? console.log(visibleNodes[event.currentIndex]) : console.log(findParent(visibleNodes[event.currentIndex].id, this.folder[0]));
 
-    function findParent(id: number, parent: TreeDeck|Folder): Folder|TreeDeck{
+    function findParent(id: number, parent: TreeDeck | Folder): Folder | TreeDeck {
 
       let result;
       let subResult;
@@ -238,11 +249,14 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
           result = parent;
         } else {
           subResult = findParent(id, item);
-          if (subResult) { result = subResult; }
+          if (subResult) {
+            result = subResult;
+          }
         }
       });
       return result;
     }
+
     const to = visibleNodes[event.currentIndex].folder ? visibleNodes[event.currentIndex] : findParent(visibleNodes[event.currentIndex].id, this.folder[0]);
     if (visibleNodes[event.previousIndex].folder) {
       this.deckService.moveFolder(visibleNodes[event.previousIndex].id, to.id).subscribe(() => {
@@ -255,7 +269,7 @@ export class DeckUserComponent extends BaseComponent implements OnInit {
     }
   }
 
-  isAncestor(parent: Folder|TreeDeck, child: Folder|TreeDeck): boolean {
+  isAncestor(parent: Folder | TreeDeck, child: Folder | TreeDeck): boolean {
     let ancestor: boolean;
     ancestor = false;
     parent.decks.forEach(d => {
@@ -285,7 +299,8 @@ export class NewEntityDialog {
 
   constructor(
     public dialogRef: MatDialogRef<NewEntityDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   closeDialog() {
     this.dialogRef.close(this.folderName);
@@ -302,6 +317,7 @@ export class DeleteEntityDialog {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteEntityDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
 }

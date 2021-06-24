@@ -24,7 +24,7 @@ public class SeleniumService {
 
     private final TestProperties properties;
 
-    private JSWaiter waiter;
+    private final JSWaiter waiter;
 
     @Autowired
     public SeleniumService(TestProperties properties) {
@@ -48,7 +48,7 @@ public class SeleniumService {
 
     public WebElement findWebElementBy(By by) {
         try {
-            return (WebElement) wDriver.findElement(by);
+            return wDriver.findElement(by);
         } catch (NoSuchElementException n) {
             n.printStackTrace();
             throw n;
@@ -125,11 +125,6 @@ public class SeleniumService {
         TakesScreenshot ts = (TakesScreenshot) wDriver;
         return ts.getScreenshotAs(OutputType.BYTES);
     }
-
-    public void goTo(String url) {
-        wDriver.get(url);
-    }
-
 
     public void startDriver() {
         if (properties.getDriver().getName().equals("chrome")) {

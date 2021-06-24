@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 @ScenarioScope
 public class DeckCreationPage extends BasePage {
 
-    public void goToDeckCreation() {
-        this.seleniumService.findWebElementById("deckMenu").click();
-        this.seleniumService.findWebElementById("newDeck").click();
-    }
+
 
     public boolean checkPageIsLoaded() {
         return this.seleniumService.isWebElementBy(By.xpath("//cc-deck-creation//div[@class='grid-container grid-deck']"));

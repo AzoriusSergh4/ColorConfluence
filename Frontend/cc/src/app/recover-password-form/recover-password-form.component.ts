@@ -25,16 +25,16 @@ export class RecoverPasswordFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public SamePasswordValidator(): ValidatorFn{
-    return (control: FormControl): {[key: string]: boolean} => {
+  public SamePasswordValidator(): ValidatorFn {
+    return (control: FormControl): { [key: string]: boolean } => {
       const notSame = control.get('password') !== control.get('passwordConfirm');
       return notSame ? {
         notSame: true
-      } : null ;
+      } : null;
     };
   }
 
-  sendForm(){
+  sendForm() {
     this.formEvent.emit(this.recoverForm);
   }
 }

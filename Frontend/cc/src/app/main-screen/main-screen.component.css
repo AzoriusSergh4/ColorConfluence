@@ -1,6 +1,6 @@
 .mat-card-actions {
-    text-align: center;
-    margin: auto;
+  text-align: center;
+  margin: auto;
 }
 
 .cc-card-filter {
@@ -9,7 +9,7 @@
   padding: 16px !important;
 }
 
-.cc-card-main{
+.cc-card-main {
   height: 400px;
 }
 
@@ -29,6 +29,9 @@ a {
   margin: 16px;
 }
 
+.cc-list-line-text {
+  line-height: 22px;
+}
 /*
 :host ::ng-deep .cc-card-filter .mat-form-field-wrapper {
   padding-bottom: 0 !important;
@@ -45,8 +48,8 @@ a {
   width: 15px;
 }
 
-::-webkit-scrollbar-button{
-    color: #00838f;
+::-webkit-scrollbar-button {
+  color: #00838f;
 }
 
 /* Track */

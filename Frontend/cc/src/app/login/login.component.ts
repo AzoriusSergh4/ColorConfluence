@@ -22,7 +22,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     super(router);
     if (loginService.isLogged) {
       this.redirectToHome();
-    }else {
+    } else {
       this.loginForm = this.fb.group({
         username: ['', [Validators.required]],
         password: ['', [Validators.required]],

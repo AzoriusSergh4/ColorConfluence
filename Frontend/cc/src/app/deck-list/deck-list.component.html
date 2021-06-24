@@ -3,24 +3,36 @@
     <h1>Deck List</h1>
   </div>
   <div class="cc-mat-form-field-full">
-    <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" >
-      <div fxFlex="0 1 calc(33% - 32px)">
+    <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="26px" fxLayoutAlign="flex-start">
+      <div fxFlex="0 1 calc(33% - 26px)" fxFlex.lt-md="0 1 1">
         <mat-form-field appearance="fill" class="cc-mat-form-field-full">
           <mat-label>Deck Name</mat-label>
-          <input id="deckName" matInput [(ngModel)]="deckName" placeholder="Ex: Mill">
+          <label for="deckName"></label><input id="deckName" matInput [(ngModel)]="deckName" placeholder="Ex: Mill">
         </mat-form-field>
       </div>
-      <div fxFlex="0 1 calc(33% - 32px)">
+      <div fxFlex="0 1 calc(33% - 26px)" fxFlex.lt-md="0 1 1">
         <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between center" style="height: 100%">
-          <mat-checkbox [(ngModel)]="colors[0].checked"  class="cc-deck-list-checkbox" color="primary" value="W" ><mat-icon svgIcon="{W}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="White Mana icon"></mat-icon></mat-checkbox>
-          <mat-checkbox [(ngModel)]="colors[1].checked" class="cc-deck-list-checkbox" color="primary" value="U" ><mat-icon svgIcon="{U}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="Blue Mana icon"></mat-icon></mat-checkbox>
-          <mat-checkbox [(ngModel)]="colors[2].checked" class="cc-deck-list-checkbox" color="primary" value="B" ><mat-icon svgIcon="{B}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="Black Mana icon"></mat-icon></mat-checkbox>
-          <mat-checkbox [(ngModel)]="colors[3].checked" class="cc-deck-list-checkbox" color="primary" value="R" ><mat-icon svgIcon="{R}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="Red Mana icon"></mat-icon></mat-checkbox>
-          <mat-checkbox [(ngModel)]="colors[4].checked" class="cc-deck-list-checkbox" color="primary" value="G" ><mat-icon svgIcon="{G}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="Green Mana icon"></mat-icon></mat-checkbox>
-          <mat-checkbox [(ngModel)]="colors[5].checked" class="cc-deck-list-checkbox" color="primary" value="C" ><mat-icon svgIcon="{C}" class="cc-deck-list-mat-icon" aria-hidden="false" aria-label="Colorless Mana icon"></mat-icon></mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[0].checked" class="cc-deck-list-checkbox" color="primary" value="W">
+            <mat-icon svgIcon="{W}" class="cc-deck-list-mat-icon"></mat-icon><span class="cdk-visually-hidden">White Mana icon</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[1].checked" class="cc-deck-list-checkbox" color="primary" value="U">
+            <mat-icon svgIcon="{U}" class="cc-deck-list-mat-icon"></mat-icon><span class="cdk-visually-hidden">Blue Mana icon</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[2].checked" class="cc-deck-list-checkbox" color="primary" value="B">
+            <mat-icon svgIcon="{B}" class="cc-deck-list-mat-icon"></mat-icon><span class="cdk-visually-hidden">Black Mana icon</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[3].checked" class="cc-deck-list-checkbox" color="primary" value="R">
+            <mat-icon svgIcon="{R}" class="cc-deck-list-mat-icon"></mat-icon><span class="cdk-visually-hidden">Red Mana icon</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[4].checked" class="cc-deck-list-checkbox" color="primary" value="G">
+            <mat-icon svgIcon="{G}" class="cc-deck-list-mat-icon"></mat-icon><span class="cdk-visually-hidden">Green Mana icon</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="colors[5].checked" class="cc-deck-list-checkbox" color="primary" value="C">
+            <mat-icon svgIcon="{C}" class="cc-deck-list-mat-icon"></mat-icon><span class="cdk-visually-hidden">Colorless Mana icon</span>
+          </mat-checkbox>
         </div>
       </div>
-      <div fxFlex="0 1 calc(33% - 32px)">
+      <div fxFlex="0 1 calc(33% - 26px)" fxFlex.lt-md="0 1 1">
         <mat-form-field appearance="fill" class="cc-mat-form-field-full">
           <mat-label>Format</mat-label>
           <mat-select [(ngModel)]="format">
@@ -34,33 +46,38 @@
       <button mat-raised-button color="primary" (click)="pagingBar.navigateToPage(1)">Search</button>
     </div>
     <div>
-      <table mat-table [dataSource]="decks" class="cc-mat-form-field-full mat-elevation-z8" >
+      <table mat-table [dataSource]="decks" class="cc-mat-form-field-full mat-elevation-z8">
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          <th mat-header-cell *matHeaderCellDef> Name</th>
+          <td mat-cell *matCellDef="let element" ngStyle.lt-md="font-size:0.8em"> {{element.name}} </td>
         </ng-container>
 
         <!-- Colors Column -->
         <ng-container matColumnDef="colors">
-          <th mat-header-cell *matHeaderCellDef> Colors </th>
-          <td mat-cell *matCellDef="let element"> <mat-icon *ngFor="let color of utilsService.getManaSymbols(element.colors)" style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></td>
+          <th mat-header-cell *matHeaderCellDef> Colors</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon ngStyle.lt-md="width:20px; height:20px"
+                      *ngFor="let color of utilsService.getManaSymbols(element.colors)" style="vertical-align: middle"
+                      svgIcon="{{color}}"></mat-icon>
+          </td>
         </ng-container>
 
         <!-- Format Column -->
         <ng-container matColumnDef="format">
-          <th mat-header-cell *matHeaderCellDef> Format </th>
-          <td mat-cell *matCellDef="let element"> {{element.format?.name}} </td>
+          <th mat-header-cell *matHeaderCellDef> Format</th>
+          <td mat-cell *matCellDef="let element" ngStyle.lt-md="font-size:0.8em"> {{element.format?.name}} </td>
         </ng-container>
 
         <!-- User Column -->
         <ng-container matColumnDef="user">
-          <th mat-header-cell *matHeaderCellDef> User </th>
-          <td mat-cell *matCellDef="let element"> {{element.user.username}} </td>
+          <th mat-header-cell *matHeaderCellDef> User</th>
+          <td mat-cell *matCellDef="let element" ngStyle.lt-md="font-size:0.8em"> {{element.user.username}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/deck/' + row.id]" class="cc-table-row-link"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/deck/' + row.id]"
+            class="cc-table-row-link"></tr>
       </table>
       <div>
         <td-paging-bar #pagingBar

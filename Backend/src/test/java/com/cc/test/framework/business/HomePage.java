@@ -24,6 +24,8 @@ public class HomePage extends BasePage {
         seleniumService.findWebElementById("search-cards-link").click();
     }
 
+
+
     public void goToPage() {
         seleniumService.goToMainPage();
     }

@@ -14,7 +14,8 @@ export interface CCError {
 })
 export class CommonService {
 
-  constructor(protected http: HttpClient) { }
+  constructor(protected http: HttpClient) {
+  }
 
   /**
    * Common method to perform the GET request
@@ -22,7 +23,7 @@ export class CommonService {
    * @param headers optional headers to add
    * @protected
    */
-  protected apiGetRequest(url: string, headers?: HttpHeaders){
+  protected apiGetRequest(url: string, headers?: HttpHeaders) {
 
     console.log(environment.apiUrl + url);
     const options = {
@@ -51,7 +52,7 @@ export class CommonService {
    * @param headers optional headers to add
    * @protected
    */
-  protected apiPostRequest(url: string, body?: string, headers?: HttpHeaders){
+  protected apiPostRequest(url: string, body?: string, headers?: HttpHeaders) {
 
     console.log(environment.apiUrl + url);
     const options = {
@@ -66,7 +67,7 @@ export class CommonService {
         options.headers = options.headers.append(key, headers.get(key));
       });
     }
-    if (body){
+    if (body) {
       return this.http.post<any>(environment.apiUrl + url, body, options)
         .pipe(
           map(result => result),
@@ -96,7 +97,7 @@ export class CommonService {
         options.headers = options.headers.append(key, headers.get(key));
       });
     }
-    if (body){
+    if (body) {
       return this.http.put<any>(environment.apiUrl + url, body, options)
         .pipe(
           map(result => result),
@@ -118,7 +119,7 @@ export class CommonService {
    * @param headers optional headers to add
    * @protected
    */
-  protected apiDeleteRequest(url: string, body?: string, headers?: HttpHeaders){
+  protected apiDeleteRequest(url: string, body?: string, headers?: HttpHeaders) {
 
     console.log(environment.apiUrl + url);
     const options = {
@@ -134,7 +135,7 @@ export class CommonService {
         options.headers = options.headers.append(key, headers.get(key));
       });
     }
-    if (body){
+    if (body) {
       options.body = body;
     }
     return this.http.delete<any>(environment.apiUrl + url, options)
@@ -150,7 +151,7 @@ export class CommonService {
    * @param criteria
    * @protected
    */
-  protected apiGetRequestWithCriteria(url: string, criteria: HttpParams){
+  protected apiGetRequestWithCriteria(url: string, criteria: HttpParams) {
     console.log(environment.apiUrl + url);
     const options = {
       headers: new HttpHeaders({
@@ -172,7 +173,7 @@ export class CommonService {
    * @param error the error
    * @protected
    */
-  protected handleError(error: any){
+  protected handleError(error: any) {
     console.error(error);
     const e: CCError = {
       message: 'Server error (' + error.status + ')',

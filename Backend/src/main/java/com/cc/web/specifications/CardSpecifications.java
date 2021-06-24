@@ -6,8 +6,10 @@ import com.cc.web.entity.CardSet;
 import com.cc.web.entity.CardTranslation;
 import org.springframework.data.jpa.domain.Specification;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +48,6 @@ public final class CardSpecifications extends CommonSpecification {
     }
 
     public static Specification<CardTranslation> colorContains(String colorCriteria) {
-        var defaultColors = new String[]{"W", "B", "U", "R", "G", "C"};
         if (colorCriteria.startsWith("=")) {
             String color = colorCriteria.replace("=", "");
             return (root, query, builder) -> {
@@ -64,25 +65,13 @@ public final class CardSpecifications extends CommonSpecification {
         } else if (colorCriteria.startsWith("<=")) {
             String color = colorCriteria.replace("<=", "");
             return (root, query, builder) -> {
-                Join<CardTranslation, CardCC> join = root.join("card");
-                List<Predicate> predicates = new ArrayList<>();
-                for (String c : defaultColors) {
-                    if (color.contains(c)) {
-                        predicates.add(builder.like(join.get(MANA_COST), contains(c)));
-                    }
-                }
+                List<Predicate> predicates = createColorPredicates(color,root,builder);
                 return builder.and(predicateListToArray(predicates));
             };
         } else if (colorCriteria.startsWith("<")) {
             String color = colorCriteria.replace("<", "");
             return (root, query, builder) -> {
-                Join<CardTranslation, CardCC> join = root.join("card");
-                List<Predicate> predicates = new ArrayList<>();
-                for (String c : defaultColors) {
-                    if (color.contains(c)) {
-                        predicates.add(builder.like(join.get(MANA_COST), contains(c)));
-                    }
-                }
+                List<Predicate> predicates = createColorPredicates(color,root,builder);
                 return builder.or(predicateListToArray(predicates));
             };
         } else {
@@ -98,33 +87,31 @@ public final class CardSpecifications extends CommonSpecification {
     }
 
     public static Specification<CardTranslation> statComparatorContains(String content, String stat) {
-
-        if (content.startsWith(">=")) {
-            return (root, query, builder) -> {
-                Join<CardTranslation, CardCC> join = root.join("card");
+        return (root, query, builder) -> {
+            Join<CardTranslation, CardCC> join = root.join("card");
+            if (content.startsWith(">=")) {
                 return builder.greaterThanOrEqualTo(join.get(stat), content.replace(">=", ""));
-            };
-        } else if (content.startsWith("<=")) {
-            return (root, query, builder) -> {
-                Join<CardTranslation, CardCC> join = root.join("card");
+            } else if (content.startsWith("<=")) {
                 return builder.lessThanOrEqualTo(join.get(stat), content.replace("<=", ""));
-            };
-        } else if (content.startsWith(">")) {
-            return (root, query, builder) -> {
-                Join<CardTranslation, CardCC> join = root.join("card");
+            } else if (content.startsWith(">")) {
                 return builder.greaterThan(join.get(stat), content.replace(">", ""));
-            };
-        } else if (content.startsWith("<")) {
-            return (root, query, builder) -> {
-                Join<CardTranslation, CardCC> join = root.join("card");
+            } else if (content.startsWith("<")) {
                 return builder.lessThan(join.get(stat), content.replace("<", ""));
-            };
-        } else {
-            return (root, query, builder) -> {
-                Join<CardTranslation, CardCC> join = root.join("card");
+            } else {
                 return builder.equal(join.get(stat), content.replace("=", ""));
-            };
+            }
+        };
+    }
+
+    private static List<Predicate> createColorPredicates(String color, Root<CardTranslation> root, CriteriaBuilder builder) {
+        Join<CardTranslation, CardCC> join = root.join("card");
+        List<Predicate> predicates = new ArrayList<>();
+        for (String c : defaultColors) {
+            if (color.contains(c)) {
+                predicates.add(builder.like(join.get(MANA_COST), contains(c)));
+            }
         }
+        return predicates;
     }
 
     public static Specification<CardTranslation> rarityContains(String rarity) {

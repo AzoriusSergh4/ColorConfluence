@@ -63,8 +63,12 @@ export class DeckListComponent implements OnInit {
   searchDecks() {
     let params = new HttpParams();
     params = params.append('page', '0');
-    if (!this.isFieldEmpty(this.deckName)) { params = params.append('name', this.deckName); }
-    if (!this.isFieldEmpty(this.format)) { params = params.append('format', this.format); }
+    if (!this.isFieldEmpty(this.deckName)) {
+      params = params.append('name', this.deckName);
+    }
+    if (!this.isFieldEmpty(this.format)) {
+      params = params.append('format', this.format);
+    }
     if (this.colors.some(color => color.checked === true)) {
       let colors = '';
       this.colors.filter(color => color.checked === true).forEach(color => colors += color.abbreviation);
@@ -78,7 +82,7 @@ export class DeckListComponent implements OnInit {
     });
   }
 
-  isFieldEmpty(field: string){
+  isFieldEmpty(field: string) {
     return field === null || field === undefined || field === '';
   }
 

@@ -10,7 +10,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent extends BaseComponent implements OnInit{
+export class ProfileComponent extends BaseComponent implements OnInit {
 
   constructor(private snackBar: MatSnackBar, public loginService: LoginService, protected router: Router) {
     super(router);

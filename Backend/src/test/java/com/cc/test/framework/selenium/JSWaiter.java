@@ -1,6 +1,5 @@
 package com.cc.test.framework.selenium;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -62,11 +61,11 @@ public class JSWaiter {
     private void waitUntilJQueryReady() {
         Boolean jQueryDefined = (Boolean) jsExec.executeScript("return typeof jQuery != 'undefined'");
         if (jQueryDefined) {
-            poll(20);
+            poll();
 
             waitForJQueryLoad();
 
-            poll(20);
+            poll();
         }
     }
 
@@ -76,11 +75,11 @@ public class JSWaiter {
             if (!angularUnDefined) {
                 Boolean angularInjectorUnDefined = (Boolean) jsExec.executeScript("return angular.element(document).injector() === undefined");
                 if (!angularInjectorUnDefined) {
-                    poll(20);
+                    poll();
 
                     waitForAngularLoad();
 
-                    poll(20);
+                    poll();
                 }
             }
         } catch (WebDriverException ignored) {
@@ -93,11 +92,11 @@ public class JSWaiter {
             if (angular5Check != null) {
                 Boolean angularPageLoaded = (Boolean) jsExec.executeScript("return window.getAllAngularTestabilities().findIndex(x=>!x.isStable()) === -1");
                 if (!angularPageLoaded) {
-                    poll(20);
+                    poll();
 
                     waitForAngular5Load();
 
-                    poll(20);
+                    poll();
                 }
             }
         } catch (WebDriverException ignored) {
@@ -131,36 +130,9 @@ public class JSWaiter {
         waitUntilAngular5Ready();
     }
 
-    /**
-     * Method to make sure a specific element has loaded on the page
-     *
-     * @param by
-     * @param expected
-     */
-    public void waitForElementAreComplete(By by, int expected) {
-        ExpectedCondition<Boolean> angularLoad = driver -> {
-            int loadingElements = jsWaitDriver.findElements(by).size();
-            return loadingElements >= expected;
-        };
-        jsWait.until(angularLoad);
-    }
-
-    /**
-     * Waits for the elements animation to be completed
-     *
-     * @param css
-     */
-    public void waitForAnimationToComplete(String css) {
-        ExpectedCondition<Boolean> angularLoad = driver -> {
-            int loadingElements = jsWaitDriver.findElements(By.cssSelector(css)).size();
-            return loadingElements == 0;
-        };
-        jsWait.until(angularLoad);
-    }
-
-    private void poll(long milis) {
+    private void poll() {
         try {
-            Thread.sleep(milis);
+            Thread.sleep(20);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

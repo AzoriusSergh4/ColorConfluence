@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
+html, body { height: 100%; line-height: 150%;}
 body { margin: 0;}
 .grid-container {
   margin: 5%;
@@ -49,6 +49,10 @@ a:hover {
   width: 50%;
 }
 
+.cc-card-three-quarter {
+  width: 75%;
+}
+
 /* Tabs */
 .cc-tab-icon {
   margin-right: 8px;
@@ -76,6 +80,10 @@ a:hover {
 .cc-mat-form-field-half {
   width: 50%;
 }
+.cc-mat-form-field-three-quarter {
+  width: 75%;
+}
+
 .cc-card-center {
   text-align: center;
 }

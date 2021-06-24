@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 public class ColorConfluenceMailSender {
 
     private static final String LOCAL = "http://localhost:4200";
-    private static final String PROD = "https://colorconfluence.ddns.net";
+    private static final String PROD = "https://azoriussergh4.github.io/ColorConfluence";
+    private static final String CURRENT = PROD;
 
     @Autowired
     JavaMailSender mailSender;
@@ -25,7 +26,7 @@ public class ColorConfluenceMailSender {
         message.setFrom("colorconfluence@gmail.com");
         message.setTo(to);
         message.setSubject("ColorConfluence Account Verification!");
-        message.setText("You almost finished! To confirm your account, please click the link below: \n" + LOCAL + "/confirm-account?tk=" + token);
+        message.setText("You almost finished! To confirm your account, please click the link below: \n" + CURRENT + "/confirm-account?tk=" + token);
         mailSender.send(message);
     }
 
@@ -34,7 +35,7 @@ public class ColorConfluenceMailSender {
         message.setFrom("colorconfluence@gmail.com");
         message.setTo(to);
         message.setSubject("ColorConfluence Recover Password");
-        message.setText("To recover your password, please click the link below: \n" + LOCAL + "/recover-password?tk=" + token);
+        message.setText("To recover your password, please click the link below: \n" + CURRENT + "/recover-password?tk=" + token);
         mailSender.send(message);
     }
 }

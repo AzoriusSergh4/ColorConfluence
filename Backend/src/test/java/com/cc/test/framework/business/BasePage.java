@@ -25,5 +25,15 @@ public abstract class BasePage {
         seleniumService.findWebElementBy(By.xpath("//div[contains(@class,'login-toolbar')]//a[@routerlink='login']")).click();
     }
 
+    public void goToDeckCreation() {
+        this.seleniumService.findWebElementById("deckMenu").click();
+        this.seleniumService.findWebElementById("newDeck").click();
+    }
+
+    public void goToDeckList() {
+        this.seleniumService.findWebElementById("deckMenu").click();
+        this.seleniumService.findWebElementById("allDecks").click();
+    }
+
     public abstract boolean checkPageIsLoaded();
 }

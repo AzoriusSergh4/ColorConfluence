@@ -80,7 +80,7 @@ export class DeckComponent extends BaseComponent implements OnInit {
         {
           show: true,
           type: 'value',
-          axisLabel: { inside: false },
+          axisLabel: {inside: false},
           max(value) {
             return Math.ceil(value.max / 10) * 10;
           }
@@ -94,7 +94,7 @@ export class DeckComponent extends BaseComponent implements OnInit {
             color: '#00838f',
           },
           markPoint: {
-            data: [{ name: 'test', value: 130, xAxis: 1, yAxis: 130 }],
+            data: [{name: 'test', value: 130, xAxis: 1, yAxis: 130}],
           },
           name: 'CMC',
           data: [],
@@ -115,8 +115,7 @@ export class DeckComponent extends BaseComponent implements OnInit {
           },
           name: 'Type',
           radius: [0, '75%'],
-          data: [
-          ],
+          data: [],
         },
       ],
 
@@ -136,8 +135,7 @@ export class DeckComponent extends BaseComponent implements OnInit {
           },
           name: 'Color',
           radius: [0, '75%'],
-          data: [
-          ],
+          data: [],
         },
       ],
 
@@ -157,8 +155,7 @@ export class DeckComponent extends BaseComponent implements OnInit {
           },
           name: 'Color',
           radius: [0, '75%'],
-          data: [
-          ],
+          data: [],
         },
       ],
 
@@ -253,13 +250,13 @@ export class DeckComponent extends BaseComponent implements OnInit {
   initializeTypeDistribution() {
     let data: any[];
     data = [
-      { name: 'Creature', value: 0, itemStyle: { color: '#E87F52' }},
-      { name: 'Instant', value: 0, itemStyle: { color: '#6AD0CA' }},
-      { name: 'Sorcery', value: 0, itemStyle: { color: '#B079AB' }},
-      { name: 'Enchantment', value: 0, itemStyle: { color: '#DFCA45' }},
-      { name: 'Artifact', value: 0, itemStyle: { color: '#DADADA' }},
-      { name: 'Planeswalker', value: 0, itemStyle: { color: '#DE888D' }},
-      { name: 'Land', value: 0, itemStyle: { color: '#6BD59A' }}
+      {name: 'Creature', value: 0, itemStyle: {color: '#E87F52'}},
+      {name: 'Instant', value: 0, itemStyle: {color: '#6AD0CA'}},
+      {name: 'Sorcery', value: 0, itemStyle: {color: '#B079AB'}},
+      {name: 'Enchantment', value: 0, itemStyle: {color: '#DFCA45'}},
+      {name: 'Artifact', value: 0, itemStyle: {color: '#DADADA'}},
+      {name: 'Planeswalker', value: 0, itemStyle: {color: '#DE888D'}},
+      {name: 'Land', value: 0, itemStyle: {color: '#6BD59A'}}
     ];
     this.deck.commander.forEach(c => {
       this.updateTypeData(c, data);
@@ -292,12 +289,12 @@ export class DeckComponent extends BaseComponent implements OnInit {
   initializeManaDistribution() {
     let data: any[];
     data = [
-      { name: 'White', value: 0, itemStyle: { color: '#FFFAA2' }},
-      { name: 'Blue', value: 0, itemStyle: { color: '#86B4E3' }},
-      { name: 'Black', value: 0, itemStyle: { color: '#1D056C' }},
-      { name: 'Red', value: 0, itemStyle: { color: '#FF5C5C' }},
-      { name: 'Green', value: 0, itemStyle: { color: '#63C97E' }},
-      { name: 'Colorless', value: 0, itemStyle: { color: '#DADADA' }}
+      {name: 'White', value: 0, itemStyle: {color: '#FFFAA2'}},
+      {name: 'Blue', value: 0, itemStyle: {color: '#86B4E3'}},
+      {name: 'Black', value: 0, itemStyle: {color: '#1D056C'}},
+      {name: 'Red', value: 0, itemStyle: {color: '#FF5C5C'}},
+      {name: 'Green', value: 0, itemStyle: {color: '#63C97E'}},
+      {name: 'Colorless', value: 0, itemStyle: {color: '#DADADA'}}
     ];
     this.deck.commander.forEach(c => {
       this.updateManaData(c, data);
@@ -324,8 +321,10 @@ export class DeckComponent extends BaseComponent implements OnInit {
     data[5].value += colorless * c.quantity;
   }
 
-  countManaSymbols(manaCost: string, regex: string){
-    if (manaCost === null) { return 0; }
+  countManaSymbols(manaCost: string, regex: string) {
+    if (manaCost === null) {
+      return 0;
+    }
     const match = manaCost.match(new RegExp(regex, 'g')) || [];
     let i: number;
     i = 0;
@@ -341,13 +340,13 @@ export class DeckComponent extends BaseComponent implements OnInit {
   initializeManaSourceDistribution() {
     let data: any[];
     data = [
-      { name: 'White', value: 0, itemStyle: { color: '#FFFAA2' }},
-      { name: 'Blue', value: 0, itemStyle: { color: '#86B4E3' }},
-      { name: 'Black', value: 0, itemStyle: { color: '#1D056C' }},
-      { name: 'Red', value: 0, itemStyle: { color: '#FF5C5C' }},
-      { name: 'Green', value: 0, itemStyle: { color: '#63C97E' }},
-      { name: 'Colorless', value: 0, itemStyle: { color: '#DADADA' }},
-      { name: 'Any', value: 0, itemStyle: {color: '#7A604E'}}
+      {name: 'White', value: 0, itemStyle: {color: '#FFFAA2'}},
+      {name: 'Blue', value: 0, itemStyle: {color: '#86B4E3'}},
+      {name: 'Black', value: 0, itemStyle: {color: '#1D056C'}},
+      {name: 'Red', value: 0, itemStyle: {color: '#FF5C5C'}},
+      {name: 'Green', value: 0, itemStyle: {color: '#63C97E'}},
+      {name: 'Colorless', value: 0, itemStyle: {color: '#DADADA'}},
+      {name: 'Any', value: 0, itemStyle: {color: '#7A604E'}}
     ];
     const lands = this.deck.main.filter(c => (c.card.cardType as string).match('Land'));
     lands.forEach(l => {
@@ -364,20 +363,16 @@ export class DeckComponent extends BaseComponent implements OnInit {
       if ((c.card.cardType as string).match('Plains')) {
         data[0].value += c.quantity;
       }
-      if ((c.card.cardType as string).match('Island'))
-      {
+      if ((c.card.cardType as string).match('Island')) {
         data[1].value += c.quantity;
       }
-      if ((c.card.cardType as string).match('Swamp'))
-      {
+      if ((c.card.cardType as string).match('Swamp')) {
         data[2].value += c.quantity;
       }
-      if ((c.card.cardType as string).match('Mountain'))
-      {
+      if ((c.card.cardType as string).match('Mountain')) {
         data[3].value += c.quantity;
       }
-      if ((c.card.cardType as string).match('Forest'))
-      {
+      if ((c.card.cardType as string).match('Forest')) {
         data[4].value += c.quantity;
       }
     } else { // Deep search
@@ -392,7 +387,7 @@ export class DeckComponent extends BaseComponent implements OnInit {
         if (match) {
           let symbols: string[];
           symbols = [];
-          match.forEach( m => {
+          match.forEach(m => {
             const matchingSymbols = m.match(new RegExp('{[WGRBUC]}', 'g'));
             matchingSymbols.forEach(s => {
               if (symbols.indexOf(s) === -1) {
@@ -401,20 +396,32 @@ export class DeckComponent extends BaseComponent implements OnInit {
             });
           });
           symbols.forEach(s => {
-            switch (s){
-              case '{W}': data[0].value += c.quantity; break;
-              case '{U}': data[1].value += c.quantity; break;
-              case '{B}': data[2].value += c.quantity; break;
-              case '{R}': data[3].value += c.quantity; break;
-              case '{G}': data[4].value += c.quantity; break;
-              case '{C}': data[5].value += c.quantity; break;
+            switch (s) {
+              case '{W}':
+                data[0].value += c.quantity;
+                break;
+              case '{U}':
+                data[1].value += c.quantity;
+                break;
+              case '{B}':
+                data[2].value += c.quantity;
+                break;
+              case '{R}':
+                data[3].value += c.quantity;
+                break;
+              case '{G}':
+                data[4].value += c.quantity;
+                break;
+              case '{C}':
+                data[5].value += c.quantity;
+                break;
             }
           });
         }
         // Numeric Colorless
         match = text.match(new RegExp('Add {[1-9]}', 'g'));
-        if (match){
-          match.forEach( m => {
+        if (match) {
+          match.forEach(m => {
             const matchingSymbols = m.match(new RegExp('[1-9]', 'g'));
             matchingSymbols.forEach(s => {
               data[5].value += +s * c.quantity;
@@ -437,7 +444,7 @@ export class DeckComponent extends BaseComponent implements OnInit {
 
   factorial(n: number): number {
     let r = 1;
-    for (let i = n; i > 0; i--){
+    for (let i = n; i > 0; i--) {
       r *= i;
     }
     return r;
@@ -478,7 +485,7 @@ export class DeckComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result){
+      if (result) {
         this.deckService.deleteDeck(this.deck.id).subscribe(() => {
           this.goToMyDecks();
           this.snackBar.open('The deck was deleted successfully', 'OK', {duration: 3000});
@@ -500,6 +507,7 @@ export class DeleteDeckDialog {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteDeckDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
 }

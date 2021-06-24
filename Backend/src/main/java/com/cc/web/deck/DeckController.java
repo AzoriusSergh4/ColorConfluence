@@ -72,7 +72,7 @@ public class DeckController {
         if (invalidRootFolder(f)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        if (f.getDecks().size() > 0) {
+        if (f.getDecks().isEmpty()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             this.deckService.deleteFolder(f);

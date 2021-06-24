@@ -30,7 +30,13 @@ export class CardInformationComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private cardService: CardService, private location: Location, public utilsService: UtilsService) {
     const id = this.activatedRoute.snapshot.params.id;
-    this.cardService.getCardInfo(id).subscribe(card => {this.card = card; this.setupCard(); this.initializeLanguages(); this.initializeLegalities(); console.log(this.card);}, error => console.error(error));
+    this.cardService.getCardInfo(id).subscribe(card => {
+      this.card = card;
+      this.setupCard();
+      this.initializeLanguages();
+      this.initializeLegalities();
+      console.log(this.card);
+    }, error => console.error(error));
   }
 
   ngOnInit(): void {
@@ -41,8 +47,8 @@ export class CardInformationComponent implements OnInit {
   }
 
   setupCard(): void {
-    for (const tr of this.card.card.cardTranslation){
-      if (tr === this.card.id){
+    for (const tr of this.card.card.cardTranslation) {
+      if (tr === this.card.id) {
         this.card.card.cardTranslation.splice(this.card.card.cardTranslation.indexOf(tr), 1);
         this.card.card.cardTranslation.push({
           id: this.card.id,
@@ -105,8 +111,8 @@ export class CardInformationComponent implements OnInit {
   }
 
   changeLanguage(lang: string): void {
-    for (const tr of this.card.card.cardTranslation){
-      if (tr.lang === lang){
+    for (const tr of this.card.card.cardTranslation) {
+      if (tr.lang === lang) {
         this.card.id = tr.id;
         this.card.name = tr.name;
         this.card.description = tr.description;

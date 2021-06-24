@@ -13,11 +13,12 @@ import {BaseComponent} from '../base/base.component';
 export class RecoverPasswordComponent extends BaseComponent implements OnInit {
 
   tk: string;
+
   constructor(protected router: Router, private snackBar: MatSnackBar, public loginService: LoginService, private route: ActivatedRoute) {
     super(router);
     this.route.queryParams.subscribe(params => {
       this.tk = params.tk;
-      if (!this.tk || loginService.isLogged){
+      if (!this.tk || loginService.isLogged) {
         this.redirectToHome();
       }
     });

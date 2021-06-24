@@ -16,6 +16,10 @@ public class FormatService {
         this.formatRepository = formatRepository;
     }
 
+    /**
+     * Get all formats
+     * @return the list of formats
+     */
     public List<Format> findAllFormats() {
         return formatRepository.findAll();
     }

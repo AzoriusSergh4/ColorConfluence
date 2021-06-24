@@ -1,21 +1,25 @@
 <div class="grid-container">
 
   <div gdAreas="filter filter | card deck" gdGap="16px 0px" gdColumns="50% 50%"
-  gdAreas.lt-md="filter | card | deck" gdColumns.lt-md="100% 100% 100%">
+       gdAreas.lt-md="filter | card | deck" gdColumns.lt-md="100% 100% 100%">
     <!-- Filtro de cartas simple con botón de avanzado -->
     <div gdArea="filter" fxLayoutAlign="center center" class="main-grid-element">
       <mat-card class="cc-card cc-card-full cc-card-filter">
         <mat-card-content class="cc-card-content">
           <div class="cc-card-filter-content">
-            <h1>ColorConfluence: Where all cards converge</h1>
+            <h1 style="font-size: 1.5em">ColorConfluence: Where all cards converge</h1>
           </div>
           <div class="cc-card-filter-content">
-              <label>
-                <input id="card-search-input" (keyup.enter)="onCardSubmit()" class="cc-main-card-filter-input" type="text" placeholder="Search your card here" [formControl]="cardName">
-              </label>
+            <label>
+              <input style="width: 35%;" ngStyle.lt-md="width: 75%" id="card-search-input"
+                     (keyup.enter)="onCardSubmit()" class="cc-main-card-filter-input" type="text"
+                     placeholder="Search your card here" [formControl]="cardName">
+            </label>
           </div>
           <div class="cc-card-filter-content cc-card-filter-text">
-            <p>Do you prefer a more personalized search? Use the <span class="cc-link"><a id="search-cards-link" routerLink="cards">advanced search engine</a></span></p>
+            <p>Do you prefer a more personalized search? Use the <span class="cc-link"><a id="search-cards-link"
+                                                                                          routerLink="cards">advanced search engine</a></span>
+            </p>
           </div>
         </mat-card-content>
       </mat-card>
@@ -30,20 +34,25 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="cc-card-content">
-          <!-- MOCKS TODO Implementar sistema de cartas más buscadas -->
           <mat-list>
-            <mat-list-item *ngFor="let card of cards; last as last" (click)="goToCard()" style="cursor: pointer">
-              <h3 matLine>
-                <span>{{card.name}}</span>
-                <span style="float: right;">{{card.colors}}</span>
-              </h3>
-              <h3 matLine>{{card.collection}}</h3>
+            <mat-list-item *ngFor="let card of cards; last as last"
+                           [routerLink]="['/card/' + card.card.cardTranslation[0].id]" style="cursor: pointer">
+              <span matLine class="cc-list-line-text">
+                <span>{{card.card.name}}</span>
+                <span style="float: right;"
+                      *ngFor="let color of utilsService.getManaSymbolsReversed(card.card.manaCost)"><mat-icon
+                  style="vertical-align: middle" svgIcon="{{color}}" ></mat-icon></span>
+              </span>
+              <span matLine class="cc-list-line-text">{{card.card.cardTranslation[0].cardSet[0].set}}</span>
               <mat-divider *ngIf="!last"></mat-divider>
             </mat-list-item>
           </mat-list>
+          <div class="cc-loading" *ngIf="loadingCards">
+            <mat-spinner color="primary" *ngIf="loadingCards"></mat-spinner>
+          </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button [@tdPulse]="pulseStateCards" (click)="pulseStateCards = !pulseStateCards" color="primary">More Cards</button>
+          <button mat-raised-button (click)="goToCards()" color="primary">More Cards</button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -57,20 +66,25 @@
         </mat-card-header>
         <mat-card-content class="cc-card-content">
           <mat-list>
-            <mat-list-item *ngFor="let deck of decks; last as last" [routerLink]="['/deck/' + deck.id]" style="cursor: pointer">
-              <h3 matLine>
+            <mat-list-item *ngFor="let deck of decks; last as last" [routerLink]="['/deck/' + deck.id]"
+                           style="cursor: pointer">
+              <span matLine class="cc-list-line-text">
                 <span>{{deck.name}} <span *ngIf="deck.format">— {{deck.format.name}}</span></span>
-                <span style="float: right;" *ngFor="let color of utilsService.getManaSymbols(deck.colors)"><mat-icon style="vertical-align: middle" svgIcon="{{color}}" aria-hidden="false" aria-label="Mana icon"></mat-icon></span>
-              </h3>
-              <h3 matLine>
+                <span style="float: right;" *ngFor="let color of utilsService.getManaSymbolsReversed(deck.colors)"><mat-icon
+                  style="vertical-align: middle" svgIcon="{{color}}"></mat-icon></span>
+              </span>
+              <span matLine class="cc-list-line-text">
                 <span style="font-style: italic">by {{deck.user.username}}</span>
-              </h3>
+              </span>
               <mat-divider *ngIf="!last"></mat-divider>
             </mat-list-item>
           </mat-list>
+          <div class="cc-loading" *ngIf="loadingDecks">
+            <mat-spinner color="primary" *ngIf="loadingDecks"></mat-spinner>
+          </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button [@tdPulse]="pulseStateDeck" (click)="goToDecks()" color="primary">More decks</button>
+          <button mat-raised-button (click)="goToDecks()" color="primary">More decks</button>
         </mat-card-actions>
       </mat-card>
     </div>

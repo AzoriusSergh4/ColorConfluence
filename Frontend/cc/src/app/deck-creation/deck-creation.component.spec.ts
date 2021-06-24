@@ -8,9 +8,9 @@ describe('DeckCreationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeckCreationComponent ]
+      declarations: [DeckCreationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

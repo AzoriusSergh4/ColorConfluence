@@ -213,6 +213,11 @@ public class DeckService {
         return deckRepository.save(deck);
     }
 
+    /**
+     * Get the total amount of cards in the deck
+     * @param cards the list of cards of the deck
+     * @return the total amount
+     */
     private int getTotalQuantity(List<DeckCard> cards) {
         var quantity = 0;
         for (DeckCard card : cards) {
@@ -221,6 +226,12 @@ public class DeckService {
         return quantity;
     }
 
+    /**
+     * Check all cards are legal
+     * @param deckCards the list of cards to add
+     * @param deckCardForms the cards to check
+     * @param deck the deck
+     */
     private void checkCard(List<DeckCard> deckCards, List<DeckForm.DeckCardForm> deckCardForms, Deck deck) {
         for (DeckForm.DeckCardForm c : deckCardForms) {
             CardCC card = cardRepository.findById(c.getId());
@@ -235,6 +246,12 @@ public class DeckService {
         }
     }
 
+    /**
+     * check if the card is legal in the given format
+     * @param card the card
+     * @param format the format
+     * @return true if the card is legal, false in other case
+     */
     private boolean checkFormat(CardCC card, String format) {
         for (CardLegality l : card.getLegalities()) {
             if (l.getFormat().equals(format) && l.getLegality().equals("Legal")) return true;
@@ -242,6 +259,11 @@ public class DeckService {
         return false;
     }
 
+    /**
+     * Updates the Color identity of the deck
+     * @param deck the deck
+     * @param cardCC the card to check if the color is new
+     */
     private void updateColorIdentity(Deck deck, CardCC cardCC) {
         var defaultColors = new String[]{"W", "B", "U", "R", "G"};
         for (String color : defaultColors) {

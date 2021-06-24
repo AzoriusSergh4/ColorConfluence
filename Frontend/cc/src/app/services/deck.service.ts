@@ -4,18 +4,18 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {DeckForm} from '../deck-creation/deck-creation.component';
 
 const FORMAT_URL = '/api/format';
-const DECKS_URL = '/decks';
 const DECK_URL = '/api/deck';
-const DECK_MOVE_URL = '/move';
-const CREATE_URL = '/create';
-const ALL_URL = '/all';
-const FOLDER_URL = '/folder';
-const FOLDER_MOVE_URL = '/folder/move';
+const DECKS_URL = DECK_URL + '/decks';
+const DECK_MOVE_URL = DECK_URL + '/move';
+const CREATE_URL = DECK_URL + '/create';
+const ALL_URL = FORMAT_URL + '/all';
+const FOLDER_URL = DECK_URL + '/folder';
+const FOLDER_MOVE_URL = DECK_URL + '/folder/move';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DeckService extends CommonService{
+export class DeckService extends CommonService {
 
   constructor(http: HttpClient) {
     super(http);
@@ -34,7 +34,7 @@ export class DeckService extends CommonService{
    * @param page the page index
    */
   getAllDecks(page: number) {
-    return this.apiGetRequest(DECK_URL + DECKS_URL + '?page=' + page);
+    return this.apiGetRequest(DECKS_URL + '?page=' + page);
   }
 
   /**
@@ -42,7 +42,7 @@ export class DeckService extends CommonService{
    * @param criteria the criteria to filter
    */
   getAllDecksWithCriteria(criteria: HttpParams) {
-    return this.apiGetRequestWithCriteria(DECK_URL + DECKS_URL, criteria);
+    return this.apiGetRequestWithCriteria(DECKS_URL, criteria);
   }
 
   /**
@@ -50,19 +50,19 @@ export class DeckService extends CommonService{
    * @param userId the id of the user
    */
   getUserDecks(userId: number) {
-    return this.apiGetRequest(DECK_URL + DECKS_URL + '/' + userId);
+    return this.apiGetRequest(DECKS_URL + '/' + userId);
   }
 
   /**
    * Save the deck
    * @param deckForm the deck data
    */
-  saveDeck(deckForm: DeckForm){
+  saveDeck(deckForm: DeckForm) {
     const body = JSON.stringify(deckForm);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.apiPostRequest(DECK_URL + CREATE_URL, body, headers);
+    return this.apiPostRequest(CREATE_URL, body, headers);
   }
 
   /**
@@ -87,7 +87,7 @@ export class DeckService extends CommonService{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.apiPutRequest(DECK_URL + DECK_MOVE_URL, body, headers);
+    return this.apiPutRequest(DECK_MOVE_URL, body, headers);
   }
 
   /**
@@ -104,7 +104,7 @@ export class DeckService extends CommonService{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.apiPostRequest(DECK_URL + FOLDER_URL, body, headers);
+    return this.apiPostRequest(FOLDER_URL, body, headers);
   }
 
   /**
@@ -119,7 +119,7 @@ export class DeckService extends CommonService{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.apiDeleteRequest(DECK_URL + FOLDER_URL, body, headers);
+    return this.apiDeleteRequest(FOLDER_URL, body, headers);
   }
 
   /**
@@ -137,13 +137,13 @@ export class DeckService extends CommonService{
       'Content-Type': 'application/json',
     });
 
-    return this.apiPutRequest(DECK_URL + FOLDER_MOVE_URL, body, headers);
+    return this.apiPutRequest(FOLDER_MOVE_URL, body, headers);
   }
 
   /**
    * Get all formats
    */
   getAllFormats() {
-    return this.apiGetRequest(FORMAT_URL + ALL_URL);
+    return this.apiGetRequest(ALL_URL);
   }
 }

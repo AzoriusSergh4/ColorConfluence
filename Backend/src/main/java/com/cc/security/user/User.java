@@ -42,12 +42,12 @@ public class User {
         this.enabled = false;
         this.roles = new ArrayList<>();
         this.roles.add("USER");
-        var folder = new DeckFolder();
-        folder.setName(this.username + "'s Decks");
-        folder.setUser(this);
-        folder.setRoot(true);
+        var folderAux = new DeckFolder();
+        folderAux.setName(this.username + "'s Decks");
+        folderAux.setUser(this);
+        folderAux.setRoot(true);
         this.folder = new ArrayList<>();
-        this.folder.add(folder);
+        this.folder.add(folderAux);
 
     }
 

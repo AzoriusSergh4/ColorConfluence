@@ -3,7 +3,7 @@
   margin-right: 15%;
 }
 
-.mtgCard-info-line-break{
+.mtgCard-info-line-break {
   white-space: pre-line;
 
 }
@@ -38,6 +38,7 @@
 .mtgCard-info-text-large {
   line-height: 1.5;
 }
+
 .cc-card-info {
   height: auto;
 }

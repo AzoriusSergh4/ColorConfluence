@@ -16,7 +16,6 @@ public final class DeckSpecification extends CommonSpecification {
     }
 
     public static Specification<Deck> colorContains(String colorCriteria) {
-        var defaultColors = new String[]{"W", "B", "U", "R", "G", "C"};
         return (root, query, builder) -> {
             List<Predicate> predicates = new ArrayList<>();
             for (String c : defaultColors) {

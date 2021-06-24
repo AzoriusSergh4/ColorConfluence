@@ -91,7 +91,7 @@ export class LoginService extends CommonService {
     return this.apiPostRequest(USER_URL + '/register', body, headers);
   }
 
-  confirmAccount(tk: string){
+  confirmAccount(tk: string) {
     return this.apiGetRequest(USER_URL + '/confirm-account?tk=' + tk);
   }
 
@@ -107,13 +107,13 @@ export class LoginService extends CommonService {
     });
     return this.apiPostRequest(USER_URL + '/change-password', body, headers).pipe(
       map(response => {
-        this.user.authdata = window.btoa(this.user.username + ':' + newPass);
-        this.isPermanentSesion ? localStorage.setItem('ccUser', JSON.stringify(this.user)) : sessionStorage.setItem('ccUser', JSON.stringify(this.user));
-        return this.user;
-      }, catchError(err => {
-        return err;
-      })
-    ));
+          this.user.authdata = window.btoa(this.user.username + ':' + newPass);
+          this.isPermanentSesion ? localStorage.setItem('ccUser', JSON.stringify(this.user)) : sessionStorage.setItem('ccUser', JSON.stringify(this.user));
+          return this.user;
+        }, catchError(err => {
+          return err;
+        })
+      ));
   }
 
   changeResetPassword(oldPass: string, newPass: string, tk: string) {
