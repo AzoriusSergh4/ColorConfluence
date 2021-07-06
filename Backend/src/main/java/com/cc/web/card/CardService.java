@@ -35,50 +35,43 @@ public class CardService {
     }
 
     /**
-     * Gets the cards filtered by name
-     *
-     * @param name Name of the card
-     * @return the list of matched cards
-     */
-    public Page<CardTranslationProjection> getBasicCardsByTranslationName(String name, int pageSize) {
-        Specification<CardTranslation> s = Specification
-                .where(name == null ? null : CardSpecifications.nameContains(name))
-                .and(CardSpecifications.langEquals(LANG_ENGLISH));
-        return translationRepository.findAll(s, CardTranslationProjection.class, PageRequest.of(0, pageSize));
-    }
-
-    /**
-     *
-     * @param name Gets the full cards filtered by name
-     * @param page the page
-     * @param pageSize the page size
-     * @return
-     */
-    public Page<CardTranslation> getCardsByTranslationName(String name, int page, int pageSize) {
-        Specification<CardTranslation> s = Specification
-                .where(name == null ? null : CardSpecifications.nameContains(name))
-                .and(CardSpecifications.langEquals(LANG_ENGLISH));
-        return translationRepository.findAll(s, PageRequest.of(page, pageSize));
-    }
-
-    /**
      * Count the cards hat matches the given name
-     * @param name the name of the card
+     * @param criteria criteria to filter by
      * @return the number of cards that match
      */
-    public long countBasicCardsByName(String name) {
-        return getBasicCardsByTranslationName(name, Integer.MAX_VALUE).getTotalElements();
+    public long countBasicCardsByCriteria(Map<String, String> criteria) {
+        criteria.put("page", "0");
+        return getBasicCardsByCriteria(criteria).getTotalElements();
+    }
+
+    /**
+     *
+     * @param criteria criteria to filter by
+     * @return
+     */
+    public Page<CardTranslation> getFullCardsByCriteria(Map<String, String> criteria) {
+        Specification<CardTranslation> s = setCardTranslationSpecification(criteria);
+        return translationRepository.findAll(s, PageRequest.of(Integer.parseInt(criteria.get("page")), Integer.parseInt(criteria.get("pageSize")), Sort.by(Sort.Direction.ASC, "name")));
     }
 
     /**
      * Gets the cards filtered by criteria
      *
-     * @param criteria crite to filter by
+     * @param criteria criteria to filter by
      * @return the page of matched cards
      */
     public Page<CardTranslationProjection> getBasicCardsByCriteria(Map<String, String> criteria) {
-        Specification<CardTranslation> s = Specification
-                .where(criteria.get("name") == null ? null : CardSpecifications.nameContains(criteria.get("name")))
+        Specification<CardTranslation> s = setCardTranslationSpecification(criteria);
+        return translationRepository.findAll(s, CardTranslationProjection.class, PageRequest.of(Integer.parseInt(criteria.get("page")), 60, Sort.by(Sort.Direction.ASC, "name")));
+    }
+
+    /**
+     * Initialise the cards specifications
+     * @param criteria criteria to filter by
+     * @return the specification with the criteria
+     */
+    private Specification<CardTranslation> setCardTranslationSpecification(Map<String, String> criteria) {
+        return Specification.where(criteria.get("name") == null ? null : CardSpecifications.nameContains(criteria.get("name")))
                 .and(criteria.get("text") == null ? null : CardSpecifications.descriptionContains(criteria.get("text")))
                 .and(criteria.get("lore") == null ? null : CardSpecifications.loreContains(criteria.get("lore")))
                 .and(criteria.get("lang") == null ? CardSpecifications.langEquals(LANG_ENGLISH) : CardSpecifications.langEquals(criteria.get("lang")))
@@ -100,8 +93,6 @@ public class CardService {
                 .and((criteria.get("pioneer") == null ? null : CardSpecifications.legalityContains("Pioneer", criteria.get("pioneer"))))
                 .and((criteria.get("penny") == null ? null : CardSpecifications.legalityContains("Penny", criteria.get("penny"))))
                 .and(CommonSpecification.distinct());
-
-        return translationRepository.findAll(s, CardTranslationProjection.class, PageRequest.of(Integer.parseInt(criteria.get("page")), 60, Sort.by(Sort.Direction.ASC, "name")));
     }
 
     /**

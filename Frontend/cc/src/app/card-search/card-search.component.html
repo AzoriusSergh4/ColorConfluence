@@ -247,7 +247,7 @@
   </div>
   <div *ngIf="cards">
     <div class="mtgCard-results-text" style="text-align: center">
-      <p>Showing {{cards.content.length}} results</p>
+      <p>Showing  {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}} results</span></p>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="center">
       <div *ngFor="let card of cards.content" class="mtgCard-result-item">

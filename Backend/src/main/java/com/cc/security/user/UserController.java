@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 @CrossOrigin(origins = {"http://localhost:4200", "https://azoriussergh4.github.io"})
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class UserController {
      * @param data the user data
      * @return the response of the operation
      */
-    @PostMapping("/register")
+    @PostMapping("/registration")
     public ResponseEntity<String> register(@RequestBody RegisterForm data) {
         var existingUser = userRepository.findByEmailOrUsername(data.getEmail(), data.getUsername());
 
@@ -68,7 +68,7 @@ public class UserController {
      * @param tk the token
      * @return the response of the oepration
      */
-    @GetMapping(value = "/confirm-account")
+    @GetMapping(value = "/account/confirmation")
     public ResponseEntity<String> confirmAccount(@RequestParam String tk) {
 
         var confirmationToken = confirmationTokenRepository.findByToken(tk);
@@ -90,7 +90,7 @@ public class UserController {
      * @param passwordForm the old and new password
      * @return the response of the operation
      */
-    @PostMapping(value = "/change-password")
+    @PostMapping(value = "/password/change")
     public ResponseEntity<User> changePassword(@RequestBody ChangePasswordForm passwordForm, HttpSession session) {
         if (!userComponent.isLoggedUser()) {
             session.invalidate();
@@ -123,7 +123,7 @@ public class UserController {
      * @param email the email to sent the links
      * @return the response of the operation
      */
-    @GetMapping("/recover-password")
+    @GetMapping("/password/recovery")
     public ResponseEntity<String> recoverPassword(@RequestParam String email) {
         var user = userRepository.findByEmail(email);
         if (user != null) {
@@ -144,7 +144,7 @@ public class UserController {
      * @param passwordForm the old and new password
      * @return the response of the operation
      */
-    @PostMapping(value = "/confirm-recover-password")
+    @PostMapping(value = "/password/recovery/confirmation")
     public ResponseEntity<User> confirmRecoverPassword(@RequestParam String tk, @RequestBody ChangePasswordForm passwordForm) {
         var confirmationToken = confirmationTokenRepository.findByToken(tk);
 

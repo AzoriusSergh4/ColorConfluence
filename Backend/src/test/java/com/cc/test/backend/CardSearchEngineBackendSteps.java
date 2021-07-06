@@ -36,7 +36,8 @@ public class CardSearchEngineBackendSteps {
         cardTranslations = new ArrayList<>();
         currentProperties.add(new HashMap<>());
         currentProperties.get(0).put("name", name);
-        cardTranslations.add(cardService.getBasicCardsByTranslationName(name, 60));
+        currentProperties.get(0).put("page", "0");
+        cardTranslations.add(cardService.getBasicCardsByCriteria(currentProperties.get(0)));
     }
 
     @When("I search for cards with specified criteria")

@@ -16,18 +16,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/card/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/set/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/user/register").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/user/confirm-account").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/user/confirm-account").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/user/recover-password").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/user/confirm-recover-password").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/user/confirm-recover-account").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/deck/decks").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/deck/{id}").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/deck/decks/{id}").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/format/all").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/cards/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/sets").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/users/registration").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/users/account/confirmation").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/users/account/confirmation").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/users/password/recovery").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/users/password/recovery/confirmation").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/decks").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/decks/{id}").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/decks/user/{id}").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/formats").permitAll();
 
         http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
 

@@ -2,15 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {CommonService} from './common.service';
 
-const CARD_URL = '/api/card';
-const CARD_POPULARITY = CARD_URL + '/popularity';
-const CARD_INFO = CARD_URL + '/';
-const FIND = CARD_URL + '/find';
-const FIND_NAME = CARD_URL + '/find/name';
-const FIND_NAME_FULL = CARD_URL + '/find/full/name';
-const COUNT_NAME = CARD_URL + '/count/name';
-const SET_URL = '/api/set';
-const SET_ALL = SET_URL + '/all';
+const CARD_URL = '/api/cards';
+const CARD_POPULARITY_URL = CARD_URL + '/popularity';
+const CARD_INFO_URL = CARD_URL + '/';
+const BASIC_URL = CARD_URL + '/basic';
+const FULL_URL = CARD_URL + '/full';
+const SIZE_URL = CARD_URL + '/size';
+const SET_URL = '/api/sets';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +24,7 @@ export class CardService extends CommonService {
    * @param page the page
    */
   getCardPopularity(page: number) {
-    return this.apiGetRequest(CARD_POPULARITY + '?page=' + page);
+    return this.apiGetRequest(CARD_POPULARITY_URL + '?page=' + page);
   }
 
   /**
@@ -34,7 +32,10 @@ export class CardService extends CommonService {
    * @param name the name to filter
    */
   getCardsByName(name: string) {
-    return this.apiGetRequest(FIND_NAME + '?name=' + encodeURIComponent(name) + '&pageSize=60');
+    let params = new HttpParams();
+    params = params.append('name', name);
+    params = params.append('page', '0');
+    return this.apiGetRequestWithCriteria(BASIC_URL, params);
   }
 
   /**
@@ -44,7 +45,11 @@ export class CardService extends CommonService {
    * @param pageSize the size of the page
    */
   getFullCardsByName(name: string, page: number, pageSize: number) {
-    return this.apiGetRequest(FIND_NAME_FULL + '?name=' + encodeURIComponent(name) + '&page=' + page + '&pageSize=' + pageSize);
+    let params = new HttpParams();
+    params = params.append('name', name);
+    params = params.append('page', String(page));
+    params = params.append('pageSize', String(pageSize));
+    return this.apiGetRequestWithCriteria(FULL_URL, params);
   }
 
   /**
@@ -52,14 +57,14 @@ export class CardService extends CommonService {
    * @param name the name to filter
    */
   countCardsByName(name: string) {
-    return this.apiGetRequest(COUNT_NAME + '?name=' + encodeURIComponent(name));
+    return this.apiGetRequest(SIZE_URL + '?name=' + encodeURIComponent(name));
   }
 
   /**
    * Get all existing sets
    */
   getAllSets() {
-    return this.apiGetRequest(SET_ALL);
+    return this.apiGetRequest(SET_URL);
   }
 
   /**
@@ -68,11 +73,11 @@ export class CardService extends CommonService {
    * @param page page index
    */
   getCardsByCriteria(criteria: HttpParams) {
-    return this.apiGetRequestWithCriteria(FIND, criteria);
+    return this.apiGetRequestWithCriteria(BASIC_URL, criteria);
   }
 
   getCardInfo(id: number) {
-    return this.apiGetRequest(CARD_INFO + id);
+    return this.apiGetRequest(CARD_INFO_URL + id);
   }
 }
 

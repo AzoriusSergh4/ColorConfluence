@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:4200", "https://azoriussergh4.github.io"})
 @RestController
-@RequestMapping("/api/format")
+@RequestMapping("/api/formats")
 public class FormatController {
 
     private final FormatService formatService;
@@ -21,7 +21,7 @@ public class FormatController {
         this.formatService = formatService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<Format> getAllFormats() {
         return formatService.findAllFormats();
     }

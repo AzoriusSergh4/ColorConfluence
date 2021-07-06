@@ -11,13 +11,13 @@ import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:4200", "https://azoriussergh4.github.io"})
 @RestController
-@RequestMapping("/api/set")
+@RequestMapping("/api/sets")
 public class SetController {
 
     @Autowired
     private SetInfoService setInfoService;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<SetInfo> getAllSets() {
         return setInfoService.getAllSets();
     }

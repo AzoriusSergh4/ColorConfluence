@@ -18,7 +18,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = {"http://localhost:4200", "https://azoriussergh4.github.io"})
 @RestController
-@RequestMapping("/api/deck")
+@RequestMapping("/api/decks")
 public class DeckController {
 
 
@@ -32,7 +32,7 @@ public class DeckController {
         this.userComponent = userComponent;
     }
 
-    @PostMapping("/create")
+    @PostMapping("")
     public ResponseEntity<Long> saveDeck(@RequestBody DeckForm deckForm) {
         if (deckForm.getFolderId() > 0) {
             var f = deckService.getFolder(deckForm.getFolderId());
@@ -46,12 +46,12 @@ public class DeckController {
         }
     }
 
-    @GetMapping("/decks")
+    @GetMapping("")
     public Page<DeckProjection> getDecks(@RequestParam Map<String, String> criteria) {
         return deckService.getBasicDecksByCriteria(criteria);
     }
 
-    @GetMapping("/decks/{id}")
+    @GetMapping("/user/{id}")
     public DeckFolderProjection getUserDecks(@PathVariable long id) {
         return deckService.findUserDecks(id);
     }
@@ -80,7 +80,7 @@ public class DeckController {
         }
     }
 
-    @PutMapping("/folder/move")
+    @PutMapping("/folder/position")
     public ResponseEntity<Boolean> moveFolder(@RequestBody FolderForm folderForm) {
         var folder = deckService.getFolder(folderForm.getFolderId());
         var to = deckService.getFolder(folderForm.getToId());
@@ -94,7 +94,7 @@ public class DeckController {
         }
     }
 
-    @PutMapping("/move")
+    @PutMapping("/position")
     public ResponseEntity<Boolean> moveDeck(@RequestBody FolderForm folderForm) {
         var deck = deckService.getDeckById(folderForm.getFromId());
         var to = deckService.getFolder(folderForm.getToId());

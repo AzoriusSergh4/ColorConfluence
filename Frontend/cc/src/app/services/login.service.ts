@@ -3,7 +3,16 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CommonService} from './common.service';
 import {catchError, map} from 'rxjs/operators';
 
-const USER_URL = '/user';
+const USERS_URL = '/users';
+const LOGIN_URL = USERS_URL + '/login';
+const LOGOUT_URL = USERS_URL + '/logout';
+const REGISTRATION_URL = USERS_URL + '/registration';
+const ACCOUNT_CONFIRMATION_URL = USERS_URL + '/account/confirmation';
+const PASSWORD_URL = USERS_URL + '/password';
+const PASSWORD_CHANGE_URL = PASSWORD_URL + '/change';
+const PASSWORD_RECOVERY_URL = PASSWORD_URL + '/recovery';
+const PASSWORD_RECOVERY_CONFIRMATION_URL = PASSWORD_RECOVERY_URL + '/confirmation';
+
 
 export interface User {
   id?: number;
@@ -55,7 +64,7 @@ export class LoginService extends CommonService {
       Authorization: 'Basic ' + auth,
       'X-Requested-With': 'XMLHttpRequest',
     });
-    return this.apiGetRequest(USER_URL + '/login', headers).pipe(
+    return this.apiGetRequest(LOGIN_URL, headers).pipe(
       map(u => {
         if (u) {
           this.setCurrentUser(u);
@@ -69,7 +78,7 @@ export class LoginService extends CommonService {
   }
 
   logout() {
-    this.apiGetRequest(USER_URL + '/logout').subscribe(response => {
+    this.apiGetRequest(LOGOUT_URL).subscribe(response => {
       this.removeCurrentUser();
       return response;
     }, error => {
@@ -88,11 +97,11 @@ export class LoginService extends CommonService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.apiPostRequest(USER_URL + '/register', body, headers);
+    return this.apiPostRequest(REGISTRATION_URL, body, headers);
   }
 
   confirmAccount(tk: string) {
-    return this.apiGetRequest(USER_URL + '/confirm-account?tk=' + tk);
+    return this.apiGetRequest(ACCOUNT_CONFIRMATION_URL + '?tk=' + tk);
   }
 
   changePassword(oldPass: string, newPass: string) {
@@ -105,7 +114,7 @@ export class LoginService extends CommonService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.apiPostRequest(USER_URL + '/change-password', body, headers).pipe(
+    return this.apiPostRequest(PASSWORD_CHANGE_URL, body, headers).pipe(
       map(response => {
           this.user.authdata = window.btoa(this.user.username + ':' + newPass);
           this.isPermanentSesion ? localStorage.setItem('ccUser', JSON.stringify(this.user)) : sessionStorage.setItem('ccUser', JSON.stringify(this.user));
@@ -126,11 +135,11 @@ export class LoginService extends CommonService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.apiPostRequest(USER_URL + '/confirm-recover-password?tk=' + tk, body, headers);
+    return this.apiPostRequest(PASSWORD_RECOVERY_CONFIRMATION_URL + '?tk=' + tk, body, headers);
   }
 
   resetPassword(email: string) {
-    return this.apiGetRequest(USER_URL + '/recover-password?email=' + email);
+    return this.apiGetRequest(PASSWORD_RECOVERY_URL + '?email=' + email);
   }
 
   private setCurrentUser(user: User) {

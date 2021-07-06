@@ -3,14 +3,12 @@ import {CommonService} from './common.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {DeckForm} from '../deck-creation/deck-creation.component';
 
-const FORMAT_URL = '/api/format';
-const DECK_URL = '/api/deck';
-const DECKS_URL = DECK_URL + '/decks';
-const DECK_MOVE_URL = DECK_URL + '/move';
-const CREATE_URL = DECK_URL + '/create';
-const ALL_URL = FORMAT_URL + '/all';
-const FOLDER_URL = DECK_URL + '/folder';
-const FOLDER_MOVE_URL = DECK_URL + '/folder/move';
+const FORMAT_URL = '/api/formats';
+const DECKS_URL = '/api/decks';
+const USER_DECKS_URL = DECKS_URL + '/user';
+const DECK_MOVE_URL = DECKS_URL + '/position';
+const FOLDER_URL = DECKS_URL + '/folder';
+const FOLDER_MOVE_URL = DECKS_URL + '/folder/position';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +24,7 @@ export class DeckService extends CommonService {
    * @param id the deck id
    */
   getDeck(id: number) {
-    return this.apiGetRequest(DECK_URL + '/' + id);
+    return this.apiGetRequest(DECKS_URL + '/' + id);
   }
 
   /**
@@ -50,7 +48,7 @@ export class DeckService extends CommonService {
    * @param userId the id of the user
    */
   getUserDecks(userId: number) {
-    return this.apiGetRequest(DECKS_URL + '/' + userId);
+    return this.apiGetRequest(USER_DECKS_URL + '/' + userId);
   }
 
   /**
@@ -62,7 +60,7 @@ export class DeckService extends CommonService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.apiPostRequest(CREATE_URL, body, headers);
+    return this.apiPostRequest(DECKS_URL, body, headers);
   }
 
   /**
@@ -70,7 +68,7 @@ export class DeckService extends CommonService {
    * @param id the deck id
    */
   deleteDeck(id: number) {
-    return this.apiDeleteRequest(DECK_URL + '/' + id);
+    return this.apiDeleteRequest(DECKS_URL + '/' + id);
   }
 
   /**
@@ -144,6 +142,6 @@ export class DeckService extends CommonService {
    * Get all formats
    */
   getAllFormats() {
-    return this.apiGetRequest(ALL_URL);
+    return this.apiGetRequest(FORMAT_URL);
   }
 }

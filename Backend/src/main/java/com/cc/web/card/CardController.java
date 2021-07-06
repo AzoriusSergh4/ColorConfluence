@@ -12,29 +12,28 @@ import java.util.Map;
 
 @CrossOrigin(origins = {"http://localhost:4200", "https://azoriussergh4.github.io"})
 @RestController
-@RequestMapping("/api/card")
+@RequestMapping("/api/cards")
 public class CardController {
 
+    private final CardService cardService;
+
     @Autowired
-    private CardService cardService;
-
-    @GetMapping("/find/name")
-    public Page<CardTranslationProjection> getCardByName(@RequestParam String name, int pageSize) {
-        return cardService.getBasicCardsByTranslationName(name, pageSize);
+    public CardController(CardService cardService) {
+        this.cardService = cardService;
     }
 
-    @GetMapping("/find/full/name")
-    public Page<CardTranslation> getFullCardByName(@RequestParam String name, int page, int pageSize) {
-        return cardService.getCardsByTranslationName(name, page, pageSize);
+    @GetMapping("/full")
+    public Page<CardTranslation> getFullCardByName(@RequestParam Map<String, String> criteria) {
+        return cardService.getFullCardsByCriteria(criteria);
     }
 
-    @GetMapping("/count/name")
-    public long countByName(@RequestParam String name) {
-        return cardService.countBasicCardsByName(name);
+    @GetMapping("/size")
+    public long countByName(@RequestParam Map<String, String> criteria) {
+        return cardService.countBasicCardsByCriteria(criteria);
     }
 
-    @GetMapping("/find")
-    public Page<CardTranslationProjection> getCardsByCriteria(@RequestParam Map<String, String> criteria) {
+    @GetMapping("/basic")
+    public Page<CardTranslationProjection> getBasicCardsByCriteria(@RequestParam Map<String, String> criteria) {
         return cardService.getBasicCardsByCriteria(criteria);
     }
 
